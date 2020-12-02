@@ -26,7 +26,7 @@ class PromotoraApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          fontFamily: 'MontserratLight',
+          fontFamily: 'Asap',
           primaryColor: primary,
           primaryColorLight: primaryLight,
           primaryColorDark: primaryDark,
@@ -42,9 +42,9 @@ class PromotoraApp extends StatelessWidget {
           ),
           textTheme: TextTheme(
             headline1: TextStyle(
-                fontSize: 22.0,
+                fontSize: 30.0,
                 fontFamily: 'AsapBold',
-                color: Colors.white,
+                color: Colors.black,
                 fontWeight: FontWeight.bold),
             headline2: TextStyle(
               fontSize: 20.0,
@@ -66,7 +66,6 @@ class PromotoraApp extends StatelessWidget {
               fontFamily: ' AsapMediumItalic',
             ),
             bodyText1: TextStyle(
-              fontSize: 18.0,
               fontFamily: 'AsapRegular',
               color: Colors.white,
             ),

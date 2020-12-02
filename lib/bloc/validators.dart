@@ -23,7 +23,7 @@ class Validators {
         sink.add(password);
       } else {
         sink.addError(
-          'El codigo debe ser de mínimo 5 caracteres',
+          'Contraseña Incorrecta',
         );
       }
     },
