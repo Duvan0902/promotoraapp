@@ -78,7 +78,7 @@ class LoginPage extends StatelessWidget {
 
   Widget _mainTitle(context) {
     return Text(
-      'Inicio de sesión de promotora',
+      'Inicio de sesión de Promotora',
       textAlign: TextAlign.left,
       style:
           Theme.of(context).textTheme.headline1.copyWith(color: Colors.black),
@@ -114,7 +114,7 @@ class LoginPage extends StatelessWidget {
         return TextField(
           obscureText: true,
           decoration: InputDecoration(
-            hintText: "Ingresa el código que recibiste",
+            hintText: "Escribe tu contraseña",
             errorText: snapshot.error,
             errorStyle: Theme.of(context)
                 .textTheme

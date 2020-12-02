@@ -67,29 +67,37 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Montserrat
+    - family: AsapBold
       fonts:
-        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/Asap/Asap-Bold.ttf
 
-    - family: MontserratMedium
+    - family: AsapBoldltalic
       fonts:
-        - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
+        - asset: assets/fonts/Asap/Asap-BoldItalic.ttf
     
-    - family: MontserratLight
+    - family: AsapItalic
       fonts:
-        - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
+        - asset: assets/fonts/Asap/Asap-Italic.ttf
 
-    - family: Poppins
+    - family: AsapMedium
       fonts:
-        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/Asap/Asap-Medium.ttf
     
-    - family: PoppinsMedium
+    - family: AsapMediumItalic
       fonts:
-        - asset: assets/fonts/Poppins/Poppins-Medium.ttf
+        - asset: assets/fonts/Asap/Asap-MediumItalic.ttf
 
-    - family: PoppinsLight
+    - family: AsapRegular
       fonts:
-        - asset: assets/fonts/Poppins/Poppins-Light.ttf
+        - asset: assets/fonts/Asap/Asap-Regular.ttf
+
+    - family: AsapSemiBold
+      fonts:
+        - asset: assets/fonts/Asap/Asap-SemiBold.ttf
+
+    - family: AsapSemiBoldItalic
+      fonts:
+        - asset: assets/fonts/Asap/Asap-SemiBoldItalic.ttf
     
 
   # For details regarding fonts from package dependencies,

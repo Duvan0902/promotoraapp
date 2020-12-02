@@ -43,47 +43,54 @@ class PromotoraApp extends StatelessWidget {
           textTheme: TextTheme(
             headline1: TextStyle(
                 fontSize: 22.0,
-                fontFamily: 'PoppinsMedium',
+                fontFamily: 'AsapBold',
                 color: Colors.white,
                 fontWeight: FontWeight.bold),
             headline2: TextStyle(
               fontSize: 20.0,
-              fontFamily: 'PoppinsMedium',
+              fontFamily: 'AsapSemiBold',
               color: Colors.black87,
               fontWeight: FontWeight.bold,
             ),
             headline3: TextStyle(
               fontSize: 20.0,
-              fontFamily: 'Poppins',
+              fontFamily: 'AsapBoldltalic',
               color: Colors.black,
             ),
-            headline4:
-                TextStyle(fontSize: 18.0, fontFamily: 'MontserratRegular'),
-            headline5: TextStyle(fontSize: 14.0, fontFamily: 'MontserratLight'),
+            headline4: TextStyle(
+              fontSize: 18.0,
+              fontFamily: ' AsapItalic',
+            ),
+            headline5: TextStyle(
+              fontSize: 14.0,
+              fontFamily: ' AsapMediumItalic',
+            ),
             bodyText1: TextStyle(
               fontSize: 18.0,
-              fontFamily: 'MontserratLight',
+              fontFamily: 'AsapRegular',
               color: Colors.white,
             ),
             bodyText2: TextStyle(
               fontSize: 16.0,
-              fontFamily: 'MontserratRegular',
+              fontFamily: 'AsapMedium',
             ),
             subtitle1: TextStyle(
               fontSize: 18.0,
-              fontFamily: 'MontserratMedium',
+              fontFamily: 'AsapSemiBoldItalic',
               color: Colors.black26,
             ),
-            subtitle2:
-                TextStyle(fontSize: 14.0, fontFamily: 'MontserratRegular'),
+            subtitle2: TextStyle(
+              fontSize: 14.0,
+              fontFamily: 'AsapRegular',
+            ),
             caption: TextStyle(
               fontSize: 25.0,
-              fontFamily: 'MontserratMedium',
+              fontFamily: 'AsapMedium',
               color: Colors.white,
             ),
             button: TextStyle(
               fontSize: 10.0,
-              fontFamily: 'MontserraLight',
+              fontFamily: 'AsapBold',
             ),
           ),
         ),
