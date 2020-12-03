@@ -116,7 +116,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
                   style: Theme.of(context)
                       .textTheme
                       .subtitle2
-                      .copyWith(color: Colors.black, fontSize: 12),
+                      .copyWith(color: Colors.grey[900], fontSize: 12),
                 )
               ],
             ),
