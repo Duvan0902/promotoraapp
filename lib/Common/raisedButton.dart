@@ -37,6 +37,9 @@ class BottomList extends StatelessWidget {
                         .copyWith(color: Colors.cyan[300], fontSize: 16),
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.all(5),
+                ),
                 Container(
                   child: Icon(
                     Icons.keyboard_arrow_right,

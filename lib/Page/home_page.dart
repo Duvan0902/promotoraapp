@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
             child: new ListView(
               padding: const EdgeInsets.all(21),
               children: <Widget>[
-                SizedBox(height: 70),
+                SizedBox(height: 20),
                 Text(
                   'Tu sesión      en Promotora',
                   style: Theme.of(context)
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                   title: 'chat',
                   title2: '',
                 ),
-                SizedBox(height: 130),
+                SizedBox(height: 181),
                 BottomList(
                   title: '',
                   title2: 'Cerrar sesión',
