@@ -3,6 +3,7 @@ import 'package:promotoraapp/Page/home_page.dart';
 import 'package:promotoraapp/Page/login_page.dart';
 import 'package:promotoraapp/Page/sale_page.dart';
 import 'package:promotoraapp/bloc/provider_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +25,16 @@ class PromotoraApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Promotora App',
+        localizationsDelegates: [
+          // ... app-specific localization delegate[s] here
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en', 'US'), // English, no country code
+          const Locale('es', 'ES'), // Spanish, no country code
+        ],
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -94,7 +105,7 @@ class PromotoraApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: 'login',
+        initialRoute: 'home',
         routes: {
           'home': (BuildContext context) => HomePage(),
           'login': (BuildContext context) => LoginPage(),

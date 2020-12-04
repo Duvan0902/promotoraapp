@@ -82,7 +82,7 @@ class LoginPage extends StatelessWidget {
 
   Widget _mainTitle(context) {
     return Text(
-      'Inicia sesión     en Promotora',
+      'Inicia sesión en Promotora',
       textAlign: TextAlign.left,
       style: Theme.of(context)
           .textTheme

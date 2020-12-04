@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Common/dropdownbutton.dart';
 import 'package:promotoraapp/main.dart';
 
-class SaleList extends StatelessWidget {
+class SaleList extends StatefulWidget {
   const SaleList({
     Key key,
   }) : super(key: key);
 
+  @override
+  _SaleListState createState() => _SaleListState();
+}
+
+class _SaleListState extends State<SaleList> {
+  String _date = '';
+  TextEditingController _dateController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,7 +30,7 @@ class SaleList extends StatelessWidget {
                 .copyWith(color: Colors.black, fontSize: 16),
           ),
         ),
-        _sale(context),
+        DropButton(),
         SizedBox(height: 20.0),
         Container(
           padding: EdgeInsets.all(10),
@@ -34,7 +42,7 @@ class SaleList extends StatelessWidget {
                 .copyWith(color: Colors.black, fontSize: 16),
           ),
         ),
-        _date(context),
+        _dateSale(context),
         SizedBox(height: 20.0),
         Container(
           padding: EdgeInsets.all(10),
@@ -65,12 +73,12 @@ class SaleList extends StatelessWidget {
     );
   }
 
-  Widget _sale(context) {
+  /*Widget _sale(context) {
     return Container(
       color: Color.fromRGBO(243, 243, 243, 1),
       child: TextField(
         textCapitalization: TextCapitalization.words,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.multiline,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10),
           hintText: 'Escoge el tipo de venta',
@@ -83,14 +91,16 @@ class SaleList extends StatelessWidget {
         ),
       ),
     );
-  }
+  }*/
 
-  Widget _date(context) {
+  Widget _dateSale(context) {
     return Container(
       color: Color.fromRGBO(243, 243, 243, 1),
       child: TextField(
+        controller: _dateController,
         textCapitalization: TextCapitalization.words,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.multiline,
+        enableInteractiveSelection: false,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10),
           hintText: 'selecciona la fecha',
@@ -101,8 +111,29 @@ class SaleList extends StatelessWidget {
           errorStyle:
               Theme.of(context).textTheme.headline4.copyWith(color: Colors.red),
         ),
+        onTap: () {
+          _selectDate(context);
+        },
       ),
     );
+  }
+
+  _selectDate(BuildContext context) async {
+    DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2018),
+      lastDate: DateTime(2025),
+      locale: Locale('es', 'ES'),
+    );
+    if (picked != null) {
+      setState(
+        () {
+          _date = picked.toString();
+          _dateController.text = _date;
+        },
+      );
+    }
   }
 
   Widget _value(context) {
@@ -110,7 +141,7 @@ class SaleList extends StatelessWidget {
       color: Color.fromRGBO(243, 243, 243, 1),
       child: TextField(
         textCapitalization: TextCapitalization.words,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10),
           hintText: 'Ingresa el valor',
@@ -130,7 +161,7 @@ class SaleList extends StatelessWidget {
       color: Color.fromRGBO(243, 243, 243, 1),
       child: TextField(
         textCapitalization: TextCapitalization.words,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.multiline,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10),
           hintText: 'Escribe el nombre',
