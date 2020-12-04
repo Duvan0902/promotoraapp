@@ -73,30 +73,14 @@ class _SaleListState extends State<SaleList> {
     );
   }
 
-  /*Widget _sale(context) {
-    return Container(
-      color: Color.fromRGBO(243, 243, 243, 1),
-      child: TextField(
-        textCapitalization: TextCapitalization.words,
-        keyboardType: TextInputType.multiline,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(10),
-          hintText: 'Escoge el tipo de venta',
-          hintStyle: Theme.of(context)
-              .textTheme
-              .bodyText1
-              .copyWith(color: Colors.black45, fontSize: 14),
-          errorStyle:
-              Theme.of(context).textTheme.headline4.copyWith(color: Colors.red),
-        ),
-      ),
-    );
-  }*/
-
   Widget _dateSale(context) {
     return Container(
       color: Color.fromRGBO(243, 243, 243, 1),
       child: TextField(
+        style: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(color: Colors.black45, fontSize: 14),
         controller: _dateController,
         textCapitalization: TextCapitalization.words,
         keyboardType: TextInputType.multiline,
@@ -140,6 +124,10 @@ class _SaleListState extends State<SaleList> {
     return Container(
       color: Color.fromRGBO(243, 243, 243, 1),
       child: TextField(
+        style: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(color: Colors.black45, fontSize: 14),
         textCapitalization: TextCapitalization.words,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(

@@ -8,35 +8,83 @@ class DropButton extends StatefulWidget {
 }
 
 class _DropButtonState extends State<DropButton> {
-  String dropdownValue = '';
+  String _value;
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: dropdownValue,
-      icon: Icon(Icons.arrow_downward),
-      iconSize: 24,
-      elevation: 16,
-      style: TextStyle(color: Colors.deepPurple),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
+    final size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width * 0.9,
+      color: Color.fromRGBO(243, 243, 243, 1),
+      child: DropdownButton<String>(
+        iconSize: 0.0,
+        underline: Container(
+          height: 1,
+          color: Colors.grey,
+        ),
+        items: [
+          DropdownMenuItem<String>(
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                'Venta 1',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.black45, fontSize: 14),
+              ),
+            ),
+            value: 'one',
+          ),
+          DropdownMenuItem<String>(
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                'Venta 2',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.black45, fontSize: 14),
+              ),
+            ),
+            value: 'two',
+          ),
+          DropdownMenuItem<String>(
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                'Venta 3',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.black45, fontSize: 14),
+              ),
+            ),
+            value: 'three',
+          ),
+        ],
+        onChanged: (String value) {
+          setState(() {
+            _value = value;
+          });
+        },
+        hint: Container(
+          padding: EdgeInsets.all(10),
+          child: Align(
+            child: Text(
+              'Escoge el tipo de venta',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(color: Colors.black45, fontSize: 14),
+            ),
+          ),
+        ),
+        style: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(color: Colors.black45, fontSize: 14),
+        value: _value,
       ),
-      onChanged: (String newValue) {
-        setState(() {
-          dropdownValue = newValue;
-        });
-      },
-      items: <String>[
-        'Selecciones tipo de venta',
-        'Venta Tipo 1',
-        'Venta Tipo 2',
-        'Venta Tipo 3',
-      ].map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
     );
   }
 }
