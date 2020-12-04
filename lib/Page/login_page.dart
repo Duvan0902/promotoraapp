@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/bloc/login_bloc.dart';
 import 'package:promotoraapp/bloc/provider_bloc.dart';
+import 'package:promotoraapp/main.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -32,27 +33,33 @@ class LoginPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 84),
+                SizedBox(height: 60),
                 Container(
                   child: _mainTitle(context),
                   alignment: Alignment.center,
                 ),
                 SizedBox(height: 40),
-                Text(
-                  'Correo electrónico',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(color: Colors.black, fontSize: 20),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    'Correo electrónico',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.black, fontSize: 16),
+                  ),
                 ),
                 _emailField(bloc),
                 SizedBox(height: 30.0),
-                Text(
-                  'Contraseña',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(color: Colors.black, fontSize: 20),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    'Contraseña',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.black, fontSize: 16),
+                  ),
                 ),
                 _passwordField(bloc),
                 SizedBox(height: 40.0),
@@ -91,13 +98,15 @@ class LoginPage extends StatelessWidget {
         return Container(
           color: Color.fromRGBO(243, 243, 243, 1),
           child: TextField(
+            textCapitalization: TextCapitalization.words,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
+              contentPadding: EdgeInsets.all(10),
               hintText: 'Escribe tu correo electrónico',
               hintStyle: Theme.of(context)
                   .textTheme
                   .bodyText1
-                  .copyWith(color: Colors.black45, fontSize: 17),
+                  .copyWith(color: Colors.black45, fontSize: 14),
               errorText: snapshot.error,
               errorStyle: Theme.of(context)
                   .textTheme
@@ -120,11 +129,12 @@ class LoginPage extends StatelessWidget {
           child: TextField(
             obscureText: true,
             decoration: InputDecoration(
+              contentPadding: EdgeInsets.all(10),
               hintText: "Escribe tu contraseña",
               hintStyle: Theme.of(context)
                   .textTheme
                   .bodyText1
-                  .copyWith(color: Colors.black45, fontSize: 17),
+                  .copyWith(color: Colors.black45, fontSize: 14),
               errorText: snapshot.error,
               errorStyle: Theme.of(context)
                   .textTheme
@@ -144,20 +154,21 @@ class LoginPage extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         final size = MediaQuery.of(context).size;
         return RaisedButton(
-            child: Container(
-              width: size.width * 0.6,
-              child: Text(
-                'Inicia sesión',
-                textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline1
-                    .copyWith(color: Colors.black, fontSize: 20),
-              ),
+          child: Container(
+            width: size.width * 0.6,
+            child: Text(
+              'Inicia sesión',
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline1
+                  .copyWith(color: Colors.black, fontSize: 16),
             ),
-            color: Colors.cyan[200],
-            disabledTextColor: Colors.grey,
-            onPressed: () {});
+          ),
+          color: PromotoraApp().primaryDark,
+          disabledTextColor: Colors.grey,
+          onPressed: () {},
+        );
       },
     );
   }
@@ -167,17 +178,17 @@ Widget _forgotPassword(context) {
   return Text(
     'Olvidé mi contraceña',
     textAlign: TextAlign.center,
-    style: Theme.of(context)
-        .textTheme
-        .headline1
-        .copyWith(color: Colors.cyan[200], fontSize: 18),
+    style: Theme.of(context).textTheme.headline1.copyWith(
+          color: PromotoraApp().primaryDark,
+          fontSize: 16,
+        ),
   );
 }
 
 Widget _background(BuildContext context) {
   return Container(
     decoration: BoxDecoration(
-      color: Colors.blue,
+      color: Colors.white,
       image: DecorationImage(
         image: AssetImage("assets/img/fondo.png"),
         fit: BoxFit.fill,

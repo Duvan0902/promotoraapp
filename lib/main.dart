@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Page/home_page.dart';
 import 'package:promotoraapp/Page/login_page.dart';
+import 'package:promotoraapp/Page/sale_page.dart';
 import 'package:promotoraapp/bloc/provider_bloc.dart';
 
 void main() async {
@@ -14,7 +15,7 @@ class PromotoraApp extends StatelessWidget {
   Color get accentDark => Color(0xffaf0043);
   Color get primary => Color(0xff0074ca);
   Color get primaryLight => Color(0xff5ba2fe);
-  Color get primaryDark => Color(0xff004999);
+  Color get primaryDark => Color.fromRGBO(0, 186, 193, 3);
   Color get grey => Color(0xfff3f3f3);
 
   @override
@@ -48,7 +49,7 @@ class PromotoraApp extends StatelessWidget {
                 fontWeight: FontWeight.bold),
             headline2: TextStyle(
               fontSize: 20.0,
-              fontFamily: 'AsapSemiBold',
+              fontFamily: 'AsapMedium',
               color: Colors.black87,
               fontWeight: FontWeight.bold,
             ),
@@ -93,10 +94,11 @@ class PromotoraApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: 'home',
+        initialRoute: 'login',
         routes: {
           'home': (BuildContext context) => HomePage(),
           'login': (BuildContext context) => LoginPage(),
+          'sale': (BuildContext context) => SalePage(),
         },
       ),
     );
