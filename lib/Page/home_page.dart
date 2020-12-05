@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:promotoraapp/Common/bottom_chat.dart';
 import 'package:promotoraapp/Common/fab_bottom_app_bar.dart';
 import 'package:promotoraapp/Common/raisedButton.dart';
 import 'package:promotoraapp/Page/contacts_page.dart';
@@ -45,39 +46,41 @@ class _HomePageState extends State<HomePage> {
         child: Drawer(
           child: Container(
             color: PromotoraApp().primaryDark,
-            child: new ListView(
+            child: ListView(
               padding: const EdgeInsets.all(21),
               children: <Widget>[
                 SizedBox(height: 40),
                 Text(
-                  'Tu sesión',
+                  'Tu sesión en Promotora',
                   style: Theme.of(context)
                       .textTheme
                       .headline1
                       .copyWith(color: Colors.black, fontSize: 33),
                 ),
-                Text(
-                  'en Promotora',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      .copyWith(color: Colors.black, fontSize: 33),
-                ),
-                SizedBox(height: 60),
+                SizedBox(height: 40),
                 BottomList(
                   title: 'Mis metas',
+                  route: 'sale',
                 ),
                 SizedBox(height: 18),
                 BottomList(
                   title: 'Preguntas Frecuentes',
+                  route: 'questions',
+                ),
+                SizedBox(height: 18),
+                BottomList(
+                  title: 'Documentos',
+                  route: 'sale',
                 ),
                 SizedBox(height: 18),
                 BottomList(
                   title: 'Chat',
+                  route: 'sale',
                 ),
-                SizedBox(height: 230),
+                SizedBox(height: 200),
                 BottomList(
                   title: 'Cerrar sesión',
+                  route: 'sale',
                 ),
               ],
             ),
@@ -129,17 +132,5 @@ class _HomePageState extends State<HomePage> {
 }
 
 Widget _transmisionButton(context) {
-  return Container(
-    alignment: Alignment.bottomRight,
-    padding: EdgeInsets.all(10),
-    margin: EdgeInsets.only(bottom: 80),
-    child: FloatingActionButton(
-      elevation: 5.0,
-      child: Icon(
-        Icons.chat,
-        color: Colors.white,
-      ),
-      onPressed: () {},
-    ),
-  );
+  return BottomChat();
 }

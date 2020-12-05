@@ -3,11 +3,11 @@ import 'package:promotoraapp/Page/frequent%20questions.dart';
 import 'package:promotoraapp/Page/sale_page.dart';
 import 'package:promotoraapp/main.dart';
 
-class BottomList extends StatelessWidget {
+class BottomQuestions extends StatelessWidget {
   final String title;
   final String route;
 
-  const BottomList({
+  const BottomQuestions({
     Key key,
     @required this.title,
     @required this.route,
@@ -18,7 +18,7 @@ class BottomList extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return RaisedButton(
         child: Container(
-          height: size.height * 0.038,
+          height: size.height * 0.09,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -28,7 +28,7 @@ class BottomList extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headline2
-                    .copyWith(color: Colors.black, fontSize: 12),
+                    .copyWith(color: Colors.black, fontSize: 14),
               ),
               Icon(
                 Icons.keyboard_arrow_right,

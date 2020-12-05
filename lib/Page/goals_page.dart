@@ -29,10 +29,10 @@ class _GoalsPageState extends State<GoalsPage> {
     return Column(
       children: <Widget>[
         Container(
-          decoration: BoxDecoration(color: Colors.grey[900]),
           margin: EdgeInsets.only(top: 10),
+          color: Colors.grey[900],
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: tabs.map((tab) {
               int currentIndex = tabs.indexOf(tab);
               bool selected = currentIndex == _selectedTab;

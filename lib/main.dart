@@ -17,7 +17,7 @@ class PromotoraApp extends StatelessWidget {
   Color get primary => Color(0xff0074ca);
   Color get primaryLight => Color(0xff5ba2fe);
   Color get primaryDark => Color.fromRGBO(0, 186, 193, 3);
-  Color get grey => Color(0xfff3f3f3);
+  Color get grey => Colors.grey[900];
 
   @override
   Widget build(BuildContext context) {
