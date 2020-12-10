@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Common/bottom_chat.dart';
-import 'package:promotoraapp/Common/botton_questions.dart';
+import 'package:promotoraapp/Common/raised_Button.dart';
 
 class QuestionsPage extends StatefulWidget {
   const QuestionsPage({Key key}) : super(key: key);
@@ -17,7 +17,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
         appBar: AppBar(
           backgroundColor: Colors.grey[900],
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
                 icon: Icon(Icons.arrow_back),
@@ -37,10 +37,6 @@ class _QuestionsPageState extends State<QuestionsPage> {
                 onPressed: () {},
               ),
             ],
-          ),
-          flexibleSpace: Container(
-            padding: EdgeInsets.only(left: 75),
-            child: Icon(Icons.ac_unit),
           ),
         ),
         body: SingleChildScrollView(
@@ -66,23 +62,62 @@ class _QuestionsPageState extends State<QuestionsPage> {
           SizedBox(
             height: 40,
           ),
-          BottomQuestions(title: 'Salud', route: 'sale'),
+          BottomList(
+            title: 'Salud',
+            route: 'sale',
+            icon: IconButton(
+              icon: Icon(Icons.keyboard_arrow_right),
+              iconSize: 28,
+              onPressed: () {},
+            ),
+          ),
           SizedBox(
             height: 10,
           ),
-          BottomQuestions(title: 'Vida', route: 'sale'),
+          BottomList(
+            title: 'Vida',
+            route: 'sale',
+            icon: IconButton(
+              icon: Icon(Icons.keyboard_arrow_right),
+              iconSize: 28,
+              onPressed: () {},
+            ),
+          ),
           SizedBox(
             height: 10,
           ),
-          BottomQuestions(title: 'Asistente Virtual', route: 'sale'),
+          BottomList(
+            title: 'Asistente Virtual',
+            route: 'sale',
+            icon: IconButton(
+              icon: Icon(Icons.keyboard_arrow_right),
+              iconSize: 28,
+              onPressed: () {},
+            ),
+          ),
           SizedBox(
             height: 10,
           ),
-          BottomQuestions(title: 'Firma cliente', route: 'sale'),
+          BottomList(
+            title: 'Firma cliente',
+            route: 'sale',
+            icon: IconButton(
+              icon: Icon(Icons.keyboard_arrow_right),
+              iconSize: 28,
+              onPressed: () {},
+            ),
+          ),
           SizedBox(
             height: 10,
           ),
-          BottomQuestions(title: 'Cambio de intermedio', route: 'sale'),
+          BottomList(
+            title: 'Cambio de intermedio',
+            route: 'sale',
+            icon: IconButton(
+              icon: Icon(Icons.keyboard_arrow_right),
+              onPressed: () {},
+            ),
+          ),
         ],
       ),
     );

@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
+
+import 'package:promotoraapp/Page/contact_information.dart';
 import 'package:promotoraapp/Page/frequent%20questions.dart';
 import 'package:promotoraapp/Page/sale_page.dart';
 import 'package:promotoraapp/main.dart';
 
 class BottomList extends StatelessWidget {
   final String title;
+  final IconButton icon;
+
   final String route;
 
   const BottomList({
     Key key,
     @required this.title,
     @required this.route,
+    @required this.icon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return RaisedButton(
+        padding: EdgeInsets.fromLTRB(20, 00, 6, 10),
         child: Container(
-          height: size.height * 0.038,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -28,12 +32,12 @@ class BottomList extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headline2
-                    .copyWith(color: Colors.black, fontSize: 12),
+                    .copyWith(color: Colors.black, fontSize: 15.1),
               ),
-              Icon(
-                Icons.keyboard_arrow_right,
-                size: 34,
+              IconButton(
+                icon: this.icon,
                 color: PromotoraApp().primaryDark,
+                onPressed: () {},
               ),
             ],
           ),
@@ -50,6 +54,8 @@ class BottomList extends StatelessWidget {
                       routes: {
                         'sale': (BuildContext context) => SalePage(),
                         'questions': (BuildContext context) => QuestionsPage(),
+                        'contact': (BuildContext context) =>
+                            ContactInformationPage(),
                       },
                     )),
           );

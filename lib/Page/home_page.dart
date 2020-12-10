@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:promotoraapp/Common/bottom_chat.dart';
-import 'package:promotoraapp/Common/fab_bottom_app_bar.dart';
-import 'package:promotoraapp/Common/raisedButton.dart';
+import 'package:promotoraapp/Common/fab_button_app_bar.dart';
+import 'package:promotoraapp/Common/raised_Button.dart';
 import 'package:promotoraapp/Page/contacts_page.dart';
 import 'package:promotoraapp/Page/education_page.dart';
 import 'package:promotoraapp/Page/goals_page.dart';
@@ -60,26 +60,51 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 40),
                 BottomList(
                   title: 'Mis metas',
+                  icon: IconButton(
+                    icon: Icon(Icons.keyboard_arrow_right),
+                    iconSize: 28,
+                    onPressed: () {},
+                  ),
                   route: 'sale',
                 ),
                 SizedBox(height: 18),
                 BottomList(
                   title: 'Preguntas Frecuentes',
+                  icon: IconButton(
+                    icon: Icon(Icons.keyboard_arrow_right),
+                    iconSize: 28,
+                    onPressed: () {},
+                  ),
                   route: 'questions',
                 ),
                 SizedBox(height: 18),
                 BottomList(
-                  title: 'Documentos',
+                  title: 'Documentos para tu gestion',
+                  icon: IconButton(
+                    icon: Icon(Icons.keyboard_arrow_right),
+                    iconSize: 28,
+                    onPressed: () {},
+                  ),
                   route: 'sale',
                 ),
                 SizedBox(height: 18),
                 BottomList(
                   title: 'Chat',
+                  icon: IconButton(
+                    icon: Icon(Icons.keyboard_arrow_right),
+                    iconSize: 28,
+                    onPressed: () {},
+                  ),
                   route: 'sale',
                 ),
                 SizedBox(height: 200),
                 BottomList(
                   title: 'Cerrar sesión',
+                  icon: IconButton(
+                    icon: Icon(Icons.keyboard_arrow_right),
+                    iconSize: 28,
+                    onPressed: () {},
+                  ),
                   route: 'sale',
                 ),
               ],
@@ -118,7 +143,7 @@ class _HomePageState extends State<HomePage> {
   Widget _topBar(context) {
     double screenWidth = MediaQuery.of(context).size.width;
     Orientation currentOrientation = MediaQuery.of(context).orientation;
-    double barHeight = currentOrientation == Orientation.portrait ? 100 : 50;
+    double barHeight = currentOrientation == Orientation.portrait ? 60 : 50;
     return PreferredSize(
       preferredSize: Size(screenWidth, barHeight),
       child: Container(
