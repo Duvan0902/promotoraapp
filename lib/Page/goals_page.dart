@@ -61,6 +61,7 @@ class _GoalsPageState extends State<GoalsPage> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        padding: EdgeInsets.fromLTRB(50, 20, 61, 20),
         decoration: BoxDecoration(
           color: selected ? PromotoraApp().primaryDark : PromotoraApp().grey,
           borderRadius: BorderRadius.only(
@@ -68,7 +69,6 @@ class _GoalsPageState extends State<GoalsPage> {
             topRight: Radius.circular(borderRadius),
           ),
         ),
-        padding: EdgeInsets.all(15),
         child: Text(
           title,
           style: Theme.of(context).textTheme.bodyText1.copyWith(

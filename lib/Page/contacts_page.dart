@@ -31,7 +31,6 @@ class _ContactsPageState extends State<ContactsPage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(top: 10),
           color: Colors.grey[900],
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +69,7 @@ class _ContactsPageState extends State<ContactsPage> {
             topRight: Radius.circular(borderRadius),
           ),
         ),
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.fromLTRB(50, 20, 49, 20),
         child: Text(
           title,
           style: Theme.of(context).textTheme.bodyText1.copyWith(
@@ -95,6 +94,7 @@ class _ContactsPageState extends State<ContactsPage> {
               onPressed: () {},
             ),
           ),
+          SizedBox(height: 20),
           BottomList(
             title: 'contacto',
             route: 'sale',
@@ -104,6 +104,7 @@ class _ContactsPageState extends State<ContactsPage> {
               onPressed: () {},
             ),
           ),
+          SizedBox(height: 20),
           BottomList(
             title: 'contacto',
             route: 'sale',
@@ -113,6 +114,7 @@ class _ContactsPageState extends State<ContactsPage> {
               onPressed: () {},
             ),
           ),
+          SizedBox(height: 20),
           BottomList(
             title: 'contacto',
             route: 'sale',

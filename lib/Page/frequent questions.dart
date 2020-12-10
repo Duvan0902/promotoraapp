@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Common/bottom_chat.dart';
 import 'package:promotoraapp/Common/raised_Button.dart';
+import 'package:promotoraapp/main.dart';
 
 class QuestionsPage extends StatefulWidget {
   const QuestionsPage({Key key}) : super(key: key);
@@ -15,29 +16,31 @@ class _QuestionsPageState extends State<QuestionsPage> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.grey[900],
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                iconSize: 30,
-                onPressed: () {},
-              ),
-              Text(
-                "Preguntas Frecuentes",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline2
-                    .copyWith(color: Colors.white, fontSize: 18),
-              ),
-              IconButton(
-                icon: Icon(Icons.search),
-                color: Colors.grey,
-                onPressed: () {},
-              ),
-            ],
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PromotoraApp(),
+                ),
+              );
+            },
           ),
+          backgroundColor: Colors.grey[900],
+          title: Text(
+            "Preguntas Frecuentes",
+            style: Theme.of(context)
+                .textTheme
+                .headline2
+                .copyWith(color: Colors.white, fontSize: 18),
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {},
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(

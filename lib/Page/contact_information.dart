@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Common/Card_information.dart';
+import 'package:promotoraapp/main.dart';
 
 class ContactInformationPage extends StatelessWidget {
   const ContactInformationPage({Key key}) : super(key: key);
@@ -20,6 +21,17 @@ class ContactInformationPage extends StatelessWidget {
                 .headline2
                 .copyWith(color: Colors.white, fontSize: 20),
           ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PromotoraApp(),
+                ),
+              );
+            },
+          ),
           flexibleSpace: Container(
             padding: EdgeInsets.only(left: 75),
             child: Icon(Icons.ac_unit),
@@ -38,6 +50,6 @@ class ContactInformationPage extends StatelessWidget {
   }
 
   Widget _posterTitle(context) {
-    return Container(child: GeneralCard());
+    return GeneralCard();
   }
 }
