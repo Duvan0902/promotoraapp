@@ -3,22 +3,35 @@ import 'package:promotoraapp/Page/contact_information_page.dart';
 import 'package:promotoraapp/main.dart';
 
 class ContactsManagementList extends StatefulWidget {
-  final String id;
   final String name;
   final String surname;
   final String company;
+  final String description;
+  final String email;
+  final String phone1;
 
-  const ContactsManagementList({
+  ContactsManagementList({
     Key key,
-    @required this.id,
     @required this.name,
     @required this.surname,
     @required this.company,
+    @required this.description,
+    @required this.email,
+    @required this.phone1,
   }) : super(key: key);
 
   @override
   _ContactsManagementListState createState() => _ContactsManagementListState();
 }
+
+final data = ContactsManagementList(
+  name: data.name,
+  surname: data.name,
+  company: data.company,
+  description: data.description,
+  email: data.email,
+  phone1: data.phone1,
+);
 
 class _ContactsManagementListState extends State<ContactsManagementList> {
   @override
@@ -82,7 +95,9 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ContactInformationPage()),
+            MaterialPageRoute(
+              builder: (context) => ContactInformationPage(),
+            ),
           );
         },
       ),

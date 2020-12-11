@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-
+/*import 'package:flutter/material.dart';
 import 'package:promotoraapp/Common/contacts_management.dart';
-import 'package:promotoraapp/Model/contacts_model.dart';
+import 'package:promotoraapp/Model/users_model.dart';
 
-class ContactsList extends StatelessWidget {
-  final List<ContactsModel> contacts;
+class UsersList extends StatelessWidget {
+  final List<UsersModel> contacts;
 
-  ContactsList({@required this.contacts});
+  UsersList({@required this.contacts});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,13 +16,10 @@ class ContactsList extends StatelessWidget {
           return ContactsManagementList(
             name: contacts[index].name,
             surname: contacts[index].surname,
-            company: contacts[index].company,
-            description: contacts[index].description,
-            email: contacts[index].email,
-            phone1: contacts[index].phone1,
+            company: contacts[index].position,
           );
         },
       ),
     );
   }
-}
+}*/

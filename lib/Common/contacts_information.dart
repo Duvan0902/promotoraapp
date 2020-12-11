@@ -1,27 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Common/contacts_management.dart';
 import 'package:promotoraapp/main.dart';
 
 class ContactsInformationList extends StatefulWidget {
-  final String id;
-  final String name;
-  final String surname;
-  final String company;
-  final String description;
-  final String email;
-  final String phone1;
-  final String phone2;
+  final ContactsManagementList data;
 
-  const ContactsInformationList({
-    Key key,
-    @required this.id,
-    @required this.name,
-    @required this.surname,
-    @required this.company,
-    @required this.description,
-    @required this.email,
-    @required this.phone1,
-    @required this.phone2,
-  }) : super(key: key);
+  const ContactsInformationList({Key key, this.data}) : super(key: key);
 
   @override
   _ContactsInformationListState createState() =>
@@ -46,7 +30,7 @@ class _ContactsInformationListState extends State<ContactsInformationList> {
                 Row(
                   children: [
                     Text(
-                      widget.name,
+                      'name:${data.name}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -56,7 +40,7 @@ class _ContactsInformationListState extends State<ContactsInformationList> {
                       width: 5,
                     ),
                     Text(
-                      widget.surname,
+                      'name:${data.surname}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -67,7 +51,7 @@ class _ContactsInformationListState extends State<ContactsInformationList> {
                 Container(
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    widget.company,
+                    'name:${data.company}',
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1
@@ -78,31 +62,31 @@ class _ContactsInformationListState extends State<ContactsInformationList> {
             ),
           ),
         ),
-        Card(
+        /* Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 50, horizontal: 15),
             child: Text(
-              widget.description,
+              'name:${data.description}',
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
                   .copyWith(color: Colors.black45, fontSize: 16),
             ),
           ),
-        ),
+        ),*/
         Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(widget.phone1),
+                Text('name:${data.phone1}'),
                 IconButton(
                   icon: Icon(
                     Icons.call_outlined,
@@ -144,7 +128,7 @@ class _ContactsInformationListState extends State<ContactsInformationList> {
           elevation: 2.0,
           child: Padding(
             padding: EdgeInsets.fromLTRB(50, 20, 59, 20),
-            child: Container(child: Text(widget.email)),
+            child: Container(child: Text('name:${data.email}')),
           ),
         ),
       ],

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:promotoraapp/Common/contacts_list.dart';
-import 'package:promotoraapp/Common/contacts_management.dart';
 
-import 'package:promotoraapp/Model/users_model.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/provider/contacts_provider.dart';
-import 'package:promotoraapp/provider/users_provider.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage({Key key}) : super(key: key);
@@ -87,26 +83,25 @@ class _ContactsPageState extends State<ContactsPage> {
   }
 
   Widget roomList(context) {
-    UsersProvider usersProvider = UsersProvider();
-    return FutureBuilder(
-      future: usersProvider.getUsers(),
-      builder: (BuildContext context, AsyncSnapshot<UsersModel> snapshot) {
-        if (snapshot.hasData) {
-          UsersModel users = snapshot.data;
-          print(users);
-          List<UsersModel> role;
-
-          return _sections(context, role);
-        } else {
-          return Container(
-            height: 400,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-      },
-    );
+    return Container();
+    /* final contactProvider = UsersProvider();
+    return Container(
+      child: FutureBuilder(
+        future: contactProvider.getUser(),
+        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+          if (snapshot.hasData) {
+            return UsersList(contacts: snapshot.data);
+          } else {
+            return Container(
+              height: 400,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        },
+      ),
+    );*/
   }
 }
 
@@ -126,25 +121,6 @@ Widget recordedList(context) {
             ),
           );
         }
-      },
-    ),
-  );
-}
-
-Widget _sections(context, List<UsersModel> role) {
-  print(role);
-  return Container(
-    child: ListView.builder(
-      itemCount: role.length,
-      itemBuilder: (context, index) {
-        UsersModel user = role[index];
-
-        return ContactsManagementList(
-          name: user.name,
-          surname: user.surname,
-          company: user.position,
-          id: '',
-        );
       },
     ),
   );

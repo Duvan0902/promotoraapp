@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/contacts_information_list.dart';
-
+/*import 'package:flutter/material.dart';
 import 'package:promotoraapp/main.dart';
-import 'package:promotoraapp/provider/contacts_provider.dart';
+import 'package:promotoraapp/provider/users_provider.dart';
 
 class UsersInformationPage extends StatelessWidget {
   const UsersInformationPage({Key key}) : super(key: key);
@@ -50,7 +48,7 @@ class UsersInformationPage extends StatelessWidget {
   }
 
   Widget _posterTitle(context) {
-    final contactProvider = ContactsProvider();
+    final contactProvider = UsersProvider();
     return Container(
       child: FutureBuilder(
         future: contactProvider.getContacts(),
@@ -69,4 +67,4 @@ class UsersInformationPage extends StatelessWidget {
       ),
     );
   }
-}
+}*/
