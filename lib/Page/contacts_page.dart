@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Common/contacts_list.dart';
 import 'package:promotoraapp/Common/raised_Button.dart';
 import 'package:promotoraapp/main.dart';
+import 'package:promotoraapp/provider/contacts_provider.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage({Key key}) : super(key: key);
@@ -87,7 +89,7 @@ class _ContactsPageState extends State<ContactsPage> {
         children: <Widget>[
           BottomList(
             title: 'contacto',
-            route: 'contact',
+            route: 'sale',
             icon: IconButton(
               icon: Icon(Icons.call_outlined),
               iconSize: 36,
@@ -130,6 +132,25 @@ class _ContactsPageState extends State<ContactsPage> {
   }
 
   Widget recordedList(context) {
-    return Text('7777');
+    final contactProvider = ContactsProvider();
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      color: Color.fromRGBO(243, 243, 243, 1),
+      child: FutureBuilder(
+        future: contactProvider.getContacts(),
+        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+          if (snapshot.hasData) {
+            return ContactsList(contacts: snapshot.data);
+          } else {
+            return Container(
+              height: 400,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        },
+      ),
+    );
   }
 }

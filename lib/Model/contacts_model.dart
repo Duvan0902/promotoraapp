@@ -2,16 +2,30 @@ import 'dart:convert';
 
 class ContactsModel {
   ContactsModel({
-    this.url,
-    this.title,
+    this.id,
+    this.name,
+    this.surname,
+    this.company,
+    this.email,
+    this.phone1,
+    this.phone2,
     this.description,
-    this.type,
+    this.publishedAt,
+    this.createdAt,
+    this.updatedAt,
   });
 
-  String url;
-  String title;
-  String description;
-  String type;
+  final int id;
+  final String name;
+  final String surname;
+  final String company;
+  final String email;
+  final String phone1;
+  final dynamic phone2;
+  final String description;
+  final DateTime publishedAt;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   factory ContactsModel.fromJson(String str) =>
       ContactsModel.fromMap(json.decode(str));
@@ -19,16 +33,30 @@ class ContactsModel {
   String toJson() => json.encode(toMap());
 
   factory ContactsModel.fromMap(Map<String, dynamic> json) => ContactsModel(
-        url: json["url"],
-        title: json["title"],
+        id: json["id"],
+        name: json["name"],
+        surname: json["surname"],
+        company: json["company"],
+        email: json["email"],
+        phone1: json["phone1"],
+        phone2: json["phone2"],
         description: json["description"],
-        type: json["type"],
+        publishedAt: DateTime.parse(json["published_at"]),
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toMap() => {
-        "url": url,
-        "title": title,
+        "id": id,
+        "name": name,
+        "surname": surname,
+        "company": company,
+        "email": email,
+        "phone1": phone1,
+        "phone2": phone2,
         "description": description,
-        "type": type,
+        "published_at": publishedAt.toIso8601String(),
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
       };
 }

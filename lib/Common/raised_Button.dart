@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Page/contact_information.dart';
 import 'package:promotoraapp/Page/frequent%20questions.dart';
 import 'package:promotoraapp/Page/sale_page.dart';
 import 'package:promotoraapp/main.dart';
@@ -47,16 +46,15 @@ class BottomList extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => MaterialApp(
-                      debugShowCheckedModeBanner: false,
-                      initialRoute: this.route,
-                      routes: {
-                        'sale': (BuildContext context) => SalePage(),
-                        'questions': (BuildContext context) => QuestionsPage(),
-                        'contact': (BuildContext context) =>
-                            ContactInformationPage(),
-                      },
-                    )),
+              builder: (context) => MaterialApp(
+                debugShowCheckedModeBanner: false,
+                initialRoute: this.route,
+                routes: {
+                  'sale': (BuildContext context) => SalePage(),
+                  'questions': (BuildContext context) => QuestionsPage(),
+                },
+              ),
+            ),
           );
         });
   }
