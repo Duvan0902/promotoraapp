@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Page/contact_information.dart';
+import 'package:promotoraapp/Page/contact_information_page.dart';
 import 'package:promotoraapp/main.dart';
 
 class ContactsManagementList extends StatefulWidget {

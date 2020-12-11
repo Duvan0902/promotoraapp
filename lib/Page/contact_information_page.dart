@@ -39,12 +39,10 @@ class ContactInformationPage extends StatelessWidget {
             child: Icon(Icons.ac_unit),
           ),
         ),
-        body: SingleChildScrollView(
+        body: Container(
+          padding: const EdgeInsets.all(25.0),
           child: Container(
-            padding: const EdgeInsets.all(25.0),
-            child: Container(
-              child: _posterTitle(context),
-            ),
+            child: _posterTitle(context),
           ),
         ),
       ),
@@ -54,8 +52,6 @@ class ContactInformationPage extends StatelessWidget {
   Widget _posterTitle(context) {
     final contactProvider = ContactsProvider();
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      color: Color.fromRGBO(243, 243, 243, 1),
       child: FutureBuilder(
         future: contactProvider.getContacts(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
