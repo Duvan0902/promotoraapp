@@ -107,6 +107,9 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
               ),
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
@@ -121,6 +124,9 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
                     .copyWith(color: Colors.black45, fontSize: 16),
               ),
             ),
+          ),
+          SizedBox(
+            height: 10,
           ),
           Card(
             shape: RoundedRectangleBorder(
@@ -144,6 +150,9 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
               ),
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
@@ -166,14 +175,22 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
               ),
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
             elevation: 2.0,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(50, 20, 59, 20),
-              child: Container(child: Text(widget.ema)),
+              padding: EdgeInsets.symmetric(vertical: 17, horizontal: 49),
+              child: Container(
+                child: Text(
+                  widget.ema,
+                  textAlign: TextAlign.left,
+                ),
+              ),
             ),
           ),
         ],

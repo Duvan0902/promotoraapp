@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:promotoraapp/Common/contacts_management.dart';
 import 'package:promotoraapp/Model/contacts_model.dart';
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Common/contacts_list.dart';
+import 'package:promotoraapp/Common/users_list.dart';
 
 import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/provider/contacts_provider.dart';
+import 'package:promotoraapp/provider/users_provider.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage({Key key}) : super(key: key);
@@ -83,11 +85,11 @@ class _ContactsPageState extends State<ContactsPage> {
   }
 
   Widget roomList(context) {
-    return Container();
-    /* final contactProvider = UsersProvider();
+    final userProvider = UsersProvider();
     return Container(
+      padding: EdgeInsets.fromLTRB(10, 20, 20, 30),
       child: FutureBuilder(
-        future: contactProvider.getUser(),
+        future: userProvider.getUsers(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
             return UsersList(contacts: snapshot.data);
@@ -101,13 +103,14 @@ class _ContactsPageState extends State<ContactsPage> {
           }
         },
       ),
-    );*/
+    );
   }
 }
 
 Widget recordedList(context) {
   final contactProvider = ContactsProvider();
   return Container(
+    padding: EdgeInsets.fromLTRB(10, 20, 20, 30),
     child: FutureBuilder(
       future: contactProvider.getContacts(),
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {

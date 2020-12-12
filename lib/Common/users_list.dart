@@ -1,5 +1,5 @@
-/*import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/contacts_management.dart';
+import 'package:flutter/material.dart';
+import 'package:promotoraapp/Common/users_management.dart';
 import 'package:promotoraapp/Model/users_model.dart';
 
 class UsersList extends StatelessWidget {
@@ -13,13 +13,17 @@ class UsersList extends StatelessWidget {
       child: ListView.builder(
         itemCount: contacts.length,
         itemBuilder: (context, index) {
-          return ContactsManagementList(
+          return UsersManagementList(
             name: contacts[index].name,
             surname: contacts[index].surname,
-            company: contacts[index].position,
+            position: contacts[index].position,
+            description: contacts[index].description,
+            email: contacts[index].email,
+            phone1: contacts[index].phone1,
+            phone2: contacts[index].phone2,
           );
         },
       ),
     );
   }
-}*/
+}

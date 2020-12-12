@@ -1,36 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Page/contact_information_page.dart';
+import 'package:promotoraapp/Page/users_information_page.dart';
 import 'package:promotoraapp/main.dart';
 
-class ContactsManagementList extends StatefulWidget {
+class UsersManagementList extends StatefulWidget {
   final String name;
   final String surname;
-  final String company;
+  final String position;
   final String description;
   final String email;
   final String phone1;
+  final String phone2;
 
-  ContactsManagementList({
+  UsersManagementList({
     Key key,
     @required this.name,
     @required this.surname,
-    @required this.company,
+    @required this.position,
     @required this.description,
     @required this.email,
     @required this.phone1,
+    @required this.phone2,
   }) : super(key: key);
 
   @override
-  _ContactsManagementListState createState() => _ContactsManagementListState();
+  _UsersManagementListState createState() => _UsersManagementListState();
 }
 
-class _ContactsManagementListState extends State<ContactsManagementList> {
+class _UsersManagementListState extends State<UsersManagementList> {
   String na = '';
   String sur = '';
-  String com = '';
+  String pos = '';
   String des = '';
   String ema = '';
-  String pho = '';
+  String pho1 = '';
+  String pho2 = '';
   @override
   Widget build(BuildContext context) {
     var listTile = Column(
@@ -60,7 +63,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
           height: 4,
         ),
         Text(
-          widget.company,
+          widget.position,
           style: Theme.of(context)
               .textTheme
               .bodyText1
@@ -95,16 +98,17 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
         onPressed: () {
           na = widget.name;
           sur = widget.surname;
-          com = widget.company;
+          pos = widget.position;
           des = widget.description;
           ema = widget.email;
-          pho = widget.phone1;
+          pho1 = widget.phone1;
+          pho2 = widget.phone2;
 
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) =>
-                  ContactInformationPage(na, sur, com, des, ema, pho),
+                  UsersInformationPage(na, sur, pos, des, ema, pho1, pho2),
             ),
           );
         },
