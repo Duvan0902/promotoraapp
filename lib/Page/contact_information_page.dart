@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/contacts_information.dart';
 import 'package:promotoraapp/main.dart';
 
-class ContactInformationPage extends StatelessWidget {
-  const ContactInformationPage({Key key}) : super(key: key);
+class ContactInformationPage extends StatefulWidget {
+  String na;
+  String sur;
+  String com;
+  String des;
+  String ema;
+  String pho;
+  ContactInformationPage(
+      this.na, this.sur, this.com, this.des, this.ema, this.pho);
 
+  @override
+  _ContactInformationPageState createState() => _ContactInformationPageState();
+}
+
+class _ContactInformationPageState extends State<ContactInformationPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,6 +59,125 @@ class ContactInformationPage extends StatelessWidget {
   }
 
   Widget _posterTitle(context) {
-    return ContactsInformationList();
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            elevation: 2.0,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 40, horizontal: 15),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Text(
+                        widget.na,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(color: Colors.black, fontSize: 18),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        widget.sur,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(color: Colors.black, fontSize: 18),
+                      )
+                    ],
+                  ),
+                  Container(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      widget.com,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(color: Colors.black45, fontSize: 16),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 50, horizontal: 15),
+              child: Text(
+                widget.des,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.black45, fontSize: 16),
+              ),
+            ),
+          ),
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(widget.pho),
+                  IconButton(
+                    icon: Icon(
+                      Icons.call_outlined,
+                    ),
+                    color: PromotoraApp().primaryDark,
+                    iconSize: 30,
+                    onPressed: () {},
+                  )
+                ],
+              ),
+            ),
+          ),
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text('sin numero'),
+                  IconButton(
+                    icon: Icon(
+                      Icons.call_outlined,
+                    ),
+                    color: PromotoraApp().primaryDark,
+                    iconSize: 30,
+                    onPressed: () {},
+                  )
+                ],
+              ),
+            ),
+          ),
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            elevation: 2.0,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(50, 20, 59, 20),
+              child: Container(child: Text(widget.ema)),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
