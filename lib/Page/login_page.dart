@@ -201,16 +201,6 @@ Widget _background(BuildContext context) {
 }
 
 _login(LoginBloc bloc, BuildContext context) async {
-  LoginProvider userProvider = LoginProvider();
-  LoginModel user = await userProvider.login(bloc.email, bloc.password);
-
-  if (user != null) {
-    Navigator.pushReplacementNamed(context, 'home');
-  } else {
-    showMyDialog(
-      context,
-      "Error",
-      Text("El correo o la contraseña no son válidos, intenta nuevamente."),
-    );
-  }
+  final LoginProvider loginProvider = LoginProvider();
+  loginProvider.login(bloc.identifier, bloc.password);
 }

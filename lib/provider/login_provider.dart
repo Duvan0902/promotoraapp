@@ -1,64 +1,30 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:promotoraapp/Model/login_model.dart';
 import 'package:promotoraapp/preferences/login_preferences.dart';
 
 class LoginProvider {
-  final _prefs = LoginPreferences();
+  final String _url = 'http://66.228.51.95:1337/auth/local';
+  final _prefs = new LoginPreferences();
 
-  Future<LoginModel> login(String email, String password) async {
-    final String _url = "http://66.228.51.95:1337/auth/local";
+  Future<Map<String, dynamic>> login(String identifier, String password) async {
+    final authData = {
+      'identifier': identifier,
+      'password': password,
+      'returnSecureToken': true
+    };
 
-    try {
-      String basicAuth = 'Basic';
-      var response = await http.post(
-        _url,
-        headers: <String, String>{
-          'authorization': basicAuth,
-          'content-type': 'application/json'
-        },
-      );
+    final resp = await http.post(_url, body: json.encode(authData));
 
-      switch (response.statusCode) {
-        case 200:
-          String token = json.decode(response.body)["token"];
+    Map<String, dynamic> decodedResp = json.decode(resp.body);
 
-          LoginModel user = await getLogin(token);
-          return user;
-          break;
-        default:
-      }
-    } catch (Exception) {
-      print(Exception);
-    }
-    return null;
-  }
+    print(decodedResp);
 
-  Future<LoginModel> getLogin(String token) async {
-    final String _url = "http://66.228.51.95:1337/auth/local" + token;
+    if (decodedResp.containsKey('Token')) {
+      _prefs.token = decodedResp['Token'];
 
-    try {
-      String basicAuth = 'Basic ';
-
-      var response = await http.get(
-        _url,
-        headers: <String, String>{
-          'authorization': basicAuth,
-          'content-type': 'application/json'
-        },
-      );
-
-      LoginModel user = LoginModel.fromJson(response.body);
-
-      if (user.mail != null) {
-        print("Token saved");
-        _prefs.token = token;
-      }
-
-      return user;
-    } catch (Exception) {
-      print(Exception);
-      return null;
+      return {'ok': true, 'token': decodedResp['Token']};
+    } else {
+      return {'ok': false, 'mensaje': decodedResp['error']['message']};
     }
   }
 }

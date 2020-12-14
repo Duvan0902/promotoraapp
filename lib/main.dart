@@ -110,7 +110,7 @@ class PromotoraApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: 'home',
+        initialRoute: 'login',
         routes: {
           'home': (BuildContext context) => HomePage(),
           'login': (BuildContext context) => LoginPage(),
