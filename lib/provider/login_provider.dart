@@ -6,14 +6,11 @@ import 'package:promotoraapp/preferences/login_preferences.dart';
 class LoginProvider {
   final _prefs = LoginPreferences();
 
-  Future<LoginModel> login(String email, String code) async {
+  Future<LoginModel> login(String email, String password) async {
     final String _url = "http://66.228.51.95:1337/auth/local";
 
     try {
-      String username = '';
-      String password = '';
-      String basicAuth = 'Basic ' + ('$username:$password');
-
+      String basicAuth = 'Basic';
       var response = await http.post(
         _url,
         headers: <String, String>{
@@ -41,9 +38,7 @@ class LoginProvider {
     final String _url = "http://66.228.51.95:1337/auth/local" + token;
 
     try {
-      String username = '';
-      String password = '';
-      String basicAuth = 'Basic ' + ('$username:$password');
+      String basicAuth = 'Basic ';
 
       var response = await http.get(
         _url,

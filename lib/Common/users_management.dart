@@ -27,13 +27,13 @@ class UsersManagementList extends StatefulWidget {
 }
 
 class _UsersManagementListState extends State<UsersManagementList> {
-  String na = '';
-  String sur = '';
-  String pos = '';
-  String des = '';
-  String ema = '';
-  String pho1 = '';
-  String pho2 = '';
+  String name = '';
+  String surname = '';
+  String position = '';
+  String description = '';
+  String email = '';
+  String phone1 = '';
+  String phone2 = '';
   @override
   Widget build(BuildContext context) {
     var listTile = Column(
@@ -96,19 +96,19 @@ class _UsersManagementListState extends State<UsersManagementList> {
           ),
         ),
         onPressed: () {
-          na = widget.name;
-          sur = widget.surname;
-          pos = widget.position;
-          des = widget.description;
-          ema = widget.email;
-          pho1 = widget.phone1;
-          pho2 = widget.phone2;
+          name = widget.name;
+          surname = widget.surname;
+          position = widget.position;
+          description = widget.description;
+          email = widget.email;
+          phone1 = widget.phone1;
+          phone2 = widget.phone2;
 
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  UsersInformationPage(na, sur, pos, des, ema, pho1, pho2),
+              builder: (context) => UsersInformationPage(
+                  name, surname, position, description, email, phone1, phone2),
             ),
           );
         },

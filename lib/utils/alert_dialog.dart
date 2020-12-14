@@ -15,7 +15,8 @@ Future<void> showMyDialog(
             child: Text(
               'Aceptar',
               style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  color: PromotoraApp().accent, fontWeight: FontWeight.bold),
+                  color: PromotoraApp().primaryDark,
+                  fontWeight: FontWeight.bold),
             ),
             onPressed: () {
               Navigator.of(context).pop();

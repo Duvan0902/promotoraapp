@@ -3,15 +3,15 @@ import 'package:promotoraapp/main.dart';
 
 // ignore: must_be_immutable
 class UsersInformationPage extends StatefulWidget {
-  String na;
-  String sur;
-  String pos;
-  String des;
-  String ema;
-  String pho1;
-  String pho2;
-  UsersInformationPage(
-      this.na, this.sur, this.pos, this.des, this.ema, this.pho1, this.pho2);
+  String name;
+  String surname;
+  String position;
+  String description;
+  String email;
+  String phone1;
+  String phone2;
+  UsersInformationPage(this.name, this.surname, this.position, this.description,
+      this.email, this.phone1, this.phone2);
 
   @override
   _UsersInformationPageState createState() => _UsersInformationPageState();
@@ -72,7 +72,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
                   Row(
                     children: [
                       Text(
-                        widget.na,
+                        widget.name,
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1
@@ -82,7 +82,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
                         width: 5,
                       ),
                       Text(
-                        widget.sur,
+                        widget.surname,
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1
@@ -93,7 +93,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
                   Container(
                     alignment: Alignment.bottomLeft,
                     child: Text(
-                      widget.pos,
+                      widget.position,
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -114,7 +114,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 50, horizontal: 70),
               child: Text(
-                widget.des,
+                widget.description,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1
@@ -134,7 +134,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(widget.pho1),
+                  Text(widget.phone1),
                   IconButton(
                     icon: Icon(
                       Icons.call_outlined,
@@ -159,7 +159,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(widget.pho2),
+                  Text(widget.phone2),
                   IconButton(
                     icon: Icon(
                       Icons.call_outlined,
@@ -184,7 +184,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
               padding: EdgeInsets.symmetric(vertical: 17, horizontal: 49),
               child: Container(
                   child: Text(
-                widget.ema,
+                widget.email,
                 textAlign: TextAlign.left,
               )),
             ),

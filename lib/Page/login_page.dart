@@ -210,7 +210,7 @@ _login(LoginBloc bloc, BuildContext context) async {
     showMyDialog(
       context,
       "Error",
-      Text("El correo o el código no son válidos, intenta nuevamente."),
+      Text("El correo o la contraseña no son válidos, intenta nuevamente."),
     );
   }
 }

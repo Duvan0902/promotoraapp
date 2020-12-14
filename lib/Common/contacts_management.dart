@@ -25,12 +25,12 @@ class ContactsManagementList extends StatefulWidget {
 }
 
 class _ContactsManagementListState extends State<ContactsManagementList> {
-  String na = '';
-  String sur = '';
-  String com = '';
-  String des = '';
-  String ema = '';
-  String pho = '';
+  String name = '';
+  String surme = '';
+  String company = '';
+  String description = '';
+  String email = '';
+  String phone = '';
   @override
   Widget build(BuildContext context) {
     var listTile = Column(
@@ -93,18 +93,18 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
           ),
         ),
         onPressed: () {
-          na = widget.name;
-          sur = widget.surname;
-          com = widget.company;
-          des = widget.description;
-          ema = widget.email;
-          pho = widget.phone1;
+          name = widget.name;
+          surme = widget.surname;
+          company = widget.company;
+          description = widget.description;
+          email = widget.email;
+          phone = widget.phone1;
 
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  ContactInformationPage(na, sur, com, des, ema, pho),
+              builder: (context) => ContactInformationPage(
+                  name, surme, company, description, email, phone),
             ),
           );
         },

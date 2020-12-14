@@ -3,14 +3,14 @@ import 'package:promotoraapp/main.dart';
 
 // ignore: must_be_immutable
 class ContactInformationPage extends StatefulWidget {
-  String na;
-  String sur;
-  String com;
-  String des;
-  String ema;
-  String pho;
-  ContactInformationPage(
-      this.na, this.sur, this.com, this.des, this.ema, this.pho);
+  String name;
+  String surname;
+  String company;
+  String description;
+  String email;
+  String phone;
+  ContactInformationPage(this.name, this.surname, this.company,
+      this.description, this.email, this.phone);
 
   @override
   _ContactInformationPageState createState() => _ContactInformationPageState();
@@ -71,7 +71,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
                   Row(
                     children: [
                       Text(
-                        widget.na,
+                        widget.name,
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1
@@ -81,7 +81,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
                         width: 5,
                       ),
                       Text(
-                        widget.sur,
+                        widget.surname,
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1
@@ -92,7 +92,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
                   Container(
                     alignment: Alignment.bottomLeft,
                     child: Text(
-                      widget.com,
+                      widget.company,
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -113,7 +113,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 50, horizontal: 15),
               child: Text(
-                widget.des,
+                widget.description,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1
@@ -133,7 +133,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(widget.pho),
+                  Text(widget.phone),
                   IconButton(
                     icon: Icon(
                       Icons.call_outlined,
@@ -183,7 +183,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
               padding: EdgeInsets.symmetric(vertical: 17, horizontal: 49),
               child: Container(
                 child: Text(
-                  widget.ema,
+                  widget.email,
                   textAlign: TextAlign.left,
                 ),
               ),
