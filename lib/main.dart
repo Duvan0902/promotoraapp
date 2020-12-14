@@ -4,9 +4,15 @@ import 'package:promotoraapp/Page/login_page.dart';
 import 'package:promotoraapp/Page/sale_page.dart';
 import 'package:promotoraapp/bloc/provider_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:promotoraapp/preferences/login_preferences.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  final prefs = new LoginPreferences();
+  await prefs.initPrefs();
+
   runApp(PromotoraApp());
 }
 
@@ -105,7 +111,7 @@ class PromotoraApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: 'home',
+        initialRoute: 'login',
         routes: {
           'home': (BuildContext context) => HomePage(),
           'login': (BuildContext context) => LoginPage(),

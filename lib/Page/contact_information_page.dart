@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/main.dart';
 
+// ignore: must_be_immutable
 class ContactInformationPage extends StatefulWidget {
   String na;
   String sur;
@@ -35,12 +36,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PromotoraApp(),
-                ),
-              );
+              Navigator.pop(context);
             },
           ),
           flexibleSpace: Container(

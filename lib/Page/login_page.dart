@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Model/login_model.dart';
 import 'package:promotoraapp/bloc/login_bloc.dart';
 import 'package:promotoraapp/bloc/provider_bloc.dart';
 import 'package:promotoraapp/main.dart';
+import 'package:promotoraapp/provider/login_provider.dart';
+import 'package:promotoraapp/utils/alert_dialog.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -167,7 +170,7 @@ class LoginPage extends StatelessWidget {
           ),
           color: PromotoraApp().primaryDark,
           disabledTextColor: Colors.grey,
-          onPressed: () {},
+          onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
         );
       },
     );
@@ -195,4 +198,19 @@ Widget _background(BuildContext context) {
       ),
     ),
   );
+}
+
+_login(LoginBloc bloc, BuildContext context) async {
+  LoginProvider userProvider = LoginProvider();
+  LoginModel user = await userProvider.login(bloc.email, bloc.password);
+
+  if (user != null) {
+    Navigator.pushReplacementNamed(context, 'home');
+  } else {
+    showMyDialog(
+      context,
+      "Error",
+      Text("El correo o el código no son válidos, intenta nuevamente."),
+    );
+  }
 }
