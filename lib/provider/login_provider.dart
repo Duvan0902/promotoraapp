@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:promotoraapp/preferences/login_preferences.dart';
 
@@ -30,7 +31,23 @@ class LoginProvider {
 
       return {'ok': true, 'jwt': decodedResp['jwt']};
     } else {
-      return {'ok': false, 'message': decodedResp['message']};
+      print(decodedResp['message'][0]['messages'][0]['id']);
+      switch (decodedResp['message'][0]['messages'][0]['id']) {
+        case "Auth.form.error.invalid":
+          print('message');
+          return {
+            'ok': false,
+            'message':
+                'Correo o contraseña invalidos. Por favor vuelva intentarlo.',
+          };
+          break;
+        default:
+          return {
+            'ok': false,
+            'message': decodedResp['message'][0]['messages'][0]['id'],
+          };
+          break;
+      }
     }
   }
 }

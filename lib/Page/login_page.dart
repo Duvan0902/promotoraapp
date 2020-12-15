@@ -74,6 +74,7 @@ class LoginPage extends StatelessWidget {
                   child: _forgotPassword(context),
                   alignment: Alignment.center,
                 ),
+                SizedBox(height: 40),
               ],
             ),
           ),
@@ -205,10 +206,6 @@ _login(LoginBloc bloc, BuildContext context) async {
   if (info['ok']) {
     Navigator.pushReplacementNamed(context, 'home');
   } else {
-    showMyDialog(
-      context,
-      "Error",
-      Text("El correo o la contraseña no son válidas, intenta nuevamente."),
-    );
+    showAlert(context, info['message']);
   }
 }

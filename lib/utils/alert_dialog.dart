@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/main.dart';
 
-Future<void> showMyDialog(
-    BuildContext context, String title, Widget body) async {
-  return showDialog<void>(
-    context: context,
-    barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(title),
-        content: SingleChildScrollView(child: body),
-        actions: <Widget>[
-          TextButton(
-            child: Text(
-              'Aceptar',
-              style: Theme.of(context).textTheme.bodyText1.copyWith(
-                  color: PromotoraApp().primaryDark,
-                  fontWeight: FontWeight.bold),
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+void showAlert(BuildContext context, String message) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            message,
+            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
           ),
-        ],
-      );
-    },
-  );
+          actions: <Widget>[
+            FlatButton(
+              child: Text(
+                'Intentar de nuevo',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: PromotoraApp().primaryDark, fontSize: 16),
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          ],
+        );
+      });
 }
