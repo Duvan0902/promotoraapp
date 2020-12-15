@@ -30,7 +30,7 @@ class LoginProvider {
 
       return {'ok': true, 'jwt': decodedResp['jwt']};
     } else {
-      return {'ok': false, 'menssage': decodedResp['message/messages/message']};
+      return {'ok': false, 'message': decodedResp['message']};
     }
   }
 }
