@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Model/login_model.dart';
 import 'package:promotoraapp/bloc/login_bloc.dart';
 import 'package:promotoraapp/bloc/provider_bloc.dart';
 import 'package:promotoraapp/main.dart';
@@ -202,5 +201,14 @@ Widget _background(BuildContext context) {
 
 _login(LoginBloc bloc, BuildContext context) async {
   final LoginProvider loginProvider = LoginProvider();
-  loginProvider.login(bloc.identifier, bloc.password);
+  Map info = await loginProvider.login(bloc.identifare, bloc.password);
+  if (info['ok']) {
+    Navigator.pushReplacementNamed(context, 'home');
+  } else {
+    showMyDialog(
+      context,
+      "Error",
+      Text("El correo o la contraceña no son válidas, intenta nuevamente."),
+    );
+  }
 }

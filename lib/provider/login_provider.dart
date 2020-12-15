@@ -3,28 +3,34 @@ import 'package:http/http.dart' as http;
 import 'package:promotoraapp/preferences/login_preferences.dart';
 
 class LoginProvider {
-  final String _url = 'http://66.228.51.95:1337/auth/local';
+  final String _url = "http://66.228.51.95:1337/auth/local";
   final _prefs = new LoginPreferences();
 
   Future<Map<String, dynamic>> login(String identifier, String password) async {
-    final authData = {
-      'identifier': identifier,
-      'password': password,
-      'returnSecureToken': true
-    };
+    final authData = json.encode(
+      {'identifier': identifier, 'password': password},
+    );
 
-    final resp = await http.post(_url, body: json.encode(authData));
+    print(authData);
+
+    final resp = await http.post(
+      _url,
+      headers: {'content-type': 'application/json'},
+      body: authData,
+    );
+
+    print(identifier);
+    print(password);
 
     Map<String, dynamic> decodedResp = json.decode(resp.body);
-
     print(decodedResp);
 
-    if (decodedResp.containsKey('Token')) {
-      _prefs.token = decodedResp['Token'];
+    if (decodedResp.containsKey('jwt')) {
+      _prefs.token = decodedResp['jwt'];
 
-      return {'ok': true, 'token': decodedResp['Token']};
+      return {'ok': true, 'jwt': decodedResp['jwt']};
     } else {
-      return {'ok': false, 'mensaje': decodedResp['error']['message']};
+      return {'ok': false, 'menssage': decodedResp['message/messages/message']};
     }
   }
 }
