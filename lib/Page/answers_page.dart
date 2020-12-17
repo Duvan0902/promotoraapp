@@ -1,5 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Common/faq_list.dart';
+import 'package:promotoraapp/Common/frequent_questions.dart';
+import 'package:promotoraapp/Common/questions_answer.dart';
+import 'package:promotoraapp/Model/categories_model.dart';
+import 'package:promotoraapp/Model/faq_model.dart';
+import 'package:promotoraapp/provider/categories_provider.dart';
 
 class AnswersPage extends StatefulWidget {
   const AnswersPage({
@@ -39,10 +45,29 @@ class _AnswersPageState extends State<AnswersPage> {
   }
 
   Widget _posterTitle(context) {
-    return Container();
+    final categoriesProvider = CategoriesProvider();
+    return Container(
+      child: FutureBuilder(
+        future: categoriesProvider.getCategories(),
+        builder: (BuildContext context,
+            AsyncSnapshot<List<FaqCategoriesModel>> snapshot) {
+          if (snapshot.hasData) {
+            return Container();
+          } else {
+            return Container(
+              height: 400,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        },
+      ),
+    );
+    ;
   }
 
-  /*Widget _sections(context, List<FaqModel> documets) {
+  Widget _sections(context, List<FaqModel> documets) {
     print(documets);
     return Container(
       child: ListView.builder(
@@ -58,5 +83,4 @@ class _AnswersPageState extends State<AnswersPage> {
       ),
     );
   }
-}*/
 }

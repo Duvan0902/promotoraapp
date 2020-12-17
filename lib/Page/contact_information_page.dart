@@ -47,14 +47,14 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
         body: Container(
           padding: const EdgeInsets.all(25.0),
           child: Container(
-            child: _posterTitle(context),
+            child: _contactsTitle(context),
           ),
         ),
       ),
     );
   }
 
-  Widget _posterTitle(context) {
+  Widget _contactsTitle(context) {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
