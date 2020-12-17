@@ -1,21 +1,22 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Common/bottom_chat.dart';
-import 'package:promotoraapp/Common/frequent_questions.dart';
+import 'package:promotoraapp/Common/questions_answer.dart';
+import 'package:promotoraapp/Model/faq_model.dart';
 import 'package:promotoraapp/Model/questions_model.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/provider/questions_provider.dart';
 
-class QuestionsPage extends StatefulWidget {
-  const QuestionsPage({
+class AnswersPage extends StatefulWidget {
+  const AnswersPage({
     Key key,
   }) : super(key: key);
 
   @override
-  _QuestionsPageState createState() => _QuestionsPageState();
+  _AnswersPageState createState() => _AnswersPageState();
 }
 
-class _QuestionsPageState extends State<QuestionsPage> {
+class _AnswersPageState extends State<AnswersPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,12 +25,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PromotoraApp(),
-                ),
-              );
+              Navigator.pop(context);
             },
           ),
           backgroundColor: Colors.grey[900],
@@ -40,24 +36,9 @@ class _QuestionsPageState extends State<QuestionsPage> {
                 .headline2
                 .copyWith(color: Colors.white, fontSize: 18),
           ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {},
-            )
-          ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(25.0),
-                child: _posterTitle(context),
-              ),
-              SizedBox(height: 55),
-              _chat(context)
-            ],
-          ),
+        body: Container(
+          child: _posterTitle(context),
         ),
       ),
     );
@@ -72,12 +53,10 @@ class _QuestionsPageState extends State<QuestionsPage> {
             (BuildContext context, AsyncSnapshot<QuestionsModel> snapshot) {
           if (snapshot.hasData) {
             QuestionsModel event = snapshot.data;
+            print(event);
+            List<FaqModel> documents = event.faq;
 
-            return Container(
-              child: FrenquentQuestions(
-                category: event.category,
-              ),
-            );
+            return _sections(context, documents);
           } else {
             return Container(
               height: 400,
@@ -91,7 +70,20 @@ class _QuestionsPageState extends State<QuestionsPage> {
     );
   }
 
-  Widget _chat(context) {
-    return BottomChat();
+  Widget _sections(context, List<FaqModel> documets) {
+    print(documets);
+    return Container(
+      child: ListView.builder(
+        itemCount: documets.length,
+        itemBuilder: (context, index) {
+          FaqModel document = documets[index];
+
+          return ExpansionCard(
+            questions: document.question,
+            answer: document.answer,
+          );
+        },
+      ),
+    );
   }
 }
