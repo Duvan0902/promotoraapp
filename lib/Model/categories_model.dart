@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:promotoraapp/Model/faq_model.dart';
 
-class QuestionsModel {
-  QuestionsModel({
+class FaqCategoriesModel {
+  FaqCategoriesModel({
     this.id,
     this.category,
     this.createdAt,
@@ -17,12 +17,13 @@ class QuestionsModel {
   final DateTime updatedAt;
   final List<FaqModel> faq;
 
-  factory QuestionsModel.fromJson(String str) =>
-      QuestionsModel.fromMap(json.decode(str));
+  factory FaqCategoriesModel.fromJson(String str) =>
+      FaqCategoriesModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory QuestionsModel.fromMap(Map<String, dynamic> json) => QuestionsModel(
+  factory FaqCategoriesModel.fromMap(Map<String, dynamic> json) =>
+      FaqCategoriesModel(
         id: json["id"],
         category: json["category"],
         createdAt: DateTime.parse(json["created_at"]),

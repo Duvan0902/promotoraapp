@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/bottom_chat.dart';
-import 'package:promotoraapp/Common/frequent_questions.dart';
-import 'package:promotoraapp/Model/questions_model.dart';
+
+import 'package:promotoraapp/Common/questions_list.dart';
 import 'package:promotoraapp/main.dart';
-import 'package:promotoraapp/provider/questions_provider.dart';
+import 'package:promotoraapp/provider/categories_provider.dart';
 
 class QuestionsPage extends StatefulWidget {
   const QuestionsPage({
@@ -47,37 +46,24 @@ class _QuestionsPageState extends State<QuestionsPage> {
             )
           ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(25.0),
-                child: _posterTitle(context),
-              ),
-              SizedBox(height: 55),
-              _chat(context)
-            ],
-          ),
+        body: Container(
+          padding: const EdgeInsets.all(25.0),
+          child: _posterTitle(context),
         ),
+
+        /*_chat(context)*/
       ),
     );
   }
 
   Widget _posterTitle(context) {
-    QuestionsProvider questionsProvider = QuestionsProvider();
+    final categoriesProvider = CategoriesProvider();
     return Container(
       child: FutureBuilder(
-        future: questionsProvider.getQuestions(),
-        builder:
-            (BuildContext context, AsyncSnapshot<QuestionsModel> snapshot) {
+        future: categoriesProvider.getCategories(),
+        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
-            QuestionsModel event = snapshot.data;
-
-            return Container(
-              child: FrenquentQuestions(
-                category: event.category,
-              ),
-            );
+            return CategoriesList(categories: snapshot.data);
           } else {
             return Container(
               height: 400,
@@ -90,8 +76,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
       ),
     );
   }
-
-  Widget _chat(context) {
+}
+/* Widget _chat(context) {
     return BottomChat();
   }
-}
+}*/
