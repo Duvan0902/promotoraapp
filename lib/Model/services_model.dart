@@ -3,19 +3,19 @@ import 'dart:convert';
 class ServicesModel {
   ServicesModel({
     this.id,
-    this.category,
+    this.service,
     this.createdAt,
     this.updatedAt,
     this.icon,
-    this.atac,
+    this.atacCategories,
   });
 
   final int id;
-  final String category;
+  final String service;
   final DateTime createdAt;
   final DateTime updatedAt;
   final Icon icon;
-  final List<dynamic> atac;
+  final List<AtacCategory> atacCategories;
 
   factory ServicesModel.fromJson(String str) =>
       ServicesModel.fromMap(json.decode(str));
@@ -24,20 +24,59 @@ class ServicesModel {
 
   factory ServicesModel.fromMap(Map<String, dynamic> json) => ServicesModel(
         id: json["id"],
-        category: json["category"],
+        service: json["service"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         icon: Icon.fromMap(json["icon"]),
-        atac: List<dynamic>.from(json["atac"].map((x) => x)),
+        atacCategories: List<AtacCategory>.from(
+            json["atac_categories"].map((x) => AtacCategory.fromMap(x))),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "service": service,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "icon": icon.toMap(),
+        "atac_categories":
+            List<dynamic>.from(atacCategories.map((x) => x.toMap())),
+      };
+}
+
+class AtacCategory {
+  AtacCategory({
+    this.id,
+    this.category,
+    this.atacService,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  final int id;
+  final String category;
+  final int atacService;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  factory AtacCategory.fromJson(String str) =>
+      AtacCategory.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory AtacCategory.fromMap(Map<String, dynamic> json) => AtacCategory(
+        id: json["id"],
+        category: json["category"],
+        atacService: json["atac_service"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toMap() => {
         "id": id,
         "category": category,
+        "atac_service": atacService,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "icon": icon.toMap(),
-        "atac": List<dynamic>.from(atac.map((x) => x)),
       };
 }
 

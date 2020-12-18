@@ -8,24 +8,13 @@ class ServicesList extends StatelessWidget {
   ServicesList({@required this.services});
   @override
   Widget build(BuildContext context) {
-    /* return Container(
-      padding: EdgeInsets.only(top: 10.0),
-      child: ListView.builder(
-        itemCount: services.length,
-        itemBuilder: (context, index) {
-          return ServicesView(
-            category: services[index].category,
-          );
-        },
-      ),
-    );*/
     return GridView.builder(
       itemCount: services.length,
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (context, index) {
         return ServicesView(
-          category: services[index].category,
+          service: services[index].service,
         );
       },
     );

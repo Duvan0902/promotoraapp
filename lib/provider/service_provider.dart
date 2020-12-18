@@ -3,7 +3,7 @@ import 'dart:convert' as json;
 import 'package:promotoraapp/Model/services_model.dart';
 
 class ServicesProvider {
-  final String _url = "http://66.228.51.95:1337/categorias-atacs";
+  final String _url = "http://66.228.51.95:1337/atac-servicios";
 
   Future<List<ServicesModel>> getService() async {
     try {
