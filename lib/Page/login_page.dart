@@ -168,6 +168,7 @@ class LoginPage extends StatelessWidget {
                   .copyWith(color: Colors.black, fontSize: 16),
             ),
           ),
+          disabledColor: Colors.grey[300],
           color: PromotoraApp().primaryDark,
           disabledTextColor: Colors.grey,
           onPressed: snapshot.hasData ? () => _login(bloc, context) : null,

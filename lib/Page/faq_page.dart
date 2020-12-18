@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/frequent_questions.dart';
 import 'package:promotoraapp/Common/questions_answer.dart';
 import 'package:promotoraapp/Model/faq_model.dart';
 
@@ -36,7 +35,17 @@ class _FaqPageState extends State<FaqPage> {
           ),
         ),
         body: Container(
-          child: _posterTitle(context),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 15,
+              ),
+              Expanded(
+                child: _posterTitle(context),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -49,6 +58,7 @@ class _FaqPageState extends State<FaqPage> {
   Widget _answer(context, List<FaqModel> faqlist) {
     print(faqlist);
     return Container(
+      padding: EdgeInsets.all(10),
       child: ListView.builder(
         itemCount: faqlist.length,
         itemBuilder: (context, index) {

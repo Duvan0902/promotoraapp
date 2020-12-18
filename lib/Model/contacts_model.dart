@@ -10,7 +10,6 @@ class ContactsModel {
     this.phone1,
     this.phone2,
     this.description,
-    this.publishedAt,
     this.createdAt,
     this.updatedAt,
   });
@@ -23,7 +22,6 @@ class ContactsModel {
   final String phone1;
   final dynamic phone2;
   final String description;
-  final DateTime publishedAt;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -41,7 +39,6 @@ class ContactsModel {
         phone1: json["phone1"],
         phone2: json["phone2"],
         description: json["description"],
-        publishedAt: DateTime.parse(json["published_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -55,7 +52,6 @@ class ContactsModel {
         "phone1": phone1,
         "phone2": phone2,
         "description": description,
-        "published_at": publishedAt.toIso8601String(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };

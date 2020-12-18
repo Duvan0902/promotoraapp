@@ -47,12 +47,25 @@ class _ExpansionCardState extends State<ExpansionCard> {
                 textAlign: TextAlign.justify,
                 style: Theme.of(context)
                     .textTheme
-                    .headline3
-                    .copyWith(color: textColor, fontSize: 15),
+                    .bodyText1
+                    .copyWith(color: Colors.black45, fontSize: 15),
               ),
             )
           : false,
-      children: <Widget>[SizedBox(height: 5), Text(widget.answer)],
+      children: <Widget>[
+        SizedBox(height: 5),
+        Container(
+          padding: EdgeInsets.fromLTRB(16, 10, 60, 10),
+          child: Text(
+            widget.answer,
+            textAlign: TextAlign.justify,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                .copyWith(color: Colors.black54, fontSize: 15),
+          ),
+        )
+      ],
       onExpansionChanged: (changed) {
         setState(() {
           _expanded = changed;

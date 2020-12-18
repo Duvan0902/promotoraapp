@@ -46,7 +46,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
         ),
         body: Container(
           padding: const EdgeInsets.all(25.0),
-          child: Container(
+          child: Expanded(
             child: _contactsTitle(context),
           ),
         ),

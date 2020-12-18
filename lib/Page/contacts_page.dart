@@ -25,11 +25,11 @@ class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> tabs = [
-      {"title": 'Empleados', "widget": roomList(context)},
-      {"title": "Para tu gestion", "widget": recordedList(context)}
+      {"title": 'Empleados', "widget": jopList(context)},
+      {"title": "Para tu gestion", "widget": managementList(context)}
     ];
     if (_currentWidget == null) {
-      _currentWidget = roomList(context);
+      _currentWidget = jopList(context);
     }
 
     return Column(
@@ -84,7 +84,7 @@ class _ContactsPageState extends State<ContactsPage> {
     );
   }
 
-  Widget roomList(context) {
+  Widget jopList(context) {
     final userProvider = UsersProvider();
     return Container(
       padding: EdgeInsets.fromLTRB(10, 20, 20, 30),
@@ -107,7 +107,7 @@ class _ContactsPageState extends State<ContactsPage> {
   }
 }
 
-Widget recordedList(context) {
+Widget managementList(context) {
   final contactProvider = ContactsProvider();
   return Container(
     padding: EdgeInsets.fromLTRB(10, 20, 20, 30),
@@ -115,7 +115,9 @@ Widget recordedList(context) {
       future: contactProvider.getContacts(),
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
         if (snapshot.hasData) {
-          return ContactsList(contacts: snapshot.data);
+          return ContactsList(
+            contacts: snapshot.data,
+          );
         } else {
           return Container(
             height: 400,

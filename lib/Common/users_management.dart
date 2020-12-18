@@ -71,7 +71,7 @@ class _UsersManagementListState extends State<UsersManagementList> {
     );
 
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 00, 0, 2),
+      padding: EdgeInsets.fromLTRB(0, 00, 0, 8),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
