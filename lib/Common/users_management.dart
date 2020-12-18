@@ -37,6 +37,7 @@ class _UsersManagementListState extends State<UsersManagementList> {
   @override
   Widget build(BuildContext context) {
     var listTile = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: <Widget>[
@@ -59,9 +60,6 @@ class _UsersManagementListState extends State<UsersManagementList> {
             ),
           ],
         ),
-        SizedBox(
-          height: 4,
-        ),
         Text(
           widget.position,
           style: Theme.of(context)
@@ -73,7 +71,7 @@ class _UsersManagementListState extends State<UsersManagementList> {
     );
 
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 10, 0, 2),
+      padding: EdgeInsets.fromLTRB(0, 00, 0, 2),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),

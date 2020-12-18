@@ -19,7 +19,7 @@ class BottomList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-        padding: EdgeInsets.fromLTRB(20, 00, 6, 10),
+        padding: EdgeInsets.fromLTRB(20, 00, 8, 5),
         child: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

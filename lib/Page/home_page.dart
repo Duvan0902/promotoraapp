@@ -9,7 +9,6 @@ import 'package:promotoraapp/Page/education_page.dart';
 import 'package:promotoraapp/Page/goals_page.dart';
 import 'package:promotoraapp/Page/services_page.dart';
 import 'package:flutter/foundation.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:promotoraapp/main.dart';
 
 class HomePage extends StatefulWidget {
@@ -48,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             color: PromotoraApp().primaryDark,
             child: ListView(
-              padding: const EdgeInsets.all(21),
+              padding: const EdgeInsets.fromLTRB(12, 20, 20, 30),
               children: <Widget>[
                 SizedBox(height: 40),
                 Text(

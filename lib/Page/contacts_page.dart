@@ -73,7 +73,7 @@ class _ContactsPageState extends State<ContactsPage> {
             topRight: Radius.circular(borderRadius),
           ),
         ),
-        padding: EdgeInsets.fromLTRB(50, 20, 49, 20),
+        padding: EdgeInsets.fromLTRB(50, 15, 49, 15),
         child: Text(
           title,
           style: Theme.of(context).textTheme.bodyText1.copyWith(

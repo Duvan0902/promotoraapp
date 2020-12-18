@@ -16,7 +16,13 @@ class _ServicesPageState extends State<ServicesPage> {
       color: Colors.grey[900],
       child: Column(
         children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
           _description(context),
+          SizedBox(
+            height: 20,
+          ),
           Expanded(
             child: _service(context),
           )
@@ -33,7 +39,7 @@ class _ServicesPageState extends State<ServicesPage> {
         style: Theme.of(context)
             .textTheme
             .bodyText1
-            .copyWith(color: Colors.white, fontSize: 17),
+            .copyWith(color: Colors.white, fontSize: 17.3),
       ),
     );
   }
@@ -41,6 +47,7 @@ class _ServicesPageState extends State<ServicesPage> {
   Widget _service(context) {
     final servicesProvider = ServicesProvider();
     return Container(
+      padding: EdgeInsets.fromLTRB(00, 00, 0, 100),
       child: FutureBuilder(
         future: servicesProvider.getService(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {

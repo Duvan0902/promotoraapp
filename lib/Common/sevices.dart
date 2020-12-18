@@ -17,24 +17,16 @@ class _ServicesViewState extends State<ServicesView> {
   Widget build(BuildContext context) {
     return _roundedButton(
         Colors.white, Icons.airport_shuttle_outlined, widget.service);
-    /* return Table(
-      children: [
-        TableRow(children: [
-          _crearBotonRedondeado(
-              Colors.white, Icons.airport_shuttle_outlined, widget.category),
-        ]),
-      ],
-    );*/
   }
 
   Widget _roundedButton(Color color, IconData icono, String texto) {
     return ClipRect(
       child: Container(
-        height: 150.0,
-        margin: EdgeInsets.all(8.0),
+        height: 130.0,
+        margin: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
             color: PromotoraApp().primaryDark,
-            borderRadius: BorderRadius.circular(10.0)),
+            borderRadius: BorderRadius.circular(17.0)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
@@ -49,7 +41,7 @@ class _ServicesViewState extends State<ServicesView> {
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
-                  .copyWith(color: Colors.white, fontSize: 18),
+                  .copyWith(color: Colors.white, fontSize: 17),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 5.0)

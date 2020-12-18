@@ -29,7 +29,6 @@ class _GoalsPageState extends State<GoalsPage> {
     return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(top: 10),
           color: Colors.grey[900],
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +60,7 @@ class _GoalsPageState extends State<GoalsPage> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.fromLTRB(50, 20, 61, 20),
+        padding: EdgeInsets.fromLTRB(50, 15, 61, 15),
         decoration: BoxDecoration(
           color: selected ? PromotoraApp().primaryDark : PromotoraApp().grey,
           borderRadius: BorderRadius.only(
