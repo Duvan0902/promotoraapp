@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/contacts_management.dart';
 import 'package:promotoraapp/Common/questions_answer.dart';
-import 'package:promotoraapp/Model/categories_model.dart';
 import 'package:promotoraapp/Model/faq_model.dart';
 
 class FaqList extends StatelessWidget {

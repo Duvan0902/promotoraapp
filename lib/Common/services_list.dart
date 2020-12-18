@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/sevices.dart';
+import 'package:promotoraapp/Common/services.dart';
 import 'package:promotoraapp/Model/services_model.dart';
 
 class ServicesList extends StatelessWidget {
@@ -8,7 +8,7 @@ class ServicesList extends StatelessWidget {
   ServicesList({@required this.services});
   @override
   Widget build(BuildContext context) {
-    return Container(
+    /* return Container(
       padding: EdgeInsets.only(top: 10.0),
       child: ListView.builder(
         itemCount: services.length,
@@ -18,6 +18,16 @@ class ServicesList extends StatelessWidget {
           );
         },
       ),
+    );*/
+    return GridView.builder(
+      itemCount: services.length,
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      itemBuilder: (context, index) {
+        return ServicesView(
+          category: services[index].category,
+        );
+      },
     );
   }
 }

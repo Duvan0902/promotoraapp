@@ -1,7 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert' as json;
-
-import 'package:promotoraapp/Model/contacts_model.dart';
 import 'package:promotoraapp/Model/services_model.dart';
 
 class ServicesProvider {

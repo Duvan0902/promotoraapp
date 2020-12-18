@@ -13,14 +13,34 @@ class _ServicesPageState extends State<ServicesPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Scaffold(body: _service(context)),
+      color: Colors.grey[900],
+      child: Column(
+        children: <Widget>[
+          _description(context),
+          Expanded(
+            child: _service(context),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _description(context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Text(
+        'Tu opinión es muy importante para nosotros, selecciona las categorias de servicios en las que te gustaria recibir capacitacion',
+        style: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(color: Colors.white, fontSize: 17),
+      ),
     );
   }
 
   Widget _service(context) {
     final servicesProvider = ServicesProvider();
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 20, 20, 30),
       child: FutureBuilder(
         future: servicesProvider.getService(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {

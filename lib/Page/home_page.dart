@@ -9,6 +9,7 @@ import 'package:promotoraapp/Page/education_page.dart';
 import 'package:promotoraapp/Page/goals_page.dart';
 import 'package:promotoraapp/Page/services_page.dart';
 import 'package:flutter/foundation.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:promotoraapp/main.dart';
 
 class HomePage extends StatefulWidget {
@@ -115,22 +116,21 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: FABBottomAppBar(
         onTabSelected: _onItemTapped,
         selectedColor: PromotoraApp().primaryDark,
-        color: Colors.grey[900],
         items: [
           FABBottomAppBarItem(
-            iconData: Icons.home_outlined,
+            iconData: CupertinoIcons.house,
             text: 'Mis metas',
           ),
           FABBottomAppBarItem(
-            iconData: Icons.perm_contact_calendar_sharp,
+            iconData: CupertinoIcons.rectangle_stack_person_crop,
             text: 'Contactos',
           ),
           FABBottomAppBarItem(
-            iconData: Icons.cleaning_services,
+            iconData: CupertinoIcons.heart,
             text: 'Servicios',
           ),
           FABBottomAppBarItem(
-            iconData: Icons.cast_for_education_outlined,
+            iconData: CupertinoIcons.book,
             text: 'Educación',
           ),
         ],

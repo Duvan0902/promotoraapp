@@ -13,8 +13,8 @@ class CategoriesList extends StatelessWidget {
       child: ListView.builder(
         itemCount: categories.length,
         itemBuilder: (context, index) {
-          return FrenquentQuestions(
-            category: categories[index].category,
+          return FrequentQuestions(
+            category: categories[index],
           );
         },
       ),

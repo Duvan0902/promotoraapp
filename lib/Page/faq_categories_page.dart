@@ -1,20 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'package:promotoraapp/Common/questions_list.dart';
+import 'package:promotoraapp/Common/categories_list.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/provider/categories_provider.dart';
 
-class QuestionsPage extends StatefulWidget {
-  const QuestionsPage({
+class FaqCategoriesPage extends StatefulWidget {
+  const FaqCategoriesPage({
     Key key,
   }) : super(key: key);
 
   @override
-  _QuestionsPageState createState() => _QuestionsPageState();
+  _FaqCategoriesPageState createState() => _FaqCategoriesPageState();
 }
 
-class _QuestionsPageState extends State<QuestionsPage> {
+class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,16 +46,22 @@ class _QuestionsPageState extends State<QuestionsPage> {
           ],
         ),
         body: Container(
-          padding: const EdgeInsets.all(25.0),
-          child: _posterTitle(context),
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                child: categories(context),
+              ),
+              Container(
+                child: _chat(context),
+              )
+            ],
+          ),
         ),
-
-        /*_chat(context)*/
       ),
     );
   }
 
-  Widget _posterTitle(context) {
+  Widget categories(context) {
     final categoriesProvider = CategoriesProvider();
     return Container(
       child: FutureBuilder(
@@ -77,7 +82,21 @@ class _QuestionsPageState extends State<QuestionsPage> {
     );
   }
 }
-/* Widget _chat(context) {
-    return BottomChat();
-  }
-}*/
+
+Widget _chat(context) {
+  return Container(
+    child: Container(
+      alignment: Alignment.bottomRight,
+      margin: EdgeInsets.fromLTRB(0, 0, 20, 30),
+      child: FloatingActionButton(
+        backgroundColor: Colors.pink[400],
+        elevation: 5.0,
+        child: Icon(
+          Icons.chat,
+          color: Colors.white,
+        ),
+        onPressed: () {},
+      ),
+    ),
+  );
+}

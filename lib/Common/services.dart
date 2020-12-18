@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/main.dart';
 
 class ServicesView extends StatefulWidget {
   final String category;
@@ -14,35 +15,43 @@ class ServicesView extends StatefulWidget {
 class _ServicesViewState extends State<ServicesView> {
   @override
   Widget build(BuildContext context) {
-    return Table(
+    return _roundedButton(
+        Colors.white, Icons.airport_shuttle_outlined, widget.category);
+    /* return Table(
       children: [
         TableRow(children: [
-          _crearBotonRedondeado(Colors.blue, Icons.border_all, widget.category),
           _crearBotonRedondeado(
-              Colors.purpleAccent, Icons.directions_bus, widget.category),
+              Colors.white, Icons.airport_shuttle_outlined, widget.category),
         ]),
       ],
-    );
+    );*/
   }
 
-  Widget _crearBotonRedondeado(Color color, IconData icono, String texto) {
+  Widget _roundedButton(Color color, IconData icono, String texto) {
     return ClipRect(
       child: Container(
-        height: 180.0,
-        margin: EdgeInsets.all(15.0),
+        height: 150.0,
+        margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-            color: Color.fromRGBO(62, 66, 107, 0.7),
-            borderRadius: BorderRadius.circular(20.0)),
+            color: PromotoraApp().primaryDark,
+            borderRadius: BorderRadius.circular(10.0)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             SizedBox(height: 5.0),
             CircleAvatar(
               backgroundColor: color,
-              radius: 35.0,
-              child: Icon(icono, color: Colors.white, size: 30.0),
+              radius: 30.0,
+              child: Icon(icono, color: Colors.black, size: 30.0),
             ),
-            Text(texto, style: TextStyle(color: color)),
+            Text(
+              texto,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(color: Colors.white, fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
             SizedBox(height: 5.0)
           ],
         ),
