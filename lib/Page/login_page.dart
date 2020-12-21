@@ -104,6 +104,9 @@ class LoginPage extends StatelessWidget {
             textCapitalization: TextCapitalization.words,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: PromotoraApp().primaryDark),
+              ),
               contentPadding: EdgeInsets.all(10),
               hintText: 'Escribe tu correo electrónico',
               hintStyle: Theme.of(context)
@@ -132,6 +135,9 @@ class LoginPage extends StatelessWidget {
           child: TextField(
             obscureText: true,
             decoration: InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: PromotoraApp().primaryDark),
+              ),
               contentPadding: EdgeInsets.all(10),
               hintText: "Escribe tu contraseña",
               hintStyle: Theme.of(context)

@@ -110,7 +110,7 @@ class _ContactsPageState extends State<ContactsPage> {
 Widget managementList(context) {
   final contactProvider = ContactsProvider();
   return Container(
-    padding: EdgeInsets.fromLTRB(10, 20, 20, 30),
+    padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
     child: FutureBuilder(
       future: contactProvider.getContacts(),
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {

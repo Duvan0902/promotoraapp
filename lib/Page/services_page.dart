@@ -35,7 +35,7 @@ class _ServicesPageState extends State<ServicesPage> {
     return Container(
       padding: EdgeInsets.all(10),
       child: Text(
-        'Tu opinión es muy importante para nosotros, selecciona las categorias de servicios en las que te gustaria recibir capacitacion',
+        'Tu opinión es muy importante para nosotros, selecciona las categorías de servicios en las que te gustaría recibir capacitación',
         style: Theme.of(context)
             .textTheme
             .bodyText1

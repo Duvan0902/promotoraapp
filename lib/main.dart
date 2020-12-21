@@ -41,7 +41,7 @@ class PromotoraApp extends StatelessWidget {
           const Locale('es', 'ES'), // Spanish, no country code
         ],
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.cyan,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Asap',
           primaryColor: primary,

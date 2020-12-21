@@ -17,14 +17,6 @@ class _ServicesViewState extends State<ServicesView> {
   Widget build(BuildContext context) {
     return _roundedButton(
         Colors.white, Icons.airport_shuttle_outlined, widget.service);
-    /* return Table(
-      children: [
-        TableRow(children: [
-          _crearBotonRedondeado(
-              Colors.white, Icons.airport_shuttle_outlined, widget.category),
-        ]),
-      ],
-    );*/
   }
 
   Widget _roundedButton(Color color, IconData icono, String texto) {
