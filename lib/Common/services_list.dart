@@ -14,7 +14,7 @@ class ServicesList extends StatelessWidget {
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (context, index) {
         return ServicesView(
-          service: services[index].service,
+          name: services[index].name,
         );
       },
     );

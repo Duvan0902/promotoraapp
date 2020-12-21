@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:promotoraapp/main.dart';
 
 class ServicesView extends StatefulWidget {
-  final String service;
+  final String name;
   ServicesView({
     Key key,
-    this.service,
+    this.name,
   }) : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class _ServicesViewState extends State<ServicesView> {
   @override
   Widget build(BuildContext context) {
     return _roundedButton(
-        Colors.white, Icons.airport_shuttle_outlined, widget.service);
+        Colors.white, Icons.airport_shuttle_outlined, widget.name);
   }
 
   Widget _roundedButton(Color color, IconData icono, String texto) {
