@@ -48,7 +48,8 @@ class PromotoraApp extends StatelessWidget {
           primaryColorLight: primaryLight,
           primaryColorDark: primaryDark,
           accentColor: accent,
-          colorScheme: ColorScheme.light(primary: primary, secondary: accent),
+          colorScheme:
+              ColorScheme.light(primary: primaryDark, secondary: accent),
           buttonTheme: ButtonThemeData(
             buttonColor: accent,
             disabledColor: accentLight,
