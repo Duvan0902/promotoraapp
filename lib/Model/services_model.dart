@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:promotoraapp/Model/atac_model.dart';
+
 class ServicesModel {
   ServicesModel({
     this.id,
@@ -14,7 +16,7 @@ class ServicesModel {
   final String name;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final List<AtacCategory> atacCategories;
+  final List<AtacModel> atacCategories;
   final Icon icon;
 
   factory ServicesModel.fromJson(String str) =>
@@ -27,8 +29,8 @@ class ServicesModel {
         name: json["name"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        atacCategories: List<AtacCategory>.from(
-            json["atac_categories"].map((x) => AtacCategory.fromMap(x))),
+        atacCategories: List<AtacModel>.from(
+            json["atac_categories"].map((x) => AtacModel.fromMap(x))),
         icon: Icon.fromMap(json["icon"]),
       );
 

@@ -36,6 +36,7 @@ dev_dependencies:
     sdk: flutter
   global_configuration: ^1.6.0
   font_awesome_flutter: ^8.8.1
+  cached_network_image: ^2.3.2+1
   http: ^0.12.2
   rxdart: ^0.24.1
   shared_preferences: ^0.5.2

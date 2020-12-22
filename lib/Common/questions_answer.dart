@@ -26,8 +26,8 @@ class _ExpansionCardState extends State<ExpansionCard> {
 
   @override
   Widget build(BuildContext context) {
-    Color textColor = widget.highlight ? Colors.white : Colors.black;
-    Color iconColor = widget.highlight ? Colors.white : PromotoraApp().accent;
+    Color iconColor =
+        widget.highlight ? Colors.white : PromotoraApp().primaryDark;
 
     var expansionTile = ExpansionTile(
       trailing: _expanded
@@ -64,7 +64,8 @@ class _ExpansionCardState extends State<ExpansionCard> {
                 .bodyText1
                 .copyWith(color: Colors.black54, fontSize: 15),
           ),
-        )
+        ),
+        Container()
       ],
       onExpansionChanged: (changed) {
         setState(() {

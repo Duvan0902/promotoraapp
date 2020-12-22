@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Model/services_model.dart';
+import 'package:global_configuration/global_configuration.dart';
+import 'package:promotoraapp/Page/atac_page.dart';
 import 'package:promotoraapp/main.dart';
 
 class ServicesView extends StatefulWidget {
-  final String name;
+  final ServicesModel atac;
   ServicesView({
     Key key,
-    this.name,
+    this.atac,
   }) : super(key: key);
 
   @override
@@ -16,10 +19,10 @@ class _ServicesViewState extends State<ServicesView> {
   @override
   Widget build(BuildContext context) {
     return _roundedButton(
-        Colors.white, Icons.airport_shuttle_outlined, widget.name);
+        Colors.white, Icons.airport_shuttle_outlined, widget.atac.name);
   }
 
-  Widget _roundedButton(Color color, IconData icono, String texto) {
+  Widget _roundedButton(Color color, IconData icono, String text) {
     return ClipRect(
       child: Container(
         height: 150.0,
@@ -34,10 +37,25 @@ class _ServicesViewState extends State<ServicesView> {
             CircleAvatar(
               backgroundColor: color,
               radius: 30.0,
-              child: Icon(icono, color: Colors.black, size: 30.0),
+              child: IconButton(
+                color: Colors.black,
+                icon: Image.network(
+                  'http://66.228.51.95:1337' + widget.atac.icon.url,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          AtacPage(atac: widget.atac.atacCategories),
+                    ),
+                  );
+                },
+              ),
             ),
             Text(
-              texto,
+              text,
               style: Theme.of(context)
                   .textTheme
                   .bodyText1

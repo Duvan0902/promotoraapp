@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Common/questions_answer.dart';
-import 'package:promotoraapp/Model/faq_model.dart';
+import 'package:promotoraapp/Model/atac_model.dart';
 
 class FaqList extends StatelessWidget {
-  final List<FaqModel> contacts;
+  final List<AtacModel> contacts;
 
   FaqList({@required this.contacts});
   @override
@@ -14,8 +14,8 @@ class FaqList extends StatelessWidget {
         itemCount: contacts.length,
         itemBuilder: (context, index) {
           return ExpansionCard(
-              questions: contacts[index].answer,
-              answer: contacts[index].question);
+              questions: contacts[index].atacCategory,
+              answer: contacts[index].atacCategory);
         },
       ),
     );
