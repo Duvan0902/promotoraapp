@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Model/services_model.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:promotoraapp/Page/atac_page.dart';
 import 'package:promotoraapp/main.dart';
 

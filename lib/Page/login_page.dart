@@ -104,6 +104,9 @@ class LoginPage extends StatelessWidget {
             textCapitalization: TextCapitalization.words,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: PromotoraApp().primaryDark),
+              ),
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: PromotoraApp().primaryDark),
               ),
@@ -135,6 +138,9 @@ class LoginPage extends StatelessWidget {
           child: TextField(
             obscureText: true,
             decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: PromotoraApp().primaryDark),
+              ),
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: PromotoraApp().primaryDark),
               ),

@@ -67,6 +67,18 @@ class _SaleListState extends State<SaleList> {
           ),
         ),
         _client(context),
+        SizedBox(height: 20.0),
+        Container(
+          padding: EdgeInsets.all(10),
+          child: Text(
+            'Nit/Cedula',
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                .copyWith(color: Colors.black, fontSize: 16),
+          ),
+        ),
+        _nit(context),
         SizedBox(height: 40.0),
         _registerButton(context),
       ],
@@ -86,6 +98,9 @@ class _SaleListState extends State<SaleList> {
         keyboardType: TextInputType.multiline,
         enableInteractiveSelection: false,
         decoration: InputDecoration(
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: PromotoraApp().primaryDark),
+          ),
           contentPadding: EdgeInsets.all(10),
           hintText: 'selecciona la fecha',
           hintStyle: Theme.of(context)
@@ -131,6 +146,9 @@ class _SaleListState extends State<SaleList> {
         textCapitalization: TextCapitalization.words,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: PromotoraApp().primaryDark),
+          ),
           contentPadding: EdgeInsets.all(10),
           hintText: 'Ingresa el valor',
           hintStyle: Theme.of(context)
@@ -151,8 +169,34 @@ class _SaleListState extends State<SaleList> {
         textCapitalization: TextCapitalization.words,
         keyboardType: TextInputType.multiline,
         decoration: InputDecoration(
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: PromotoraApp().primaryDark),
+          ),
           contentPadding: EdgeInsets.all(10),
           hintText: 'Escribe el nombre',
+          hintStyle: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(color: Colors.black45, fontSize: 14),
+          errorStyle:
+              Theme.of(context).textTheme.headline4.copyWith(color: Colors.red),
+        ),
+      ),
+    );
+  }
+
+  Widget _nit(context) {
+    return Container(
+      color: Color.fromRGBO(243, 243, 243, 1),
+      child: TextField(
+        textCapitalization: TextCapitalization.words,
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: PromotoraApp().primaryDark),
+          ),
+          contentPadding: EdgeInsets.all(10),
+          hintText: 'ingresa identificación del cliente',
           hintStyle: Theme.of(context)
               .textTheme
               .bodyText1

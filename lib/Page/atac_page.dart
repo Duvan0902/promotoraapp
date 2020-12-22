@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Common/questions_answer.dart';
 import 'package:promotoraapp/Model/atac_model.dart';
+import 'package:promotoraapp/main.dart';
 
 class AtacPage extends StatefulWidget {
   final List<AtacModel> atac;
 
-  AtacPage({Key key, this.atac}) : super(key: key);
+  AtacPage({
+    Key key,
+    this.atac,
+  }) : super(key: key);
 
   @override
   _AtacPageState createState() => _AtacPageState();
@@ -36,13 +40,17 @@ class _AtacPageState extends State<AtacPage> {
           ),
         ),
         body: Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(10),
           child: Column(
             children: <Widget>[
               _title(context),
+              SizedBox(
+                height: 20,
+              ),
               Expanded(
                 child: _cardAtac(context),
               ),
+              _others(),
             ],
           ),
         ),
@@ -51,7 +59,13 @@ class _AtacPageState extends State<AtacPage> {
   }
 
   Widget _title(context) {
-    return Text('Selecciona los temas en los cuales estas interasado');
+    return Text(
+      'Selecciona los temas en los cuales estas interasado',
+      style: Theme.of(context)
+          .textTheme
+          .bodyText1
+          .copyWith(color: Colors.black, fontSize: 17),
+    );
   }
 
   Widget _cardAtac(context) {
@@ -61,7 +75,6 @@ class _AtacPageState extends State<AtacPage> {
   Widget _answer(context, List<AtacModel> faqlist) {
     print(faqlist);
     return Container(
-      padding: EdgeInsets.all(10),
       child: ListView.builder(
         itemCount: faqlist.length,
         itemBuilder: (context, index) {
@@ -69,9 +82,46 @@ class _AtacPageState extends State<AtacPage> {
 
           return ExpansionCard(
             questions: document.atacCategory,
-            answer: '',
+            answer: document.atacCategory,
           );
         },
+      ),
+    );
+  }
+
+  Widget _others() {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      elevation: 2.0,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: Container(
+          child: Row(
+            children: <Widget>[
+              Text('Otros:'),
+              Expanded(
+                child: TextField(
+                  textCapitalization: TextCapitalization.words,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: PromotoraApp().primaryDark),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    hintStyle: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.black45, fontSize: 14),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
