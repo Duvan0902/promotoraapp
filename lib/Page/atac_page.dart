@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/questions_answer.dart';
 import 'package:promotoraapp/Model/atac_model.dart';
 import 'package:promotoraapp/main.dart';
 
 class AtacPage extends StatefulWidget {
-  final List<AtacModel> atac;
+  final List<AtacCategory> atac;
+  final Function() onChanged;
+  final bool highlight;
 
   AtacPage({
     Key key,
     this.atac,
-  }) : super(key: key);
+    this.highlight,
+    this.onChanged,
+  })  : assert(atac != null),
+        super(key: key);
 
   @override
   _AtacPageState createState() => _AtacPageState();
@@ -72,20 +76,88 @@ class _AtacPageState extends State<AtacPage> {
     return _answer(context, widget.atac);
   }
 
-  Widget _answer(context, List<AtacModel> faqlist) {
-    print(faqlist);
+  Widget _answer(context, List<AtacCategory> atac) {
+    bool _expanded = false;
+    Color iconColor = PromotoraApp().primaryDark;
+    print(atac);
     return Container(
       child: ListView.builder(
-        itemCount: faqlist.length,
+        itemCount: atac.length,
         itemBuilder: (context, index) {
-          AtacModel document = faqlist[index];
-
-          return ExpansionCard(
-            questions: document.atacCategory,
-            answer: document.atacCategory,
+          AtacCategory document = atac[index];
+          var expansionTile = ExpansionTile(
+            trailing: _expanded
+                ? Icon(
+                    Icons.remove_circle_outline,
+                    color: iconColor,
+                  )
+                : Icon(
+                    Icons.add_circle_outline,
+                    color: iconColor,
+                  ),
+            title: document.atacCategory != null
+                ? Container(
+                    padding: EdgeInsets.only(top: 5, bottom: 5),
+                    child: Text(
+                      document.atacCategory,
+                      textAlign: TextAlign.justify,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(color: Colors.black45, fontSize: 15),
+                    ),
+                  )
+                : false,
+            children: <Widget>[
+              SizedBox(height: 5),
+              Container(
+                child: _subCategory(document.atacSubcategories),
+              ),
+            ],
+            onExpansionChanged: (changed) {
+              setState(() {
+                _expanded = changed;
+              });
+              if (widget.onChanged != null) {
+                widget.onChanged.call();
+              }
+            },
+            initiallyExpanded: _expanded,
+          );
+          return Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            elevation: 2.0,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              child: expansionTile,
+            ),
           );
         },
       ),
+    );
+  }
+
+  Widget _subCategory(List<AtacSubcategory> subcategories) {
+    print(subcategories);
+    Map<String, bool> values = Map.fromIterable(subcategories,
+        key: (e) => e.atacSubcategory, value: (e) => false);
+
+    return Column(
+      children: values.keys.map((String key) {
+        return new CheckboxListTile(
+          title: new Text(key),
+          value: values[key],
+          activeColor: Colors.pink,
+          checkColor: Colors.white,
+          onChanged: (bool value) {
+            setState(() {
+              values[key] = value;
+            });
+          },
+        );
+      }).toList(),
     );
   }
 

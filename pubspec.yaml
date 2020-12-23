@@ -42,6 +42,7 @@ dev_dependencies:
   shared_preferences: ^0.5.2
   smart_select: ^4.3.2
   sticky_headers: "^0.1.8"
+  grouped_buttons: ^1.0.4
  
 
 

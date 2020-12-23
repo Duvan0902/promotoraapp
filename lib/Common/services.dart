@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Model/services_model.dart';
+import 'package:promotoraapp/Model/atac_model.dart';
 import 'package:promotoraapp/Page/atac_page.dart';
 import 'package:promotoraapp/main.dart';
 
 class ServicesView extends StatefulWidget {
-  final ServicesModel atac;
+  final AtacModel atac;
   ServicesView({
     Key key,
     this.atac,

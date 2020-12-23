@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smart_select/smart_select.dart';
 import 'package:promotoraapp/main.dart';
 
 class ExpansionCard extends StatefulWidget {
@@ -65,9 +64,6 @@ class _ExpansionCardState extends State<ExpansionCard> {
                 .copyWith(color: Colors.black54, fontSize: 15),
           ),
         ),
-        Container(
-          child: _subCategory(),
-        ),
       ],
       onExpansionChanged: (changed) {
         setState(() {
@@ -91,18 +87,5 @@ class _ExpansionCardState extends State<ExpansionCard> {
         child: expansionTile,
       ),
     );
-  }
-
-  Widget _subCategory() {
-    List<int> value = [];
-    List<S2Choice> frameworks = [
-      S2Choice(value: 1, title: widget.answer),
-      S2Choice(value: 2, title: widget.answer),
-    ];
-    return SmartSelect.multiple(
-        title: '',
-        value: value,
-        choiceItems: frameworks,
-        onChange: (value) => frameworks);
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Common/services.dart';
-import 'package:promotoraapp/Model/services_model.dart';
+import 'package:promotoraapp/Model/atac_model.dart';
 
 class ServicesList extends StatelessWidget {
-  final List<ServicesModel> services;
+  final List<AtacModel> services;
 
   ServicesList({@required this.services});
   @override
