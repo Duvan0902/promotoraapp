@@ -7,7 +7,7 @@ class AtacPage extends StatefulWidget {
   final Function() onChanged;
   final bool highlight;
 
-  AtacPage({
+  const AtacPage({
     Key key,
     this.atac,
     this.highlight,
@@ -16,10 +16,10 @@ class AtacPage extends StatefulWidget {
         super(key: key);
 
   @override
-  _AtacPageState createState() => _AtacPageState();
+  AtacPageState createState() => AtacPageState();
 }
 
-class _AtacPageState extends State<AtacPage> {
+class AtacPageState extends State<AtacPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,6 +55,13 @@ class _AtacPageState extends State<AtacPage> {
                 child: _cardAtac(context),
               ),
               _others(),
+              SizedBox(
+                height: 10,
+              ),
+              _sendButton(),
+              SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),
@@ -144,21 +151,23 @@ class _AtacPageState extends State<AtacPage> {
     Map<String, bool> values = Map.fromIterable(subcategories,
         key: (e) => e.atacSubcategory, value: (e) => false);
 
-    return Column(
-      children: values.keys.map((String key) {
-        return new CheckboxListTile(
-          title: new Text(key),
-          value: values[key],
-          activeColor: Colors.pink,
-          checkColor: Colors.white,
-          onChanged: (bool value) {
-            setState(() {
-              values[key] = value;
-            });
-          },
-        );
-      }).toList(),
-    );
+    return Column(children: <Widget>[
+      Column(
+        children: values.keys.map((String key) {
+          return new CheckboxListTile(
+            title: new Text(key),
+            value: values[key],
+            activeColor: Colors.pink,
+            checkColor: Colors.white,
+            onChanged: (bool value) {
+              setState(() {
+                values[key] = value;
+              });
+            },
+          );
+        }).toList(),
+      ),
+    ]);
   }
 
   Widget _others() {
@@ -196,5 +205,25 @@ class _AtacPageState extends State<AtacPage> {
         ),
       ),
     );
+  }
+
+  Widget _sendButton() {
+    final size = MediaQuery.of(context).size;
+    return RaisedButton(
+        child: Container(
+          width: size.width * 0.7,
+          child: Text(
+            'Enviar',
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .headline1
+                .copyWith(color: Colors.black, fontSize: 19),
+          ),
+        ),
+        disabledColor: Colors.grey[300],
+        color: PromotoraApp().primaryDark,
+        disabledTextColor: Colors.grey,
+        onPressed: () {});
   }
 }

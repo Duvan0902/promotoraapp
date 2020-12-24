@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:promotoraapp/preferences/users_preferences.dart';
 
-class LoginProvider {
-  final String _url = "http://66.228.51.95:1337/auth/local";
+class AtacRequestsProvider {
+  final String _url = "http://66.228.51.95:1337/atac-solicitudes";
   final _prefs = new LoginPreferences();
 
-  Future<Map<String, dynamic>> login(String identifier, String password) async {
+  Future<Map<String, dynamic>> login(
+      String userid, String service, String interests) async {
     final authData = json.encode(
-      {'identifier': identifier, 'password': password},
+      {'user:id': userid, 'service': service, 'interests': interests},
     );
 
     print(authData);
@@ -19,8 +20,8 @@ class LoginProvider {
       body: authData,
     );
 
-    print(identifier);
-    print(password);
+    print(userid);
+    print(service);
 
     Map<String, dynamic> decodedResp = json.decode(resp.body);
     print(decodedResp);

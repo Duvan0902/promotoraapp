@@ -18,4 +18,8 @@ class LoginPreferences {
   set token(String token) => _prefs.setString('token', token);
 
   String get token => _prefs.getString('token');
+
+  set atacRequests(String userid) => _prefs.setString('user:id', userid);
+
+  String get atacRequests => _prefs.getString('userid');
 }

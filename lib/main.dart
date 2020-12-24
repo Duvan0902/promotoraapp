@@ -4,7 +4,7 @@ import 'package:promotoraapp/Page/login_page.dart';
 import 'package:promotoraapp/Page/sale_page.dart';
 import 'package:promotoraapp/bloc/provider_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:promotoraapp/preferences/login_preferences.dart';
+import 'package:promotoraapp/preferences/users_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
