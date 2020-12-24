@@ -26,28 +26,10 @@ class AtacRequestsProvider {
     Map<String, dynamic> decodedResp = json.decode(resp.body);
     print(decodedResp);
 
-    if (decodedResp.containsKey('jwt')) {
-      _prefs.token = decodedResp['jwt'];
+    if (decodedResp.containsKey('interests')) {
+      _prefs.token = decodedResp['interests'];
 
-      return {'ok': true, 'jwt': decodedResp['jwt']};
-    } else {
-      print(decodedResp['message'][0]['messages'][0]['id']);
-      switch (decodedResp['message'][0]['messages'][0]['id']) {
-        case "Auth.form.error.invalid":
-          print('message');
-          return {
-            'ok': false,
-            'message':
-                'Correo o contraseña invalidos. Por favor vuelva intentarlo.',
-          };
-          break;
-        default:
-          return {
-            'ok': false,
-            'message': decodedResp['message'][0]['messages'][0]['id'],
-          };
-          break;
-      }
+      return {'ok': true, 'interests': decodedResp['interests']};
     }
   }
 }

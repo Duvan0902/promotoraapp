@@ -160,9 +160,15 @@ class AtacPageState extends State<AtacPage> {
             activeColor: Colors.pink,
             checkColor: Colors.white,
             onChanged: (bool value) {
-              setState(() {
-                values[key] = value;
-              });
+              if (value == false) {
+                setState(() {
+                  value = true;
+                });
+              } else {
+                setState(() {
+                  value = false;
+                });
+              }
             },
           );
         }).toList(),
