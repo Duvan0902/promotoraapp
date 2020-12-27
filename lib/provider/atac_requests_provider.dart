@@ -5,6 +5,14 @@ import 'package:promotoraapp/preferences/users_preferences.dart';
 class AtacRequestsProvider {
   final String _url = "http://66.228.51.95:1337/atac-solicitudes";
   final _prefs = new LoginPreferences();
+  final Map<String, String> interests = {
+    'Salud':
+        'canel ventas - Ventas, canal ventas- Cotizaciones, canal ventas- Registro,'
+            'otros:',
+    'Desarrollo comercial':
+        'vida - Cotizador, Vida - Polizas, canal ventas- Registro, Icendio - salud'
+            'otros:',
+  };
 
   Future<Map<String, dynamic>> login(
       String userid, String service, String interests) async {

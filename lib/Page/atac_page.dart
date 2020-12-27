@@ -151,13 +151,13 @@ class AtacPageState extends State<AtacPage> {
     Map<String, bool> values = Map.fromIterable(subcategories,
         key: (e) => e.atacSubcategory, value: (e) => false);
 
-    return Column(children: <Widget>[
-      Column(
-        children: values.keys.map((String key) {
+    return Column(
+      children: values.keys.map(
+        (String key) {
           return new CheckboxListTile(
             title: new Text(key),
             value: values[key],
-            activeColor: Colors.pink,
+            activeColor: PromotoraApp().primaryDark,
             checkColor: Colors.white,
             onChanged: (bool value) {
               if (value == false) {
@@ -171,9 +171,9 @@ class AtacPageState extends State<AtacPage> {
               }
             },
           );
-        }).toList(),
-      ),
-    ]);
+        },
+      ).toList(),
+    );
   }
 
   Widget _others() {
