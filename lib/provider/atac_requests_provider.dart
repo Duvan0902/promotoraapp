@@ -14,7 +14,7 @@ class AtacRequestsProvider {
             'otros:',
   };
 
-  Future<Map<String, dynamic>> login(
+  Future<Map<String, dynamic>> interest(
       String userid, String service, String interests) async {
     final authData = json.encode(
       {'user:id': userid, 'service': service, 'interests': interests},
@@ -38,6 +38,8 @@ class AtacRequestsProvider {
       _prefs.token = decodedResp['interests'];
 
       return {'ok': true, 'interests': decodedResp['interests']};
+    } else {
+      return null;
     }
   }
 }

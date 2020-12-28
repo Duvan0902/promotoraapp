@@ -52,7 +52,7 @@ class AtacPageState extends State<AtacPage> {
                 height: 20,
               ),
               Expanded(
-                child: _cardAtac(context),
+                child: _cardAtac(context, widget.atac),
               ),
               _others(),
               SizedBox(
@@ -79,58 +79,15 @@ class AtacPageState extends State<AtacPage> {
     );
   }
 
-  Widget _cardAtac(context) {
-    return _answer(context, widget.atac);
-  }
-
-  Widget _answer(context, List<AtacCategory> atac) {
+  Widget _cardAtac(context, List<AtacCategory> atac) {
     bool _expanded = false;
     Color iconColor = PromotoraApp().primaryDark;
-    print(atac);
     return Container(
       child: ListView.builder(
         itemCount: atac.length,
         itemBuilder: (context, index) {
           AtacCategory document = atac[index];
-          var expansionTile = ExpansionTile(
-            trailing: _expanded
-                ? Icon(
-                    Icons.remove_circle_outline,
-                    color: iconColor,
-                  )
-                : Icon(
-                    Icons.add_circle_outline,
-                    color: iconColor,
-                  ),
-            title: document.atacCategory != null
-                ? Container(
-                    padding: EdgeInsets.only(top: 5, bottom: 5),
-                    child: Text(
-                      document.atacCategory,
-                      textAlign: TextAlign.justify,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .copyWith(color: Colors.black45, fontSize: 15),
-                    ),
-                  )
-                : false,
-            children: <Widget>[
-              SizedBox(height: 5),
-              Container(
-                child: _subCategory(document.atacSubcategories),
-              ),
-            ],
-            onExpansionChanged: (changed) {
-              setState(() {
-                _expanded = changed;
-              });
-              if (widget.onChanged != null) {
-                widget.onChanged.call();
-              }
-            },
-            initiallyExpanded: _expanded,
-          );
+
           return Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
@@ -138,7 +95,43 @@ class AtacPageState extends State<AtacPage> {
             elevation: 2.0,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              child: expansionTile,
+              child: ExpansionTile(
+                trailing: _expanded
+                    ? Icon(
+                        Icons.remove_circle_outline,
+                        color: iconColor,
+                      )
+                    : Icon(
+                        Icons.add_circle_outline,
+                        color: iconColor,
+                      ),
+                title: document.atacCategory != null
+                    ? Container(
+                        padding: EdgeInsets.only(top: 5, bottom: 5),
+                        child: Text(
+                          document.atacCategory,
+                          textAlign: TextAlign.justify,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              .copyWith(color: Colors.black45, fontSize: 15),
+                        ),
+                      )
+                    : false,
+                children: [
+                  _subCategory(document.atacSubcategories),
+                  SizedBox(height: 5),
+                ],
+                onExpansionChanged: (changed) {
+                  setState(() {
+                    _expanded = changed;
+                  });
+                  if (widget.onChanged != null) {
+                    widget.onChanged.call();
+                  }
+                },
+                initiallyExpanded: _expanded,
+              ),
             ),
           );
         },
@@ -150,29 +143,24 @@ class AtacPageState extends State<AtacPage> {
     print(subcategories);
     Map<String, bool> values = Map.fromIterable(subcategories,
         key: (e) => e.atacSubcategory, value: (e) => false);
-
-    return Column(
-      children: values.keys.map(
-        (String key) {
-          return new CheckboxListTile(
-            title: new Text(key),
-            value: values[key],
-            activeColor: PromotoraApp().primaryDark,
-            checkColor: Colors.white,
-            onChanged: (bool value) {
-              if (value == false) {
+    return StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+        return Column(
+          children: values.keys.map((String key) {
+            return new CheckboxListTile(
+              title: new Text(key),
+              value: values[key],
+              activeColor: PromotoraApp().primaryDark,
+              checkColor: Colors.white,
+              onChanged: (bool value) {
                 setState(() {
-                  value = true;
+                  values[key] = value;
                 });
-              } else {
-                setState(() {
-                  value = false;
-                });
-              }
-            },
-          );
-        },
-      ).toList(),
+              },
+            );
+          }).toList(),
+        );
+      },
     );
   }
 

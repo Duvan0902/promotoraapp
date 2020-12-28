@@ -19,7 +19,8 @@ class LoginPreferences {
 
   String get token => _prefs.getString('token');
 
-  set atacRequests(String userid) => _prefs.setString('user:id', userid);
+  set atacRequests(String interests) =>
+      _prefs.setString('interests', interests);
 
-  String get atacRequests => _prefs.getString('userid');
+  String get atacRequests => _prefs.getString('interests');
 }
