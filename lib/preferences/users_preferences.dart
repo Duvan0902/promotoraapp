@@ -1,13 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPreferences {
-  static final LoginPreferences _instance = new LoginPreferences._internal();
+class UserPreferences {
+  static final UserPreferences _instance = new UserPreferences._internal();
 
-  factory LoginPreferences() {
+  factory UserPreferences() {
     return _instance;
   }
 
-  LoginPreferences._internal();
+  UserPreferences._internal();
 
   SharedPreferences _prefs;
 
@@ -19,8 +19,11 @@ class LoginPreferences {
 
   String get token => _prefs.getString('token');
 
-  set atacRequests(String interests) =>
-      _prefs.setString('interests', interests);
+  set userId(int userId) => _prefs.setInt('user', userId);
 
-  String get atacRequests => _prefs.getString('interests');
+  int get userId => _prefs.getInt('user');
+
+  set userEmail(String email) => _prefs.setString('user', email);
+
+  String get userEmail => _prefs.getString('user');
 }

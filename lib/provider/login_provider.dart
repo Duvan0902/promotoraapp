@@ -4,7 +4,7 @@ import 'package:promotoraapp/preferences/users_preferences.dart';
 
 class LoginProvider {
   final String _url = "http://66.228.51.95:1337/auth/local";
-  final _prefs = new LoginPreferences();
+  final _prefs = new UserPreferences();
 
   Future<Map<String, dynamic>> login(String identifier, String password) async {
     final authData = json.encode(
@@ -27,6 +27,10 @@ class LoginProvider {
 
     if (decodedResp.containsKey('jwt')) {
       _prefs.token = decodedResp['jwt'];
+      _prefs.userId = decodedResp['user']['id'];
+      _prefs.userEmail = decodedResp['user']['email'];
+
+      print(decodedResp['user']['id']);
 
       return {'ok': true, 'jwt': decodedResp['jwt']};
     } else {

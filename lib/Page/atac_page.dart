@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:promotoraapp/Model/atac_model.dart';
 import 'package:promotoraapp/main.dart';
+import 'package:promotoraapp/utils/alert_dialog.dart';
+import 'package:promotoraapp/provider/atac_requests_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AtacPage extends StatefulWidget {
   final List<AtacCategory> atac;
@@ -44,7 +48,7 @@ class AtacPageState extends State<AtacPage> {
           ),
         ),
         body: Container(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(17),
           child: Column(
             children: <Widget>[
               _title(context),
@@ -114,7 +118,7 @@ class AtacPageState extends State<AtacPage> {
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1
-                              .copyWith(color: Colors.black45, fontSize: 15),
+                              .copyWith(color: Colors.black, fontSize: 16),
                         ),
                       )
                     : false,
@@ -140,25 +144,62 @@ class AtacPageState extends State<AtacPage> {
   }
 
   Widget _subCategory(List<AtacSubcategory> subcategories) {
-    print(subcategories);
     Map<String, bool> values = Map.fromIterable(subcategories,
         key: (e) => e.atacSubcategory, value: (e) => false);
+    var holder_1 = [];
+
+    items() {
+      values.forEach((key, value) {
+        if (value == true) {
+          holder_1.add(key);
+        }
+      });
+
+      // Printing all selected items on Terminal screen.
+      print(holder_1);
+      // Here you will get all your selected Checkbox items.
+
+      // Clear array after use.
+      holder_1.clear();
+    }
+
     return StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
         return Column(
-          children: values.keys.map((String key) {
-            return new CheckboxListTile(
-              title: new Text(key),
-              value: values[key],
-              activeColor: PromotoraApp().primaryDark,
-              checkColor: Colors.white,
-              onChanged: (bool value) {
-                setState(() {
-                  values[key] = value;
-                });
-              },
-            );
-          }).toList(),
+          children: [
+            Column(
+              children: values.keys.map((String key) {
+                return new CheckboxListTile(
+                  title: new Text(
+                    key,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.black, fontSize: 16),
+                  ),
+                  value: values[key],
+                  activeColor: PromotoraApp().primaryDark,
+                  checkColor: Colors.white,
+                  onChanged: (bool value) {
+                    setState(() {
+                      values[key] = value;
+                    });
+                  },
+                );
+              }).toList(),
+            ),
+            RaisedButton(
+              child: Text(
+                " Get Checked Checkbox Items ",
+                style: TextStyle(fontSize: 20),
+              ),
+              onPressed: items,
+              color: Colors.green,
+              textColor: Colors.white,
+              splashColor: Colors.grey,
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            ),
+          ],
         );
       },
     );
@@ -218,6 +259,18 @@ class AtacPageState extends State<AtacPage> {
         disabledColor: Colors.grey[300],
         color: PromotoraApp().primaryDark,
         disabledTextColor: Colors.grey,
-        onPressed: () {});
+        onPressed: () => _sendInterests(context));
+  }
+}
+
+_sendInterests(BuildContext context) async {
+  final AtacRequestsProvider requestsProvider = AtacRequestsProvider();
+  final prefs = await SharedPreferences.getInstance();
+  final id = prefs.getInt('id') ?? 13;
+
+  bool sent = await requestsProvider.sendInterests(
+      id.toString(), 'Talento Humano', 'No tengo opinión');
+  if (sent) {
+    showAlert(context, 'Su respuesta se envio correctamente');
   }
 }

@@ -9,7 +9,7 @@ import 'package:promotoraapp/preferences/users_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final prefs = new LoginPreferences();
+  final prefs = new UserPreferences();
   await prefs.initPrefs();
 
   runApp(PromotoraApp());
