@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:promotoraapp/preferences/users_preferences.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 class LoginProvider {
-  final String _url = "http://66.228.51.95:1337/auth/local";
+  final String _url = GlobalConfiguration().getValue("api_url") + "/auth/local";
   final _prefs = new UserPreferences();
 
   Future<Map<String, dynamic>> login(String identifier, String password) async {

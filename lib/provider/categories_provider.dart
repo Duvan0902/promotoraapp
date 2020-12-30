@@ -1,11 +1,11 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert' as json;
-
 import 'package:promotoraapp/Model/categories_model.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 class CategoriesProvider {
-  final String _url =
-      "http://66.228.51.95:1337/categorias-preguntas-frecuentes";
+  final String _url = GlobalConfiguration().getValue("api_url") +
+      "categorias-preguntas-frecuentes";
 
   Future<List<FaqCategoriesModel>> getCategories() async {
     try {

@@ -1,9 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'package:promotoraapp/Model/contacts_model.dart';
 import 'dart:convert' as json;
+import 'package:global_configuration/global_configuration.dart';
 
 class ContactsProvider {
-  final String _url = "http://66.228.51.95:1337/contactos";
+  final String _url = GlobalConfiguration().getValue("api_url") + "/contactos";
 
   Future<List<ContactsModel>> getContacts() async {
     try {

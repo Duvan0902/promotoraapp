@@ -187,9 +187,7 @@ class AtacPageState extends State<AtacPage> {
                       () {
                         values[key] = (value);
                         if (value == true) {
-                          interests.join(
-                            items.toString(),
-                          );
+                          items();
                         }
                       },
                     );

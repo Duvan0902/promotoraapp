@@ -1,9 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'package:promotoraapp/Model/atac_model.dart';
 import 'dart:convert' as json;
+import 'package:global_configuration/global_configuration.dart';
 
 class ServicesProvider {
-  final String _url = "http://66.228.51.95:1337/atacs";
+  final String _url = GlobalConfiguration().getValue("api_url") + "/atacs";
 
   Future<List<AtacModel>> getService() async {
     try {

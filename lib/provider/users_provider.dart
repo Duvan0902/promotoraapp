@@ -1,9 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert' as json;
 import 'package:promotoraapp/Model/users_model.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 class UsersProvider {
-  final String _url = "http://66.228.51.95:1337/users";
+  final String _url = GlobalConfiguration().getValue("api_url") + "/users";
 
   Future<List<UsersModel>> getUsers() async {
     try {

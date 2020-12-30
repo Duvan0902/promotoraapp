@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:global_configuration/global_configuration.dart';
 
 class AtacRequestsProvider {
-  final String _url = "http://66.228.51.95:1337/atac-solicitudes";
+  final String _url =
+      GlobalConfiguration().getValue("api_url") + "/atac-solicitudes";
+
   Future<bool> sendInterests(
       String userid, String service, String interests) async {
     final bodyData = json.encode(
