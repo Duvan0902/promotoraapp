@@ -46,8 +46,10 @@ class _ServicesViewState extends State<ServicesView> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          AtacPage(atac: widget.atac.atacCategories),
+                      builder: (context) => AtacPage(
+                        categoriesAtac: widget.atac.atacCategories,
+                        atac: widget.atac,
+                      ),
                     ),
                   );
                 },

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:promotoraapp/preferences/users_preferences.dart';
 
 class AtacRequestsProvider {
   final String _url = "http://66.228.51.95:1337/atac-solicitudes";

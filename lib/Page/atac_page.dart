@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:promotoraapp/Model/atac_model.dart';
+import 'package:promotoraapp/Page/login_page.dart';
 import 'package:promotoraapp/main.dart';
+import 'package:promotoraapp/preferences/users_preferences.dart';
 import 'package:promotoraapp/utils/alert_dialog.dart';
 import 'package:promotoraapp/provider/atac_requests_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AtacPage extends StatefulWidget {
-  final List<AtacCategory> atac;
-  final Function() onChanged;
-  final bool highlight;
+  final List<AtacCategory> categoriesAtac;
+
+  final AtacModel atac;
 
   const AtacPage({
     Key key,
+    this.categoriesAtac,
     this.atac,
-    this.highlight,
-    this.onChanged,
-  })  : assert(atac != null),
+  })  : assert(categoriesAtac != null),
         super(key: key);
 
   @override
@@ -24,6 +24,9 @@ class AtacPage extends StatefulWidget {
 }
 
 class AtacPageState extends State<AtacPage> {
+  List<String> interests = [];
+  AtacCategory categories;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,7 +59,7 @@ class AtacPageState extends State<AtacPage> {
                 height: 20,
               ),
               Expanded(
-                child: _cardAtac(context, widget.atac),
+                child: _cardAtac(context, widget.categoriesAtac),
               ),
               _others(),
               SizedBox(
@@ -130,9 +133,6 @@ class AtacPageState extends State<AtacPage> {
                   setState(() {
                     _expanded = changed;
                   });
-                  if (widget.onChanged != null) {
-                    widget.onChanged.call();
-                  }
                 },
                 initiallyExpanded: _expanded,
               ),
@@ -143,24 +143,23 @@ class AtacPageState extends State<AtacPage> {
     );
   }
 
-  Widget _subCategory(List<AtacSubcategory> subcategories) {
+  Widget _subCategory(
+    List<AtacSubcategory> subcategories,
+  ) {
     Map<String, bool> values = Map.fromIterable(subcategories,
         key: (e) => e.atacSubcategory, value: (e) => false);
-    var holder_1 = [];
 
     items() {
-      values.forEach((key, value) {
-        if (value == true) {
-          holder_1.add(key);
-        }
-      });
+      values.forEach(
+        (key, value) {
+          if (value == true) {
+            interests.add((key) + (widget.atac.name));
+          }
+        },
+      );
 
-      // Printing all selected items on Terminal screen.
-      print(holder_1);
-      // Here you will get all your selected Checkbox items.
-
-      // Clear array after use.
-      holder_1.clear();
+      print(interests);
+      interests.remove('1');
     }
 
     return StatefulBuilder(
@@ -182,22 +181,15 @@ class AtacPageState extends State<AtacPage> {
                   checkColor: Colors.white,
                   onChanged: (bool value) {
                     setState(() {
-                      values[key] = value;
+                      values[key] = (value);
+
+                      if (value == true) {
+                        return (items());
+                      }
                     });
                   },
                 );
               }).toList(),
-            ),
-            RaisedButton(
-              child: Text(
-                " Get Checked Checkbox Items ",
-                style: TextStyle(fontSize: 20),
-              ),
-              onPressed: items,
-              color: Colors.green,
-              textColor: Colors.white,
-              splashColor: Colors.grey,
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
             ),
           ],
         );
@@ -220,7 +212,7 @@ class AtacPageState extends State<AtacPage> {
               Expanded(
                 child: TextField(
                   textCapitalization: TextCapitalization.words,
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.multiline,
                   decoration: InputDecoration(
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: PromotoraApp().primaryDark),
@@ -244,6 +236,7 @@ class AtacPageState extends State<AtacPage> {
 
   Widget _sendButton() {
     final size = MediaQuery.of(context).size;
+
     return RaisedButton(
         child: Container(
           width: size.width * 0.7,
@@ -261,16 +254,27 @@ class AtacPageState extends State<AtacPage> {
         disabledTextColor: Colors.grey,
         onPressed: () => _sendInterests(context));
   }
-}
 
-_sendInterests(BuildContext context) async {
-  final AtacRequestsProvider requestsProvider = AtacRequestsProvider();
-  final prefs = await SharedPreferences.getInstance();
-  final id = prefs.getInt('id') ?? 13;
+  _sendInterests(BuildContext context) async {
+    final AtacRequestsProvider requestsProvider = AtacRequestsProvider();
+    final _prefs = new UserPreferences();
+    final id = _prefs.userId;
+    if (id == null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginPage(),
+        ),
+      );
+    }
 
-  bool sent = await requestsProvider.sendInterests(
-      id.toString(), 'Talento Humano', 'No tengo opinión');
-  if (sent) {
-    showAlert(context, 'Su respuesta se envio correctamente');
+    bool sent = await requestsProvider.sendInterests(
+      id.toString(),
+      widget.atac.name,
+      (interests.toString()),
+    );
+    if (sent) {
+      showAlert(context, 'Su respuesta se envio correctamente');
+    }
   }
 }
