@@ -25,7 +25,8 @@ class AtacPage extends StatefulWidget {
 
 class AtacPageState extends State<AtacPage> {
   List<String> interests = [];
-  AtacCategory categories;
+  String data = '';
+  String others = 'Otros: ';
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +127,8 @@ class AtacPageState extends State<AtacPage> {
                       )
                     : false,
                 children: [
-                  _subCategory(document.atacSubcategories),
+                  _subCategory(
+                      document.atacSubcategories, document.atacCategory),
                   SizedBox(height: 5),
                 ],
                 onExpansionChanged: (changed) {
@@ -143,23 +145,24 @@ class AtacPageState extends State<AtacPage> {
     );
   }
 
-  Widget _subCategory(
-    List<AtacSubcategory> subcategories,
-  ) {
+  Widget _subCategory(List<AtacSubcategory> subcategories, atac) {
     Map<String, bool> values = Map.fromIterable(subcategories,
         key: (e) => e.atacSubcategory, value: (e) => false);
 
     items() {
+      interests.clear();
+
       values.forEach(
         (key, value) {
           if (value == true) {
-            interests.add((key) + (widget.atac.name));
+            interests.add((key) + (atac));
           }
         },
       );
 
       print(interests);
-      interests.remove('1');
+      // interests.remove('1');
+      interests.add((others) + data);
     }
 
     return StatefulBuilder(
@@ -225,6 +228,9 @@ class AtacPageState extends State<AtacPage> {
                         .bodyText1
                         .copyWith(color: Colors.black45, fontSize: 14),
                   ),
+                  onChanged: (text) {
+                    data = text;
+                  },
                 ),
               ),
             ],
