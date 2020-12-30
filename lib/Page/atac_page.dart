@@ -155,14 +155,14 @@ class AtacPageState extends State<AtacPage> {
       values.forEach(
         (key, value) {
           if (value == true) {
-            interests.add((key) + (atac));
+            interests.add(
+              (key) + ('-' + atac),
+            );
           }
         },
       );
 
       print(interests);
-      // interests.remove('1');
-      interests.add((others) + data);
     }
 
     return StatefulBuilder(
@@ -183,13 +183,16 @@ class AtacPageState extends State<AtacPage> {
                   activeColor: PromotoraApp().primaryDark,
                   checkColor: Colors.white,
                   onChanged: (bool value) {
-                    setState(() {
-                      values[key] = (value);
-
-                      if (value == true) {
-                        return (items());
-                      }
-                    });
+                    setState(
+                      () {
+                        values[key] = (value);
+                        if (value == true) {
+                          interests.join(
+                            items.toString(),
+                          );
+                        }
+                      },
+                    );
                   },
                 );
               }).toList(),
@@ -216,6 +219,10 @@ class AtacPageState extends State<AtacPage> {
                 child: TextField(
                   textCapitalization: TextCapitalization.words,
                   keyboardType: TextInputType.multiline,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: Colors.black, fontSize: 16),
                   decoration: InputDecoration(
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: PromotoraApp().primaryDark),
@@ -229,7 +236,11 @@ class AtacPageState extends State<AtacPage> {
                         .copyWith(color: Colors.black45, fontSize: 14),
                   ),
                   onChanged: (text) {
-                    data = text;
+                    setState(
+                      () {
+                        data = text;
+                      },
+                    );
                   },
                 ),
               ),
@@ -277,7 +288,7 @@ class AtacPageState extends State<AtacPage> {
     bool sent = await requestsProvider.sendInterests(
       id.toString(),
       widget.atac.name,
-      (interests.toString()),
+      (interests.toString() + ('-Otros: $data')),
     );
     if (sent) {
       showAlert(context, 'Su respuesta se envio correctamente');

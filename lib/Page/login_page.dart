@@ -103,6 +103,10 @@ class LoginPage extends StatelessWidget {
           child: TextField(
             textCapitalization: TextCapitalization.words,
             keyboardType: TextInputType.emailAddress,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                .copyWith(color: Colors.black, fontSize: 18),
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: PromotoraApp().primaryDark),
@@ -137,6 +141,10 @@ class LoginPage extends StatelessWidget {
           color: Color.fromRGBO(243, 243, 243, 1),
           child: TextField(
             obscureText: true,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                .copyWith(color: Colors.black, fontSize: 18),
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: PromotoraApp().primaryDark),
