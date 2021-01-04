@@ -150,8 +150,6 @@ class AtacPageState extends State<AtacPage> {
         key: (e) => e.atacSubcategory, value: (e) => false);
 
     items() {
-      interests.clear();
-
       values.forEach(
         (key, value) {
           if (value == true) {
@@ -286,7 +284,7 @@ class AtacPageState extends State<AtacPage> {
     bool sent = await requestsProvider.sendInterests(
       id.toString(),
       widget.atac.name,
-      (interests.toString() + ('-Otros: $data')),
+      (interests.toSet().toString() + ('-Otros: $data')),
     );
     if (sent) {
       showAlert(context, 'Su respuesta se envio correctamente');
