@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:promotoraapp/Model/faq_model.dart';
 
 class FaqCategoriesModel {

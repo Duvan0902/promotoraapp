@@ -5,7 +5,7 @@ import 'package:global_configuration/global_configuration.dart';
 
 class CategoriesProvider {
   final String _url = GlobalConfiguration().getValue("api_url") +
-      "categorias-preguntas-frecuentes";
+      "/categorias-preguntas-frecuentes";
 
   Future<List<FaqCategoriesModel>> getCategories() async {
     try {
