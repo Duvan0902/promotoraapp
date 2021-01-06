@@ -14,7 +14,7 @@ class DocumentList extends StatelessWidget {
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (context, index) {
         return DocumentView(
-          document: documents[index],
+          doc: documents[index],
         );
       },
     );

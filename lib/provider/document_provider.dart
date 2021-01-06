@@ -1,5 +1,4 @@
 import 'package:http/http.dart' as http;
-import 'package:promotoraapp/Model/contacts_model.dart';
 import 'dart:convert' as json;
 import 'package:global_configuration/global_configuration.dart';
 import 'package:promotoraapp/Model/documents_model.dart';
