@@ -288,6 +288,8 @@ class AtacPageState extends State<AtacPage> {
     );
     if (sent) {
       showAlert(context, 'Su respuesta se envio correctamente');
+    } else {
+      showAlert(context, 'Su respuesta no envio correctamente');
     }
   }
 }

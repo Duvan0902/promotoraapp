@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Page/documents_page.dart';
 import 'package:promotoraapp/Page/faq_categories_page.dart';
 import 'package:promotoraapp/Page/sale_page.dart';
 import 'package:promotoraapp/main.dart';
@@ -52,6 +53,7 @@ class BottomList extends StatelessWidget {
                 routes: {
                   'sale': (BuildContext context) => SalePage(),
                   'questions': (BuildContext context) => FaqCategoriesPage(),
+                  'Documents': (BuildContext context) => DocumentsPage(),
                 },
               ),
             ),

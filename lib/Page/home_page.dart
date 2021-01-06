@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                     iconSize: 28,
                     onPressed: () {},
                   ),
-                  route: 'sale',
+                  route: 'Documents',
                 ),
                 SizedBox(height: 18),
                 BottomList(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Page/sale_page.dart';
+import 'package:promotoraapp/Common/objective.dart';
 import 'package:promotoraapp/main.dart';
 
 class GoalsPage extends StatefulWidget {
@@ -79,27 +79,8 @@ class _GoalsPageState extends State<GoalsPage> {
   }
 
   Widget roomList(context) {
-    final size = MediaQuery.of(context).size;
-    return RaisedButton(
-      child: Container(
-        width: size.width * 0.3,
-        child: Text(
-          'Inicia sesión',
-          textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .headline1
-              .copyWith(color: Colors.black, fontSize: 16),
-        ),
-      ),
-      color: PromotoraApp().primaryDark,
-      disabledTextColor: Colors.grey,
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SalePage()),
-        );
-      },
+    return Container(
+      child: MyObjetive(),
     );
   }
 

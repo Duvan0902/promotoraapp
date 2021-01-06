@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:global_configuration/global_configuration.dart';
+import 'package:promotoraapp/preferences/users_preferences.dart';
 
 class AtacRequestsProvider {
   final String _url =
       GlobalConfiguration().getValue("api_url") + "/atac-solicitudes";
+  final _prefs = new UserPreferences();
 
   Future<bool> sendInterests(
       String userid, String service, String interests) async {
@@ -13,10 +15,14 @@ class AtacRequestsProvider {
     );
 
     print(bodyData);
+    String token = _prefs.token;
 
     final resp = await http.post(
       _url,
-      headers: {'content-type': 'application/json'},
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
       body: bodyData,
     );
 
