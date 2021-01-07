@@ -10,8 +10,9 @@ class ContactInformationPage extends StatefulWidget {
   String description;
   String email;
   String phone;
+  String phone1;
   ContactInformationPage(this.name, this.surname, this.company,
-      this.description, this.email, this.phone);
+      this.description, this.email, this.phone, this.phone1);
 
   @override
   _ContactInformationPageState createState() => _ContactInformationPageState();
@@ -156,14 +157,14 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text('sin numero'),
+                  Text(widget.phone1),
                   IconButton(
                     icon: Icon(
                       Icons.call_outlined,
                     ),
                     color: PromotoraApp().primaryDark,
                     iconSize: 30,
-                    onPressed: () {},
+                    onPressed: () => _launchURL2(widget.phone1),
                   )
                 ],
               ),
@@ -200,11 +201,11 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
     }
   }
 
-  /* _launchURL2(phone2) async {
+  _launchURL2(phone2) async {
     if (await canLaunch('tel:' + phone2)) {
       await launch('tel:' + phone2);
     } else {
       throw 'Could not launch $phone2';
     }
-  }*/
+  }
 }

@@ -10,6 +10,7 @@ class ContactsManagementList extends StatefulWidget {
   final String description;
   final String email;
   final String phone1;
+  final String phone2;
 
   ContactsManagementList({
     Key key,
@@ -19,6 +20,7 @@ class ContactsManagementList extends StatefulWidget {
     @required this.description,
     @required this.email,
     @required this.phone1,
+    @required this.phone2,
   }) : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
   String description = '';
   String email = '';
   String phone = '';
+  String phone1 = '';
   @override
   Widget build(BuildContext context) {
     var listTile = Column(
@@ -100,12 +103,13 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
           description = widget.description;
           email = widget.email;
           phone = widget.phone1;
+          phone1 = widget.phone2;
 
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => ContactInformationPage(
-                  name, surme, company, description, email, phone),
+                  name, surme, company, description, email, phone, phone1),
             ),
           );
         },

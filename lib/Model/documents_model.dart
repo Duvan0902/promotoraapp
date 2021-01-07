@@ -13,7 +13,7 @@ class DocumentsModel {
   final String title;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final List<FileElement> file;
+  final FileClass file;
 
   factory DocumentsModel.fromJson(String str) =>
       DocumentsModel.fromMap(json.decode(str));
@@ -25,8 +25,7 @@ class DocumentsModel {
         title: json["title"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        file: List<FileElement>.from(
-            json["file"].map((x) => FileElement.fromMap(x))),
+        file: FileClass.fromMap(json["file"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -34,12 +33,12 @@ class DocumentsModel {
         "title": title,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "file": List<dynamic>.from(file.map((x) => x.toMap())),
+        "file": file.toMap(),
       };
 }
 
-class FileElement {
-  FileElement({
+class FileClass {
+  FileClass({
     this.id,
     this.name,
     this.alternativeText,
@@ -77,12 +76,11 @@ class FileElement {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  factory FileElement.fromJson(String str) =>
-      FileElement.fromMap(json.decode(str));
+  factory FileClass.fromJson(String str) => FileClass.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory FileElement.fromMap(Map<String, dynamic> json) => FileElement(
+  factory FileClass.fromMap(Map<String, dynamic> json) => FileClass(
         id: json["id"],
         name: json["name"],
         alternativeText: json["alternativeText"],

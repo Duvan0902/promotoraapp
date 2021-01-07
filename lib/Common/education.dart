@@ -1,35 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Model/documents_model.dart';
+import 'package:promotoraapp/Model/education_model.dart';
 import 'package:promotoraapp/main.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class DocumentView extends StatefulWidget {
-  final DocumentsModel doc;
-
-  DocumentView({
-    Key key,
-    this.doc,
-  }) : super(key: key);
+class EducationView extends StatefulWidget {
+  final EducationModel education;
+  EducationView({Key key, this.education}) : super(key: key);
 
   @override
-  _DocumentViewState createState() => _DocumentViewState();
+  _EducationViewState createState() => _EducationViewState();
 }
 
-class _DocumentViewState extends State<DocumentView> {
+class _EducationViewState extends State<EducationView> {
   @override
   Widget build(BuildContext context) {
-    return _roundedButton(
-      Color.fromRGBO(243, 243, 243, 1),
+    return _educationItems(
+      Colors.white,
       Icons.airport_shuttle_outlined,
-      widget.doc.title,
     );
   }
 
-  Widget _roundedButton(
-    Color color,
-    IconData icono,
-    String text,
-  ) {
+  Widget _educationItems(Color color, IconData icono) {
     return ClipRect(
       child: Container(
         height: 150.0,
@@ -51,14 +41,16 @@ class _DocumentViewState extends State<DocumentView> {
               backgroundColor: color,
               radius: 30.0,
               child: IconButton(
-                color: PromotoraApp().primaryDark,
-                icon: Icon(Icons.file_download),
-                iconSize: 30,
-                onPressed: () => _launchURL(widget.doc.file.url),
-              ),
+                  color: PromotoraApp().primaryDark,
+                  icon: Image.network(
+                    'http://66.228.51.95:1337' + widget.education.icon.url,
+                    color: Colors.black,
+                  ),
+                  iconSize: 30,
+                  onPressed: () {}),
             ),
             Text(
-              text,
+              widget.education.module,
               style: Theme.of(context)
                   .textTheme
                   .headline3
@@ -70,13 +62,5 @@ class _DocumentViewState extends State<DocumentView> {
         ),
       ),
     );
-  }
-}
-
-_launchURL(url) async {
-  if (await canLaunch('http://66.228.51.95:1337' + url)) {
-    await launch('http://66.228.51.95:1337' + url);
-  } else {
-    throw 'Could not launch $url';
   }
 }

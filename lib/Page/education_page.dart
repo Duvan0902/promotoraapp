@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Common/education_list.dart';
+import 'package:promotoraapp/provider/education_provider.dart';
 
-class EducationsPage extends StatelessWidget {
-  const EducationsPage({Key key}) : super(key: key);
+class EducationsPage extends StatefulWidget {
+  const EducationsPage({
+    Key key,
+  }) : super(key: key);
 
+  @override
+  _EducationsPageState createState() => _EducationsPageState();
+}
+
+class _EducationsPageState extends State<EducationsPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,6 +20,9 @@ class EducationsPage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           _titleEducation(context),
+          Expanded(
+            child: _education(context),
+          ),
         ],
       ),
     );
@@ -23,6 +35,27 @@ class EducationsPage extends StatelessWidget {
           .textTheme
           .bodyText2
           .copyWith(color: Colors.white, fontSize: 17),
+    );
+  }
+
+  Widget _education(context) {
+    final educationProvider = EducationProvider();
+    return Container(
+      child: FutureBuilder(
+        future: educationProvider.getEducation(),
+        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+          if (snapshot.hasData) {
+            return EducationList(education: snapshot.data);
+          } else {
+            return Container(
+              height: 400,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }

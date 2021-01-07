@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Common/document_list.dart';
-import 'package:promotoraapp/Model/documents_model.dart';
 import 'package:promotoraapp/provider/document_provider.dart';
 
 class DocumentsPage extends StatelessWidget {
-  final List<DocumentsModel> document;
-  const DocumentsPage({Key key, this.document}) : super(key: key);
+  const DocumentsPage({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -20,6 +20,7 @@ class ContactsList extends StatelessWidget {
             description: contacts[index].description,
             email: contacts[index].email,
             phone1: contacts[index].phone1,
+            phone2: contacts[index].phone2,
           );
         },
       ),
