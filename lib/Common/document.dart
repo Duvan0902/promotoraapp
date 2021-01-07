@@ -35,6 +35,11 @@ class _DocumentViewState extends State<DocumentView> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10.0),
+              boxShadow: [
+                new BoxShadow(
+                  color: Colors.black,
+                ),
+              ],
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

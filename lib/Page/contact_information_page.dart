@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/main.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class ContactInformationPage extends StatefulWidget {
@@ -137,7 +138,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
                     ),
                     color: PromotoraApp().primaryDark,
                     iconSize: 30,
-                    onPressed: () {},
+                    onPressed: () => _launchURL(widget.phone),
                   )
                 ],
               ),
@@ -190,4 +191,20 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
       ),
     );
   }
+
+  _launchURL(phone) async {
+    if (await canLaunch('tel:' + phone)) {
+      await launch('tel:' + phone);
+    } else {
+      throw 'Could not launch $phone';
+    }
+  }
+
+  /* _launchURL2(phone2) async {
+    if (await canLaunch('tel:' + phone2)) {
+      await launch('tel:' + phone2);
+    } else {
+      throw 'Could not launch $phone2';
+    }
+  }*/
 }

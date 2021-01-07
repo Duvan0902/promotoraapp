@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Page/users_information_page.dart';
 import 'package:promotoraapp/main.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UsersManagementList extends StatefulWidget {
   final String name;
@@ -88,7 +89,7 @@ class _UsersManagementListState extends State<UsersManagementList> {
                 ),
                 color: PromotoraApp().primaryDark,
                 iconSize: 30,
-                onPressed: () {},
+                onPressed: () => _launchURL(widget.phone1),
               )
             ],
           ),
@@ -112,5 +113,13 @@ class _UsersManagementListState extends State<UsersManagementList> {
         },
       ),
     );
+  }
+
+  _launchURL(phone) async {
+    if (await canLaunch('tel:' + phone)) {
+      await launch('tel:' + phone);
+    } else {
+      throw 'Could not launch $phone';
+    }
   }
 }

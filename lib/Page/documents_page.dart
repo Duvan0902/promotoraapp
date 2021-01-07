@@ -36,6 +36,9 @@ class DocumentsPage extends StatelessWidget {
                 height: 15,
               ),
               _posterTitle(context),
+              SizedBox(
+                height: 15,
+              ),
               Expanded(
                 child: _documentItems(),
               ),
@@ -47,12 +50,15 @@ class DocumentsPage extends StatelessWidget {
   }
 
   Widget _posterTitle(context) {
-    return Text(
-      'Te brindamos material de apoyo que te ayudará en tu proceso.',
-      style: Theme.of(context)
-          .textTheme
-          .bodyText2
-          .copyWith(color: Colors.black, fontSize: 17),
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Text(
+        'Te brindamos material de apoyo que te ayudará en tu proceso.',
+        style: Theme.of(context)
+            .textTheme
+            .bodyText2
+            .copyWith(color: Colors.black, fontSize: 17),
+      ),
     );
   }
 
