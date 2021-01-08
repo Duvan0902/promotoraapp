@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/education_list.dart';
+import 'package:promotoraapp/Page/education_list.dart';
 import 'package:promotoraapp/provider/education_provider.dart';
 
 class EducationsPage extends StatefulWidget {
