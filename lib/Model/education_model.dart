@@ -29,24 +29,26 @@ class EducationModel {
   factory EducationModel.fromMap(Map<String, dynamic> json) => EducationModel(
         id: json["id"],
         module: json["module"],
-        videoUrl: json["video_url"],
+        videoUrl: json["video_url"] == null ? null : json["video_url"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         documentFiles: List<DocumentFile>.from(
             json["document_files"].map((x) => DocumentFile.fromMap(x))),
-        podcastFile: EducationIcon.fromMap(json["podcast_file"]),
+        podcastFile: json["podcast_file"] == null
+            ? null
+            : EducationIcon.fromMap(json["podcast_file"]),
         icon: EducationIcon.fromMap(json["icon"]),
       );
 
   Map<String, dynamic> toMap() => {
         "id": id,
         "module": module,
-        "video_url": videoUrl,
+        "video_url": videoUrl == null ? null : module,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "document_files":
             List<dynamic>.from(documentFiles.map((x) => x.toMap())),
-        "podcast_file": podcastFile.toMap(),
+        "podcast_file": podcastFile.toMap() == null ? null : podcastFile,
         "icon": icon.toMap(),
       };
 }

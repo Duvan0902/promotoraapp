@@ -13,13 +13,6 @@ class EducationView extends StatefulWidget {
 class _EducationViewState extends State<EducationView> {
   @override
   Widget build(BuildContext context) {
-    return _educationItems(
-      Colors.white,
-      Icons.airport_shuttle_outlined,
-    );
-  }
-
-  Widget _educationItems(Color color, IconData icono) {
     return ClipRect(
       child: Container(
         height: 150.0,
@@ -38,7 +31,6 @@ class _EducationViewState extends State<EducationView> {
           children: <Widget>[
             SizedBox(height: 5.0),
             CircleAvatar(
-              backgroundColor: color,
               radius: 30.0,
               child: IconButton(
                   color: PromotoraApp().primaryDark,
