@@ -46,6 +46,8 @@ dev_dependencies:
   url_launcher: ^5.7.10
   youtube_player_flutter: ^7.0.0+7
   webview_flutter: ^1.0.7
+  audioplayer: 0.8.1
+  audioplayer_web: 0.7.1
   
  
 

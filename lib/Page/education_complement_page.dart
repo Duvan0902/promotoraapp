@@ -3,6 +3,7 @@ import 'package:promotoraapp/Model/education_model.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:audioplayer/audioplayer.dart';
 
 class EducationComplementPage extends StatefulWidget {
   final EducationModel complement;
@@ -49,11 +50,17 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
               ),
               _titleEducation(),
               SizedBox(
-                height: 10,
+                height: 5,
               ),
               _videoPlayer(),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 child: _audioPlayer(),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Expanded(
                 child: _document(context, widget.complement.documentFiles),
@@ -115,9 +122,16 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
             ),
           ),
           SizedBox(width: 40),
+          _player()
         ],
       ),
     );
+  }
+
+  Widget _player() {
+    AudioPlayer audioPlayer = AudioPlayer();
+
+    return Container();
   }
 
   Widget _document(context, final List<DocumentFile> documentFiles) {
