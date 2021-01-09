@@ -61,7 +61,7 @@ class _DocumentViewState extends State<DocumentView> {
               text,
               style: Theme.of(context)
                   .textTheme
-                  .headline3
+                  .headline2
                   .copyWith(color: Colors.black, fontSize: 18),
               textAlign: TextAlign.center,
             ),

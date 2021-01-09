@@ -44,6 +44,9 @@ dev_dependencies:
   sticky_headers: "^0.1.8"
   grouped_buttons: ^1.0.4
   url_launcher: ^5.7.10
+  youtube_player_flutter: ^7.0.0+7
+  webview_flutter: ^1.0.7
+  
  
 
 
