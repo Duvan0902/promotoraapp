@@ -42,14 +42,13 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
               SizedBox(
                 height: 6,
               ),
-              _titleEducation(),
+              Container(padding: EdgeInsets.all(4), child: _titleEducation()),
               SizedBox(
-                height: 15,
+                height: 8,
               ),
               Container(
                   padding: EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    color: Colors.grey[900],
                     borderRadius: BorderRadius.circular(18),
                   ),
                   child: _videoPlayer()),
@@ -72,7 +71,7 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
 
   Widget _titleEducation() {
     return Text(
-      'Te brindamos material de apoyo que te ayudara con tu proceso',
+      'Te brindamos material de apoyo que te ayudara con tu proceso.',
       style: Theme.of(context)
           .textTheme
           .bodyText1
@@ -105,6 +104,9 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
 
   Widget _audioPlayer() {
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Row(
         children: [
           Container(
@@ -126,7 +128,7 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1
-                        .copyWith(color: Colors.black45, fontSize: 15))
+                        .copyWith(color: Colors.black45, fontSize: 14))
               ],
             ),
           ),

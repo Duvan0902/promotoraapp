@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/contacts_list.dart';
-import 'package:promotoraapp/Common/users_list.dart';
+import 'package:promotoraapp/Page/contacts_list.dart';
+import 'package:promotoraapp/Page/users_list.dart';
 
 import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/provider/contacts_provider.dart';

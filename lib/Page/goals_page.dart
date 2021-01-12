@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/objective.dart';
+import 'package:promotoraapp/Page/objective.dart';
 import 'package:promotoraapp/main.dart';
 
 class GoalsPage extends StatefulWidget {

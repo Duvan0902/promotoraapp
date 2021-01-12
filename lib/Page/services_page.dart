@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/services_list.dart';
+import 'package:promotoraapp/Page/services_list.dart';
 import 'package:promotoraapp/provider/service_provider.dart';
 
 class ServicesPage extends StatefulWidget {
@@ -35,7 +35,7 @@ class _ServicesPageState extends State<ServicesPage> {
     return Container(
       padding: EdgeInsets.all(10),
       child: Text(
-        'Tu opinión es muy importante para nosotros, selecciona las categorías de servicios en las que te gustaría recibir capacitación',
+        'Tu opinión es muy importante para nosotros, selecciona las categorías de servicios en las que te gustaría recibir capacitación.',
         style: Theme.of(context)
             .textTheme
             .bodyText1

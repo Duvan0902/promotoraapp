@@ -33,7 +33,7 @@ class MyObjetive extends StatelessWidget {
 
   Widget _title(context) {
     return Text(
-      'Registra cada una de las metas que relaices en el mes, así podras llervar el control de tus metas.',
+      'Registra cada una de las metas que realices en el mes, así podrás llevar el control de tus metas.',
       style: Theme.of(context)
           .textTheme
           .bodyText1

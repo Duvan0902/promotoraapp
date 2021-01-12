@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/users_management.dart';
+import 'package:promotoraapp/Page/users_management.dart';
 import 'package:promotoraapp/Model/users_model.dart';
 
 class UsersList extends StatelessWidget {
