@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Common/frequent_questions.dart';
 import 'package:promotoraapp/Model/categories_model.dart';
+import 'package:promotoraapp/Page/faq_plugin.dart';
 
 class CategoriesList extends StatelessWidget {
   final List<FaqCategoriesModel> categories;

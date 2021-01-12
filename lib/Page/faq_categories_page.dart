@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Page/categories_list.dart';
+import 'package:promotoraapp/Page/faq_list.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/provider/categories_provider.dart';
 
