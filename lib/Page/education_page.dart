@@ -19,7 +19,8 @@ class _EducationsPageState extends State<EducationsPage> {
       padding: EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
-          _titleEducation(context),
+          Container(
+              padding: EdgeInsets.all(10), child: _titleEducation(context)),
           Expanded(
             child: _education(context),
           ),

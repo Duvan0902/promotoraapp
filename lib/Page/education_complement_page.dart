@@ -34,33 +34,31 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
                 .headline2
                 .copyWith(color: Colors.white, fontSize: 18),
           ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {},
-            )
-          ],
         ),
         body: Container(
           padding: EdgeInsets.all(10),
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: 10,
+                height: 6,
               ),
               _titleEducation(),
               SizedBox(
-                height: 5,
-              ),
-              _videoPlayer(),
-              SizedBox(
-                height: 10,
+                height: 15,
               ),
               Container(
-                child: _audioPlayer(),
-              ),
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[900],
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  child: _videoPlayer()),
               SizedBox(
-                height: 10,
+                height: 5,
+              ),
+              Container(
+                padding: EdgeInsets.all(2),
+                child: _audioPlayer(),
               ),
               Expanded(
                 child: _document(context, widget.complement.documentFiles),
@@ -73,7 +71,13 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
   }
 
   Widget _titleEducation() {
-    return Text('Te brindamos material de apoyo que te ayudara con tu proceso');
+    return Text(
+      'Te brindamos material de apoyo que te ayudara con tu proceso',
+      style: Theme.of(context)
+          .textTheme
+          .bodyText1
+          .copyWith(color: Colors.black, fontSize: 17),
+    );
   }
 
   Widget _videoPlayer() {
@@ -85,22 +89,17 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
         mute: false,
       ),
     );
-    return Card(
-      child: Container(
-        padding: EdgeInsets.all(1),
-        child: YoutubePlayerBuilder(
-          player: YoutubePlayer(
-            controller: _controller,
-          ),
-          builder: (context, player) {
-            return Column(
-              children: [
-                player,
-              ],
-            );
-          },
-        ),
+    return YoutubePlayerBuilder(
+      player: YoutubePlayer(
+        controller: _controller,
       ),
+      builder: (context, player) {
+        return Column(
+          children: [
+            player,
+          ],
+        );
+      },
     );
   }
 
@@ -109,29 +108,57 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.fromLTRB(20, 13, 20, 13),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(widget.complement.podcastFile.name),
-                SizedBox(
-                  height: 10,
+                Text(
+                  widget.complement.podcastFile.name,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1
+                      .copyWith(color: Colors.black, fontSize: 17),
                 ),
-                Text(widget.complement.podcastFile.caption)
+                SizedBox(
+                  height: 5,
+                ),
+                Text(widget.complement.podcastFile.caption,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.black45, fontSize: 15))
               ],
             ),
           ),
-          SizedBox(width: 40),
-          _player()
+          SizedBox(
+            width: 20,
+          ),
+          IconButton(
+            color: PromotoraApp().primaryDark,
+            icon: Icon(Icons.play_circle_outline_outlined),
+            iconSize: 40,
+            onPressed: () => _player(),
+          ),
+          IconButton(
+              color: PromotoraApp().primaryDark,
+              icon: Icon(Icons.pause_circle_outline),
+              iconSize: 40,
+              onPressed: () => _stop()),
         ],
       ),
     );
   }
 
-  Widget _player() {
+  _player() {
     AudioPlayer audioPlayer = AudioPlayer();
 
-    return Container();
+    audioPlayer
+        .play("http://66.228.51.95:1337" + widget.complement.podcastFile.url);
+  }
+
+  _stop() {
+    AudioPlayer audioPlayer = AudioPlayer();
+    audioPlayer.pause();
   }
 
   Widget _document(context, final List<DocumentFile> documentFiles) {
@@ -172,8 +199,8 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
                   document.title,
                   style: Theme.of(context)
                       .textTheme
-                      .headline3
-                      .copyWith(color: Colors.black, fontSize: 18),
+                      .headline1
+                      .copyWith(color: Colors.black, fontSize: 17),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 5.0)

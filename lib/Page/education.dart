@@ -55,8 +55,8 @@ class _EducationViewState extends State<EducationView> {
               widget.education.module,
               style: Theme.of(context)
                   .textTheme
-                  .headline3
-                  .copyWith(color: Colors.black, fontSize: 18),
+                  .bodyText2
+                  .copyWith(color: Colors.white, fontSize: 18),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 5.0)
