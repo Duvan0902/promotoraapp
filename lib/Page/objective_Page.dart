@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:promotoraapp/Page/sale_page.dart';
 import 'package:promotoraapp/main.dart';
 
-class MyObjetive extends StatelessWidget {
-  const MyObjetive({Key key}) : super(key: key);
+class MyObjetivePage extends StatelessWidget {
+  const MyObjetivePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

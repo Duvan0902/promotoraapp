@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Page/objective.dart';
+import 'package:promotoraapp/Page/objective_Page.dart';
 import 'package:promotoraapp/main.dart';
 
 class GoalsPage extends StatefulWidget {
@@ -80,7 +80,7 @@ class _GoalsPageState extends State<GoalsPage> {
 
   Widget roomList(context) {
     return Container(
-      child: MyObjetive(),
+      child: MyObjetivePage(),
     );
   }
 
