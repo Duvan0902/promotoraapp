@@ -26,7 +26,7 @@ class _ContactsPageState extends State<ContactsPage> {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> tabs = [
       {"title": 'Empleados', "widget": jopList(context)},
-      {"title": "Para tu gestion", "widget": managementList(context)}
+      {"title": "Para tu gestión", "widget": managementList(context)}
     ];
     if (_currentWidget == null) {
       _currentWidget = jopList(context);

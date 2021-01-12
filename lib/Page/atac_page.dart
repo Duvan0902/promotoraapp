@@ -79,7 +79,7 @@ class AtacPageState extends State<AtacPage> {
 
   Widget _title(context) {
     return Text(
-      'Selecciona los temas en los cuales estas interasado',
+      'Selecciona los temas en los cuales estas interesado.',
       style: Theme.of(context)
           .textTheme
           .bodyText1
