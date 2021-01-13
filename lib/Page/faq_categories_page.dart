@@ -1,50 +1,53 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Model/categories_model.dart';
 import 'package:promotoraapp/Page/faq_list.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/provider/categories_provider.dart';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
 
 class FaqCategoriesPage extends StatefulWidget {
-  const FaqCategoriesPage({
-    Key key,
-  }) : super(key: key);
+  final FaqCategoriesModel category;
+  const FaqCategoriesPage({Key key, this.category}) : super(key: key);
 
   @override
   _FaqCategoriesPageState createState() => _FaqCategoriesPageState();
 }
 
 class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
+  SearchBar searchBar;
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PromotoraApp(),
+            ),
+          );
+        },
+      ),
+      title: new Text('Preguntas Frecuentes'),
+      actions: [searchBar.getSearchAction(context)],
+      backgroundColor: Colors.grey[900],
+    );
+  }
+
+  _FaqCategoriesPageState() {
+    searchBar = new SearchBar(
+        inBar: false,
+        setState: setState,
+        onSubmitted: print,
+        buildDefaultAppBar: buildAppBar);
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PromotoraApp(),
-                ),
-              );
-            },
-          ),
-          backgroundColor: Colors.grey[900],
-          title: Text(
-            "Preguntas Frecuentes",
-            style: Theme.of(context)
-                .textTheme
-                .headline2
-                .copyWith(color: Colors.white, fontSize: 18),
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {},
-            )
-          ],
-        ),
+        appBar: searchBar.build(context),
         body: Container(
           child: Column(
             children: <Widget>[
@@ -63,6 +66,7 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
 
   Widget categories(context) {
     final categoriesProvider = CategoriesProvider();
+
     return Container(
       child: FutureBuilder(
         future: categoriesProvider.getCategories(),

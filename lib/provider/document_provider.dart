@@ -9,9 +9,11 @@ class DocumentsProvider {
   final _prefs = new UserPreferences();
 
   Future<List<DocumentsModel>> getDocuments() async {
+    String token = _prefs.token;
     try {
       final response = await http.get(
         _url,
+        headers: {'Authorization': 'Bearer $token'},
       );
       print(_prefs.token);
 

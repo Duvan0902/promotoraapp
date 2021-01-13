@@ -2,13 +2,17 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as json;
 import 'package:global_configuration/global_configuration.dart';
 import 'package:promotoraapp/Model/education_model.dart';
+import 'package:promotoraapp/preferences/users_preferences.dart';
 
 class EducationProvider {
   final String _url = GlobalConfiguration().getValue("api_url") + "/educacions";
+  final _prefs = new UserPreferences();
 
   Future<List<EducationModel>> getEducation() async {
     try {
-      final response = await http.get(_url);
+      String token = _prefs.token;
+      final response =
+          await http.get(_url, headers: {'Authorization': 'Bearer $token'});
 
       if (response.statusCode == 200) {
         print(response.body);
