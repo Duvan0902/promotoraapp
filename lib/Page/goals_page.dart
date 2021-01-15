@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/Page/objective_Page.dart';
+import 'package:promotoraapp/Page/self_management_page.dart';
 import 'package:promotoraapp/main.dart';
 
 class GoalsPage extends StatefulWidget {
@@ -85,6 +86,8 @@ class _GoalsPageState extends State<GoalsPage> {
   }
 
   Widget recordedList(context) {
-    return Text('7777');
+    return Container(
+      child: SelfManagementPage(),
+    );
   }
 }

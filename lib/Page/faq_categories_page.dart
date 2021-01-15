@@ -1,14 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Model/categories_model.dart';
 import 'package:promotoraapp/Page/faq_list.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/provider/categories_provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 
 class FaqCategoriesPage extends StatefulWidget {
-  final FaqCategoriesModel category;
-  const FaqCategoriesPage({Key key, this.category}) : super(key: key);
+  const FaqCategoriesPage({Key key}) : super(key: key);
 
   @override
   _FaqCategoriesPageState createState() => _FaqCategoriesPageState();
@@ -37,7 +35,7 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
   }
 
   _FaqCategoriesPageState() {
-    searchBar = new SearchBar(
+    searchBar = SearchBar(
         inBar: false,
         setState: setState,
         onSubmitted: print,
@@ -64,9 +62,18 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
     );
   }
 
+  /*List<String> newDataList = List.from();
+
+  onItemChanged(String value) {
+    setState(() {
+      newDataList = mainDataList
+          .where((string) => string.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
+  }*/
+
   Widget categories(context) {
     final categoriesProvider = CategoriesProvider();
-
     return Container(
       child: FutureBuilder(
         future: categoriesProvider.getCategories(),
@@ -85,22 +92,22 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
       ),
     );
   }
-}
 
-Widget _chat(context) {
-  return Container(
-    child: Container(
-      alignment: Alignment.bottomRight,
-      margin: EdgeInsets.fromLTRB(0, 0, 20, 30),
-      child: FloatingActionButton(
-        backgroundColor: Colors.pink[400],
-        elevation: 5.0,
-        child: Icon(
-          Icons.chat,
-          color: Colors.white,
+  Widget _chat(context) {
+    return Container(
+      child: Container(
+        alignment: Alignment.bottomRight,
+        margin: EdgeInsets.fromLTRB(0, 0, 20, 30),
+        child: FloatingActionButton(
+          backgroundColor: Colors.pink[400],
+          elevation: 5.0,
+          child: Icon(
+            Icons.chat,
+            color: Colors.white,
+          ),
+          onPressed: () {},
         ),
-        onPressed: () {},
       ),
-    ),
-  );
+    );
+  }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Page/education.dart';
+import 'package:promotoraapp/Page/education_view.dart';
 import 'package:promotoraapp/Model/education_model.dart';
 
 class EducationList extends StatelessWidget {

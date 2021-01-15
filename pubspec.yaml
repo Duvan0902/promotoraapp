@@ -50,6 +50,7 @@ dev_dependencies:
   audioplayer_web: 0.7.1
   flutter_search_bar: ^2.1.0
   dio: ^3.0.10
+  string_similarity: ^1.1.0
  
 
 
