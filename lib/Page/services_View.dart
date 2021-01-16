@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Common/random_color.dart';
 import 'package:promotoraapp/Model/atac_model.dart';
 import 'package:promotoraapp/Page/atac_page.dart';
-import 'package:promotoraapp/main.dart';
 
 class ServicesView extends StatefulWidget {
   final AtacModel atac;
@@ -27,7 +27,7 @@ class _ServicesViewState extends State<ServicesView> {
         height: 150.0,
         margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-            color: PromotoraApp().primaryDark,
+            color: UniqueColorGenerator.getColor(),
             borderRadius: BorderRadius.circular(10.0)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -51,6 +51,8 @@ dev_dependencies:
   flutter_search_bar: ^2.1.0
   dio: ^3.0.10
   string_similarity: ^1.1.0
+  random_color: ^1.0.5
+  
  
 
 

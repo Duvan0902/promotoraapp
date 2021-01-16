@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Common/random_color.dart';
 import 'package:promotoraapp/Model/education_model.dart';
 import 'package:promotoraapp/Page/education_complement_page.dart';
 import 'package:promotoraapp/main.dart';
@@ -19,7 +20,7 @@ class _EducationViewState extends State<EducationView> {
         height: 150.0,
         margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: PromotoraApp().primaryDark,
+          color: UniqueColorGenerator.getColor(),
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             new BoxShadow(
