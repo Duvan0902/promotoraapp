@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Page/document_download.dart';
+import 'package:promotoraapp/Page/document_View.dart';
 import 'package:promotoraapp/Model/documents_model.dart';
 
 class DocumentList extends StatelessWidget {
