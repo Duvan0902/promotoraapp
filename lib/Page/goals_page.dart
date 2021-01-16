@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Common/drawer.dart';
 import 'package:promotoraapp/Page/objective_Page.dart';
 import 'package:promotoraapp/Page/self_management_page.dart';
 import 'package:promotoraapp/main.dart';
@@ -27,31 +28,37 @@ class _GoalsPageState extends State<GoalsPage> {
       _currentWidget = roomList(context);
     }
 
-    return Column(
-      children: <Widget>[
-        Container(
-          color: Colors.grey[900],
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: tabs.map((tab) {
-              int currentIndex = tabs.indexOf(tab);
-              bool selected = currentIndex == _selectedTab;
+    return Container(
+      child: Scaffold(
+        appBar: _topBar(context),
+        drawer: DrawerPage(),
+        body: Column(
+          children: <Widget>[
+            Container(
+              color: Colors.grey[900],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: tabs.map((tab) {
+                  int currentIndex = tabs.indexOf(tab);
+                  bool selected = currentIndex == _selectedTab;
 
-              Function onTabFunction = () {
-                setState(() {
-                  _selectedTab = currentIndex;
-                  _currentWidget = tab['widget'];
-                });
-              };
+                  Function onTabFunction = () {
+                    setState(() {
+                      _selectedTab = currentIndex;
+                      _currentWidget = tab['widget'];
+                    });
+                  };
 
-              return _tab(tab["title"], onTabFunction, selected);
-            }).toList(),
-          ),
+                  return _tab(tab["title"], onTabFunction, selected);
+                }).toList(),
+              ),
+            ),
+            Expanded(
+              child: _currentWidget,
+            ),
+          ],
         ),
-        Expanded(
-          child: _currentWidget,
-        ),
-      ],
+      ),
     );
   }
 
@@ -74,6 +81,21 @@ class _GoalsPageState extends State<GoalsPage> {
           style: Theme.of(context).textTheme.bodyText1.copyWith(
               color: selected ? Colors.black : Colors.white,
               fontWeight: FontWeight.w800),
+        ),
+      ),
+    );
+  }
+
+  Widget _topBar(context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    Orientation currentOrientation = MediaQuery.of(context).orientation;
+    double barHeight = currentOrientation == Orientation.portrait ? 60 : 50;
+    return PreferredSize(
+      preferredSize: Size(screenWidth, barHeight),
+      child: Container(
+        child: AppBar(
+          backgroundColor: Colors.grey[900],
+          title: new Text("Mis metas"),
         ),
       ),
     );

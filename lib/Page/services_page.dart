@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Common/drawer.dart';
 import 'package:promotoraapp/Page/services_list.dart';
 import 'package:promotoraapp/provider/service_provider.dart';
 
@@ -13,20 +14,26 @@ class _ServicesPageState extends State<ServicesPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[900],
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 20,
+      child: Scaffold(
+        appBar: _topBar(context),
+        drawer: DrawerPage(),
+        body: Container(
+          color: Colors.grey[900],
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 20,
+              ),
+              _description(context),
+              SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: _service(context),
+              )
+            ],
           ),
-          _description(context),
-          SizedBox(
-            height: 20,
-          ),
-          Expanded(
-            child: _service(context),
-          )
-        ],
+        ),
       ),
     );
   }
@@ -61,6 +68,21 @@ class _ServicesPageState extends State<ServicesPage> {
             );
           }
         },
+      ),
+    );
+  }
+
+  Widget _topBar(context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    Orientation currentOrientation = MediaQuery.of(context).orientation;
+    double barHeight = currentOrientation == Orientation.portrait ? 60 : 50;
+    return PreferredSize(
+      preferredSize: Size(screenWidth, barHeight),
+      child: Container(
+        child: AppBar(
+          backgroundColor: Colors.grey[900],
+          title: new Text("ATAC"),
+        ),
       ),
     );
   }

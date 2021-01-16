@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Common/drawer.dart';
 import 'package:promotoraapp/Page/education_list.dart';
 import 'package:promotoraapp/provider/education_provider.dart';
 
@@ -15,16 +16,22 @@ class _EducationsPageState extends State<EducationsPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[900],
-      padding: EdgeInsets.all(10),
-      child: Column(
-        children: <Widget>[
-          Container(
-              padding: EdgeInsets.all(10), child: _titleEducation(context)),
-          Expanded(
-            child: _education(context),
+      child: Scaffold(
+        appBar: _topBar(context),
+        drawer: DrawerPage(),
+        body: Container(
+          color: Colors.grey[900],
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: <Widget>[
+              Container(
+                  padding: EdgeInsets.all(10), child: _titleEducation(context)),
+              Expanded(
+                child: _education(context),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -56,6 +63,21 @@ class _EducationsPageState extends State<EducationsPage> {
             );
           }
         },
+      ),
+    );
+  }
+
+  Widget _topBar(context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    Orientation currentOrientation = MediaQuery.of(context).orientation;
+    double barHeight = currentOrientation == Orientation.portrait ? 60 : 50;
+    return PreferredSize(
+      preferredSize: Size(screenWidth, barHeight),
+      child: Container(
+        child: AppBar(
+          backgroundColor: Colors.grey[900],
+          title: new Text("Educación"),
+        ),
       ),
     );
   }

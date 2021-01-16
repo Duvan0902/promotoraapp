@@ -1,18 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/Model/categories_model.dart';
 import 'package:promotoraapp/Page/faq_list.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/provider/categories_provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
+import 'package:string_similarity/string_similarity.dart';
 
 class FaqCategoriesPage extends StatefulWidget {
-  const FaqCategoriesPage({Key key}) : super(key: key);
+  final FaqCategoriesModel category;
+  const FaqCategoriesPage({Key key, this.category}) : super(key: key);
 
   @override
   _FaqCategoriesPageState createState() => _FaqCategoriesPageState();
 }
 
 class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
+  final categoriesProvider = CategoriesProvider();
+  TextEditingController myController = TextEditingController();
   SearchBar searchBar;
 
   AppBar buildAppBar(BuildContext context) {
@@ -39,8 +44,13 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
         inBar: false,
         setState: setState,
         onSubmitted: print,
+        controller: myController,
+        //onChanged: search(),
         buildDefaultAppBar: buildAppBar);
+
+    print(myController);
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,24 +72,19 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
     );
   }
 
-  /*List<String> newDataList = List.from();
-
-  onItemChanged(String value) {
-    setState(() {
-      newDataList = mainDataList
-          .where((string) => string.toLowerCase().contains(value.toLowerCase()))
-          .toList();
-    });
-  }*/
-
   Widget categories(context) {
     final categoriesProvider = CategoriesProvider();
+
     return Container(
       child: FutureBuilder(
         future: categoriesProvider.getCategories(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
             return CategoriesList(categories: snapshot.data);
+            /*where(
+                (category) => category.search(myController).toList(),
+              ),
+            );*/
           } else {
             return Container(
               height: 400,
@@ -109,5 +114,12 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
         ),
       ),
     );
+  }
+
+  search() {
+    String category = widget.category.category.toLowerCase();
+    String search = myController.text.toLowerCase();
+    return StringSimilarity.compareTwoStrings(category, search) > 0.3 ||
+        category.contains(search);
   }
 }
