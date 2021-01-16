@@ -1,27 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/models/users_model.dart';
 import 'package:promotoraapp/pages/users_information_page.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UsersManagementList extends StatefulWidget {
-  final String name;
-  final String surname;
-  final String position;
-  final String description;
-  final String email;
-  final String phone1;
-  final String phone2;
+  final UsersModel user;
 
-  UsersManagementList({
-    Key key,
-    @required this.name,
-    @required this.surname,
-    @required this.position,
-    @required this.description,
-    @required this.email,
-    @required this.phone1,
-    @required this.phone2,
-  }) : super(key: key);
+  UsersManagementList({Key key, this.user}) : super(key: key);
 
   @override
   _UsersManagementListState createState() => _UsersManagementListState();
@@ -43,7 +29,7 @@ class _UsersManagementListState extends State<UsersManagementList> {
         Row(
           children: <Widget>[
             Text(
-              widget.name,
+              widget.user.name,
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
@@ -53,7 +39,7 @@ class _UsersManagementListState extends State<UsersManagementList> {
               width: 5,
             ),
             Text(
-              widget.surname,
+              widget.user.surname,
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
@@ -62,7 +48,7 @@ class _UsersManagementListState extends State<UsersManagementList> {
           ],
         ),
         Text(
-          widget.position,
+          widget.user.position,
           style: Theme.of(context)
               .textTheme
               .bodyText1
@@ -89,19 +75,19 @@ class _UsersManagementListState extends State<UsersManagementList> {
                 ),
                 color: PromotoraApp().primaryDark,
                 iconSize: 30,
-                onPressed: () => _launchURL(widget.phone1),
+                onPressed: () => _launchURL(widget.user.phone1),
               )
             ],
           ),
         ),
         onPressed: () {
-          name = widget.name;
-          surname = widget.surname;
-          position = widget.position;
-          description = widget.description;
-          email = widget.email;
-          phone1 = widget.phone1;
-          phone2 = widget.phone2;
+          name = widget.user.name;
+          surname = widget.user.surname;
+          position = widget.user.position;
+          description = widget.user.description;
+          email = widget.user.email;
+          phone1 = widget.user.phone1;
+          phone2 = widget.user.phone2;
 
           Navigator.push(
             context,

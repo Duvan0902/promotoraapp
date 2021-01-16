@@ -1,27 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/models/contacts_model.dart';
 import 'package:promotoraapp/pages/contact_information_page.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactsManagementList extends StatefulWidget {
-  final String name;
-  final String surname;
-  final String company;
-  final String description;
-  final String email;
-  final String phone1;
-  final String phone2;
+  final ContactsModel contacts;
 
-  ContactsManagementList({
-    Key key,
-    @required this.name,
-    @required this.surname,
-    @required this.company,
-    @required this.description,
-    @required this.email,
-    @required this.phone1,
-    @required this.phone2,
-  }) : super(key: key);
+  ContactsManagementList({Key key, this.contacts}) : super(key: key);
 
   @override
   _ContactsManagementListState createState() => _ContactsManagementListState();
@@ -42,7 +28,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
         Row(
           children: <Widget>[
             Text(
-              widget.name,
+              widget.contacts.name,
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
@@ -52,7 +38,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
               width: 5,
             ),
             Text(
-              widget.surname,
+              widget.contacts.surname,
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
@@ -64,7 +50,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
           height: 4,
         ),
         Text(
-          widget.company,
+          widget.contacts.company,
           style: Theme.of(context)
               .textTheme
               .bodyText1
@@ -91,19 +77,19 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
                 ),
                 color: PromotoraApp().primaryDark,
                 iconSize: 30,
-                onPressed: () => _launchURL(widget.phone1),
+                onPressed: () => _launchURL(widget.contacts.phone1),
               )
             ],
           ),
         ),
         onPressed: () {
-          name = widget.name;
-          surme = widget.surname;
-          company = widget.company;
-          description = widget.description;
-          email = widget.email;
-          phone = widget.phone1;
-          phone1 = widget.phone2;
+          name = widget.contacts.name;
+          surme = widget.contacts.surname;
+          company = widget.contacts.company;
+          description = widget.contacts.description;
+          email = widget.contacts.email;
+          phone = widget.contacts.phone1;
+          phone1 = widget.contacts.phone2;
 
           Navigator.push(
             context,
