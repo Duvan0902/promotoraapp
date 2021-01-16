@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/Page/home_page.dart';
-import 'package:promotoraapp/Page/login_page.dart';
-import 'package:promotoraapp/Page/sale_page.dart';
+import 'package:promotoraapp/pages/home_page.dart';
+import 'package:promotoraapp/pages/login_page.dart';
+import 'package:promotoraapp/pages/sale_page.dart';
 import 'package:promotoraapp/bloc/provider_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:promotoraapp/preferences/users_preferences.dart';
