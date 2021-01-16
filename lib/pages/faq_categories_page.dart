@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/models/categories_model.dart';
-import 'package:promotoraapp/pages/faq_list.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/providers/categories_provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:string_similarity/string_similarity.dart';
+
+import 'faq.dart';
 
 class FaqCategoriesPage extends StatefulWidget {
   final FaqCategoriesModel category;
@@ -17,7 +18,7 @@ class FaqCategoriesPage extends StatefulWidget {
 
 class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
   final categoriesProvider = CategoriesProvider();
-  TextEditingController myController = TextEditingController();
+  String searchText;
   SearchBar searchBar;
 
   AppBar buildAppBar(BuildContext context) {
@@ -39,16 +40,26 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
     );
   }
 
+  void clearSearch() {
+    setState(() {
+      searchText = "";
+    });
+  }
+
+  void search(String value) {
+    setState(() {
+      searchText = value;
+    });
+  }
+
   _FaqCategoriesPageState() {
     searchBar = SearchBar(
         inBar: false,
         setState: setState,
-        onSubmitted: print,
-        controller: myController,
-        //onChanged: search(),
+        onChanged: search,
+        onCleared: clearSearch,
+        onClosed: clearSearch,
         buildDefaultAppBar: buildAppBar);
-
-    print(myController);
   }
 
   @override
@@ -80,11 +91,7 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
         future: categoriesProvider.getCategories(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
-            return CategoriesList(categories: snapshot.data);
-            /*where(
-                (category) => category.search(myController).toList(),
-              ),
-            );*/
+            return _categoriesList(snapshot.data);
           } else {
             return Container(
               height: 400,
@@ -116,10 +123,34 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
     );
   }
 
-  search() {
-    String category = widget.category.category.toLowerCase();
-    String search = myController.text.toLowerCase();
-    return StringSimilarity.compareTwoStrings(category, search) > 0.3 ||
-        category.contains(search);
+  Widget _categoriesList(List<FaqCategoriesModel> categories) {
+    print("Search text is: $searchText");
+
+    List<FaqCategoriesModel> filteredList;
+
+    if (searchText != "" && searchText != null) {
+      filteredList = categories.where((category) {
+        bool isSimilar = category.category.similarityTo(searchText) > 0.3;
+        bool isContained = category.category
+            .toLowerCase()
+            .contains(this.searchText.toLowerCase());
+
+        return isSimilar || isContained;
+      }).toList();
+    } else {
+      filteredList = categories;
+    }
+
+    return Container(
+      padding: EdgeInsets.only(top: 10.0),
+      child: ListView.builder(
+        itemCount: filteredList.length,
+        itemBuilder: (context, index) {
+          return FrequentQuestionsPage(
+            category: filteredList[index],
+          );
+        },
+      ),
+    );
   }
 }

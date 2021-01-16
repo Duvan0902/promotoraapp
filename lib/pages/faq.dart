@@ -3,16 +3,16 @@ import 'package:promotoraapp/models/categories_model.dart';
 import 'package:promotoraapp/pages/faq_page.dart';
 import 'package:promotoraapp/main.dart';
 
-class FrequentQuestions extends StatefulWidget {
+class FrequentQuestionsPage extends StatefulWidget {
   final FaqCategoriesModel category;
 
-  FrequentQuestions({Key key, this.category}) : super(key: key);
+  FrequentQuestionsPage({Key key, this.category}) : super(key: key);
 
   @override
-  _FrequentQuestionsState createState() => _FrequentQuestionsState();
+  _FrequentQuestionsPageState createState() => _FrequentQuestionsPageState();
 }
 
-class _FrequentQuestionsState extends State<FrequentQuestions> {
+class _FrequentQuestionsPageState extends State<FrequentQuestionsPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
