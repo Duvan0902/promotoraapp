@@ -23,16 +23,9 @@ class _DocumentsPageState extends State<DocumentsPage> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       leading: BackButton(
-        color: Colors.white,
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Container(
-              child: HomePage(),
-            ),
-          ),
-        ),
-      ),
+          color: Colors.white,
+          onPressed: () =>
+              Navigator.of(context, rootNavigator: true).pop(context)),
       title: new Text('Preguntas Frecuentes'),
       actions: [searchBar.getSearchAction(context)],
       backgroundColor: Colors.grey[900],

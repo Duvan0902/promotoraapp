@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/common/bottom_chat.dart';
 import 'package:promotoraapp/models/categories_model.dart';
-import 'package:promotoraapp/pages/home_page.dart';
 import 'package:promotoraapp/providers/categories_provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:string_similarity/string_similarity.dart';
@@ -24,14 +23,9 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
-        },
-      ),
+          icon: Icon(Icons.arrow_back),
+          onPressed: () =>
+              Navigator.of(context, rootNavigator: true).pop(context)),
       title: new Text('Preguntas Frecuentes'),
       actions: [searchBar.getSearchAction(context)],
       backgroundColor: Colors.grey[900],
