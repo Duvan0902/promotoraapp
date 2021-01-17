@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/common/drawer.dart';
+import 'package:promotoraapp/models/goals_model.dart';
+import 'package:promotoraapp/pages/goals_information_page.dart';
 import 'package:promotoraapp/pages/objective_Page.dart';
-import 'package:promotoraapp/pages/self_management_page.dart';
 import 'package:promotoraapp/main.dart';
+import 'package:promotoraapp/providers/goals_provider.dart';
 
 class GoalsPage extends StatefulWidget {
   const GoalsPage({Key key}) : super(key: key);
@@ -21,8 +23,8 @@ class _GoalsPageState extends State<GoalsPage> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> tabs = [
-      {"title": 'Tus metas', "widget": roomList(context)},
-      {"title": "Autogestión", "widget": recordedList(context)}
+      {"title": 'Tus metas', "widget": goalInformationList(context)},
+      {"title": "Autogestión", "widget": roomList(context)}
     ];
     if (_currentWidget == null) {
       _currentWidget = roomList(context);
@@ -107,9 +109,39 @@ class _GoalsPageState extends State<GoalsPage> {
     );
   }
 
-  Widget recordedList(context) {
+  Widget goalInformationList(context) {
+    final servicesProvider = GoalsProvider();
     return Container(
-      child: SelfManagementPage(),
+      color: Colors.grey[900],
+      child: FutureBuilder(
+        future: servicesProvider.getGoals(),
+        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+          if (snapshot.hasData) {
+            return _documentList(snapshot.data);
+          } else {
+            return Container(
+              height: 400,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _documentList(List<GoalsModel> goals) {
+    return Container(
+      padding: EdgeInsets.only(top: 10.0),
+      child: ListView.builder(
+        itemCount: goals.length,
+        itemBuilder: (context, index) {
+          return GoaldInformationPage(
+            goasl: goals[index],
+          );
+        },
+      ),
     );
   }
 }
