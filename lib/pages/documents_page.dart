@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/common/drawer.dart';
 import 'package:promotoraapp/models/documents_model.dart';
+import 'package:promotoraapp/pages/home_page.dart';
 import 'package:promotoraapp/providers/document_provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:string_similarity/string_similarity.dart';
@@ -15,21 +15,23 @@ class DocumentsPage extends StatefulWidget {
   _DocumentsPageState createState() => _DocumentsPageState();
 }
 
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
 class _DocumentsPageState extends State<DocumentsPage> {
   String searchText;
   SearchBar searchBar;
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CustomDrawer(),
+      leading: BackButton(
+        color: Colors.white,
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Container(
+              child: HomePage(),
             ),
-          );
-        },
+          ),
+        ),
       ),
       title: new Text('Preguntas Frecuentes'),
       actions: [searchBar.getSearchAction(context)],
@@ -63,6 +65,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+        key: _scaffoldKey,
         appBar: searchBar.build(context),
         body: Container(
           padding: EdgeInsets.all(10),
