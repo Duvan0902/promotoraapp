@@ -10,13 +10,6 @@ class GoaldInformationPage extends StatefulWidget {
   _GoaldInformationPageState createState() => _GoaldInformationPageState();
 }
 
-class GradesData {
-  final String gradeSymbol;
-  final int numberOfStudents;
-
-  GradesData(this.gradeSymbol, this.numberOfStudents);
-}
-
 class _GoaldInformationPageState extends State<GoaldInformationPage> {
   @override
   Widget build(BuildContext context) {
@@ -28,9 +21,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
           SizedBox(
             height: 20,
           ),
-          Expanded(
-            child: _weightValue(),
-          ),
+          _weightValue(),
         ],
       ),
     );

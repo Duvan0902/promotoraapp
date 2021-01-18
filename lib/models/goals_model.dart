@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final goalsModel = goalsModelFromMap(jsonString);
-
 import 'dart:convert';
 
 class GoalsModel {
