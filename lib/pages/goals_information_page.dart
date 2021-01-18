@@ -5,6 +5,7 @@ import 'package:promotoraapp/pages/top_ten_page.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
 import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
+import "package:intl/intl.dart";
 
 class GoaldInformationPage extends StatefulWidget {
   final GoalsModel goasl;
@@ -25,15 +26,19 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
           SizedBox(
             height: 20,
           ),
+          _progressBarBudget(),
+          SizedBox(
+            height: 10,
+          ),
           _progressBar(),
           SizedBox(
             height: 10,
           ),
-          _cirleGraph(),
+          _top10(),
           SizedBox(
             height: 10,
           ),
-          _top10(),
+          _cirleGraph(),
           SizedBox(
             height: 10,
           ),
@@ -53,16 +58,26 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
     );
   }
 
-  Widget _progressBar() {
+  Widget _progressBarBudget() {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.fromLTRB(18, 13, 18, 13),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Cantidad de clientes que debes visitar este mes.'),
+            Text(
+              'Presupuesto mensual.',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2
+                  .copyWith(color: Colors.black, fontSize: 14),
+            ),
+            SizedBox(
+              height: 10,
+            ),
             RoundedProgressBar(
               style: RoundedProgressBarStyle(
                 borderWidth: 0,
@@ -70,7 +85,51 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
                 backgroundProgress: Color.fromRGBO(243, 243, 243, 1),
                 colorProgress: Colors.pink,
               ),
-              margin: EdgeInsets.symmetric(vertical: 10),
+              margin: EdgeInsets.symmetric(vertical: 5),
+              borderRadius: BorderRadius.circular(20),
+              percent: 40,
+              height: 12,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('0'),
+                Text('2.000.000'),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _progressBar() {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Container(
+        padding: EdgeInsets.fromLTRB(18, 13, 18, 13),
+        child: Column(
+          children: <Widget>[
+            Text(
+              'Cantidad de clientes que debes visitar este mes.',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2
+                  .copyWith(color: Colors.black, fontSize: 14),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            RoundedProgressBar(
+              style: RoundedProgressBarStyle(
+                borderWidth: 0,
+                widthShadow: 0,
+                backgroundProgress: Color.fromRGBO(243, 243, 243, 1),
+                colorProgress: Colors.pink,
+              ),
+              margin: EdgeInsets.symmetric(vertical: 5),
               borderRadius: BorderRadius.circular(20),
               percent: 40,
               height: 12,
@@ -89,41 +148,53 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
   }
 
   Widget _cirleGraph() {
+    var total = widget.goasl.pdnNewPrev;
+    var cancel = widget.goasl.pdnCanc;
+    var pndNewPrev = double.parse(total);
+    var pdnCanc = double.parse(cancel).abs();
+    var totalPercentage = pndNewPrev + pdnCanc;
+    var totalPercentagePdnNewPrev = (100 * pndNewPrev / totalPercentage).ceil();
+    var totalPercentagePdnCanc = (100 * pdnCanc / totalPercentage).floor();
+
     Map<String, double> dataMap = {
-      "Flutter": 55,
-      "React": 45,
+      "Flutter": pndNewPrev,
+      "React": pdnCanc,
     };
 
-    PieChart(dataMap: dataMap);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       child: Container(
+        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
         child: Row(
           children: <Widget>[
             PieChart(
               dataMap: dataMap,
               animationDuration: Duration(milliseconds: 800),
               chartLegendSpacing: 32,
-              chartRadius: MediaQuery.of(context).size.width / 2.5,
+              chartRadius: MediaQuery.of(context).size.width / 2.8,
               initialAngleInDegree: 0,
+              colorList: [Colors.blue, Colors.indigo[700]],
               ringStrokeWidth: 40,
               legendOptions: LegendOptions(
                 showLegendsInRow: false,
                 legendPosition: LegendPosition.right,
                 showLegends: false,
                 legendShape: BoxShape.circle,
-                legendTextStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
               ),
               chartValuesOptions: ChartValuesOptions(
-                showChartValueBackground: false,
-                showChartValues: true,
-                showChartValuesInPercentage: true,
-                showChartValuesOutside: false,
-              ),
+                  showChartValueBackground: false,
+                  showChartValues: true,
+                  showChartValuesInPercentage: true,
+                  showChartValuesOutside: false,
+                  chartValueStyle: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: Colors.white, fontSize: 17)),
+            ),
+            SizedBox(
+              width: 10,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,14 +217,14 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
                   height: 20,
                 ),
                 Text(
-                  'Produccion Nueva: 55%',
+                  ('Produccion Nueva: $totalPercentagePdnNewPrev %'),
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1
                       .copyWith(color: Colors.black45, fontSize: 14),
                 ),
                 Text(
-                  'Cancelaciones 45%',
+                  'Cancelaciones: $totalPercentagePdnCanc%',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1
@@ -206,7 +277,14 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
   }
 
   Widget _weightValue() {
+    var total = widget.goasl.pdnTotal;
+    var changeTotal = int.parse(total);
+    var finaldataTotal = NumberFormat.simpleCurrency().format(changeTotal);
+    var cancel = widget.goasl.pdnCanc;
+    var changeCancel = int.parse(cancel).abs();
+    var finaldataCancel = NumberFormat.simpleCurrency().format(changeCancel);
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Container(
           width: 170,
@@ -220,12 +298,11 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Text(
-                  '' + widget.goasl.pdnCanc,
+                  finaldataCancel,
                   style: Theme.of(context)
                       .textTheme
                       .headline1
-                      .copyWith(color: Colors.black, fontSize: 24),
-                  textAlign: TextAlign.center,
+                      .copyWith(color: Colors.black, fontSize: 20),
                 ),
                 Text(
                   'Cancelación',
@@ -233,7 +310,6 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
                       .textTheme
                       .bodyText1
                       .copyWith(color: Colors.black, fontSize: 18),
-                  textAlign: TextAlign.center,
                 ),
               ],
             ),
@@ -254,11 +330,11 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Text(
-                  '' + widget.goasl.pdnTotal,
+                  finaldataTotal,
                   style: Theme.of(context)
                       .textTheme
                       .headline1
-                      .copyWith(color: Colors.black, fontSize: 24),
+                      .copyWith(color: Colors.black, fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
                 Text(
