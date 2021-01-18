@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/models/goals_model.dart';
+import 'package:promotoraapp/pages/Top_ten_page.dart';
 
 class GoaldInformationPage extends StatefulWidget {
   final GoalsModel goasl;
@@ -21,6 +22,10 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
           SizedBox(
             height: 20,
           ),
+          _top10(),
+          SizedBox(
+            height: 20,
+          ),
           _weightValue(),
         ],
       ),
@@ -35,6 +40,40 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
           .bodyText1
           .copyWith(color: Colors.white, fontSize: 17),
     );
+  }
+
+  Widget _top10() {
+    return RaisedButton(
+        padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+        child: Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                'Revisa el Top 10',
+                textAlign: TextAlign.left,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2
+                    .copyWith(color: Colors.black, fontSize: 15.1),
+              ),
+              IconButton(
+                icon: Icon(Icons.keyboard_arrow_right),
+                color: PromotoraApp().primaryDark,
+                iconSize: 30,
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ),
+        color: Colors.white,
+        disabledTextColor: Colors.grey,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TopTenPage()),
+          );
+        });
   }
 
   Widget _weightValue() {
