@@ -22,6 +22,10 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
           SizedBox(
             height: 20,
           ),
+          _cirleGraph(),
+          SizedBox(
+            height: 20,
+          ),
           _top10(),
           SizedBox(
             height: 20,
@@ -39,6 +43,29 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
           .textTheme
           .bodyText1
           .copyWith(color: Colors.white, fontSize: 17),
+    );
+  }
+
+  Widget _cirleGraph() {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Container(
+        padding: EdgeInsets.all(20),
+        child: Row(
+          children: <Widget>[
+            SizedBox(
+              width: 10,
+            ),
+            Column(
+              children: <Widget>[
+                Text('Producción Nueva VS Cancelaciones'),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 
