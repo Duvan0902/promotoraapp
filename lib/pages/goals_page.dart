@@ -35,9 +35,9 @@ class _GoalsPageState extends State<GoalsPage> {
         body: Column(
           children: <Widget>[
             Container(
-              color: Colors.grey[900],
+              padding: EdgeInsets.only(top: 15),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: tabs.map((tab) {
                   int currentIndex = tabs.indexOf(tab);
                   bool selected = currentIndex == _selectedTab;
@@ -64,11 +64,13 @@ class _GoalsPageState extends State<GoalsPage> {
 
   Widget _tab(String title, Function onTap, selected) {
     double borderRadius = 10;
+    double width = (MediaQuery.of(context).size.width / 2) - 2;
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.fromLTRB(50, 15, 61, 15),
+        padding: EdgeInsets.all(15),
+        margin: EdgeInsets.only(right: 2),
         decoration: BoxDecoration(
           color: selected ? PromotoraApp().primaryDark : PromotoraApp().grey,
           borderRadius: BorderRadius.only(
@@ -78,10 +80,12 @@ class _GoalsPageState extends State<GoalsPage> {
         ),
         child: Text(
           title,
+          textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyText1.copyWith(
               color: selected ? Colors.black : Colors.white,
               fontWeight: FontWeight.w800),
         ),
+        width: width,
       ),
     );
   }
