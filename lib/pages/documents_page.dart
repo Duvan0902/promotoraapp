@@ -4,7 +4,7 @@ import 'package:promotoraapp/providers/document_provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:string_similarity/string_similarity.dart';
 
-import 'document_View.dart';
+import 'document_view.dart';
 
 class DocumentsPage extends StatefulWidget {
   final DocumentsModel document;

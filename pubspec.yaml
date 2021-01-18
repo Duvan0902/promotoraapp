@@ -52,6 +52,8 @@ dev_dependencies:
   dio: ^3.0.10
   string_similarity: ^1.1.0
   random_color: ^1.0.5
+  pie_chart: ^4.0.1
+  flutter_rounded_progress_bar: ^0.1.2
   
  
 
