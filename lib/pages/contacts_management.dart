@@ -24,6 +24,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
   @override
   Widget build(BuildContext context) {
     var listTile = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: <Widget>[

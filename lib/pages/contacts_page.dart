@@ -72,9 +72,9 @@ class _ContactsPageState extends State<ContactsPage> {
         body: Column(
           children: <Widget>[
             Container(
-              color: Colors.grey[900],
+              padding: EdgeInsets.only(top: 15),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: tabs.map((tab) {
                   int currentIndex = tabs.indexOf(tab);
                   bool selected = currentIndex == _selectedTab;
@@ -101,24 +101,31 @@ class _ContactsPageState extends State<ContactsPage> {
 
   Widget _tab(String title, Function onTap, selected) {
     double borderRadius = 10;
+    double width = (MediaQuery.of(context).size.width / 2) - 2;
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        padding: EdgeInsets.all(15),
+        margin: EdgeInsets.only(right: 2),
         decoration: BoxDecoration(
-          color: selected ? PromotoraApp().primaryDark : PromotoraApp().grey,
+          color: selected ? PromotoraApp().primaryDark : Colors.white,
+          border: Border.all(
+            color: Color.fromRGBO(243, 243, 243, 1),
+          ),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(borderRadius),
             topRight: Radius.circular(borderRadius),
           ),
         ),
-        padding: EdgeInsets.fromLTRB(50, 15, 49, 15),
         child: Text(
           title,
+          textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyText1.copyWith(
-              color: selected ? Colors.black : Colors.white,
+              color: selected ? Colors.black : Colors.black,
               fontWeight: FontWeight.w800),
         ),
+        width: width,
       ),
     );
   }
@@ -179,7 +186,7 @@ class _ContactsPageState extends State<ContactsPage> {
   Widget managementList(context) {
     final contactProvider = ContactsProvider();
     return Container(
-      padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+      padding: EdgeInsets.fromLTRB(10, 20, 20, 30),
       child: FutureBuilder(
         future: contactProvider.getContacts(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {

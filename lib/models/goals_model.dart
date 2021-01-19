@@ -12,6 +12,7 @@ class GoalsModel {
     this.pdnCanc,
     this.pctEffect,
     this.avgPrima,
+    this.goal,
     this.integratedReport,
     this.createdAt,
     this.updatedAt,
@@ -27,6 +28,7 @@ class GoalsModel {
   final String pdnCanc;
   final double pctEffect;
   final String avgPrima;
+  final String goal;
   final IntegratedReport integratedReport;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -47,6 +49,7 @@ class GoalsModel {
         pdnCanc: json["pdn_canc"],
         pctEffect: json["pct_effect"].toDouble(),
         avgPrima: json["avg_prima"],
+        goal: json["goal"],
         integratedReport: IntegratedReport.fromMap(json["integrated_report"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
@@ -63,6 +66,7 @@ class GoalsModel {
         "pdn_canc": pdnCanc,
         "pct_effect": pctEffect,
         "avg_prima": avgPrima,
+        "goal": goal,
         "integrated_report": integratedReport.toMap(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
@@ -130,7 +134,7 @@ class FileClass {
   final String caption;
   final dynamic width;
   final dynamic height;
-  final dynamic formats;
+  final Formats formats;
   final String hash;
   final String ext;
   final String mime;
@@ -153,7 +157,7 @@ class FileClass {
         caption: json["caption"],
         width: json["width"],
         height: json["height"],
-        formats: json["formats"],
+        formats: Formats.fromMap(json["formats"]),
         hash: json["hash"],
         ext: json["ext"],
         mime: json["mime"],
@@ -173,7 +177,7 @@ class FileClass {
         "caption": caption,
         "width": width,
         "height": height,
-        "formats": formats,
+        "formats": formats.toMap(),
         "hash": hash,
         "ext": ext,
         "mime": mime,
@@ -185,4 +189,16 @@ class FileClass {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };
+}
+
+class Formats {
+  Formats();
+
+  factory Formats.fromJson(String str) => Formats.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Formats.fromMap(Map<String, dynamic> json) => Formats();
+
+  Map<String, dynamic> toMap() => {};
 }

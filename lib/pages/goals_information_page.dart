@@ -15,6 +15,8 @@ class GoaldInformationPage extends StatefulWidget {
   _GoaldInformationPageState createState() => _GoaldInformationPageState();
 }
 
+String sign = "\$";
+
 class _GoaldInformationPageState extends State<GoaldInformationPage> {
   @override
   Widget build(BuildContext context) {
@@ -59,6 +61,12 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
   }
 
   Widget _progressBarBudget() {
+    var pdnNew = widget.goasl.pdnNew;
+    var covertNumberPdnNew = double.parse(pdnNew);
+    var totalPercentage = widget.goasl.goal;
+    var convertNumberGoal = double.parse(totalPercentage);
+    var totalPercentagePdnNew = (100 * covertNumberPdnNew / convertNumberGoal);
+    var newNamberGoal = NumberFormat.decimalPattern().format(convertNumberGoal);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -87,14 +95,14 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
               ),
               margin: EdgeInsets.symmetric(vertical: 5),
               borderRadius: BorderRadius.circular(20),
-              percent: 40,
+              percent: totalPercentagePdnNew,
               height: 12,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('0'),
-                Text('2.000.000'),
+                Text(sign + '0'),
+                Text(sign + newNamberGoal),
               ],
             )
           ],
@@ -278,13 +286,15 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
 
   Widget _weightValue() {
     var total = widget.goasl.pdnTotal;
-    var changeTotal = int.parse(total);
-    var finaldataTotal = NumberFormat.simpleCurrency().format(changeTotal);
+    var changeTotal = int.parse(total).ceil();
+    var finaldataTotal = NumberFormat.decimalPattern()
+        .format(changeTotal); //     .format(changeTotal);
+
     var cancel = widget.goasl.pdnCanc;
-    var changeCancel = int.parse(cancel).abs();
-    var finaldataCancel = NumberFormat.simpleCurrency().format(changeCancel);
+    var changeCancel = int.parse(cancel).abs().ceil();
+
+    var finaldataCancel = NumberFormat.decimalPattern().format(changeCancel);
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Container(
           width: 170,
@@ -295,21 +305,22 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
+                SizedBox(height: 40),
                 Text(
-                  finaldataCancel,
+                  sign + finaldataCancel,
                   style: Theme.of(context)
                       .textTheme
                       .headline1
-                      .copyWith(color: Colors.black, fontSize: 20),
+                      .copyWith(color: Colors.black, fontSize: 22),
                 ),
+                SizedBox(height: 20),
                 Text(
                   'Cancelación',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1
-                      .copyWith(color: Colors.black, fontSize: 18),
+                      .copyWith(color: Colors.black, fontSize: 20),
                 ),
               ],
             ),
@@ -327,22 +338,23 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
+                SizedBox(height: 40),
                 Text(
-                  finaldataTotal,
+                  (sign + finaldataTotal),
                   style: Theme.of(context)
                       .textTheme
                       .headline1
-                      .copyWith(color: Colors.black, fontSize: 20),
+                      .copyWith(color: Colors.black, fontSize: 22),
                   textAlign: TextAlign.center,
                 ),
+                SizedBox(height: 20),
                 Text(
                   'Producción Total',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1
-                      .copyWith(color: Colors.black, fontSize: 18),
+                      .copyWith(color: Colors.black, fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
               ],
