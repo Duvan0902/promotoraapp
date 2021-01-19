@@ -25,25 +25,15 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
       child: Column(
         children: <Widget>[
           _title(context),
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
           _progressBarBudget(),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           _progressBar(),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           _top10(),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           _cirleGraph(),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           _weightValue(),
         ],
       ),
@@ -83,9 +73,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
                   .bodyText2
                   .copyWith(color: Colors.black, fontSize: 14),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             RoundedProgressBar(
               style: RoundedProgressBarStyle(
                 borderWidth: 0,
@@ -112,6 +100,18 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
   }
 
   Widget _progressBar() {
+    var goalValue = widget.goasl.goal;
+    var avgPrima = widget.goasl.avgPrima;
+    var pdnNew = widget.goasl.pdnNew;
+    var covertNumberPdnNew = double.parse(pdnNew);
+    var covertNumberGoal = double.parse(goalValue);
+    var covertNumberAvgPrima = double.parse(avgPrima);
+    var leaflet =
+        (covertNumberGoal / (widget.goasl.pctEffect * covertNumberAvgPrima))
+            .ceil();
+    var totalPercentageLeaflet =
+        (100 * (covertNumberPdnNew / covertNumberAvgPrima) / leaflet);
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -127,9 +127,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
                   .bodyText2
                   .copyWith(color: Colors.black, fontSize: 14),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             RoundedProgressBar(
               style: RoundedProgressBarStyle(
                 borderWidth: 0,
@@ -139,14 +137,14 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
               ),
               margin: EdgeInsets.symmetric(vertical: 5),
               borderRadius: BorderRadius.circular(20),
-              percent: 40,
+              percent: totalPercentageLeaflet,
               height: 12,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('0'),
-                Text('30'),
+                Text('$leaflet'),
               ],
             )
           ],
@@ -201,9 +199,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
                       .bodyText1
                       .copyWith(color: Colors.white, fontSize: 17)),
             ),
-            SizedBox(
-              width: 10,
-            ),
+            SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -221,9 +217,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
                       .bodyText1
                       .copyWith(color: Colors.black, fontSize: 17),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 Text(
                   ('Produccion Nueva: $totalPercentagePdnNewPrev %'),
                   style: Theme.of(context)
@@ -287,8 +281,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
   Widget _weightValue() {
     var total = widget.goasl.pdnTotal;
     var changeTotal = int.parse(total).ceil();
-    var finaldataTotal = NumberFormat.decimalPattern()
-        .format(changeTotal); //     .format(changeTotal);
+    var finaldataTotal = NumberFormat.decimalPattern().format(changeTotal); //
 
     var cancel = widget.goasl.pdnCanc;
     var changeCancel = int.parse(cancel).abs().ceil();
@@ -326,9 +319,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
             ),
           ),
         ),
-        SizedBox(
-          width: 4,
-        ),
+        SizedBox(width: 4),
         Container(
           width: 170,
           height: 160,
