@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/common/drawer.dart';
-import 'package:promotoraapp/pages/education_list.dart';
+import 'package:promotoraapp/models/education_model.dart';
 import 'package:promotoraapp/providers/education_provider.dart';
+
+import 'education_view.dart';
 
 class EducationsPage extends StatefulWidget {
   const EducationsPage({
@@ -53,7 +55,7 @@ class _EducationsPageState extends State<EducationsPage> {
         future: educationProvider.getEducation(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
-            return EducationList(education: snapshot.data);
+            return _educationList(snapshot.data);
           } else {
             return Container(
               height: 400,
@@ -64,6 +66,19 @@ class _EducationsPageState extends State<EducationsPage> {
           }
         },
       ),
+    );
+  }
+
+  Widget _educationList(List<EducationModel> education) {
+    return GridView.builder(
+      itemCount: education.length,
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      itemBuilder: (context, index) {
+        return EducationView(
+          education: education[index],
+        );
+      },
     );
   }
 

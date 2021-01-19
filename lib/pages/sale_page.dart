@@ -19,8 +19,6 @@ class _SalePageState extends State<SalePage> {
   String idClient = '';
   String _value;
 
-  // Map<String, String> sale = {"type": "$DropButton", "": ""};
-
   TextEditingController _dateController = TextEditingController();
   @override
   Widget build(BuildContext context) {
