@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:promotoraapp/models/atac_model.dart';
 import 'package:promotoraapp/pages/login_page.dart';
 import 'package:promotoraapp/main.dart';
+import 'package:promotoraapp/pages/services_page.dart';
 import 'package:promotoraapp/preferences/users_preferences.dart';
-import 'package:promotoraapp/utils/alert_dialog.dart';
 import 'package:promotoraapp/providers/atac_requests_provider.dart';
 
 class AtacPage extends StatefulWidget {
@@ -287,9 +287,33 @@ class AtacPageState extends State<AtacPage> {
       (interests.toSet().toString() + ('-Otros: $data')),
     );
     if (sent) {
-      showAlert(context, 'Su respuesta se envio correctamente');
-    } else {
-      showAlert(context, 'Su respuesta no envio correctamente');
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              'Su respuesta se envio correctamente',
+              style:
+                  Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text(
+                  'OK',
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(
+                      color: PromotoraApp().primaryDark, fontSize: 16),
+                ),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => ServicesPage(),
+                  ),
+                ),
+              )
+            ],
+          );
+        },
+      );
     }
   }
 }

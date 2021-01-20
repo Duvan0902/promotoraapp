@@ -25,6 +25,11 @@ dependencies:
     sdk: flutter
   flutter_localizations: # Add this line
     sdk: flutter # Add this line
+  flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/img/fondo.png"
+  image_path_android: "assets/img/fondo.png" 
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -34,6 +39,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
   global_configuration: ^1.6.0
   font_awesome_flutter: ^8.8.1
   cached_network_image: ^2.3.2+1
@@ -55,6 +61,7 @@ dev_dependencies:
   pie_chart: ^4.0.1
   flutter_rounded_progress_bar: ^0.1.2
   intl: ^0.16.1
+  
   
   
  
