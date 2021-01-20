@@ -139,15 +139,15 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
           _expanded == true
               ? IconButton(
                   color: PromotoraApp().primaryDark,
+                  icon: Icon(Icons.pause_circle_outline),
+                  iconSize: 40,
+                  onPressed: () => _stop())
+              : IconButton(
+                  color: PromotoraApp().primaryDark,
                   icon: Icon(Icons.play_circle_outline_outlined),
                   iconSize: 40,
                   onPressed: () => _player(),
                 )
-              : IconButton(
-                  color: PromotoraApp().primaryDark,
-                  icon: Icon(Icons.pause_circle_outline),
-                  iconSize: 40,
-                  onPressed: () => _stop())
         ],
       ),
     );
