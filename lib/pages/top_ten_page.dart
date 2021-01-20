@@ -13,7 +13,7 @@ class TopTenPage extends StatelessWidget {
           ),
           backgroundColor: Colors.grey[900],
           title: new Text(
-            "Agregar una venta",
+            "Top 10",
             style: Theme.of(context)
                 .textTheme
                 .headline2

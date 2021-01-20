@@ -1,32 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/pages/document_list.dart';
+import 'package:promotoraapp/models/documents_model.dart';
 import 'package:promotoraapp/providers/document_provider.dart';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
+import 'package:string_similarity/string_similarity.dart';
 
-class DocumentsPage extends StatelessWidget {
-  const DocumentsPage({
-    Key key,
-  }) : super(key: key);
+import 'document_view.dart';
+
+class DocumentsPage extends StatefulWidget {
+  final DocumentsModel document;
+  const DocumentsPage({Key key, this.document}) : super(key: key);
+
+  @override
+  _DocumentsPageState createState() => _DocumentsPageState();
+}
+
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+class _DocumentsPageState extends State<DocumentsPage> {
+  String searchText;
+  SearchBar searchBar;
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      leading: BackButton(
+          color: Colors.white,
+          onPressed: () =>
+              Navigator.of(context, rootNavigator: true).pop(context)),
+      title: new Text('Preguntas Frecuentes'),
+      actions: [searchBar.getSearchAction(context)],
+      backgroundColor: Colors.grey[900],
+    );
+  }
+
+  void clearSearch() {
+    setState(() {
+      searchText = "";
+    });
+  }
+
+  void search(String value) {
+    setState(() {
+      searchText = value;
+    });
+  }
+
+  _DocumentsPageState() {
+    searchBar = SearchBar(
+        inBar: false,
+        setState: setState,
+        onChanged: search,
+        onCleared: clearSearch,
+        onClosed: clearSearch,
+        buildDefaultAppBar: buildAppBar);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          backgroundColor: Colors.grey[900],
-          title: Text(
-            "Documentos",
-            style: Theme.of(context)
-                .textTheme
-                .headline2
-                .copyWith(color: Colors.white, fontSize: 18),
-          ),
-        ),
+        key: _scaffoldKey,
+        appBar: searchBar.build(context),
         body: Container(
           padding: EdgeInsets.all(10),
           child: Column(
@@ -69,7 +101,7 @@ class DocumentsPage extends StatelessWidget {
         future: servicesProvider.getDocuments(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
-            return DocumentList(documents: snapshot.data);
+            return _documentList(snapshot.data);
           } else {
             return Container(
               height: 400,
@@ -78,6 +110,39 @@ class DocumentsPage extends StatelessWidget {
               ),
             );
           }
+        },
+      ),
+    );
+  }
+
+  Widget _documentList(List<DocumentsModel> documents) {
+    print("Search text is: $searchText");
+
+    List<DocumentsModel> filteredList;
+
+    if (searchText != "" && searchText != null) {
+      filteredList = documents.where((document) {
+        bool isSimilar = document.title.similarityTo(searchText) > 0.3;
+        bool isContained = document.title
+            .toLowerCase()
+            .contains(this.searchText.toLowerCase());
+
+        return isSimilar || isContained;
+      }).toList();
+    } else {
+      filteredList = documents;
+    }
+
+    return Container(
+      padding: EdgeInsets.only(top: 10.0),
+      child: GridView.builder(
+        itemCount: filteredList.length,
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemBuilder: (context, index) {
+          return DocumentView(
+            doc: filteredList[index],
+          );
         },
       ),
     );

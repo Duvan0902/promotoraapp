@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:promotoraapp/common/bottom_chat.dart';
 import 'package:promotoraapp/models/categories_model.dart';
-import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/providers/categories_provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:string_similarity/string_similarity.dart';
-
 import 'faq.dart';
 
 class FaqCategoriesPage extends StatefulWidget {
@@ -24,16 +23,9 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PromotoraApp(),
-            ),
-          );
-        },
-      ),
+          icon: Icon(Icons.arrow_back),
+          onPressed: () =>
+              Navigator.of(context, rootNavigator: true).pop(context)),
       title: new Text('Preguntas Frecuentes'),
       actions: [searchBar.getSearchAction(context)],
       backgroundColor: Colors.grey[900],
@@ -73,9 +65,7 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
               Expanded(
                 child: categories(context),
               ),
-              Container(
-                child: _chat(context),
-              )
+              BottomChat(),
             ],
           ),
         ),
@@ -101,24 +91,6 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
             );
           }
         },
-      ),
-    );
-  }
-
-  Widget _chat(context) {
-    return Container(
-      child: Container(
-        alignment: Alignment.bottomRight,
-        margin: EdgeInsets.fromLTRB(0, 0, 20, 30),
-        child: FloatingActionButton(
-          backgroundColor: Colors.pink[400],
-          elevation: 5.0,
-          child: Icon(
-            Icons.chat,
-            color: Colors.white,
-          ),
-          onPressed: () {},
-        ),
       ),
     );
   }

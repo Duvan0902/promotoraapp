@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/common/drawer.dart';
-import 'package:promotoraapp/pages/services_list.dart';
+import 'package:promotoraapp/models/atac_model.dart';
 import 'package:promotoraapp/providers/service_provider.dart';
+
+import 'services_View.dart';
 
 class ServicesPage extends StatefulWidget {
   const ServicesPage({Key key}) : super(key: key);
@@ -58,7 +60,7 @@ class _ServicesPageState extends State<ServicesPage> {
         future: servicesProvider.getService(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
-            return ServicesList(services: snapshot.data);
+            return _servicesList(snapshot.data);
           } else {
             return Container(
               height: 400,
@@ -69,6 +71,19 @@ class _ServicesPageState extends State<ServicesPage> {
           }
         },
       ),
+    );
+  }
+
+  Widget _servicesList(List<AtacModel> services) {
+    return GridView.builder(
+      itemCount: services.length,
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      itemBuilder: (context, index) {
+        return ServicesView(
+          atac: services[index],
+        );
+      },
     );
   }
 

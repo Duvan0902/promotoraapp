@@ -47,6 +47,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
           ),
         ),
         body: Container(
+          padding: EdgeInsets.all(15),
           child: _contactsTitle(context),
         ),
       ),
@@ -63,7 +64,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
             ),
             elevation: 2.0,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 40, horizontal: 15),
+              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -110,7 +111,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 50, horizontal: 15),
+              padding: EdgeInsets.fromLTRB(15, 40, 120, 40),
               child: Text(
                 widget.description,
                 style: Theme.of(context)
@@ -179,7 +180,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
             ),
             elevation: 2.0,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 17, horizontal: 49),
+              padding: EdgeInsets.fromLTRB(15, 20, 130, 20),
               child: Container(
                 child: Text(
                   widget.email,

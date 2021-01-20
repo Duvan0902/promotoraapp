@@ -47,7 +47,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
           ),
         ),
         body: Container(
-          padding: const EdgeInsets.all(25.0),
+          padding: const EdgeInsets.all(15),
           child: Container(
             child: _posterTitle(context),
           ),
@@ -114,7 +114,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Padding(
-              padding: EdgeInsets.fromLTRB(15, 40, 120, 40),
+              padding: EdgeInsets.fromLTRB(15, 40, 160, 40),
               child: Text(
                 widget.description,
                 style: Theme.of(context)
@@ -183,7 +183,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
             ),
             elevation: 2.0,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(15, 20, 80, 20),
+              padding: EdgeInsets.fromLTRB(15, 20, 130, 20),
               child: Container(
                   child: Text(
                 widget.email,
