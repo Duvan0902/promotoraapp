@@ -27,7 +27,7 @@ class _ServicesViewState extends State<ServicesView> {
         height: 150.0,
         margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-            color: UniqueColorGenerator.getColor(),
+            color: generateRandomColor1(),
             borderRadius: BorderRadius.circular(10.0)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

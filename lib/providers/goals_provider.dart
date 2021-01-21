@@ -25,7 +25,9 @@ class GoalsProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {}
+    } catch (Exception) {
+      print('objectssssssssssssssssss');
+    }
 
     return [];
   }

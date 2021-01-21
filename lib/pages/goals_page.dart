@@ -121,7 +121,7 @@ class _GoalsPageState extends State<GoalsPage> {
         future: servicesProvider.getGoals(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
-            return _contactsList(snapshot.data);
+            return _goalsList(snapshot.data);
           } else {
             return Container(
               height: 400,
@@ -135,14 +135,14 @@ class _GoalsPageState extends State<GoalsPage> {
     );
   }
 
-  Widget _contactsList(List<GoalsModel> contacts) {
+  Widget _goalsList(List<GoalsModel> goals) {
     return Container(
       padding: EdgeInsets.only(top: 10.0),
       child: ListView.builder(
-        itemCount: contacts.length,
+        itemCount: goals.length,
         itemBuilder: (context, index) {
           return GoaldInformationPage(
-            goasl: contacts[index],
+            goasl: goals[index],
           );
         },
       ),

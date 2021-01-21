@@ -20,7 +20,7 @@ class _EducationViewState extends State<EducationView> {
         height: 150.0,
         margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: UniqueColorGenerator.getColor(),
+          color: generateRandomColor1(),
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             new BoxShadow(

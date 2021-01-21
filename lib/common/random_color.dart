@@ -3,24 +3,16 @@ import 'dart:math';
 
 import 'package:promotoraapp/main.dart';
 
-class UniqueColorGenerator {
-  static List colorOptions = [
-    PromotoraApp().primaryDark,
+Color generateRandomColor1() {
+  // Define all colors you want here
+  var predefinedColors = [
     Colors.blue[900],
+    PromotoraApp().primaryDark,
     Colors.blue[400],
+    Colors.lightBlue[400],
     Colors.cyanAccent[100],
+    Colors.blue,
   ];
-  static Random random = new Random();
-  static Color getColor() {
-    if (colorOptions.length > 0) {
-      return colorOptions.removeAt(random.nextInt(colorOptions.length));
-    } else {
-      return Color.fromARGB(
-        random.nextInt(255),
-        random.nextInt(255),
-        random.nextInt(255),
-        random.nextInt(255),
-      );
-    }
-  }
+  Random random = Random();
+  return predefinedColors[random.nextInt(predefinedColors.length)];
 }
