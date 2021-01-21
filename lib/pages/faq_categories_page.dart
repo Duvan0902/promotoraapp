@@ -26,7 +26,13 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () =>
               Navigator.of(context, rootNavigator: true).pop(context)),
-      title: new Text('Preguntas Frecuentes'),
+      title: new Text(
+        'Preguntas Frecuentes',
+        style: Theme.of(context)
+            .textTheme
+            .headline2
+            .copyWith(color: Colors.white, fontSize: 18),
+      ),
       actions: [searchBar.getSearchAction(context)],
       backgroundColor: Colors.grey[900],
     );
