@@ -3,8 +3,8 @@ import 'package:promotoraapp/common/questions_answer.dart';
 import 'package:promotoraapp/models/ranking_model.dart';
 import 'package:promotoraapp/providers/ranking_provider.dart';
 
-class TopTenPage extends StatelessWidget {
-  const TopTenPage({Key key}) : super(key: key);
+class RankingPage extends StatelessWidget {
+  const RankingPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,8 @@ class TopTenPage extends StatelessWidget {
     return Container(
       child: FutureBuilder(
         future: rankingProvider.getRanking(),
-        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<List<RankingModel>> snapshot) {
           if (snapshot.hasData) {
             return _rankingList(snapshot.data);
           } else {
@@ -53,14 +54,15 @@ class TopTenPage extends StatelessWidget {
     );
   }
 
-  Widget _rankingList(List<RankingDataModel> ranking) {
+  Widget _rankingList(List<RankingModel> ranking) {
     return Container(
       padding: EdgeInsets.only(top: 10.0),
       child: ListView.builder(
         itemCount: ranking.length,
         itemBuilder: (context, index) {
           return ExpansionCard(
-              questions: ranking[index].userCode, answer: ranking[index].name);
+              questions: ranking[index].insurance,
+              answer: ranking[index].insurance);
         },
       ),
     );

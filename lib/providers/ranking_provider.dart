@@ -8,23 +8,22 @@ class RankingProvider {
   final String _url = GlobalConfiguration().getValue("api_url") +
       "/reporte-integrado-data/ranking";
 
-  Future<List<RankingDataModel>> getRanking() async {
+  Future<List<RankingModel>> getRanking() async {
     try {
       final response = await http.get(
         _url,
       );
 
       if (response.statusCode == 200) {
-        print(response.body);
-        List<dynamic> jsonResponse = json.jsonDecode(response.body);
-        List<RankingDataModel> contacts = List();
+        // print(response.body);
+        Map<String, dynamic> jsonResponse = json.jsonDecode(response.body);
+        List<RankingModel> ranking = List();
 
-        for (var item in jsonResponse) {
-          RankingDataModel contact = RankingDataModel.fromMap(item);
-          contacts.add(contact);
-        }
+        jsonResponse.forEach((key, value) {
+          ranking.add(RankingModel.fromMap(jsonResponse, key));
+        });
 
-        return contacts;
+        return ranking;
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }

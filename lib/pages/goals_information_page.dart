@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:promotoraapp/main.dart';
 import 'package:promotoraapp/models/goals_model.dart';
-import 'package:promotoraapp/pages/top_ten_page.dart';
+import 'package:promotoraapp/pages/ranking_page.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
 import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
@@ -271,7 +271,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => TopTenPage()),
+            MaterialPageRoute(builder: (context) => RankingPage()),
           );
         },
       ),
