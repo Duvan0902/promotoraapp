@@ -3,6 +3,7 @@ import 'package:MiPromotora/models/contacts_model.dart';
 import 'package:MiPromotora/pages/contact_information_page.dart';
 import 'package:MiPromotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:recase/recase.dart';
 
 class ContactsManagementList extends StatefulWidget {
   final ContactsModel contacts;
@@ -29,7 +30,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
         Row(
           children: <Widget>[
             Text(
-              widget.contacts.name,
+              widget.contacts.name.titleCase,
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
@@ -39,7 +40,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
               width: 5,
             ),
             Text(
-              widget.contacts.surname,
+              widget.contacts.surname.titleCase,
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
@@ -51,7 +52,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
           height: 4,
         ),
         Text(
-          widget.contacts.company,
+          widget.contacts.company.titleCase,
           style: Theme.of(context)
               .textTheme
               .bodyText1
@@ -61,45 +62,48 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
     );
 
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 10, 0, 2),
-      child: RaisedButton(
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+      child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
         color: Colors.white,
-        child: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              listTile,
-              IconButton(
-                icon: Icon(
-                  Icons.call_outlined,
-                ),
-                color: MiPromotora().primaryDark,
-                iconSize: 30,
-                onPressed: () => _launchURL(widget.contacts.phone1),
-              )
-            ],
-          ),
-        ),
-        onPressed: () {
-          name = widget.contacts.name;
-          surme = widget.contacts.surname;
-          company = widget.contacts.company;
-          description = widget.contacts.description;
-          email = widget.contacts.email;
-          phone = widget.contacts.phone1;
-          phone1 = widget.contacts.phone2;
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ContactInformationPage(
-                  name, surme, company, description, email, phone, phone1),
+        child: InkWell(
+          child: Container(
+            padding: EdgeInsets.fromLTRB(15, 15, 3, 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                listTile,
+                IconButton(
+                  icon: Icon(
+                    Icons.call_outlined,
+                  ),
+                  color: MiPromotora().primaryDark,
+                  iconSize: 30,
+                  onPressed: () => _launchURL(widget.contacts.phone1),
+                )
+              ],
             ),
-          );
-        },
+          ),
+          onTap: () {
+            name = widget.contacts.name;
+            surme = widget.contacts.surname;
+            company = widget.contacts.company;
+            description = widget.contacts.description;
+            email = widget.contacts.email;
+            phone = widget.contacts.phone1;
+            phone1 = widget.contacts.phone2;
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ContactInformationPage(
+                    name, surme, company, description, email, phone, phone1),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

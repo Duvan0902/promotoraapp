@@ -133,7 +133,6 @@ class _ContactsPageState extends State<ContactsPage> {
   Widget jopList(context) {
     final userProvider = UsersProvider();
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 20, 20, 30),
       child: FutureBuilder(
         future: userProvider.getUsers(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
@@ -186,7 +185,6 @@ class _ContactsPageState extends State<ContactsPage> {
   Widget managementList(context) {
     final contactProvider = ContactsProvider();
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 20, 20, 30),
       child: FutureBuilder(
         future: contactProvider.getContacts(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {

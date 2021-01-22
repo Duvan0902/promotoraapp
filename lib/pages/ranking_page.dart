@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:MiPromotora/models/ranking_model.dart';
 import 'package:MiPromotora/providers/ranking_provider.dart';
-
+import 'package:recase/recase.dart';
 import '../main.dart';
 
 class RankingPage extends StatefulWidget {
@@ -121,14 +121,15 @@ class _RankingPageState extends State<RankingPage> {
 
   Widget _subCategory(List<RankingDataModel> top) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(10),
       height: 200,
       child: ListView.builder(
         itemCount: top.length,
         itemBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text(top[index].name)],
+          return Row(
+            children: <Widget>[
+              Text(top[index].name.titleCase),
+            ],
           );
         },
       ),
