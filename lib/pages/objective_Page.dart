@@ -6,7 +6,8 @@ import 'package:MiPromotora/providers/goals_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyObjetivePage extends StatefulWidget {
-  const MyObjetivePage({Key key}) : super(key: key);
+  final GoalsModel goal;
+  const MyObjetivePage({Key key, this.goal}) : super(key: key);
 
   @override
   _MyObjetivePageState createState() => _MyObjetivePageState();
@@ -71,14 +72,11 @@ class _MyObjetivePageState extends State<MyObjetivePage> {
                 margin: EdgeInsets.all(10),
                 elevation: 1,
                 child: Center(
-                  child: Text(
-                    '75%',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(color: Colors.black, fontSize: 28),
-                  ),
-                ),
+                    child: Container(
+                  child: _percentageGoal(context),
+                  width: 37,
+                  height: 40,
+                )),
               ),
             ),
             SizedBox(
@@ -119,6 +117,71 @@ class _MyObjetivePageState extends State<MyObjetivePage> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  saleProvider() {
+    final GoalsProvider porcentageProvider = GoalsProvider();
+    return Container(
+      child: FutureBuilder(
+        future: porcentageProvider.saleCount(),
+        builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+          if (snapshot.hasData) {
+            return Container();
+          } else {
+            return Container(
+              height: 400,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _percentageGoal(context) {
+    final servicesProvider = GoalsProvider();
+    return Container(
+      child: FutureBuilder(
+        future: servicesProvider.getGoals(),
+        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+          if (snapshot.hasData) {
+            return _percentagelist(snapshot.data);
+          } else {
+            return Container(
+              height: 400,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _percentagelist(List<GoalsModel> percentageGoals) {
+    return Container(
+      child: ListView.builder(
+        itemCount: percentageGoals.length,
+        itemBuilder: (context, index) {
+          var valueGoal = percentageGoals[index].goal;
+          var valueChangeGoal = double.parse(valueGoal);
+          var valuePrima = percentageGoals[index].avgPrima;
+          var valueChangePrima = double.parse(valuePrima);
+          var totalValue = (valueChangeGoal / valueChangePrima);
+          var totalPercentage = ((100 * 50) / totalValue).ceil();
+          return Text(
+            '$totalPercentage%',
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                .copyWith(color: Colors.black, fontSize: 28),
+          );
+        },
       ),
     );
   }

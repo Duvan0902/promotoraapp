@@ -81,8 +81,7 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
 
   Widget _videoPlayer() {
     YoutubePlayerController _controller = YoutubePlayerController(
-      initialVideoId:
-          YoutubePlayer.convertUrlToId("https://" + widget.complement.videoUrl),
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.complement.videoUrl),
       flags: YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
@@ -93,64 +92,64 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
         controller: _controller,
       ),
       builder: (context, player) {
-        return Column(
-          children: [
-            player,
-          ],
+        return Container(
+          child: player,
         );
       },
     );
   }
 
   Widget _audioPlayer() {
-    bool _expanded = _player() == true;
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: EdgeInsets.fromLTRB(20, 13, 20, 13),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  widget.complement.podcastFile.name,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      .copyWith(color: Colors.black, fontSize: 17),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(widget.complement.podcastFile.caption,
+    if (widget.complement.podcastFile == null) {
+      return SizedBox();
+    } else {
+      return Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 13, 20, 13),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    widget.complement.podcastFile.name,
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText1
-                        .copyWith(color: Colors.black45, fontSize: 14))
-              ],
+                        .headline1
+                        .copyWith(color: Colors.black, fontSize: 17),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(widget.complement.podcastFile.caption,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(color: Colors.black45, fontSize: 14))
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            width: 70,
-          ),
-          _expanded == true
-              ? IconButton(
-                  color: MiPromotora().primaryDark,
-                  icon: Icon(Icons.pause_circle_outline),
-                  iconSize: 40,
-                  onPressed: () => _stop())
-              : IconButton(
-                  color: MiPromotora().primaryDark,
-                  icon: Icon(Icons.play_circle_outline_outlined),
-                  iconSize: 40,
-                  onPressed: () => _player(),
-                )
-        ],
-      ),
-    );
+            SizedBox(
+              width: 40,
+            ),
+            IconButton(
+                color: MiPromotora().primaryDark,
+                icon: Icon(Icons.pause_circle_outline),
+                iconSize: 40,
+                onPressed: () => _stop()),
+            IconButton(
+              color: MiPromotora().primaryDark,
+              icon: Icon(Icons.play_circle_outline_outlined),
+              iconSize: 40,
+              onPressed: () => _player(),
+            )
+          ],
+        ),
+      );
+    }
   }
 
   _player() {

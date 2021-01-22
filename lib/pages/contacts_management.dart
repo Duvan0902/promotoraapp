@@ -34,7 +34,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
-                  .copyWith(color: Colors.black, fontSize: 18),
+                  .copyWith(color: Colors.black, fontSize: 16),
             ),
             SizedBox(
               width: 5,
@@ -44,7 +44,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
-                  .copyWith(color: Colors.black, fontSize: 18),
+                  .copyWith(color: Colors.black, fontSize: 16),
             ),
           ],
         ),
@@ -56,7 +56,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
           style: Theme.of(context)
               .textTheme
               .bodyText1
-              .copyWith(color: Colors.black45, fontSize: 16),
+              .copyWith(color: Colors.black45, fontSize: 15),
         ),
       ],
     );
