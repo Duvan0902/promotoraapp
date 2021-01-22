@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -26,8 +26,6 @@ dependencies:
   flutter_localizations: # Add this line
     sdk: flutter # Add this line
 
-
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
@@ -35,7 +33,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  
+
   global_configuration: ^1.6.0
   font_awesome_flutter: ^8.8.1
   cached_network_image: ^2.3.2+1
@@ -56,7 +54,7 @@ dev_dependencies:
   random_color: ^1.0.5
   pie_chart: ^4.0.1
   flutter_rounded_progress_bar: ^0.1.2
-  intl: ^0.16.1
+  intl: ^0.17.0-nullsafety.2
   flutter_launcher_icons: ^0.8.1
 flutter_icons:
   ios: true
@@ -64,19 +62,11 @@ flutter_icons:
   image_path_ios: "assets/img/fondo.png"
   image_path_android: "assets/img/fondo.png"
 
-
-  
-  
-  
- 
-
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -84,9 +74,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-      - assets/img/
-      - assets/config/
-      
+    - assets/img/
+    - assets/config/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -107,7 +96,7 @@ flutter:
     - family: AsapBoldltalic
       fonts:
         - asset: assets/fonts/Asap/Asap-BoldItalic.ttf
-    
+
     - family: AsapItalic
       fonts:
         - asset: assets/fonts/Asap/Asap-Italic.ttf
@@ -115,7 +104,7 @@ flutter:
     - family: AsapMedium
       fonts:
         - asset: assets/fonts/Asap/Asap-Medium.ttf
-    
+
     - family: AsapMediumItalic
       fonts:
         - asset: assets/fonts/Asap/Asap-MediumItalic.ttf
@@ -131,7 +120,6 @@ flutter:
     - family: AsapSemiBoldItalic
       fonts:
         - asset: assets/fonts/Asap/Asap-SemiBoldItalic.ttf
-    
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
