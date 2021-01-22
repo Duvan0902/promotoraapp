@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:promotoraapp/models/goals_model.dart';
+import 'package:MiPromotora/models/goals_model.dart';
 import 'dart:convert' as json;
 import 'package:global_configuration/global_configuration.dart';
 

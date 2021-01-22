@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/common/raised_Button.dart';
+import 'package:MiPromotora/common/raised_Button.dart';
 
 import '../main.dart';
 
@@ -15,7 +15,7 @@ class CustomDrawer extends StatelessWidget {
         ),
         child: Drawer(
           child: Container(
-            color: PromotoraApp().primaryDark,
+            color: MiPromotora().primaryDark,
             padding: const EdgeInsets.fromLTRB(12, 20, 20, 30),
             child: SingleChildScrollView(
               child: Column(

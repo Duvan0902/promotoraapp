@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/models/contacts_model.dart';
-import 'package:promotoraapp/pages/contact_information_page.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/models/contacts_model.dart';
+import 'package:MiPromotora/pages/contact_information_page.dart';
+import 'package:MiPromotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactsManagementList extends StatefulWidget {
@@ -76,7 +76,7 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
                 icon: Icon(
                   Icons.call_outlined,
                 ),
-                color: PromotoraApp().primaryDark,
+                color: MiPromotora().primaryDark,
                 iconSize: 30,
                 onPressed: () => _launchURL(widget.contacts.phone1),
               )

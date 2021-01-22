@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/main.dart';
 
 class ExpansionCard extends StatefulWidget {
   final String questions;
@@ -26,7 +26,7 @@ class _ExpansionCardState extends State<ExpansionCard> {
   @override
   Widget build(BuildContext context) {
     Color iconColor =
-        widget.highlight ? Colors.white : PromotoraApp().primaryDark;
+        widget.highlight ? Colors.white : MiPromotora().primaryDark;
 
     var expansionTile = ExpansionTile(
       trailing: _expanded
@@ -80,7 +80,7 @@ class _ExpansionCardState extends State<ExpansionCard> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      color: widget.highlight ? PromotoraApp().primaryLight : Colors.white,
+      color: widget.highlight ? MiPromotora().primaryLight : Colors.white,
       elevation: 2.0,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),

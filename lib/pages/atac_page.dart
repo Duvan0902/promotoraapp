@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:promotoraapp/models/atac_model.dart';
-import 'package:promotoraapp/pages/login_page.dart';
-import 'package:promotoraapp/main.dart';
-import 'package:promotoraapp/pages/services_page.dart';
-import 'package:promotoraapp/preferences/users_preferences.dart';
-import 'package:promotoraapp/providers/atac_requests_provider.dart';
+import 'package:MiPromotora/models/atac_model.dart';
+import 'package:MiPromotora/pages/login_page.dart';
+import 'package:MiPromotora/main.dart';
+import 'package:MiPromotora/pages/services_page.dart';
+import 'package:MiPromotora/preferences/users_preferences.dart';
+import 'package:MiPromotora/providers/atac_requests_provider.dart';
 
 class AtacPage extends StatefulWidget {
   final List<AtacCategory> categoriesAtac;
@@ -89,7 +89,7 @@ class AtacPageState extends State<AtacPage> {
 
   Widget _cardAtac(context, List<AtacCategory> atac) {
     bool _expanded = false;
-    Color iconColor = PromotoraApp().primaryDark;
+    Color iconColor = MiPromotora().primaryDark;
     return Container(
       child: ListView.builder(
         itemCount: atac.length,
@@ -178,7 +178,7 @@ class AtacPageState extends State<AtacPage> {
                         .copyWith(color: Colors.black, fontSize: 16),
                   ),
                   value: values[key],
-                  activeColor: PromotoraApp().primaryDark,
+                  activeColor: MiPromotora().primaryDark,
                   checkColor: Colors.white,
                   onChanged: (bool value) {
                     setState(
@@ -221,7 +221,7 @@ class AtacPageState extends State<AtacPage> {
                       .copyWith(color: Colors.black, fontSize: 16),
                   decoration: InputDecoration(
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: PromotoraApp().primaryDark),
+                      borderSide: BorderSide(color: MiPromotora().primaryDark),
                     ),
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),
@@ -263,7 +263,7 @@ class AtacPageState extends State<AtacPage> {
           ),
         ),
         disabledColor: Colors.grey[300],
-        color: PromotoraApp().primaryDark,
+        color: MiPromotora().primaryDark,
         disabledTextColor: Colors.grey,
         onPressed: () => _sendInterests(context));
   }
@@ -300,8 +300,10 @@ class AtacPageState extends State<AtacPage> {
               FlatButton(
                 child: Text(
                   'OK',
-                  style: Theme.of(context).textTheme.bodyText1.copyWith(
-                      color: PromotoraApp().primaryDark, fontSize: 16),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: MiPromotora().primaryDark, fontSize: 16),
                 ),
                 onPressed: () => Navigator.push(
                   context,

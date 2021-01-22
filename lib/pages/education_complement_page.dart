@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/models/education_model.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/models/education_model.dart';
+import 'package:MiPromotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:audioplayer/audioplayer.dart';
@@ -138,12 +138,12 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
           ),
           _expanded == true
               ? IconButton(
-                  color: PromotoraApp().primaryDark,
+                  color: MiPromotora().primaryDark,
                   icon: Icon(Icons.pause_circle_outline),
                   iconSize: 40,
                   onPressed: () => _stop())
               : IconButton(
-                  color: PromotoraApp().primaryDark,
+                  color: MiPromotora().primaryDark,
                   icon: Icon(Icons.play_circle_outline_outlined),
                   iconSize: 40,
                   onPressed: () => _player(),
@@ -193,7 +193,7 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
                   backgroundColor: Color.fromRGBO(243, 243, 243, 1),
                   radius: 30.0,
                   child: IconButton(
-                    color: PromotoraApp().primaryDark,
+                    color: MiPromotora().primaryDark,
                     icon: Icon(Icons.file_download),
                     iconSize: 30,
                     onPressed: () => _launchURL(document.file.url),

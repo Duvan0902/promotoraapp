@@ -57,14 +57,14 @@ class UsersModel {
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "username": username,
+        "username": username.toLowerCase(),
         "email": email,
         "provider": provider,
         "confirmed": confirmed,
         "blocked": blocked,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "name": name,
+        "name": name.toLowerCase(),
         "surname": surname,
         "position": position,
         "phone1": phone1,

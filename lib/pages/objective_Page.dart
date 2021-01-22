@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/models/goals_model.dart';
-import 'package:promotoraapp/pages/sale_page.dart';
-import 'package:promotoraapp/main.dart';
-import 'package:promotoraapp/providers/goals_provider.dart';
+import 'package:MiPromotora/models/goals_model.dart';
+import 'package:MiPromotora/pages/sale_page.dart';
+import 'package:MiPromotora/main.dart';
+import 'package:MiPromotora/providers/goals_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyObjetivePage extends StatefulWidget {
@@ -152,7 +152,7 @@ class _MyObjetivePageState extends State<MyObjetivePage> {
         itemCount: goals.length,
         itemBuilder: (context, index) {
           return FlatButton(
-            textColor: PromotoraApp().primaryDark,
+            textColor: MiPromotora().primaryDark,
             disabledTextColor: Colors.black,
             padding: EdgeInsets.all(2),
             onPressed: () => _launchURL(goals[index].integratedReport.file.url),
@@ -181,7 +181,7 @@ class _MyObjetivePageState extends State<MyObjetivePage> {
               .copyWith(color: Colors.black, fontSize: 17),
         ),
       ),
-      color: PromotoraApp().primaryDark,
+      color: MiPromotora().primaryDark,
       disabledTextColor: Colors.grey,
       onPressed: () {
         Navigator.push(

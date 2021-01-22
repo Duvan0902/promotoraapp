@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/main.dart';
-import 'package:promotoraapp/models/goals_model.dart';
-import 'package:promotoraapp/pages/ranking_page.dart';
+import 'package:MiPromotora/main.dart';
+import 'package:MiPromotora/models/goals_model.dart';
+import 'package:MiPromotora/pages/ranking_page.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
 import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
@@ -259,7 +259,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
               ),
               IconButton(
                 icon: Icon(Icons.keyboard_arrow_right),
-                color: PromotoraApp().primaryDark,
+                color: MiPromotora().primaryDark,
                 iconSize: 30,
                 onPressed: () {},
               ),
@@ -293,7 +293,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
           width: 170,
           height: 160,
           child: Card(
-            color: PromotoraApp().primaryDark,
+            color: MiPromotora().primaryDark,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),

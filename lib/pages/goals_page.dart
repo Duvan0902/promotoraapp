@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/common/drawer.dart';
-import 'package:promotoraapp/models/goals_model.dart';
-import 'package:promotoraapp/pages/goals_information_page.dart';
-import 'package:promotoraapp/pages/objective_Page.dart';
-import 'package:promotoraapp/main.dart';
-import 'package:promotoraapp/providers/goals_provider.dart';
+import 'package:MiPromotora/common/drawer.dart';
+import 'package:MiPromotora/models/goals_model.dart';
+import 'package:MiPromotora/pages/goals_information_page.dart';
+import 'package:MiPromotora/pages/objective_Page.dart';
+import 'package:MiPromotora/main.dart';
+import 'package:MiPromotora/providers/goals_provider.dart';
 
 class GoalsPage extends StatefulWidget {
   const GoalsPage({Key key}) : super(key: key);
@@ -74,7 +74,7 @@ class _GoalsPageState extends State<GoalsPage> {
         padding: EdgeInsets.all(15),
         margin: EdgeInsets.only(right: 2),
         decoration: BoxDecoration(
-          color: selected ? PromotoraApp().primaryDark : PromotoraApp().grey,
+          color: selected ? MiPromotora().primaryDark : MiPromotora().grey,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(borderRadius),
             topRight: Radius.circular(borderRadius),

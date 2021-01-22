@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/common/random_color.dart';
-import 'package:promotoraapp/models/education_model.dart';
-import 'package:promotoraapp/pages/education_complement_page.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/common/random_color.dart';
+import 'package:MiPromotora/models/education_model.dart';
+import 'package:MiPromotora/pages/education_complement_page.dart';
+import 'package:MiPromotora/main.dart';
 
 class EducationView extends StatefulWidget {
   final EducationModel education;
@@ -36,7 +36,7 @@ class _EducationViewState extends State<EducationView> {
               backgroundColor: Colors.white,
               radius: 30.0,
               child: IconButton(
-                  color: PromotoraApp().primaryDark,
+                  color: MiPromotora().primaryDark,
                   icon: Image.network(
                     'http://66.228.51.95:1337' + widget.education.icon.url,
                     color: Colors.black,

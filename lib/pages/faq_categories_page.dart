@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/common/bottom_chat.dart';
-import 'package:promotoraapp/models/categories_model.dart';
-import 'package:promotoraapp/providers/categories_provider.dart';
+import 'package:MiPromotora/common/bottom_chat.dart';
+import 'package:MiPromotora/models/categories_model.dart';
+import 'package:MiPromotora/providers/categories_provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:string_similarity/string_similarity.dart';
 import 'faq.dart';

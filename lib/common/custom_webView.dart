@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 class CustomWebView extends StatelessWidget {
   const CustomWebView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final String url =
-        'https://empresite.eleconomistaamerica.co/PROMOTORA-METROPOLITANA-SA.html';
+    final String url = GlobalConfiguration().getValue("chat_url");
+
     return Container(
       child: Scaffold(
         appBar: AppBar(

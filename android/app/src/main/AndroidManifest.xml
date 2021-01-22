@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.promotoraapp">
+    package="com.example.MiPromotora">
    <application
-        android:label="promotoraapp"
+        android:label="MiPromotora"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

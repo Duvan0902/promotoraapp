@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/models/categories_model.dart';
-import 'package:promotoraapp/pages/faq_page.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/models/categories_model.dart';
+import 'package:MiPromotora/pages/faq_page.dart';
+import 'package:MiPromotora/main.dart';
 
 class FrequentQuestionsPage extends StatefulWidget {
   final FaqCategoriesModel category;
@@ -33,7 +33,7 @@ class _FrequentQuestionsPageState extends State<FrequentQuestionsPage> {
                 ),
                 Icon(
                   Icons.arrow_forward_ios_rounded,
-                  color: PromotoraApp().primaryDark,
+                  color: MiPromotora().primaryDark,
                 ),
               ],
             ),

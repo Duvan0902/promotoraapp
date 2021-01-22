@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/common/random_color.dart';
-import 'package:promotoraapp/models/atac_model.dart';
-import 'package:promotoraapp/pages/atac_page.dart';
+import 'package:MiPromotora/common/random_color.dart';
+import 'package:MiPromotora/models/atac_model.dart';
+import 'package:MiPromotora/pages/atac_page.dart';
 
 class ServicesView extends StatefulWidget {
   final AtacModel atac;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/pages/documents_page.dart';
-import 'package:promotoraapp/pages/faq_categories_page.dart';
-import 'package:promotoraapp/pages/sale_page.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/pages/documents_page.dart';
+import 'package:MiPromotora/pages/faq_categories_page.dart';
+import 'package:MiPromotora/pages/sale_page.dart';
+import 'package:MiPromotora/main.dart';
 
 class BottomList extends StatelessWidget {
   final String title;
@@ -35,7 +35,7 @@ class BottomList extends StatelessWidget {
               ),
               IconButton(
                 icon: this.icon,
-                color: PromotoraApp().primaryDark,
+                color: MiPromotora().primaryDark,
                 onPressed: () {},
               ),
             ],

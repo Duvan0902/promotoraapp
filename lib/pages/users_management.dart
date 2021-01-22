@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/models/users_model.dart';
-import 'package:promotoraapp/pages/users_information_page.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/models/users_model.dart';
+import 'package:MiPromotora/pages/users_information_page.dart';
+import 'package:MiPromotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UsersManagementList extends StatefulWidget {
@@ -58,7 +58,7 @@ class _UsersManagementListState extends State<UsersManagementList> {
     );
 
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 10, 0, 2),
+      padding: EdgeInsets.fromLTRB(0, 10, 00, 2),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -73,7 +73,7 @@ class _UsersManagementListState extends State<UsersManagementList> {
                 icon: Icon(
                   Icons.call_outlined,
                 ),
-                color: PromotoraApp().primaryDark,
+                color: MiPromotora().primaryDark,
                 iconSize: 30,
                 onPressed: () => _launchURL(widget.user.phone1),
               )

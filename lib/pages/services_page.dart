@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/common/drawer.dart';
-import 'package:promotoraapp/models/atac_model.dart';
-import 'package:promotoraapp/providers/service_provider.dart';
+import 'package:MiPromotora/common/drawer.dart';
+import 'package:MiPromotora/models/atac_model.dart';
+import 'package:MiPromotora/providers/service_provider.dart';
 
 import 'services_View.dart';
 

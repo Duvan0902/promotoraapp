@@ -1,8 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert' as json;
-
 import 'package:global_configuration/global_configuration.dart';
-import 'package:promotoraapp/models/ranking_model.dart';
+import 'package:MiPromotora/models/ranking_model.dart';
 
 class RankingProvider {
   final String _url = GlobalConfiguration().getValue("api_url") +

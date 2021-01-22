@@ -1,6 +1,6 @@
 {
-    "name": "promotoraapp",
-    "short_name": "promotoraapp",
+    "name": "MiPromotora",
+    "short_name": "MiPromotora",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

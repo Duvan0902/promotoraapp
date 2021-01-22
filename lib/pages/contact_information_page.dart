@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
@@ -138,7 +138,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
                     icon: Icon(
                       Icons.call_outlined,
                     ),
-                    color: PromotoraApp().primaryDark,
+                    color: MiPromotora().primaryDark,
                     iconSize: 30,
                     onPressed: () => _launchURL(widget.phone),
                   )
@@ -163,7 +163,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
                     icon: Icon(
                       Icons.call_outlined,
                     ),
-                    color: PromotoraApp().primaryDark,
+                    color: MiPromotora().primaryDark,
                     iconSize: 30,
                     onPressed: () => _launchURL2(widget.phone1),
                   )
