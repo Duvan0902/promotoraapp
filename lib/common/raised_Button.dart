@@ -6,7 +6,6 @@ import 'package:MiPromotora/main.dart';
 
 import '../main.dart';
 import '../pages/home_page.dart';
-import '../pages/login_page.dart';
 import 'custom_webView.dart';
 
 class BottomList extends StatelessWidget {
