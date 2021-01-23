@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:MiPromotora/common/drawer.dart';
 import 'package:MiPromotora/models/goals_model.dart';
 import 'package:MiPromotora/pages/goals_information_page.dart';
-import 'package:MiPromotora/pages/objective_Page.dart';
+import 'package:MiPromotora/pages/management_page.dart';
 import 'package:MiPromotora/main.dart';
 import 'package:MiPromotora/providers/goals_provider.dart';
 
@@ -109,17 +109,17 @@ class _GoalsPageState extends State<GoalsPage> {
 
   Widget roomList(context) {
     return Container(
-      child: MyObjetivePage(),
+      child: ManagementPage(),
     );
   }
 
   Widget goalInformationList(context) {
-    final servicesProvider = GoalsProvider();
+    final goalsProvider = GoalsProvider();
     return Container(
       color: Colors.grey[900],
       child: FutureBuilder(
-        future: servicesProvider.getGoals(),
-        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+        future: goalsProvider.getGoal(),
+        builder: (BuildContext context, AsyncSnapshot<GoalsModel> snapshot) {
           if (snapshot.hasData) {
             return _goalsList(snapshot.data);
           } else {
@@ -135,17 +135,9 @@ class _GoalsPageState extends State<GoalsPage> {
     );
   }
 
-  Widget _goalsList(List<GoalsModel> goals) {
-    return Container(
-      padding: EdgeInsets.only(top: 10.0),
-      child: ListView.builder(
-        itemCount: goals.length,
-        itemBuilder: (context, index) {
-          return GoaldInformationPage(
-            goasl: goals[index],
-          );
-        },
-      ),
+  Widget _goalsList(GoalsModel goal) {
+    return GoaldInformationPage(
+      goasl: goal,
     );
   }
 }

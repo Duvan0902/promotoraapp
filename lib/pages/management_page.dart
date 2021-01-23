@@ -1,3 +1,4 @@
+import 'package:MiPromotora/providers/sales_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:MiPromotora/models/goals_model.dart';
 import 'package:MiPromotora/pages/sale_page.dart';
@@ -5,15 +6,42 @@ import 'package:MiPromotora/main.dart';
 import 'package:MiPromotora/providers/goals_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MyObjetivePage extends StatefulWidget {
+class ManagementPage extends StatefulWidget {
   final GoalsModel goal;
-  const MyObjetivePage({Key key, this.goal}) : super(key: key);
+  const ManagementPage({Key key, this.goal}) : super(key: key);
 
   @override
-  _MyObjetivePageState createState() => _MyObjetivePageState();
+  _ManagementPageState createState() => _ManagementPageState();
 }
 
-class _MyObjetivePageState extends State<MyObjetivePage> {
+class _ManagementPageState extends State<ManagementPage> {
+  int currentSales = 0;
+  int missingSales = 0;
+  int goalSales = 0;
+  String downloadUrl;
+
+  getInitialData() async {
+    GoalsProvider goalsProvider = GoalsProvider();
+    SalesProvider salesProvider = SalesProvider();
+
+    GoalsModel goals = await goalsProvider.getGoal().then((value) => value);
+    int sales = await salesProvider.getSalesCount().then((value) => value);
+    print("Data: " + goals.avgPrima);
+    print("Sales: " + sales.toString());
+
+    setState(() {
+      this.currentSales = sales;
+      this.goalSales = int.tryParse(goals.goal);
+      this.missingSales = this.goalSales - this.currentSales;
+    });
+  }
+
+  @override
+  initState() {
+    super.initState();
+    getInitialData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +56,7 @@ class _MyObjetivePageState extends State<MyObjetivePage> {
           SizedBox(
             height: 30,
           ),
-          Expanded(child: _progressIndicator(context)),
+          Flexible(child: _progressIndicator(context)),
           SizedBox(
             height: 20,
           ),
@@ -73,92 +101,48 @@ class _MyObjetivePageState extends State<MyObjetivePage> {
                 elevation: 1,
                 child: Center(
                     child: Container(
-                  child: _percentageGoal(context),
+                  child: SizedBox(),
                   width: 37,
                   height: 40,
                 )),
               ),
             ),
-            SizedBox(
-              width: 5,
-            ),
             Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(
-                    height: 10,
+                  Column(
+                    children: [
+                      Text(
+                        'Números de ventas',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(color: Colors.black, fontSize: 18),
+                      ),
+                      Text(
+                        'Cuantas llevo: ' + this.currentSales.toString(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(color: Colors.black45, fontSize: 15),
+                      ),
+                      Text(
+                        'Cuantas me faltan: ' + this.missingSales.toString(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(color: Colors.black45, fontSize: 15),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'Números de ventas',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(color: Colors.black, fontSize: 18),
-                  ),
-                  Text(
-                    'Cuantas llevo: 10',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(color: Colors.black45, fontSize: 15),
-                  ),
-                  Text(
-                    'Cuantas me faltan: 4',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(color: Colors.black45, fontSize: 15),
-                  ),
-                  SizedBox(height: 20),
                   Expanded(child: _downloadButton(context)),
                 ],
               ),
             )
           ],
         ),
-      ),
-    );
-  }
-
-  saleProvider() {
-    final GoalsProvider porcentageProvider = GoalsProvider();
-    return Container(
-      child: FutureBuilder(
-        future: porcentageProvider.saleCount(),
-        builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-          if (snapshot.hasData) {
-            return Container();
-          } else {
-            return Container(
-              height: 400,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-        },
-      ),
-    );
-  }
-
-  Widget _percentageGoal(context) {
-    final servicesProvider = GoalsProvider();
-    return Container(
-      child: FutureBuilder(
-        future: servicesProvider.getGoals(),
-        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-          if (snapshot.hasData) {
-            return _percentagelist(snapshot.data);
-          } else {
-            return Container(
-              height: 400,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-        },
       ),
     );
   }
@@ -188,6 +172,8 @@ class _MyObjetivePageState extends State<MyObjetivePage> {
 
   Widget _downloadButton(context) {
     final servicesProvider = GoalsProvider();
+    return SizedBox();
+    /*
     return Container(
       width: 150,
       child: FutureBuilder(
@@ -205,7 +191,7 @@ class _MyObjetivePageState extends State<MyObjetivePage> {
           }
         },
       ),
-    );
+    );*/
   }
 
   Widget _contactsList(List<GoalsModel> goals) {
