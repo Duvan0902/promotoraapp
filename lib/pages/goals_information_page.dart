@@ -22,7 +22,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(8),
-      child: Column(
+      child: ListView(
         children: <Widget>[
           _title(context),
           SizedBox(height: 20),

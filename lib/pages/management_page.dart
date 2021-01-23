@@ -17,6 +17,7 @@ class ManagementPage extends StatefulWidget {
 class _ManagementPageState extends State<ManagementPage> {
   int currentSales = 0;
   int missingSales = 0;
+  int avgPrima = 0;
   int goalSales = 0;
   String downloadUrl;
 
@@ -32,6 +33,7 @@ class _ManagementPageState extends State<ManagementPage> {
     setState(() {
       this.currentSales = sales;
       this.goalSales = int.tryParse(goals.goal);
+      this.avgPrima = int.tryParse(goals.avgPrima);
       this.missingSales = this.goalSales - this.currentSales;
     });
   }
@@ -101,7 +103,7 @@ class _ManagementPageState extends State<ManagementPage> {
                 elevation: 1,
                 child: Center(
                     child: Container(
-                  child: SizedBox(),
+                  child: _percentagelist(),
                   width: 37,
                   height: 40,
                 )),
@@ -147,26 +149,19 @@ class _ManagementPageState extends State<ManagementPage> {
     );
   }
 
-  Widget _percentagelist(List<GoalsModel> percentageGoals) {
-    return Container(
-      child: ListView.builder(
-        itemCount: percentageGoals.length,
-        itemBuilder: (context, index) {
-          var valueGoal = percentageGoals[index].goal;
-          var valueChangeGoal = double.parse(valueGoal);
-          var valuePrima = percentageGoals[index].avgPrima;
-          var valueChangePrima = double.parse(valuePrima);
-          var totalValue = (valueChangeGoal / valueChangePrima);
-          var totalPercentage = ((100 * 50) / totalValue).ceil();
-          return Text(
-            '$totalPercentage%',
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1
-                .copyWith(color: Colors.black, fontSize: 28),
-          );
-        },
-      ),
+  Widget _percentagelist() {
+    var goalSales = this.goalSales;
+    var currentSales = this.currentSales;
+    var avgPrima = this.avgPrima;
+    var totalValue = (goalSales / avgPrima);
+    var totalPercentage = ((100 * currentSales) / totalValue).ceil();
+    print(totalPercentage);
+    return Text(
+      '$totalPercentage%',
+      style: Theme.of(context)
+          .textTheme
+          .bodyText1
+          .copyWith(color: Colors.black, fontSize: 28),
     );
   }
 

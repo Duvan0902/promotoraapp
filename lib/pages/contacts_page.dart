@@ -109,7 +109,7 @@ class _ContactsPageState extends State<ContactsPage> {
         padding: EdgeInsets.all(15),
         margin: EdgeInsets.only(right: 2),
         decoration: BoxDecoration(
-          color: selected ? MiPromotora().primaryDark : Colors.white,
+          color: selected ? Colors.white : MiPromotora().primaryDark,
           border: Border.all(
             color: Color.fromRGBO(243, 243, 243, 1),
           ),

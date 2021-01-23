@@ -74,7 +74,7 @@ class _GoalsPageState extends State<GoalsPage> {
         padding: EdgeInsets.all(15),
         margin: EdgeInsets.only(right: 2),
         decoration: BoxDecoration(
-          color: selected ? MiPromotora().primaryDark : MiPromotora().grey,
+          color: selected ? MiPromotora().grey : MiPromotora().primaryDark,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(borderRadius),
             topRight: Radius.circular(borderRadius),
@@ -84,7 +84,7 @@ class _GoalsPageState extends State<GoalsPage> {
           title,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyText1.copyWith(
-              color: selected ? Colors.black : Colors.white,
+              color: selected ? Colors.white : Colors.white,
               fontWeight: FontWeight.w800),
         ),
         width: width,
