@@ -24,11 +24,9 @@ class CustomWebView extends StatelessWidget {
                 .copyWith(color: Colors.white, fontSize: 20),
           ),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
+              icon: Icon(Icons.arrow_back),
+              onPressed: () =>
+                  Navigator.of(context, rootNavigator: true).pop(context)),
           flexibleSpace: Container(
             padding: EdgeInsets.only(left: 75),
             child: Icon(Icons.ac_unit),

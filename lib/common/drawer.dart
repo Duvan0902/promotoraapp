@@ -66,7 +66,7 @@ class CustomDrawer extends StatelessWidget {
                       iconSize: 28,
                       onPressed: () {},
                     ),
-                    route: 'sale',
+                    route: 'Porchat',
                   ),
                   SizedBox(height: 200),
                   BottomList(
@@ -76,7 +76,7 @@ class CustomDrawer extends StatelessWidget {
                       iconSize: 28,
                       onPressed: () {},
                     ),
-                    route: 'sale',
+                    route: 'LoginPage',
                   ),
                 ],
               ),

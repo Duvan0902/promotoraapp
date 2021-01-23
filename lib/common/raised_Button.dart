@@ -4,6 +4,11 @@ import 'package:MiPromotora/pages/faq_categories_page.dart';
 import 'package:MiPromotora/pages/sale_page.dart';
 import 'package:MiPromotora/main.dart';
 
+import '../main.dart';
+import '../pages/home_page.dart';
+import '../pages/login_page.dart';
+import 'custom_webView.dart';
+
 class BottomList extends StatelessWidget {
   final String title;
   final IconButton icon;
@@ -54,6 +59,9 @@ class BottomList extends StatelessWidget {
                   'sale': (BuildContext context) => SalePage(),
                   'questions': (BuildContext context) => FaqCategoriesPage(),
                   'Documents': (BuildContext context) => DocumentsPage(),
+                  'Porchat': (BuildContext context) => CustomWebView(),
+                  'HomePage': (BuildContext context) => HomePage(),
+                  'LoginPage': (BuildContext context) => MiPromotora(),
                 },
               ),
             ),

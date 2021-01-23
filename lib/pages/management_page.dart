@@ -165,12 +165,14 @@ class _ManagementPageState extends State<ManagementPage> {
     var totalValue = (goalSales / avgPrima);
     var totalPercentage = ((100 * currentSales) / totalValue).ceil().abs();
     print(totalPercentage);
-    return Text(
-      '$totalPercentage%',
-      style: Theme.of(context)
-          .textTheme
-          .bodyText1
-          .copyWith(color: Colors.black, fontSize: 28),
+    return Container(
+      child: Text(
+        '$totalPercentage%',
+        style: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(color: Colors.black, fontSize: 28),
+      ),
     );
   }
 
