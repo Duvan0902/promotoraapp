@@ -105,8 +105,6 @@ class _ManagementPageState extends State<ManagementPage> {
                 child: Center(
                     child: Container(
                   child: _percentagelist(),
-                  width: 37,
-                  height: 40,
                 )),
               ),
             ),
@@ -162,9 +160,9 @@ class _ManagementPageState extends State<ManagementPage> {
     var goalSales = this.goalSales;
     var currentSales = this.currentSales;
     var avgPrima = this.avgPrima;
-    var totalValue = (goalSales / avgPrima);
-    var totalPercentage = ((100 * currentSales) / totalValue).ceil().abs();
-    print(totalPercentage);
+    var totalValue = (goalSales / avgPrima).floorToDouble();
+    var totalPercentage = ((100 * currentSales) / totalValue).roundToDouble();
+
     return Container(
       child: Text(
         '$totalPercentage%',
