@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/common/random_color.dart';
+import 'package:MiPromotora/utils/random_color.dart';
 import 'package:MiPromotora/models/education_model.dart';
 import 'package:MiPromotora/pages/education_complement_page.dart';
 import 'package:MiPromotora/main.dart';
@@ -20,7 +20,7 @@ class _EducationViewState extends State<EducationView> {
         height: 150.0,
         margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: generateRandomColor1(),
+          color: generateRandomColor(),
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             new BoxShadow(

@@ -65,12 +65,13 @@ class _RankingPageState extends State<RankingPage> {
   Widget _rankingList(List<RankingModel> ranking) {
     bool _expanded = false;
     Color iconColor = MiPromotora().primaryDark;
+
     return Container(
       padding: EdgeInsets.only(top: 10.0),
       child: ListView.builder(
         itemCount: ranking.length,
         itemBuilder: (context, index) {
-          var top = ranking[index];
+          var rankingItem = ranking[index];
           return Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
@@ -88,11 +89,11 @@ class _RankingPageState extends State<RankingPage> {
                         Icons.add_circle_outline,
                         color: iconColor,
                       ),
-                title: top.insurance != null
+                title: rankingItem.insurance != null
                     ? Container(
                         padding: EdgeInsets.only(top: 5, bottom: 5),
                         child: Text(
-                          top.insurance,
+                          rankingItem.insurance,
                           textAlign: TextAlign.justify,
                           style: Theme.of(context)
                               .textTheme
@@ -102,7 +103,7 @@ class _RankingPageState extends State<RankingPage> {
                       )
                     : true,
                 children: [
-                  _subCategory(top.data),
+                  _rankingData(rankingItem.data),
                   SizedBox(height: 5),
                 ],
                 onExpansionChanged: (changed) {
@@ -119,17 +120,25 @@ class _RankingPageState extends State<RankingPage> {
     );
   }
 
-  Widget _subCategory(List<RankingDataModel> top) {
+  Widget _rankingData(List<RankingDataModel> seller) {
     return Container(
       padding: EdgeInsets.all(10),
-      height: 200,
       child: ListView.builder(
-        itemCount: top.length,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: seller.length,
+        shrinkWrap: true,
         itemBuilder: (context, index) {
-          return Row(
-            children: <Widget>[
-              Text(top[index].name.titleCase),
-            ],
+          return Container(
+            padding: EdgeInsets.only(bottom: 5),
+            child: Row(
+              children: <Widget>[
+                SizedBox(
+                  width: 40,
+                  child: Text((index + 1).toString()),
+                ),
+                Flexible(child: Text(seller[index].name.titleCase)),
+              ],
+            ),
           );
         },
       ),

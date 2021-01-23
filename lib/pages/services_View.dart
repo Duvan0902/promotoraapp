@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/common/random_color.dart';
+import 'package:MiPromotora/utils/random_color.dart';
 import 'package:MiPromotora/models/atac_model.dart';
 import 'package:MiPromotora/pages/atac_page.dart';
 
@@ -27,7 +27,7 @@ class _ServicesViewState extends State<ServicesView> {
         height: 150.0,
         margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-            color: generateRandomColor1(),
+            color: generateRandomColor(),
             borderRadius: BorderRadius.circular(10.0)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -29,7 +29,7 @@ class EducationModel {
   factory EducationModel.fromMap(Map<String, dynamic> json) => EducationModel(
         id: json["id"],
         module: json["module"],
-        videoUrl: json["video_url"] == null ? null : json["video_url"],
+        videoUrl: json["video_url"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         documentFiles: List<DocumentFile>.from(

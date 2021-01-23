@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:MiPromotora/main.dart';
 
-Color generateRandomColor1() {
+Color generateRandomColor() {
   // Define all colors you want here
   var predefinedColors = [
     Colors.blue[900],

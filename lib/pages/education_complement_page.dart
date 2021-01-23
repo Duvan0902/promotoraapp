@@ -15,6 +15,8 @@ class EducationComplementPage extends StatefulWidget {
 }
 
 class _EducationComplementPageState extends State<EducationComplementPage> {
+  var playerState;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,20 +49,28 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
                 height: 8,
               ),
               Container(
-                  padding: EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  child: _videoPlayer()),
+                padding: EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: widget.complement.videoUrl == null ||
+                        widget.complement.videoUrl == ''
+                    ? SizedBox()
+                    : _videoPlayer(),
+              ),
               SizedBox(
                 height: 5,
               ),
               Container(
                 padding: EdgeInsets.all(2),
-                child: _audioPlayer(),
+                child: widget.complement.podcastFile == null
+                    ? SizedBox()
+                    : _audioPlayer(),
               ),
               Expanded(
-                child: _document(context, widget.complement.documentFiles),
+                child: widget.complement.documentFiles == null
+                    ? SizedBox()
+                    : _document(context, widget.complement.documentFiles),
               ),
             ],
           ),
@@ -100,68 +110,71 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
   }
 
   Widget _audioPlayer() {
-    if (widget.complement.podcastFile == null) {
-      return SizedBox();
-    } else {
-      return Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(20, 13, 20, 13),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    widget.complement.podcastFile.name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1
-                        .copyWith(color: Colors.black, fontSize: 17),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(widget.complement.podcastFile.caption,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .copyWith(color: Colors.black45, fontSize: 14))
-                ],
-              ),
-            ),
-            SizedBox(
-              width: 40,
-            ),
-            IconButton(
-                color: MiPromotora().primaryDark,
-                icon: Icon(Icons.pause_circle_outline),
-                iconSize: 40,
-                onPressed: () => _stop()),
-            IconButton(
-              color: MiPromotora().primaryDark,
-              icon: Icon(Icons.play_circle_outline_outlined),
-              iconSize: 40,
-              onPressed: () => _player(),
-            )
-          ],
-        ),
-      );
-    }
-  }
-
-  _player() {
     AudioPlayer audioPlayer = AudioPlayer();
 
+    audioPlayer.onPlayerStateChanged.listen((s) {
+      setState(() => playerState = s);
+    }, onError: (msg) {
+      setState(() {
+        playerState = AudioPlayerState.STOPPED;
+      });
+    });
+
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(20, 13, 20, 13),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  widget.complement.podcastFile.name,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1
+                      .copyWith(color: Colors.black, fontSize: 17),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(widget.complement.podcastFile.caption,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.black45, fontSize: 14))
+              ],
+            ),
+          ),
+          playerState == AudioPlayerState.PLAYING
+              ? IconButton(
+                  color: MiPromotora().primaryDark,
+                  icon: Icon(Icons.pause_circle_outline),
+                  iconSize: 40,
+                  onPressed: () => _stop(audioPlayer))
+              : IconButton(
+                  color: MiPromotora().primaryDark,
+                  icon: Icon(Icons.play_circle_outline_outlined),
+                  iconSize: 40,
+                  onPressed: () => _play(audioPlayer),
+                )
+        ],
+      ),
+    );
+  }
+
+  _play(AudioPlayer audioPlayer) {
     audioPlayer
         .play("http://66.228.51.95:1337" + widget.complement.podcastFile.url);
   }
 
-  _stop() {
-    AudioPlayer audioPlayer = AudioPlayer();
+  _stop(AudioPlayer audioPlayer) {
     audioPlayer.pause();
+    setState(() {});
   }
 
   Widget _document(context, final List<DocumentFile> documentFiles) {
