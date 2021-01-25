@@ -97,7 +97,7 @@ class _SalePageState extends State<SalePage> {
         Container(
           padding: EdgeInsets.all(10),
           child: Text(
-            'cliente',
+            'Cliente',
             style: Theme.of(context)
                 .textTheme
                 .bodyText1

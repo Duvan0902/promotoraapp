@@ -17,7 +17,7 @@ class CustomWebView extends StatelessWidget {
           ),
           backgroundColor: Colors.grey[900],
           title: new Text(
-            "Portchat",
+            "Porchat",
             style: Theme.of(context)
                 .textTheme
                 .headline2

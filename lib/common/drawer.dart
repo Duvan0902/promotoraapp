@@ -31,51 +31,26 @@ class CustomDrawer extends StatelessWidget {
                   SizedBox(height: 40),
                   BottomList(
                     title: 'Mis metas',
-                    icon: IconButton(
-                      icon: Icon(Icons.keyboard_arrow_right),
-                      iconSize: 28,
-                      onPressed: () {},
-                    ),
                     route: 'sale',
                   ),
                   SizedBox(height: 18),
                   BottomList(
                     title: 'Preguntas Frecuentes',
-                    icon: IconButton(
-                      icon: Icon(Icons.keyboard_arrow_right),
-                      iconSize: 28,
-                      onPressed: () {},
-                    ),
                     route: 'questions',
                   ),
                   SizedBox(height: 18),
                   BottomList(
                     title: 'Documentos para tu gestion',
-                    icon: IconButton(
-                      icon: Icon(Icons.keyboard_arrow_right),
-                      iconSize: 28,
-                      onPressed: () {},
-                    ),
                     route: 'Documents',
                   ),
                   SizedBox(height: 18),
                   BottomList(
                     title: 'Chat',
-                    icon: IconButton(
-                      icon: Icon(Icons.keyboard_arrow_right),
-                      iconSize: 28,
-                      onPressed: () {},
-                    ),
                     route: 'Porchat',
                   ),
                   SizedBox(height: 200),
                   BottomList(
                     title: 'Cerrar sesión',
-                    icon: IconButton(
-                      icon: Icon(Icons.keyboard_arrow_right),
-                      iconSize: 28,
-                      onPressed: () {},
-                    ),
                     route: 'LoginPage',
                   ),
                 ],

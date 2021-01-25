@@ -10,7 +10,6 @@ import 'custom_webView.dart';
 
 class BottomList extends StatelessWidget {
   final String title;
-  final IconButton icon;
 
   final String route;
 
@@ -18,13 +17,12 @@ class BottomList extends StatelessWidget {
     Key key,
     @required this.title,
     @required this.route,
-    @required this.icon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-        padding: EdgeInsets.fromLTRB(20, 00, 8, 5),
+        padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
         child: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,10 +35,9 @@ class BottomList extends StatelessWidget {
                     .headline2
                     .copyWith(color: Colors.black, fontSize: 15.1),
               ),
-              IconButton(
-                icon: this.icon,
+              Icon(
+                Icons.keyboard_arrow_right,
                 color: MiPromotora().primaryDark,
-                onPressed: () {},
               ),
             ],
           ),
