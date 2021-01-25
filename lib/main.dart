@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/pages/home_page.dart';
-import 'package:promotoraapp/pages/login_page.dart';
-import 'package:promotoraapp/pages/sale_page.dart';
-import 'package:promotoraapp/bloc/provider_bloc.dart';
+import 'package:MiPromotora/pages/home_page.dart';
+import 'package:MiPromotora/pages/login_page.dart';
+import 'package:MiPromotora/pages/sale_page.dart';
+import 'package:MiPromotora/bloc/provider_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:promotoraapp/preferences/users_preferences.dart';
+import 'package:MiPromotora/preferences/users_preferences.dart';
 import 'package:global_configuration/global_configuration.dart';
 
 void main() async {
@@ -13,10 +13,10 @@ void main() async {
   final prefs = new UserPreferences();
   await prefs.initPrefs();
 
-  runApp(PromotoraApp());
+  runApp(MiPromotora());
 }
 
-class PromotoraApp extends StatelessWidget {
+class MiPromotora extends StatelessWidget {
   Color get accent => Color(0xffe7326e);
   Color get accentLight => Color(0xffff6c9c);
   Color get accentDark => Color(0xffaf0043);

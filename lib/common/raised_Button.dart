@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/pages/documents_page.dart';
-import 'package:promotoraapp/pages/faq_categories_page.dart';
-import 'package:promotoraapp/pages/sale_page.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/pages/documents_page.dart';
+import 'package:MiPromotora/pages/faq_categories_page.dart';
+import 'package:MiPromotora/pages/sale_page.dart';
+import 'package:MiPromotora/main.dart';
+
+import '../main.dart';
+import '../pages/home_page.dart';
+import 'custom_webView.dart';
 
 class BottomList extends StatelessWidget {
   final String title;
@@ -35,7 +39,7 @@ class BottomList extends StatelessWidget {
               ),
               IconButton(
                 icon: this.icon,
-                color: PromotoraApp().primaryDark,
+                color: MiPromotora().primaryDark,
                 onPressed: () {},
               ),
             ],
@@ -54,6 +58,9 @@ class BottomList extends StatelessWidget {
                   'sale': (BuildContext context) => SalePage(),
                   'questions': (BuildContext context) => FaqCategoriesPage(),
                   'Documents': (BuildContext context) => DocumentsPage(),
+                  'Porchat': (BuildContext context) => CustomWebView(),
+                  'HomePage': (BuildContext context) => HomePage(),
+                  'LoginPage': (BuildContext context) => MiPromotora(),
                 },
               ),
             ),

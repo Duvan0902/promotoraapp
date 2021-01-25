@@ -45,8 +45,8 @@ class ContactsModel {
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "name": name,
-        "surname": surname,
+        "name": name.toLowerCase(),
+        "surname": surname.toLowerCase(),
         "company": company,
         "email": email,
         "phone1": phone1,

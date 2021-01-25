@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/models/documents_model.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/models/documents_model.dart';
+import 'package:MiPromotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DocumentView extends StatefulWidget {
@@ -51,7 +51,7 @@ class _DocumentViewState extends State<DocumentView> {
               backgroundColor: color,
               radius: 30.0,
               child: IconButton(
-                color: PromotoraApp().primaryDark,
+                color: MiPromotora().primaryDark,
                 icon: Icon(Icons.file_download),
                 iconSize: 30,
                 onPressed: () => _launchURL(widget.doc.file.url),

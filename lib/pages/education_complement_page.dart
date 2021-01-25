@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/models/education_model.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/models/education_model.dart';
+import 'package:MiPromotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:audioplayer/audioplayer.dart';
@@ -15,6 +15,8 @@ class EducationComplementPage extends StatefulWidget {
 }
 
 class _EducationComplementPageState extends State<EducationComplementPage> {
+  var playerState;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,20 +49,28 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
                 height: 8,
               ),
               Container(
-                  padding: EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  child: _videoPlayer()),
+                padding: EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: widget.complement.videoUrl == null ||
+                        widget.complement.videoUrl == ''
+                    ? SizedBox()
+                    : _videoPlayer(),
+              ),
               SizedBox(
                 height: 5,
               ),
               Container(
                 padding: EdgeInsets.all(2),
-                child: _audioPlayer(),
+                child: widget.complement.podcastFile == null
+                    ? SizedBox()
+                    : _audioPlayer(),
               ),
               Expanded(
-                child: _document(context, widget.complement.documentFiles),
+                child: widget.complement.documentFiles == null
+                    ? SizedBox()
+                    : _document(context, widget.complement.documentFiles),
               ),
             ],
           ),
@@ -81,8 +91,7 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
 
   Widget _videoPlayer() {
     YoutubePlayerController _controller = YoutubePlayerController(
-      initialVideoId:
-          YoutubePlayer.convertUrlToId("https://" + widget.complement.videoUrl),
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.complement.videoUrl),
       flags: YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
@@ -93,22 +102,30 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
         controller: _controller,
       ),
       builder: (context, player) {
-        return Column(
-          children: [
-            player,
-          ],
+        return Container(
+          child: player,
         );
       },
     );
   }
 
   Widget _audioPlayer() {
-    bool _expanded = _player() == true;
+    AudioPlayer audioPlayer = AudioPlayer();
+
+    audioPlayer.onPlayerStateChanged.listen((s) {
+      setState(() => playerState = s);
+    }, onError: (msg) {
+      setState(() {
+        playerState = AudioPlayerState.STOPPED;
+      });
+    });
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             padding: EdgeInsets.fromLTRB(20, 13, 20, 13),
@@ -133,36 +150,31 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
               ],
             ),
           ),
-          SizedBox(
-            width: 70,
-          ),
-          _expanded == true
+          playerState == AudioPlayerState.PLAYING
               ? IconButton(
-                  color: PromotoraApp().primaryDark,
+                  color: MiPromotora().primaryDark,
                   icon: Icon(Icons.pause_circle_outline),
                   iconSize: 40,
-                  onPressed: () => _stop())
+                  onPressed: () => _stop(audioPlayer))
               : IconButton(
-                  color: PromotoraApp().primaryDark,
+                  color: MiPromotora().primaryDark,
                   icon: Icon(Icons.play_circle_outline_outlined),
                   iconSize: 40,
-                  onPressed: () => _player(),
+                  onPressed: () => _play(audioPlayer),
                 )
         ],
       ),
     );
   }
 
-  _player() {
-    AudioPlayer audioPlayer = AudioPlayer();
-
+  _play(AudioPlayer audioPlayer) {
     audioPlayer
         .play("http://66.228.51.95:1337" + widget.complement.podcastFile.url);
   }
 
-  _stop() {
-    AudioPlayer audioPlayer = AudioPlayer();
+  _stop(AudioPlayer audioPlayer) {
     audioPlayer.pause();
+    setState(() {});
   }
 
   Widget _document(context, final List<DocumentFile> documentFiles) {
@@ -193,7 +205,7 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
                   backgroundColor: Color.fromRGBO(243, 243, 243, 1),
                   radius: 30.0,
                   child: IconButton(
-                    color: PromotoraApp().primaryDark,
+                    color: MiPromotora().primaryDark,
                     icon: Icon(Icons.file_download),
                     iconSize: 30,
                     onPressed: () => _launchURL(document.file.url),

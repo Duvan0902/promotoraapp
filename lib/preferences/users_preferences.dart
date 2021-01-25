@@ -19,6 +19,10 @@ class UserPreferences {
 
   String get token => _prefs.getString('token');
 
+  set userName(String username) => _prefs.setString('username', username);
+
+  String get userName => _prefs.getString('username');
+
   set userId(int userId) => _prefs.setInt('id', userId);
 
   int get userId => _prefs.getInt('id');

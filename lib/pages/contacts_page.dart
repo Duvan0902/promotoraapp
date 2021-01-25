@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/common/drawer.dart';
-import 'package:promotoraapp/models/contacts_model.dart';
-import 'package:promotoraapp/models/users_model.dart';
+import 'package:MiPromotora/common/drawer.dart';
+import 'package:MiPromotora/models/contacts_model.dart';
+import 'package:MiPromotora/models/users_model.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
-import 'package:promotoraapp/main.dart';
-import 'package:promotoraapp/providers/contacts_provider.dart';
-import 'package:promotoraapp/providers/users_provider.dart';
+import 'package:MiPromotora/main.dart';
+import 'package:MiPromotora/providers/contacts_provider.dart';
+import 'package:MiPromotora/providers/users_provider.dart';
 import 'package:string_similarity/string_similarity.dart';
 
 import 'contacts_management.dart';
@@ -109,7 +109,7 @@ class _ContactsPageState extends State<ContactsPage> {
         padding: EdgeInsets.all(15),
         margin: EdgeInsets.only(right: 2),
         decoration: BoxDecoration(
-          color: selected ? PromotoraApp().primaryDark : Colors.white,
+          color: selected ? Colors.white : MiPromotora().primaryDark,
           border: Border.all(
             color: Color.fromRGBO(243, 243, 243, 1),
           ),
@@ -133,7 +133,6 @@ class _ContactsPageState extends State<ContactsPage> {
   Widget jopList(context) {
     final userProvider = UsersProvider();
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 20, 20, 30),
       child: FutureBuilder(
         future: userProvider.getUsers(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
@@ -186,7 +185,6 @@ class _ContactsPageState extends State<ContactsPage> {
   Widget managementList(context) {
     final contactProvider = ContactsProvider();
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 20, 20, 30),
       child: FutureBuilder(
         future: contactProvider.getContacts(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {

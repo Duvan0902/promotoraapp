@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert' as json;
-import 'package:promotoraapp/models/users_model.dart';
+import 'package:MiPromotora/models/users_model.dart';
 import 'package:global_configuration/global_configuration.dart';
 
 class UsersProvider {

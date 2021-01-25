@@ -1,8 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert' as json;
-import 'package:promotoraapp/models/categories_model.dart';
+import 'package:MiPromotora/models/categories_model.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:promotoraapp/preferences/users_preferences.dart';
+import 'package:MiPromotora/preferences/users_preferences.dart';
 
 class CategoriesProvider {
   final String _url = GlobalConfiguration().getValue("api_url") +
@@ -35,7 +35,9 @@ class CategoriesProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {}
+    } catch (Exception) {
+      print('djdjjd');
+    }
 
     return null;
   }

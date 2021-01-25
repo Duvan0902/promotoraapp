@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/common/questions_answer.dart';
-import 'package:promotoraapp/models/faq_model.dart';
+import 'package:MiPromotora/common/questions_answer.dart';
+import 'package:MiPromotora/models/faq_model.dart';
 
 // ignore: must_be_immutable
 class FaqPage extends StatefulWidget {

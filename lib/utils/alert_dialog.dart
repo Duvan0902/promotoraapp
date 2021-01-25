@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/main.dart';
 
 void showAlert(BuildContext context, String message) {
   showDialog(
@@ -17,7 +17,7 @@ void showAlert(BuildContext context, String message) {
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1
-                    .copyWith(color: PromotoraApp().primaryDark, fontSize: 16),
+                    .copyWith(color: MiPromotora().primaryDark, fontSize: 16),
               ),
               onPressed: () => Navigator.of(context).pop(),
             )

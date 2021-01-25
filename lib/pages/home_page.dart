@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:promotoraapp/common/bottom_chat.dart';
-import 'package:promotoraapp/common/fab_button_app_bar.dart';
-import 'package:promotoraapp/pages/contacts_page.dart';
-import 'package:promotoraapp/pages/education_page.dart';
-import 'package:promotoraapp/pages/goals_page.dart';
-import 'package:promotoraapp/pages/services_page.dart';
+import 'package:MiPromotora/common/bottom_chat.dart';
+import 'package:MiPromotora/common/fab_button_app_bar.dart';
+import 'package:MiPromotora/pages/contacts_page.dart';
+import 'package:MiPromotora/pages/education_page.dart';
+import 'package:MiPromotora/pages/goals_page.dart';
+import 'package:MiPromotora/pages/services_page.dart';
 import 'package:flutter/foundation.dart';
-import 'package:promotoraapp/main.dart';
+import 'package:MiPromotora/main.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: FABBottomAppBar(
         onTabSelected: _onItemTapped,
-        selectedColor: PromotoraApp().primaryDark,
+        selectedColor: MiPromotora().primaryDark,
         items: [
           FABBottomAppBarItem(
             iconData: CupertinoIcons.house,

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:global_configuration/global_configuration.dart';
-import 'package:promotoraapp/preferences/users_preferences.dart';
+import 'package:MiPromotora/preferences/users_preferences.dart';
 
 class AtacRequestsProvider {
   final String _url =

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/common/drawer.dart';
-import 'package:promotoraapp/models/education_model.dart';
-import 'package:promotoraapp/providers/education_provider.dart';
+import 'package:MiPromotora/common/drawer.dart';
+import 'package:MiPromotora/models/education_model.dart';
+import 'package:MiPromotora/providers/education_provider.dart';
 
 import 'education_view.dart';
 

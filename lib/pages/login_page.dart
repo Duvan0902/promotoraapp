@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/bloc/login_bloc.dart';
-import 'package:promotoraapp/bloc/provider_bloc.dart';
-import 'package:promotoraapp/main.dart';
-import 'package:promotoraapp/providers/login_provider.dart';
-import 'package:promotoraapp/utils/alert_dialog.dart';
+import 'package:MiPromotora/bloc/login_bloc.dart';
+import 'package:MiPromotora/bloc/provider_bloc.dart';
+import 'package:MiPromotora/main.dart';
+import 'package:MiPromotora/providers/login_provider.dart';
+import 'package:MiPromotora/utils/alert_dialog.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -109,10 +109,10 @@ class LoginPage extends StatelessWidget {
                 .copyWith(color: Colors.black, fontSize: 18),
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: PromotoraApp().primaryDark),
+                borderSide: BorderSide(color: MiPromotora().primaryDark),
               ),
               enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: PromotoraApp().primaryDark),
+                borderSide: BorderSide(color: MiPromotora().primaryDark),
               ),
               contentPadding: EdgeInsets.all(10),
               hintText: 'Escribe tu correo electrónico',
@@ -147,10 +147,10 @@ class LoginPage extends StatelessWidget {
                 .copyWith(color: Colors.black, fontSize: 18),
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: PromotoraApp().primaryDark),
+                borderSide: BorderSide(color: MiPromotora().primaryDark),
               ),
               enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: PromotoraApp().primaryDark),
+                borderSide: BorderSide(color: MiPromotora().primaryDark),
               ),
               contentPadding: EdgeInsets.all(10),
               hintText: "Escribe tu contraseña",
@@ -189,7 +189,7 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           disabledColor: Colors.grey[300],
-          color: PromotoraApp().primaryDark,
+          color: MiPromotora().primaryDark,
           disabledTextColor: Colors.grey,
           onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
         );
@@ -203,7 +203,7 @@ Widget _forgotPassword(context) {
     'Olvidé mi contraceña',
     textAlign: TextAlign.center,
     style: Theme.of(context).textTheme.headline1.copyWith(
-          color: PromotoraApp().primaryDark,
+          color: MiPromotora().primaryDark,
           fontSize: 16,
         ),
   );

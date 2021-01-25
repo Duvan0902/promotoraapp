@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/pages/login_page.dart';
-import 'package:promotoraapp/main.dart';
-import 'package:promotoraapp/preferences/users_preferences.dart';
-import 'package:promotoraapp/providers/sales_provider.dart';
+import 'package:MiPromotora/pages/login_page.dart';
+import 'package:MiPromotora/main.dart';
+import 'package:MiPromotora/preferences/users_preferences.dart';
+import 'package:MiPromotora/providers/sales_provider.dart';
 import 'home_page.dart';
 
 class SalePage extends StatefulWidget {
@@ -215,7 +215,7 @@ class _SalePageState extends State<SalePage> {
         enableInteractiveSelection: false,
         decoration: InputDecoration(
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: PromotoraApp().primaryDark),
+            borderSide: BorderSide(color: MiPromotora().primaryDark),
           ),
           contentPadding: EdgeInsets.all(10),
           hintText: 'selecciona la fecha',
@@ -263,7 +263,7 @@ class _SalePageState extends State<SalePage> {
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: PromotoraApp().primaryDark),
+            borderSide: BorderSide(color: MiPromotora().primaryDark),
           ),
           contentPadding: EdgeInsets.all(10),
           hintText: 'Ingresa el valor',
@@ -293,7 +293,7 @@ class _SalePageState extends State<SalePage> {
         keyboardType: TextInputType.multiline,
         decoration: InputDecoration(
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: PromotoraApp().primaryDark),
+            borderSide: BorderSide(color: MiPromotora().primaryDark),
           ),
           contentPadding: EdgeInsets.all(10),
           hintText: 'Escribe el nombre',
@@ -323,7 +323,7 @@ class _SalePageState extends State<SalePage> {
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: PromotoraApp().primaryDark),
+            borderSide: BorderSide(color: MiPromotora().primaryDark),
           ),
           contentPadding: EdgeInsets.all(10),
           hintText: 'ingresa identificación del cliente',
@@ -361,7 +361,7 @@ class _SalePageState extends State<SalePage> {
                 .copyWith(color: Colors.black, fontSize: 16),
           ),
         ),
-        color: PromotoraApp().primaryDark,
+        color: MiPromotora().primaryDark,
         disabledTextColor: Colors.grey,
         onPressed: () => _sendInterests(context));
   }
@@ -401,8 +401,10 @@ class _SalePageState extends State<SalePage> {
               FlatButton(
                 child: Text(
                   'OK',
-                  style: Theme.of(context).textTheme.bodyText1.copyWith(
-                      color: PromotoraApp().primaryDark, fontSize: 16),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: MiPromotora().primaryDark, fontSize: 16),
                 ),
                 onPressed: () => Navigator.push(
                   context,

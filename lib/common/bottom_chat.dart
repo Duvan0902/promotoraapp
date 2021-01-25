@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'custom_webView.dart';
 
 class BottomChat extends StatelessWidget {
   const BottomChat({Key key}) : super(key: key);
@@ -9,15 +12,21 @@ class BottomChat extends StatelessWidget {
       child: Container(
         alignment: Alignment.bottomRight,
         padding: EdgeInsets.all(20),
-        margin: EdgeInsets.only(bottom: 50),
+        margin: EdgeInsets.only(bottom: 35),
         child: FloatingActionButton(
           backgroundColor: Colors.pink[400],
           elevation: 5.0,
           child: Icon(
-            Icons.chat,
+            CupertinoIcons.chat_bubble_text,
             color: Colors.white,
+            size: 30,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CustomWebView()),
+            );
+          },
         ),
       ),
     );

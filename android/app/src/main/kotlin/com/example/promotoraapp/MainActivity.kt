@@ -1,4 +1,4 @@
-package com.example.promotoraapp
+package com.innovaciones.MiPromotora
 
 import io.flutter.embedding.android.FlutterActivity
 

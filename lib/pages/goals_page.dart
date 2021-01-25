@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/common/drawer.dart';
-import 'package:promotoraapp/models/goals_model.dart';
-import 'package:promotoraapp/pages/goals_information_page.dart';
-import 'package:promotoraapp/pages/objective_Page.dart';
-import 'package:promotoraapp/main.dart';
-import 'package:promotoraapp/providers/goals_provider.dart';
+import 'package:MiPromotora/common/drawer.dart';
+import 'package:MiPromotora/models/goals_model.dart';
+import 'package:MiPromotora/pages/goals_information_page.dart';
+import 'package:MiPromotora/pages/management_page.dart';
+import 'package:MiPromotora/main.dart';
+import 'package:MiPromotora/providers/goals_provider.dart';
 
 class GoalsPage extends StatefulWidget {
   const GoalsPage({Key key}) : super(key: key);
@@ -74,7 +74,7 @@ class _GoalsPageState extends State<GoalsPage> {
         padding: EdgeInsets.all(15),
         margin: EdgeInsets.only(right: 2),
         decoration: BoxDecoration(
-          color: selected ? PromotoraApp().primaryDark : PromotoraApp().grey,
+          color: selected ? MiPromotora().grey : MiPromotora().primaryDark,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(borderRadius),
             topRight: Radius.circular(borderRadius),
@@ -84,7 +84,7 @@ class _GoalsPageState extends State<GoalsPage> {
           title,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyText1.copyWith(
-              color: selected ? Colors.black : Colors.white,
+              color: selected ? Colors.white : Colors.white,
               fontWeight: FontWeight.w800),
         ),
         width: width,
@@ -109,19 +109,19 @@ class _GoalsPageState extends State<GoalsPage> {
 
   Widget roomList(context) {
     return Container(
-      child: MyObjetivePage(),
+      child: ManagementPage(),
     );
   }
 
   Widget goalInformationList(context) {
-    final servicesProvider = GoalsProvider();
+    final goalsProvider = GoalsProvider();
     return Container(
       color: Colors.grey[900],
       child: FutureBuilder(
-        future: servicesProvider.getGoals(),
-        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+        future: goalsProvider.getGoal(),
+        builder: (BuildContext context, AsyncSnapshot<GoalsModel> snapshot) {
           if (snapshot.hasData) {
-            return _contactsList(snapshot.data);
+            return _goalsList(snapshot.data);
           } else {
             return Container(
               height: 400,
@@ -135,17 +135,9 @@ class _GoalsPageState extends State<GoalsPage> {
     );
   }
 
-  Widget _contactsList(List<GoalsModel> contacts) {
-    return Container(
-      padding: EdgeInsets.only(top: 10.0),
-      child: ListView.builder(
-        itemCount: contacts.length,
-        itemBuilder: (context, index) {
-          return GoaldInformationPage(
-            goasl: contacts[index],
-          );
-        },
-      ),
+  Widget _goalsList(GoalsModel goal) {
+    return GoaldInformationPage(
+      goasl: goal,
     );
   }
 }

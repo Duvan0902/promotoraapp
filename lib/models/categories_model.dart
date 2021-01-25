@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:promotoraapp/models/faq_model.dart';
+import 'package:MiPromotora/models/faq_model.dart';
 
 class FaqCategoriesModel {
   FaqCategoriesModel({

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/bloc/login_bloc.dart';
+import 'package:MiPromotora/bloc/login_bloc.dart';
 
 class Provider extends InheritedWidget {
   static Provider _instance;

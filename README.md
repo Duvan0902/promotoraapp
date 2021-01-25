@@ -1,4 +1,4 @@
-# promotoraapp
+# MiPromotora
 
 A new Flutter project.
 

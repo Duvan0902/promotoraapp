@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:promotoraapp/preferences/users_preferences.dart';
+import 'package:MiPromotora/preferences/users_preferences.dart';
 import 'package:global_configuration/global_configuration.dart';
 
 class LoginProvider {
@@ -28,10 +28,13 @@ class LoginProvider {
 
     if (decodedResp.containsKey('jwt')) {
       _prefs.token = decodedResp['jwt'];
+      _prefs.userName = decodedResp['user']['username'];
       _prefs.userId = decodedResp['user']['id'];
       _prefs.userEmail = decodedResp['user']['email'];
 
       print(decodedResp['user']['id']);
+      print(decodedResp['user']['username']);
+      print(decodedResp['user']['email']);
 
       return {'ok': true, 'jwt': decodedResp['jwt']};
     } else {

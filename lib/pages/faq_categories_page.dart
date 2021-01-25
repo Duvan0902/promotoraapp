@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:promotoraapp/common/bottom_chat.dart';
-import 'package:promotoraapp/models/categories_model.dart';
-import 'package:promotoraapp/providers/categories_provider.dart';
+import 'package:MiPromotora/common/bottom_chat.dart';
+import 'package:MiPromotora/models/categories_model.dart';
+import 'package:MiPromotora/providers/categories_provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:string_similarity/string_similarity.dart';
 import 'faq.dart';
@@ -26,7 +26,13 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () =>
               Navigator.of(context, rootNavigator: true).pop(context)),
-      title: new Text('Preguntas Frecuentes'),
+      title: new Text(
+        'Preguntas Frecuentes',
+        style: Theme.of(context)
+            .textTheme
+            .headline2
+            .copyWith(color: Colors.white, fontSize: 18),
+      ),
       actions: [searchBar.getSearchAction(context)],
       backgroundColor: Colors.grey[900],
     );

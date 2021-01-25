@@ -64,7 +64,7 @@ class UsersModel {
         "blocked": blocked,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "name": name,
+        "name": name.toLowerCase(),
         "surname": surname,
         "position": position,
         "phone1": phone1,

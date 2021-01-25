@@ -1,4 +1,4 @@
-name: promotoraapp
+name: MiPromotora
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -55,7 +55,9 @@ dev_dependencies:
   pie_chart: ^4.0.1
   flutter_rounded_progress_bar: ^0.1.2
   intl: ^0.17.0-nullsafety.2
+
   flutter_launcher_icons: ^0.8.1
+  recase: ^3.0.1
 flutter_icons:
   ios: true
   android: true
