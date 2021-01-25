@@ -17,8 +17,8 @@ class ManagementPage extends StatefulWidget {
 class _ManagementPageState extends State<ManagementPage> {
   int currentSales = 0;
   int missingSales = 0;
-  int avgPrima = 0;
-  int goalSales = 0;
+  int avgPrima = 1;
+  int goalSales = 1;
   String downloadUrl;
 
   getInitialData() async {
