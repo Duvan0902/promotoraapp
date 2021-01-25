@@ -55,6 +55,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
   }
 
   Widget _contactsTitle(context) {
+    final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -110,8 +111,10 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(15, 40, 120, 40),
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: size.width * 1,
+              height: size.width * 0.5,
               child: Text(
                 widget.description,
                 style: Theme.of(context)
@@ -158,7 +161,9 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(widget.phone1),
+                  Text(widget.phone1 == null || widget.phone1 == ''
+                      ? ''
+                      : widget.phone1),
                   IconButton(
                     icon: Icon(
                       Icons.call_outlined,
@@ -179,13 +184,13 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
               borderRadius: BorderRadius.circular(8),
             ),
             elevation: 2.0,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(15, 20, 130, 20),
-              child: Container(
-                child: Text(
-                  widget.email,
-                  textAlign: TextAlign.left,
-                ),
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: size.width * 1,
+              height: size.width * 0.2,
+              child: Text(
+                widget.email,
+                textAlign: TextAlign.left,
               ),
             ),
           ),

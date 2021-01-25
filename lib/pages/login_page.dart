@@ -123,7 +123,7 @@ class LoginPage extends StatelessWidget {
               errorText: snapshot.error,
               errorStyle: Theme.of(context)
                   .textTheme
-                  .headline4
+                  .bodyText1
                   .copyWith(color: Colors.red),
             ),
             onChanged: bloc.changeEmail,

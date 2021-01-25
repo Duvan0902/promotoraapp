@@ -287,11 +287,13 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
     var changeCancel = int.parse(cancel).abs().ceil();
 
     var finaldataCancel = NumberFormat.decimalPattern().format(changeCancel);
+    final size = MediaQuery.of(context).size;
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         Container(
-          width: 170,
-          height: 160,
+          width: size.width * 0.47,
+          height: size.width * 0.45,
           child: Card(
             color: MiPromotora().primaryDark,
             shape: RoundedRectangleBorder(
@@ -321,8 +323,8 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
         ),
         SizedBox(width: 4),
         Container(
-          width: 170,
-          height: 160,
+          width: size.width * 0.47,
+          height: size.width * 0.45,
           child: Card(
             color: Colors.cyan[300],
             shape: RoundedRectangleBorder(

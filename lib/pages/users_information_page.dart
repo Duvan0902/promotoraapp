@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:MiPromotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:recase/recase.dart';
 
 // ignore: must_be_immutable
 class UsersInformationPage extends StatefulWidget {
@@ -57,6 +58,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
   }
 
   Widget _posterTitle(context) {
+    final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +76,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
                   Row(
                     children: [
                       Text(
-                        widget.name,
+                        widget.name.titleCase,
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1
@@ -84,7 +86,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
                         width: 5,
                       ),
                       Text(
-                        widget.surname,
+                        widget.surname.titleCase,
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1
@@ -95,7 +97,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
                   Container(
                     alignment: Alignment.bottomLeft,
                     child: Text(
-                      widget.position,
+                      widget.position.titleCase,
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -113,8 +115,10 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(15, 40, 160, 40),
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: size.width * 1,
+              height: size.width * 0.5,
               child: Text(
                 widget.description,
                 style: Theme.of(context)
@@ -162,7 +166,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(widget.phone2 == null || widget.phone2 == ''
-                      ? widget.phone1
+                      ? ''
                       : widget.phone2),
                   IconButton(
                     icon: Icon(
@@ -184,13 +188,14 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
               borderRadius: BorderRadius.circular(8),
             ),
             elevation: 2.0,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(15, 20, 130, 20),
-              child: Container(
-                  child: Text(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              width: size.width * 1,
+              height: size.width * 0.2,
+              child: Text(
                 widget.email,
                 textAlign: TextAlign.left,
-              )),
+              ),
             ),
           ),
         ],
