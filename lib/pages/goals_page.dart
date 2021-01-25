@@ -27,7 +27,7 @@ class _GoalsPageState extends State<GoalsPage> {
       {"title": "Autogestión", "widget": roomList(context)}
     ];
     if (_currentWidget == null) {
-      _currentWidget = roomList(context);
+      _currentWidget = goalInformationList(context);
     }
 
     return Container(
