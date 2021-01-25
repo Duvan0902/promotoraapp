@@ -51,7 +51,7 @@ class _ManagementPageState extends State<ManagementPage> {
     return Container(
       padding: EdgeInsets.all(8),
       color: Colors.grey[900],
-      child: Column(
+      child: ListView(
         children: <Widget>[
           SizedBox(
             height: 25,

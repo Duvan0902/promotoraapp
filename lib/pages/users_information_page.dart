@@ -161,7 +161,9 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(widget.phone2),
+                  Text(widget.phone2 == null || widget.phone2 == ''
+                      ? widget.phone1
+                      : widget.phone2),
                   IconButton(
                     icon: Icon(
                       Icons.call_outlined,
