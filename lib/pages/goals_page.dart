@@ -5,6 +5,7 @@ import 'package:MiPromotora/pages/goals_information_page.dart';
 import 'package:MiPromotora/pages/management_page.dart';
 import 'package:MiPromotora/main.dart';
 import 'package:MiPromotora/providers/goals_provider.dart';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
 
 class GoalsPage extends StatefulWidget {
   const GoalsPage({Key key}) : super(key: key);
@@ -19,6 +20,38 @@ class _GoalsPageState extends State<GoalsPage> {
 
   int _selectedTab = 0;
   Widget _currentWidget;
+  String searchText;
+  SearchBar searchBar;
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      title: new Text('Buscar Contactos'),
+      actions: [searchBar.getSearchAction(context)],
+      backgroundColor: Colors.grey[900],
+    );
+  }
+
+  void clearSearch() {
+    setState(() {
+      searchText = "";
+    });
+  }
+
+  void search(String value) {
+    setState(() {
+      searchText = value;
+    });
+  }
+
+  _GoalsPageState() {
+    searchBar = SearchBar(
+        inBar: false,
+        setState: setState,
+        onChanged: search,
+        onCleared: clearSearch,
+        onClosed: clearSearch,
+        buildDefaultAppBar: buildAppBar);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +65,7 @@ class _GoalsPageState extends State<GoalsPage> {
 
     return Container(
       child: Scaffold(
-        appBar: _topBar(context),
+        appBar: searchBar.build(context),
         drawer: CustomDrawer(),
         body: Column(
           children: <Widget>[
@@ -88,21 +121,6 @@ class _GoalsPageState extends State<GoalsPage> {
               fontWeight: FontWeight.w800),
         ),
         width: width,
-      ),
-    );
-  }
-
-  Widget _topBar(context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    Orientation currentOrientation = MediaQuery.of(context).orientation;
-    double barHeight = currentOrientation == Orientation.portrait ? 60 : 50;
-    return PreferredSize(
-      preferredSize: Size(screenWidth, barHeight),
-      child: Container(
-        child: AppBar(
-          backgroundColor: Colors.grey[900],
-          title: new Text("Mis metas"),
-        ),
       ),
     );
   }

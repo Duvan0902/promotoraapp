@@ -65,15 +65,12 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
     return Container(
       child: Scaffold(
         appBar: searchBar.build(context),
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: categories(context),
-              ),
-              BottomChat(),
-            ],
-          ),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: categories(context),
+            ),
+          ],
         ),
       ),
     );

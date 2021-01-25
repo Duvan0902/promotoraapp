@@ -16,7 +16,7 @@ class ManagementPage extends StatefulWidget {
 
 class _ManagementPageState extends State<ManagementPage> {
   int currentSales = 0;
-  int missingSales = 0;
+
   int avgPrima = 1;
   int goalSales = 1;
   String downloadUrl;
@@ -35,7 +35,7 @@ class _ManagementPageState extends State<ManagementPage> {
       this.currentSales = sales;
       this.goalSales = int.tryParse(goals.goal);
       this.avgPrima = int.tryParse(goals.avgPrima);
-      this.missingSales = this.goalSales - this.currentSales;
+
       this.downloadUrl = url;
     });
   }
@@ -81,6 +81,7 @@ class _ManagementPageState extends State<ManagementPage> {
   }
 
   Widget _progressIndicator(context) {
+    var value = (this.goalSales / this.avgPrima);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -138,7 +139,7 @@ class _ManagementPageState extends State<ManagementPage> {
                             .copyWith(color: Colors.black45, fontSize: 15),
                       ),
                       Text(
-                        this.missingSales.ceil().toString(),
+                        value.ceil().toString(),
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1
