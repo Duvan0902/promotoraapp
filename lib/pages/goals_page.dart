@@ -20,38 +20,6 @@ class _GoalsPageState extends State<GoalsPage> {
 
   int _selectedTab = 0;
   Widget _currentWidget;
-  String searchText;
-  SearchBar searchBar;
-
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      title: new Text('Buscar Contactos'),
-      actions: [searchBar.getSearchAction(context)],
-      backgroundColor: Colors.grey[900],
-    );
-  }
-
-  void clearSearch() {
-    setState(() {
-      searchText = "";
-    });
-  }
-
-  void search(String value) {
-    setState(() {
-      searchText = value;
-    });
-  }
-
-  _GoalsPageState() {
-    searchBar = SearchBar(
-        inBar: false,
-        setState: setState,
-        onChanged: search,
-        onCleared: clearSearch,
-        onClosed: clearSearch,
-        buildDefaultAppBar: buildAppBar);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +33,16 @@ class _GoalsPageState extends State<GoalsPage> {
 
     return Container(
       child: Scaffold(
-        appBar: searchBar.build(context),
+        appBar: AppBar(
+          backgroundColor: Colors.grey[900],
+          title: new Text(
+            "Mis metas",
+            style: Theme.of(context)
+                .textTheme
+                .headline1
+                .copyWith(color: Colors.white, fontSize: 20),
+          ),
+        ),
         drawer: CustomDrawer(),
         body: Column(
           children: <Widget>[
