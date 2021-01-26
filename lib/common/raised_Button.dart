@@ -57,7 +57,7 @@ class BottomList extends StatelessWidget {
                   'Documents': (BuildContext context) => DocumentsPage(),
                   'Porchat': (BuildContext context) => CustomWebView(),
                   'HomePage': (BuildContext context) => HomePage(),
-                  'LoginPage': (BuildContext context) => MiPromotora(),
+                  'LoginPage': (BuildContext context) => MiPromotora()
                 },
               ),
             ),

@@ -200,7 +200,7 @@ class LoginPage extends StatelessWidget {
 
 Widget _forgotPassword(context) {
   return Text(
-    'Olvidé mi contraceña',
+    'Olvidé mi contraseña',
     textAlign: TextAlign.center,
     style: Theme.of(context).textTheme.headline1.copyWith(
           color: MiPromotora().primaryDark,

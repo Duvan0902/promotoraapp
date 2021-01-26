@@ -131,55 +131,57 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
           SizedBox(
             height: 10,
           ),
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(widget.phone1),
-                  IconButton(
-                    icon: Icon(
-                      Icons.call_outlined,
+          widget.phone1 == null || widget.phone1 == ''
+              ? SizedBox()
+              : Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(widget.phone1),
+                        IconButton(
+                          icon: Icon(
+                            Icons.call_outlined,
+                          ),
+                          color: MiPromotora().primaryDark,
+                          iconSize: 30,
+                          onPressed: () => _launchURL(widget.phone1),
+                        )
+                      ],
                     ),
-                    color: MiPromotora().primaryDark,
-                    iconSize: 30,
-                    onPressed: () => _launchURL(widget.phone1),
-                  )
-                ],
-              ),
-            ),
-          ),
+                  ),
+                ),
           SizedBox(
             height: 10,
           ),
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(widget.phone2 == null || widget.phone2 == ''
-                      ? ''
-                      : widget.phone2),
-                  IconButton(
-                    icon: Icon(
-                      Icons.call_outlined,
+          widget.phone2 == null || widget.phone2 == ''
+              ? SizedBox()
+              : Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(widget.phone2),
+                        IconButton(
+                          icon: Icon(
+                            Icons.call_outlined,
+                          ),
+                          color: MiPromotora().primaryDark,
+                          iconSize: 30,
+                          onPressed: () => _launchURL2(widget.phone2),
+                        )
+                      ],
                     ),
-                    color: MiPromotora().primaryDark,
-                    iconSize: 30,
-                    onPressed: () => _launchURL2(widget.phone2),
-                  )
-                ],
-              ),
-            ),
-          ),
+                  ),
+                ),
           SizedBox(
             height: 10,
           ),

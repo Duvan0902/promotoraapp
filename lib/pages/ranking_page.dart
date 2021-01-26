@@ -30,10 +30,6 @@ class _RankingPageState extends State<RankingPage> {
                 .headline2
                 .copyWith(color: Colors.white, fontSize: 20),
           ),
-          flexibleSpace: Container(
-            padding: EdgeInsets.only(left: 75),
-            child: Icon(Icons.ac_unit),
-          ),
         ),
         body: Container(child: _ranking()),
       ),
