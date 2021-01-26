@@ -199,8 +199,8 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
                       .bodyText1
                       .copyWith(color: Colors.white, fontSize: 17)),
             ),
-            SizedBox(width: 10),
-            Column(
+            Flexible(
+                child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
@@ -233,7 +233,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
                       .copyWith(color: Colors.black45, fontSize: 14),
                 )
               ],
-            )
+            ))
           ],
         ),
       ),

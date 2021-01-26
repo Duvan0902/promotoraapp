@@ -104,13 +104,14 @@ class _ManagementPageState extends State<ManagementPage> {
                 ),
                 elevation: 1,
                 child: Center(
-                    child: Container(
-                  child: _percentagelist(),
-                )),
+                  child: Container(
+                    child: _percentagelist(),
+                  ),
+                ),
               ),
             ),
-            SizedBox(width: 8),
-            Container(
+            SizedBox(width: 6),
+            Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -132,14 +133,7 @@ class _ManagementPageState extends State<ManagementPage> {
                             .copyWith(color: Colors.black45, fontSize: 15),
                       ),
                       Text(
-                        'Cuantas me faltan: ',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1
-                            .copyWith(color: Colors.black45, fontSize: 15),
-                      ),
-                      Text(
-                        value.ceil().toString(),
+                        ('Cuantas me faltan: ' + value.ceil().toString()),
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1

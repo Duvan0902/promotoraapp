@@ -24,7 +24,8 @@ class _UsersManagementListState extends State<UsersManagementList> {
   String phone2 = '';
   @override
   Widget build(BuildContext context) {
-    var listTile = Column(
+    var listTile = Flexible(
+        child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
@@ -57,7 +58,7 @@ class _UsersManagementListState extends State<UsersManagementList> {
               .copyWith(color: Colors.black45, fontSize: 15),
         ),
       ],
-    );
+    ));
 
     return Container(
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),

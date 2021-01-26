@@ -24,41 +24,43 @@ class _ContactsManagementListState extends State<ContactsManagementList> {
   String phone1 = '';
   @override
   Widget build(BuildContext context) {
-    var listTile = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: <Widget>[
-            Text(
-              widget.contacts.name.titleCase,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: Colors.black, fontSize: 16),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Text(
-              widget.contacts.surname.titleCase,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: Colors.black, fontSize: 16),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 4,
-        ),
-        Text(
-          widget.contacts.company.titleCase,
-          style: Theme.of(context)
-              .textTheme
-              .bodyText1
-              .copyWith(color: Colors.black45, fontSize: 15),
-        ),
-      ],
+    var listTile = Flexible(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: <Widget>[
+              Text(
+                widget.contacts.name.titleCase,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.black, fontSize: 16),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                widget.contacts.surname.titleCase,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.black, fontSize: 16),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 4,
+          ),
+          Text(
+            widget.contacts.company.titleCase,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                .copyWith(color: Colors.black45, fontSize: 15),
+          ),
+        ],
+      ),
     );
 
     return Container(
