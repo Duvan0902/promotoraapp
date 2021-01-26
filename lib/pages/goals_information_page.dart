@@ -291,66 +291,70 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        Container(
-          width: size.width * 0.47,
-          height: size.width * 0.45,
-          child: Card(
-            color: MiPromotora().primaryDark,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 40),
-                Text(
-                  sign + finaldataCancel,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      .copyWith(color: Colors.black, fontSize: 22),
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'Cancelación',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(color: Colors.black, fontSize: 20),
-                ),
-              ],
+        Flexible(
+          child: Container(
+            width: size.width * 0.47,
+            height: size.width * 0.45,
+            child: Card(
+              color: MiPromotora().primaryDark,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 40),
+                  Text(
+                    sign + finaldataCancel,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1
+                        .copyWith(color: Colors.black, fontSize: 22),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Cancelación',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.black, fontSize: 20),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
         SizedBox(width: 4),
-        Container(
-          width: size.width * 0.47,
-          height: size.width * 0.45,
-          child: Card(
-            color: Colors.cyan[300],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 40),
-                Text(
-                  (sign + finaldataTotal),
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      .copyWith(color: Colors.black, fontSize: 22),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'Producción Total',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(color: Colors.black, fontSize: 20),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+        Flexible(
+          child: Container(
+            width: size.width * 0.47,
+            height: size.width * 0.45,
+            child: Card(
+              color: Colors.cyan[300],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 40),
+                  Text(
+                    (sign + finaldataTotal),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1
+                        .copyWith(color: Colors.black, fontSize: 22),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Producción Total',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.black, fontSize: 20),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

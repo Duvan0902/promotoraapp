@@ -5,7 +5,6 @@ import 'package:MiPromotora/pages/goals_information_page.dart';
 import 'package:MiPromotora/pages/management_page.dart';
 import 'package:MiPromotora/main.dart';
 import 'package:MiPromotora/providers/goals_provider.dart';
-import 'package:flutter_search_bar/flutter_search_bar.dart';
 
 class GoalsPage extends StatefulWidget {
   const GoalsPage({Key key}) : super(key: key);

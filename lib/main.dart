@@ -17,6 +17,7 @@ void main() async {
 }
 
 class MiPromotora extends StatelessWidget {
+  final prefs = new UserPreferences();
   Color get accent => Color(0xffe7326e);
   Color get accentLight => Color(0xffff6c9c);
   Color get accentDark => Color(0xffaf0043);
@@ -112,7 +113,7 @@ class MiPromotora extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: 'login',
+        initialRoute: prefs.token != null ? 'home' : 'login',
         routes: {
           'home': (BuildContext context) => HomePage(),
           'login': (BuildContext context) => LoginPage(),
