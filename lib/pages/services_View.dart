@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:MiPromotora/utils/random_color.dart';
 import 'package:MiPromotora/models/atac_model.dart';
 import 'package:MiPromotora/pages/atac_page.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 class ServicesView extends StatefulWidget {
   final AtacModel atac;
@@ -13,6 +14,8 @@ class ServicesView extends StatefulWidget {
   @override
   _ServicesViewState createState() => _ServicesViewState();
 }
+
+final String _url = GlobalConfiguration().getValue("api_url");
 
 class _ServicesViewState extends State<ServicesView> {
   @override
@@ -39,7 +42,7 @@ class _ServicesViewState extends State<ServicesView> {
               child: IconButton(
                 color: Colors.black,
                 icon: Image.network(
-                  'http://66.228.51.95:1337' + widget.atac.icon.url,
+                  _url + widget.atac.icon.url,
                   color: Colors.black,
                 ),
                 onPressed: () {

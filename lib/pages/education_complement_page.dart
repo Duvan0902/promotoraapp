@@ -4,6 +4,7 @@ import 'package:MiPromotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:audioplayer/audioplayer.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 class EducationComplementPage extends StatefulWidget {
   final EducationModel complement;
@@ -13,6 +14,8 @@ class EducationComplementPage extends StatefulWidget {
   _EducationComplementPageState createState() =>
       _EducationComplementPageState();
 }
+
+final String _url = GlobalConfiguration().getValue("api_url");
 
 class _EducationComplementPageState extends State<EducationComplementPage> {
   var playerState;
@@ -168,8 +171,7 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
   }
 
   _play(AudioPlayer audioPlayer) {
-    audioPlayer
-        .play("http://66.228.51.95:1337" + widget.complement.podcastFile.url);
+    audioPlayer.play(_url + widget.complement.podcastFile.url);
   }
 
   _stop(AudioPlayer audioPlayer) {
@@ -230,8 +232,8 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
 }
 
 _launchURL(url) async {
-  if (await canLaunch('http://66.228.51.95:1337' + url)) {
-    await launch('http://66.228.51.95:1337' + url);
+  if (await canLaunch(_url + url)) {
+    await launch(_url + url);
   } else {
     throw 'Could not launch $url';
   }

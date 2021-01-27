@@ -3,6 +3,7 @@ import 'package:MiPromotora/utils/random_color.dart';
 import 'package:MiPromotora/models/education_model.dart';
 import 'package:MiPromotora/pages/education_complement_page.dart';
 import 'package:MiPromotora/main.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 class EducationView extends StatefulWidget {
   final EducationModel education;
@@ -11,6 +12,8 @@ class EducationView extends StatefulWidget {
   @override
   _EducationViewState createState() => _EducationViewState();
 }
+
+final String _url = GlobalConfiguration().getValue("api_url");
 
 class _EducationViewState extends State<EducationView> {
   @override
@@ -38,7 +41,7 @@ class _EducationViewState extends State<EducationView> {
               child: IconButton(
                   color: MiPromotora().primaryDark,
                   icon: Image.network(
-                    'http://66.228.51.95:1337' + widget.education.icon.url,
+                    _url + widget.education.icon.url,
                     color: Colors.black,
                   ),
                   iconSize: 30,
