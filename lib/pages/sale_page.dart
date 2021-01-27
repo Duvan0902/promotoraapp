@@ -97,7 +97,7 @@ class _SalePageState extends State<SalePage> {
         Container(
           padding: EdgeInsets.all(10),
           child: Text(
-            'cliente',
+            'Cliente',
             style: Theme.of(context)
                 .textTheme
                 .bodyText1
@@ -258,7 +258,7 @@ class _SalePageState extends State<SalePage> {
         style: Theme.of(context)
             .textTheme
             .bodyText1
-            .copyWith(color: Colors.black45, fontSize: 14),
+            .copyWith(color: Colors.black, fontSize: 14),
         textCapitalization: TextCapitalization.words,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
@@ -291,6 +291,10 @@ class _SalePageState extends State<SalePage> {
       child: TextField(
         textCapitalization: TextCapitalization.words,
         keyboardType: TextInputType.multiline,
+        style: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(color: Colors.black, fontSize: 14),
         decoration: InputDecoration(
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: MiPromotora().primaryDark),
@@ -320,6 +324,10 @@ class _SalePageState extends State<SalePage> {
       color: Color.fromRGBO(243, 243, 243, 1),
       child: TextField(
         textCapitalization: TextCapitalization.words,
+        style: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(color: Colors.black, fontSize: 14),
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
           focusedBorder: UnderlineInputBorder(

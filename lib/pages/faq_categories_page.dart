@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/common/bottom_chat.dart';
 import 'package:MiPromotora/models/categories_model.dart';
 import 'package:MiPromotora/providers/categories_provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
@@ -65,15 +64,12 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
     return Container(
       child: Scaffold(
         appBar: searchBar.build(context),
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: categories(context),
-              ),
-              BottomChat(),
-            ],
-          ),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: categories(context),
+            ),
+          ],
         ),
       ),
     );

@@ -123,7 +123,7 @@ class LoginPage extends StatelessWidget {
               errorText: snapshot.error,
               errorStyle: Theme.of(context)
                   .textTheme
-                  .headline4
+                  .bodyText1
                   .copyWith(color: Colors.red),
             ),
             onChanged: bloc.changeEmail,
@@ -200,7 +200,7 @@ class LoginPage extends StatelessWidget {
 
 Widget _forgotPassword(context) {
   return Text(
-    'Olvidé mi contraceña',
+    'Olvidé mi contraseña',
     textAlign: TextAlign.center,
     style: Theme.of(context).textTheme.headline1.copyWith(
           color: MiPromotora().primaryDark,

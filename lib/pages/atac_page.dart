@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:MiPromotora/models/atac_model.dart';
 import 'package:MiPromotora/pages/login_page.dart';
 import 'package:MiPromotora/main.dart';
-import 'package:MiPromotora/pages/services_page.dart';
 import 'package:MiPromotora/preferences/users_preferences.dart';
 import 'package:MiPromotora/providers/atac_requests_provider.dart';
+
+import 'home_page.dart';
 
 class AtacPage extends StatefulWidget {
   final List<AtacCategory> categoriesAtac;
@@ -308,7 +309,7 @@ class AtacPageState extends State<AtacPage> {
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (BuildContext context) => ServicesPage(),
+                    builder: (BuildContext context) => HomePage(),
                   ),
                 ),
               )

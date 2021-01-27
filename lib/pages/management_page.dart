@@ -5,6 +5,7 @@ import 'package:MiPromotora/pages/sale_page.dart';
 import 'package:MiPromotora/main.dart';
 import 'package:MiPromotora/providers/goals_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 class ManagementPage extends StatefulWidget {
   final GoalsModel goal;
@@ -14,11 +15,13 @@ class ManagementPage extends StatefulWidget {
   _ManagementPageState createState() => _ManagementPageState();
 }
 
+final String _url = GlobalConfiguration().getValue("api_url");
+
 class _ManagementPageState extends State<ManagementPage> {
   int currentSales = 0;
-  int missingSales = 0;
-  int avgPrima = 0;
-  int goalSales = 0;
+
+  int avgPrima = 1;
+  int goalSales = 1;
   String downloadUrl;
 
   getInitialData() async {
@@ -35,7 +38,7 @@ class _ManagementPageState extends State<ManagementPage> {
       this.currentSales = sales;
       this.goalSales = int.tryParse(goals.goal);
       this.avgPrima = int.tryParse(goals.avgPrima);
-      this.missingSales = this.goalSales - this.currentSales;
+
       this.downloadUrl = url;
     });
   }
@@ -81,6 +84,7 @@ class _ManagementPageState extends State<ManagementPage> {
   }
 
   Widget _progressIndicator(context) {
+    var value = (this.goalSales / this.avgPrima);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -103,13 +107,14 @@ class _ManagementPageState extends State<ManagementPage> {
                 ),
                 elevation: 1,
                 child: Center(
-                    child: Container(
-                  child: _percentagelist(),
-                )),
+                  child: Container(
+                    child: _percentagelist(),
+                  ),
+                ),
               ),
             ),
-            SizedBox(width: 8),
-            Container(
+            SizedBox(width: 6),
+            Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -131,14 +136,7 @@ class _ManagementPageState extends State<ManagementPage> {
                             .copyWith(color: Colors.black45, fontSize: 15),
                       ),
                       Text(
-                        'Cuantas me faltan: ',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1
-                            .copyWith(color: Colors.black45, fontSize: 15),
-                      ),
-                      Text(
-                        this.missingSales.ceil().toString(),
+                        ('Cuantas me faltan: ' + value.ceil().toString()),
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1
@@ -217,8 +215,8 @@ Widget _addSaleButton(context) {
 }
 
 _launchURL(url) async {
-  if (await canLaunch('http://66.228.51.95:1337' + url)) {
-    await launch('http://66.228.51.95:1337' + url);
+  if (await canLaunch(_url + url)) {
+    await launch(_url + url);
   } else {
     throw 'Could not launch $url';
   }

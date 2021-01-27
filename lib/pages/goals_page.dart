@@ -27,12 +27,21 @@ class _GoalsPageState extends State<GoalsPage> {
       {"title": "Autogestión", "widget": roomList(context)}
     ];
     if (_currentWidget == null) {
-      _currentWidget = roomList(context);
+      _currentWidget = goalInformationList(context);
     }
 
     return Container(
       child: Scaffold(
-        appBar: _topBar(context),
+        appBar: AppBar(
+          backgroundColor: Colors.grey[900],
+          title: new Text(
+            "Mis metas",
+            style: Theme.of(context)
+                .textTheme
+                .headline1
+                .copyWith(color: Colors.white, fontSize: 20),
+          ),
+        ),
         drawer: CustomDrawer(),
         body: Column(
           children: <Widget>[
@@ -88,21 +97,6 @@ class _GoalsPageState extends State<GoalsPage> {
               fontWeight: FontWeight.w800),
         ),
         width: width,
-      ),
-    );
-  }
-
-  Widget _topBar(context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    Orientation currentOrientation = MediaQuery.of(context).orientation;
-    double barHeight = currentOrientation == Orientation.portrait ? 60 : 50;
-    return PreferredSize(
-      preferredSize: Size(screenWidth, barHeight),
-      child: Container(
-        child: AppBar(
-          backgroundColor: Colors.grey[900],
-          title: new Text("Mis metas"),
-        ),
       ),
     );
   }

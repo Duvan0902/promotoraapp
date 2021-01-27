@@ -1,3 +1,4 @@
+import 'package:MiPromotora/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:MiPromotora/common/raised_Button.dart';
 
@@ -29,53 +30,56 @@ class CustomDrawer extends StatelessWidget {
                         .copyWith(color: Colors.black, fontSize: 33),
                   ),
                   SizedBox(height: 40),
-                  BottomList(
-                    title: 'Mis metas',
-                    icon: IconButton(
-                      icon: Icon(Icons.keyboard_arrow_right),
-                      iconSize: 28,
-                      onPressed: () {},
-                    ),
-                    route: 'sale',
-                  ),
+                  RaisedButton(
+                      padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
+                      child: Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              'Mis metas',
+                              textAlign: TextAlign.left,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline2
+                                  .copyWith(
+                                      color: Colors.black, fontSize: 15.1),
+                            ),
+                            Icon(
+                              Icons.keyboard_arrow_right,
+                              color: MiPromotora().primaryDark,
+                            ),
+                          ],
+                        ),
+                      ),
+                      color: Colors.white,
+                      disabledTextColor: Colors.grey,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                        );
+                      }),
                   SizedBox(height: 18),
                   BottomList(
                     title: 'Preguntas Frecuentes',
-                    icon: IconButton(
-                      icon: Icon(Icons.keyboard_arrow_right),
-                      iconSize: 28,
-                      onPressed: () {},
-                    ),
                     route: 'questions',
                   ),
                   SizedBox(height: 18),
                   BottomList(
                     title: 'Documentos para tu gestion',
-                    icon: IconButton(
-                      icon: Icon(Icons.keyboard_arrow_right),
-                      iconSize: 28,
-                      onPressed: () {},
-                    ),
                     route: 'Documents',
                   ),
                   SizedBox(height: 18),
                   BottomList(
                     title: 'Chat',
-                    icon: IconButton(
-                      icon: Icon(Icons.keyboard_arrow_right),
-                      iconSize: 28,
-                      onPressed: () {},
-                    ),
                     route: 'Porchat',
                   ),
                   SizedBox(height: 200),
                   BottomList(
                     title: 'Cerrar sesión',
-                    icon: IconButton(
-                      icon: Icon(Icons.keyboard_arrow_right),
-                      iconSize: 28,
-                      onPressed: () {},
-                    ),
                     route: 'LoginPage',
                   ),
                 ],

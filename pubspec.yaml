@@ -54,15 +54,15 @@ dev_dependencies:
   random_color: ^1.0.5
   pie_chart: ^4.0.1
   flutter_rounded_progress_bar: ^0.1.2
-  intl: ^0.17.0-nullsafety.2
+  intl: ^0.16.0-nullsafety.2
 
   flutter_launcher_icons: ^0.8.1
   recase: ^3.0.1
 flutter_icons:
   ios: true
   android: true
-  image_path_ios: "assets/img/fondo.png"
-  image_path_android: "assets/img/fondo.png"
+  image_path_ios: "assets/img/IOS.png"
+  image_path_android: "assets/img/Android.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

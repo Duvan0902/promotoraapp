@@ -7,7 +7,6 @@ import 'package:MiPromotora/main.dart';
 import 'package:MiPromotora/providers/contacts_provider.dart';
 import 'package:MiPromotora/providers/users_provider.dart';
 import 'package:string_similarity/string_similarity.dart';
-
 import 'contacts_management.dart';
 import 'users_management.dart';
 

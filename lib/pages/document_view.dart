@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:MiPromotora/models/documents_model.dart';
 import 'package:MiPromotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 class DocumentView extends StatefulWidget {
   final DocumentsModel doc;
@@ -14,6 +15,8 @@ class DocumentView extends StatefulWidget {
   @override
   _DocumentViewState createState() => _DocumentViewState();
 }
+
+final String _url = GlobalConfiguration().getValue("api_url");
 
 class _DocumentViewState extends State<DocumentView> {
   @override
@@ -74,8 +77,8 @@ class _DocumentViewState extends State<DocumentView> {
 }
 
 _launchURL(url) async {
-  if (await canLaunch('http://66.228.51.95:1337' + url)) {
-    await launch('http://66.228.51.95:1337' + url);
+  if (await canLaunch(_url + url)) {
+    await launch(_url + url);
   } else {
     throw 'Could not launch $url';
   }
