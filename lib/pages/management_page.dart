@@ -5,6 +5,7 @@ import 'package:MiPromotora/pages/sale_page.dart';
 import 'package:MiPromotora/main.dart';
 import 'package:MiPromotora/providers/goals_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:global_configuration/global_configuration.dart';
 
 class ManagementPage extends StatefulWidget {
   final GoalsModel goal;
@@ -13,6 +14,8 @@ class ManagementPage extends StatefulWidget {
   @override
   _ManagementPageState createState() => _ManagementPageState();
 }
+
+final String _url = GlobalConfiguration().getValue("api_url");
 
 class _ManagementPageState extends State<ManagementPage> {
   int currentSales = 0;
@@ -212,8 +215,8 @@ Widget _addSaleButton(context) {
 }
 
 _launchURL(url) async {
-  if (await canLaunch('http://66.228.51.95:1337' + url)) {
-    await launch('http://66.228.51.95:1337' + url);
+  if (await canLaunch(_url + url)) {
+    await launch(_url + url);
   } else {
     throw 'Could not launch $url';
   }
