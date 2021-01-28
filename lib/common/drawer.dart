@@ -1,11 +1,20 @@
 import 'package:MiPromotora/pages/home_page.dart';
+import 'package:MiPromotora/pages/login_page.dart';
+import 'package:MiPromotora/preferences/users_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:MiPromotora/common/raised_Button.dart';
 
 import '../main.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends StatefulWidget {
   const CustomDrawer({Key key}) : super(key: key);
+
+  @override
+  _CustomDrawerState createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
+  final prefs = new UserPreferences();
 
   @override
   Widget build(BuildContext context) {
@@ -31,37 +40,37 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   SizedBox(height: 40),
                   RaisedButton(
-                      padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
-                      child: Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              'Mis metas',
-                              textAlign: TextAlign.left,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline2
-                                  .copyWith(
-                                      color: Colors.black, fontSize: 15.1),
-                            ),
-                            Icon(
-                              Icons.keyboard_arrow_right,
-                              color: MiPromotora().primaryDark,
-                            ),
-                          ],
-                        ),
-                      ),
-                      color: Colors.white,
-                      disabledTextColor: Colors.grey,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(),
+                    padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Mis metas',
+                            textAlign: TextAlign.left,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline2
+                                .copyWith(color: Colors.black, fontSize: 15.1),
                           ),
-                        );
-                      }),
+                          Icon(
+                            Icons.keyboard_arrow_right,
+                            color: MiPromotora().primaryDark,
+                          ),
+                        ],
+                      ),
+                    ),
+                    color: Colors.white,
+                    disabledTextColor: Colors.grey,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ),
+                      );
+                    },
+                  ),
                   SizedBox(height: 18),
                   BottomList(
                     title: 'Preguntas Frecuentes',
@@ -78,9 +87,35 @@ class CustomDrawer extends StatelessWidget {
                     route: 'Porchat',
                   ),
                   SizedBox(height: 200),
-                  BottomList(
-                    title: 'Cerrar sesión',
-                    route: 'LoginPage',
+                  RaisedButton(
+                    padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Cerrar sesión',
+                            textAlign: TextAlign.left,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline2
+                                .copyWith(color: Colors.black, fontSize: 15.1),
+                          ),
+                          Icon(
+                            Icons.keyboard_arrow_right,
+                            color: MiPromotora().primaryDark,
+                          ),
+                        ],
+                      ),
+                    ),
+                    color: Colors.white,
+                    disabledTextColor: Colors.grey,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
                   ),
                 ],
               ),

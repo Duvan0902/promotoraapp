@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:MiPromotora/bloc/login_bloc.dart';
 import 'package:MiPromotora/bloc/provider_bloc.dart';
 import 'package:MiPromotora/main.dart';
-import 'package:MiPromotora/providers/login_provider.dart';
-import 'package:MiPromotora/utils/alert_dialog.dart';
 
 class NewPasswordPage extends StatelessWidget {
   @override
