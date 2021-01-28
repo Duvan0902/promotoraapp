@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/models/ranking_model.dart';
-import 'package:MiPromotora/providers/ranking_provider.dart';
+import 'package:mi_promotora/models/ranking_model.dart';
+import 'package:mi_promotora/providers/ranking_provider.dart';
 import 'package:recase/recase.dart';
 import '../main.dart';
 

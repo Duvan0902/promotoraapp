@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/main.dart';
-import 'package:MiPromotora/models/goals_model.dart';
-import 'package:MiPromotora/pages/ranking_page.dart';
+import 'package:mi_promotora/main.dart';
+import 'package:mi_promotora/models/goals_model.dart';
+import 'package:mi_promotora/pages/ranking_page.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
 import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';

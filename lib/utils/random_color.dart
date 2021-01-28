@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'package:MiPromotora/main.dart';
+import 'package:mi_promotora/main.dart';
 
 Color generateRandomColor() {
   // Define all colors you want here

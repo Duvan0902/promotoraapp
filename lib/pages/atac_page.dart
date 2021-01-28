@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:MiPromotora/models/atac_model.dart';
-import 'package:MiPromotora/pages/login_page.dart';
-import 'package:MiPromotora/main.dart';
-import 'package:MiPromotora/preferences/users_preferences.dart';
-import 'package:MiPromotora/providers/atac_requests_provider.dart';
+import 'package:mi_promotora/models/atac_model.dart';
+import 'package:mi_promotora/pages/login_page.dart';
+import 'package:mi_promotora/main.dart';
+import 'package:mi_promotora/preferences/users_preferences.dart';
+import 'package:mi_promotora/providers/atac_requests_provider.dart';
 
 import 'home_page.dart';
 

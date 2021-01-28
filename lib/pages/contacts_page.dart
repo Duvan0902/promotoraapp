@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/common/drawer.dart';
-import 'package:MiPromotora/models/contacts_model.dart';
-import 'package:MiPromotora/models/users_model.dart';
+import 'package:mi_promotora/common/drawer.dart';
+import 'package:mi_promotora/models/contacts_model.dart';
+import 'package:mi_promotora/models/users_model.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
-import 'package:MiPromotora/main.dart';
-import 'package:MiPromotora/providers/contacts_provider.dart';
-import 'package:MiPromotora/providers/users_provider.dart';
+import 'package:mi_promotora/main.dart';
+import 'package:mi_promotora/providers/contacts_provider.dart';
+import 'package:mi_promotora/providers/users_provider.dart';
 import 'package:string_similarity/string_similarity.dart';
 import 'contacts_management.dart';
 import 'users_management.dart';

@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:MiPromotora/common/bottom_chat.dart';
-import 'package:MiPromotora/common/fab_button_app_bar.dart';
-import 'package:MiPromotora/pages/contacts_page.dart';
-import 'package:MiPromotora/pages/education_page.dart';
-import 'package:MiPromotora/pages/goals_page.dart';
-import 'package:MiPromotora/pages/services_page.dart';
+import 'package:mi_promotora/common/bottom_chat.dart';
+import 'package:mi_promotora/common/fab_button_app_bar.dart';
+import 'package:mi_promotora/pages/contacts_page.dart';
+import 'package:mi_promotora/pages/education_page.dart';
+import 'package:mi_promotora/pages/goals_page.dart';
+import 'package:mi_promotora/pages/services_page.dart';
 import 'package:flutter/foundation.dart';
-import 'package:MiPromotora/main.dart';
+import 'package:mi_promotora/main.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);

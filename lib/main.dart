@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/pages/home_page.dart';
-import 'package:MiPromotora/pages/login_page.dart';
-import 'package:MiPromotora/pages/sale_page.dart';
-import 'package:MiPromotora/bloc/provider_bloc.dart';
+import 'package:mi_promotora/pages/home_page.dart';
+import 'package:mi_promotora/pages/login_page.dart';
+import 'package:mi_promotora/pages/sale_page.dart';
+import 'package:mi_promotora/bloc/provider_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:MiPromotora/preferences/users_preferences.dart';
+import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:global_configuration/global_configuration.dart';
 
 void main() async {

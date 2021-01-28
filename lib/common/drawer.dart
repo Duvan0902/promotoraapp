@@ -1,6 +1,6 @@
-import 'package:MiPromotora/pages/home_page.dart';
+import 'package:mi_promotora/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/common/raised_Button.dart';
+import 'package:mi_promotora/common/raised_Button.dart';
 
 import '../main.dart';
 

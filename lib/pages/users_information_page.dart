@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/main.dart';
+import 'package:mi_promotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:recase/recase.dart';
 

@@ -1,6 +1,6 @@
-import 'package:MiPromotora/preferences/users_preferences.dart';
+import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:MiPromotora/models/goals_model.dart';
+import 'package:mi_promotora/models/goals_model.dart';
 import 'dart:convert' as json;
 import 'package:global_configuration/global_configuration.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:global_configuration/global_configuration.dart';
-import 'package:MiPromotora/preferences/users_preferences.dart';
+import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:intl/intl.dart';
 
 class SalesProvider {

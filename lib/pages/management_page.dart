@@ -1,9 +1,9 @@
-import 'package:MiPromotora/providers/sales_provider.dart';
+import 'package:mi_promotora/providers/sales_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/models/goals_model.dart';
-import 'package:MiPromotora/pages/sale_page.dart';
-import 'package:MiPromotora/main.dart';
-import 'package:MiPromotora/providers/goals_provider.dart';
+import 'package:mi_promotora/models/goals_model.dart';
+import 'package:mi_promotora/pages/sale_page.dart';
+import 'package:mi_promotora/main.dart';
+import 'package:mi_promotora/providers/goals_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:global_configuration/global_configuration.dart';
 

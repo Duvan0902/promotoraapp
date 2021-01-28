@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/models/documents_model.dart';
-import 'package:MiPromotora/providers/document_provider.dart';
+import 'package:mi_promotora/models/documents_model.dart';
+import 'package:mi_promotora/providers/document_provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:string_similarity/string_similarity.dart';
 

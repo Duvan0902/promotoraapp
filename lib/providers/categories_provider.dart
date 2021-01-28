@@ -1,8 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert' as json;
-import 'package:MiPromotora/models/categories_model.dart';
+import 'package:mi_promotora/models/categories_model.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:MiPromotora/preferences/users_preferences.dart';
+import 'package:mi_promotora/preferences/users_preferences.dart';
 
 class CategoriesProvider {
   final String _url = GlobalConfiguration().getValue("api_url") +

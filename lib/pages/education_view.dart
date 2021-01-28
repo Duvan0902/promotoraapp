@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/utils/random_color.dart';
-import 'package:MiPromotora/models/education_model.dart';
-import 'package:MiPromotora/pages/education_complement_page.dart';
-import 'package:MiPromotora/main.dart';
+import 'package:mi_promotora/utils/random_color.dart';
+import 'package:mi_promotora/models/education_model.dart';
+import 'package:mi_promotora/pages/education_complement_page.dart';
+import 'package:mi_promotora/main.dart';
 import 'package:global_configuration/global_configuration.dart';
 
 class EducationView extends StatefulWidget {

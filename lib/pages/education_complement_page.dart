@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/models/education_model.dart';
-import 'package:MiPromotora/main.dart';
+import 'package:mi_promotora/models/education_model.dart';
+import 'package:mi_promotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:audioplayer/audioplayer.dart';

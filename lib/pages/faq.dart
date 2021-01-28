@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/models/categories_model.dart';
-import 'package:MiPromotora/pages/faq_page.dart';
-import 'package:MiPromotora/main.dart';
+import 'package:mi_promotora/models/categories_model.dart';
+import 'package:mi_promotora/pages/faq_page.dart';
+import 'package:mi_promotora/main.dart';
 
 class FrequentQuestionsPage extends StatefulWidget {
   final FaqCategoriesModel category;

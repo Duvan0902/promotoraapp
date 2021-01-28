@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/common/drawer.dart';
-import 'package:MiPromotora/models/goals_model.dart';
-import 'package:MiPromotora/pages/goals_information_page.dart';
-import 'package:MiPromotora/pages/management_page.dart';
-import 'package:MiPromotora/main.dart';
-import 'package:MiPromotora/providers/goals_provider.dart';
+import 'package:mi_promotora/common/drawer.dart';
+import 'package:mi_promotora/models/goals_model.dart';
+import 'package:mi_promotora/pages/goals_information_page.dart';
+import 'package:mi_promotora/pages/management_page.dart';
+import 'package:mi_promotora/main.dart';
+import 'package:mi_promotora/providers/goals_provider.dart';
 
 class GoalsPage extends StatefulWidget {
   const GoalsPage({Key key}) : super(key: key);

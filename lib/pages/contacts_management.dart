@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/models/contacts_model.dart';
-import 'package:MiPromotora/pages/contact_information_page.dart';
-import 'package:MiPromotora/main.dart';
+import 'package:mi_promotora/models/contacts_model.dart';
+import 'package:mi_promotora/pages/contact_information_page.dart';
+import 'package:mi_promotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:recase/recase.dart';
 

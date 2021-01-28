@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/main.dart';
+import 'package:mi_promotora/main.dart';
 
 class ExpansionCard extends StatefulWidget {
   final String questions;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:MiPromotora/pages/documents_page.dart';
-import 'package:MiPromotora/pages/faq_categories_page.dart';
-import 'package:MiPromotora/pages/sale_page.dart';
-import 'package:MiPromotora/main.dart';
+import 'package:mi_promotora/pages/documents_page.dart';
+import 'package:mi_promotora/pages/faq_categories_page.dart';
+import 'package:mi_promotora/pages/sale_page.dart';
+import 'package:mi_promotora/main.dart';
 
 import '../main.dart';
 import '../pages/home_page.dart';
