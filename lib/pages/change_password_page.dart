@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:mi_promotora/bloc/login_bloc.dart';
-import 'package:mi_promotora/bloc/provider_bloc.dart';
+import 'package:mi_promotora/providers/forgot_password_provider.dart';
 import '../main.dart';
+import 'login_page.dart';
 
-class ChangePasswordPage extends StatelessWidget {
+class ChangePasswordPage extends StatefulWidget {
+  @override
+  _ChangePasswordPageState createState() => _ChangePasswordPageState();
+}
+
+String email = '';
+
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +24,6 @@ class ChangePasswordPage extends StatelessWidget {
   }
 
   Widget _loginForm(BuildContext context) {
-    final bloc = Provider.of(context);
     final size = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
@@ -49,11 +55,11 @@ class ChangePasswordPage extends StatelessWidget {
                         .copyWith(color: Colors.black, fontSize: 16),
                   ),
                 ),
-                _emailField(bloc),
+                _emailField(context),
                 SizedBox(height: 30.0),
                 SizedBox(height: 40.0),
                 Container(
-                  child: _createButton(bloc),
+                  child: _createButton(context),
                   alignment: Alignment.bottomCenter,
                 ),
                 SizedBox(height: 40),
@@ -76,80 +82,133 @@ class ChangePasswordPage extends StatelessWidget {
     );
   }
 
-  Widget _emailField(LoginBloc bloc) {
-    return StreamBuilder(
-      stream: bloc.emailStream,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return Container(
-          color: Color.fromRGBO(243, 243, 243, 1),
-          child: TextField(
-            textCapitalization: TextCapitalization.words,
-            keyboardType: TextInputType.emailAddress,
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1
-                .copyWith(color: Colors.black, fontSize: 18),
-            decoration: InputDecoration(
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: MiPromotora().primaryDark),
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: MiPromotora().primaryDark),
-              ),
-              contentPadding: EdgeInsets.all(10),
-              hintText: 'Escribe tu correo electrónico',
-              hintStyle: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: Colors.black45, fontSize: 14),
-              errorText: snapshot.error,
-              errorStyle: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: Colors.red),
-            ),
-            onChanged: bloc.changeEmail,
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _createButton(LoginBloc bloc) {
-    return StreamBuilder(
-      stream: bloc.formValidStream,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        final size = MediaQuery.of(context).size;
-        return RaisedButton(
-          child: Container(
-            width: size.width * 0.6,
-            child: Text(
-              'Enviar enlace',
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline1
-                  .copyWith(color: Colors.black, fontSize: 16),
-            ),
-          ),
-          disabledColor: Colors.grey[300],
-          color: MiPromotora().primaryDark,
-          disabledTextColor: Colors.grey,
-          onPressed: () {},
-        );
-      },
-    );
-  }
-
-  Widget _background(BuildContext context) {
+  Widget _emailField(context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        image: DecorationImage(
-          image: AssetImage("assets/img/fondo.png"),
-          fit: BoxFit.fill,
+      color: Color.fromRGBO(243, 243, 243, 1),
+      child: TextField(
+        textCapitalization: TextCapitalization.words,
+        keyboardType: TextInputType.emailAddress,
+        style: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(color: Colors.black, fontSize: 18),
+        decoration: InputDecoration(
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: MiPromotora().primaryDark),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: MiPromotora().primaryDark),
+          ),
+          contentPadding: EdgeInsets.all(10),
+          hintText: 'Escribe tu correo electrónico',
+          hintStyle: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(color: Colors.black45, fontSize: 14),
+          //errorText: 'correo invalido',
+          errorStyle:
+              Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.red),
+        ),
+        onChanged: (text) {
+          setState(
+            () {
+              email = text;
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+Widget _createButton(context) {
+  final size = MediaQuery.of(context).size;
+  return RaisedButton(
+      child: Container(
+        width: size.width * 0.6,
+        child: Text(
+          'Enviar enlace',
+          textAlign: TextAlign.center,
+          style: Theme.of(context)
+              .textTheme
+              .headline1
+              .copyWith(color: Colors.black, fontSize: 16),
         ),
       ),
+      disabledColor: Colors.grey[300],
+      color: MiPromotora().primaryDark,
+      disabledTextColor: Colors.grey,
+      onPressed: () => _sendInterests(context));
+}
+
+Widget _background(BuildContext context) {
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.white,
+      image: DecorationImage(
+        image: AssetImage("assets/img/fondo.png"),
+        fit: BoxFit.fill,
+      ),
+    ),
+  );
+}
+
+_sendInterests(BuildContext context) async {
+  final ForgotPasswordProvider saleProvider = ForgotPasswordProvider();
+
+  bool sent = await saleProvider.sendPassword(email);
+  print(email);
+  if (sent) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Su correo se envio correctamente',
+            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(
+                'OK',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: MiPromotora().primaryDark, fontSize: 16),
+              ),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => LoginPage(),
+                ),
+              ),
+            )
+          ],
+        );
+      },
+    );
+  } else {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Este correo electronico no existe, vualva a intentarlo.',
+            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
+          ),
+          actions: <Widget>[
+            FlatButton(
+                child: Text(
+                  'OK',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: MiPromotora().primaryDark, fontSize: 16),
+                ),
+                onPressed: () => Navigator.pop(context))
+          ],
+        );
+      },
     );
   }
 }

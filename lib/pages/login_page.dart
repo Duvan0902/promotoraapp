@@ -103,8 +103,6 @@ class LoginPage extends StatelessWidget {
         return Container(
           color: Color.fromRGBO(243, 243, 243, 1),
           child: TextField(
-            textCapitalization: TextCapitalization.words,
-            keyboardType: TextInputType.emailAddress,
             style: Theme.of(context)
                 .textTheme
                 .bodyText1
