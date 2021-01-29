@@ -250,10 +250,10 @@ class AtacPageState extends State<AtacPage> {
 
   Widget _sendButton() {
     final size = MediaQuery.of(context).size;
-
     return RaisedButton(
         child: Container(
           width: size.width * 0.7,
+          height: size.height * 0.037,
           child: Text(
             'Enviar',
             textAlign: TextAlign.center,

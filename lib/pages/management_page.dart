@@ -6,6 +6,7 @@ import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/providers/goals_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:global_configuration/global_configuration.dart';
+import "package:intl/intl.dart";
 
 class ManagementPage extends StatefulWidget {
   final GoalsModel goal;
@@ -159,11 +160,12 @@ class _ManagementPageState extends State<ManagementPage> {
     var currentSales = this.currentSales;
     var avgPrima = this.avgPrima;
     var totalValue = (goalSales / avgPrima).floorToDouble();
-    var totalPercentage = ((100 * currentSales) / totalValue).roundToDouble();
+    var totalPercentage = ((100 * currentSales) / totalValue);
+    var finalvalue = NumberFormat("#,##0.00").format(totalPercentage);
 
     return Container(
       child: Text(
-        '$totalPercentage%',
+        '$finalvalue%',
         style: Theme.of(context)
             .textTheme
             .bodyText1
@@ -191,7 +193,7 @@ Widget _addSaleButton(context) {
   return RaisedButton(
     child: Container(
       width: size.width * 0.7,
-      height: size.height * 0.04,
+      height: size.height * 0.037,
       child: Text(
         'Agregar mi venta',
         textAlign: TextAlign.center,

@@ -119,6 +119,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
       child: Container(
         padding: EdgeInsets.fromLTRB(18, 13, 18, 13),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
               'Cantidad de clientes que debes visitar este mes.',
