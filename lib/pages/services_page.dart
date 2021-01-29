@@ -28,7 +28,7 @@ class _ServicesPageState extends State<ServicesPage> {
               ),
               _description(context),
               SizedBox(
-                height: 20,
+                height: 18,
               ),
               Expanded(
                 child: _service(context),

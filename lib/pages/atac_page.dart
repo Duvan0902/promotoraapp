@@ -56,6 +56,7 @@ class AtacPageState extends State<AtacPage> {
           padding: EdgeInsets.all(17),
           child: Column(
             children: <Widget>[
+              SizedBox(height: 10),
               _title(context),
               SizedBox(
                 height: 20,

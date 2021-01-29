@@ -45,6 +45,7 @@ class _GoalsPageState extends State<GoalsPage> {
         drawer: CustomDrawer(),
         body: Column(
           children: <Widget>[
+            SizedBox(height: 20),
             Container(
               padding: EdgeInsets.only(top: 15),
               child: Row(

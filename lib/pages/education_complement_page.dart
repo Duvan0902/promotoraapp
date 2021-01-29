@@ -45,7 +45,7 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: 6,
+                height: 20,
               ),
               Container(padding: EdgeInsets.all(4), child: _titleEducation()),
               SizedBox(

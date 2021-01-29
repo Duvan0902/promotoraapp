@@ -24,6 +24,9 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
       padding: EdgeInsets.all(8),
       child: ListView(
         children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
           _title(context),
           SizedBox(height: 20),
           _progressBarBudget(),

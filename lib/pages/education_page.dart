@@ -26,8 +26,12 @@ class _EducationsPageState extends State<EducationsPage> {
           padding: EdgeInsets.all(10),
           child: Column(
             children: <Widget>[
+              SizedBox(height: 15),
               Container(
-                  padding: EdgeInsets.all(10), child: _titleEducation(context)),
+                padding: EdgeInsets.all(10),
+                child: _titleEducation(context),
+              ),
+              SizedBox(height: 20),
               Expanded(
                 child: _education(context),
               ),
@@ -43,7 +47,7 @@ class _EducationsPageState extends State<EducationsPage> {
       'Te brindamos material de apoyo que te puede ayudar en tu proceso.',
       style: Theme.of(context)
           .textTheme
-          .bodyText2
+          .bodyText1
           .copyWith(color: Colors.white, fontSize: 17),
     );
   }

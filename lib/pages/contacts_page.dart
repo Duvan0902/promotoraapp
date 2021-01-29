@@ -70,6 +70,7 @@ class _ContactsPageState extends State<ContactsPage> {
         drawer: CustomDrawer(),
         body: Column(
           children: <Widget>[
+            SizedBox(height: 20),
             Container(
               padding: EdgeInsets.only(top: 15),
               child: Row(
