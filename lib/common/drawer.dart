@@ -2,6 +2,7 @@ import 'package:mi_promotora/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/common/raised_Button.dart';
 import 'package:mi_promotora/pages/login_page.dart';
+import 'package:mi_promotora/preferences/users_preferences.dart';
 
 import '../main.dart';
 
@@ -10,6 +11,7 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final prefs = new UserPreferences();
     return Container(
       child: ClipRRect(
         borderRadius: BorderRadius.only(
@@ -103,14 +105,19 @@ class CustomDrawer extends StatelessWidget {
                       ),
                       color: Colors.white,
                       disabledTextColor: Colors.grey,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginPage(),
-                          ),
-                        );
-                      }),
+                      onPressed: () => prefs.token != null
+                          ? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginPage(),
+                              ),
+                            )
+                          : Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginPage(),
+                              ),
+                            )),
                 ],
               ),
             ),

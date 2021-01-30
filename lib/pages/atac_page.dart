@@ -56,7 +56,6 @@ class AtacPageState extends State<AtacPage> {
           padding: EdgeInsets.all(17),
           child: Column(
             children: <Widget>[
-              SizedBox(height: 10),
               _title(context),
               SizedBox(
                 height: 20,
@@ -251,10 +250,10 @@ class AtacPageState extends State<AtacPage> {
 
   Widget _sendButton() {
     final size = MediaQuery.of(context).size;
+
     return RaisedButton(
         child: Container(
           width: size.width * 0.7,
-          height: size.height * 0.037,
           child: Text(
             'Enviar',
             textAlign: TextAlign.center,
@@ -267,7 +266,9 @@ class AtacPageState extends State<AtacPage> {
         disabledColor: Colors.grey[300],
         color: MiPromotora().primaryDark,
         disabledTextColor: Colors.grey,
-        onPressed: () => _sendInterests(context));
+        onPressed: () => interests == null && data == null
+            ? print('envio vacio')
+            : _sendInterests(context));
   }
 
   _sendInterests(BuildContext context) async {
@@ -288,13 +289,14 @@ class AtacPageState extends State<AtacPage> {
       widget.atac.name,
       (interests.toSet().toString() + ('-Otros: $data')),
     );
+
     if (sent) {
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: Text(
-              'Su respuesta se envio correctamente',
+              'Su respuesta  se envio correctamente',
               style:
                   Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
             ),
