@@ -42,7 +42,7 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
         ),
         body: Container(
           padding: EdgeInsets.all(10),
-          child: Column(
+          child: ListView(
             children: <Widget>[
               SizedBox(
                 height: 20,
@@ -70,7 +70,7 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
                     ? SizedBox()
                     : _audioPlayer(),
               ),
-              Expanded(
+              Container(
                 child: widget.complement.documentFiles == null
                     ? SizedBox()
                     : _document(context, widget.complement.documentFiles),
@@ -180,53 +180,56 @@ class _EducationComplementPageState extends State<EducationComplementPage> {
   }
 
   Widget _document(context, final List<DocumentFile> documentFiles) {
-    return GridView.builder(
-      itemCount: documentFiles.length,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemBuilder: (context, index) {
-        DocumentFile document = documentFiles[index];
-        return ClipRect(
-          child: Container(
-            height: 150.0,
-            margin: EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
-              boxShadow: [
-                new BoxShadow(
-                  color: Colors.black,
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                SizedBox(height: 5.0),
-                CircleAvatar(
-                  backgroundColor: Color.fromRGBO(243, 243, 243, 1),
-                  radius: 30.0,
-                  child: IconButton(
-                    color: MiPromotora().primaryDark,
-                    icon: Icon(Icons.file_download),
-                    iconSize: 30,
-                    onPressed: () => _launchURL(document.file.url),
+    return Container(
+      height: 300,
+      child: GridView.builder(
+        itemCount: documentFiles.length,
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemBuilder: (context, index) {
+          DocumentFile document = documentFiles[index];
+          return ClipRect(
+            child: Container(
+              height: 150.0,
+              margin: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  new BoxShadow(
+                    color: Colors.black,
                   ),
-                ),
-                Text(
-                  document.title,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      .copyWith(color: Colors.black, fontSize: 17),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 5.0)
-              ],
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  SizedBox(height: 5.0),
+                  CircleAvatar(
+                    backgroundColor: Color.fromRGBO(243, 243, 243, 1),
+                    radius: 30.0,
+                    child: IconButton(
+                      color: MiPromotora().primaryDark,
+                      icon: Icon(Icons.file_download),
+                      iconSize: 30,
+                      onPressed: () => _launchURL(document.file.url),
+                    ),
+                  ),
+                  Text(
+                    document.title,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1
+                        .copyWith(color: Colors.black, fontSize: 17),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 5.0)
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

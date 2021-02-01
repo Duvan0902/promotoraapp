@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:mi_promotora/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/common/raised_Button.dart';
@@ -106,12 +107,8 @@ class CustomDrawer extends StatelessWidget {
                       color: Colors.white,
                       disabledTextColor: Colors.grey,
                       onPressed: () => prefs.token != null
-                          ? Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginPage(),
-                              ),
-                            )
+                          ? SystemChannels.platform
+                              .invokeMethod('SystemNavigator.pop')
                           : Navigator.push(
                               context,
                               MaterialPageRoute(
