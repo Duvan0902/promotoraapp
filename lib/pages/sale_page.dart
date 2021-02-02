@@ -358,7 +358,6 @@ class _SalePageState extends State<SalePage> {
     return RaisedButton(
         child: Container(
           width: size.width * 0.7,
-          height: size.height * 0.037,
           child: Text(
             'Registra la venta',
             textAlign: TextAlign.center,

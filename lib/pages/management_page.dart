@@ -193,7 +193,6 @@ Widget _addSaleButton(context) {
   return RaisedButton(
     child: Container(
       width: size.width * 0.7,
-      height: size.height * 0.037,
       child: Text(
         'Agregar mi venta',
         textAlign: TextAlign.center,
