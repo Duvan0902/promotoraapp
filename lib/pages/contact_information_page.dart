@@ -107,23 +107,25 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
           SizedBox(
             height: 10,
           ),
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Container(
-              padding: EdgeInsets.all(20),
-              width: size.width * 1,
-              height: size.width * 0.5,
-              child: Text(
-                widget.description,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: Colors.black45, fontSize: 16),
-              ),
-            ),
-          ),
+          widget.description == null || widget.description == ''
+              ? SizedBox()
+              : Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    width: size.width * 1,
+                    height: size.width * 0.5,
+                    child: Text(
+                      widget.description,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(color: Colors.black45, fontSize: 16),
+                    ),
+                  ),
+                ),
           SizedBox(
             height: 10,
           ),
