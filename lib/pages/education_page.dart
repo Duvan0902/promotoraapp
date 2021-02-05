@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mi_promotora/common/Popup_Menu_Button.dart';
 import 'package:mi_promotora/common/drawer.dart';
 import 'package:mi_promotora/models/education_model.dart';
 import 'package:mi_promotora/providers/education_provider.dart';
@@ -95,7 +96,13 @@ class _EducationsPageState extends State<EducationsPage> {
       child: Container(
         child: AppBar(
           backgroundColor: Colors.grey[900],
-          title: new Text("Educación"),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Educación"),
+              PopupButton(),
+            ],
+          ),
         ),
       ),
     );

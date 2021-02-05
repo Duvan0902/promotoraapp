@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mi_promotora/common/Popup_Menu_Button.dart';
 import 'package:mi_promotora/common/drawer.dart';
 import 'package:mi_promotora/models/goals_model.dart';
 import 'package:mi_promotora/pages/goals_information_page.dart';
@@ -34,12 +35,18 @@ class _GoalsPageState extends State<GoalsPage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.grey[900],
-          title: new Text(
-            "Mis metas",
-            style: Theme.of(context)
-                .textTheme
-                .headline1
-                .copyWith(color: Colors.white, fontSize: 20),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Mis metas",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline1
+                    .copyWith(color: Colors.white, fontSize: 20),
+              ),
+              PopupButton(),
+            ],
           ),
         ),
         drawer: CustomDrawer(),
