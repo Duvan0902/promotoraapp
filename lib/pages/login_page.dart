@@ -5,7 +5,7 @@ import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/providers/login_provider.dart';
 import 'package:mi_promotora/utils/alert_dialog.dart';
 
-import 'change_password_page.dart';
+import 'forgot_password_page.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -205,7 +205,7 @@ Widget _forgotPassword(context) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ChangePasswordPage(),
+          builder: (context) => ForgotPasswordPage(),
         ),
       );
     },

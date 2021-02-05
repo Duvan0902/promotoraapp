@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mi_promotora/providers/forgot_password_provider.dart';
+import 'package:mi_promotora/pages/new_password_page.dart';
 import '../main.dart';
-import 'login_page.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   @override
@@ -48,14 +47,14 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 Container(
                   padding: EdgeInsets.all(10),
                   child: Text(
-                    'Correo electrónico',
+                    'Contraseña actual',
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1
                         .copyWith(color: Colors.black, fontSize: 16),
                   ),
                 ),
-                _emailField(context),
+                _passwordField(context),
                 SizedBox(height: 30.0),
                 SizedBox(height: 40.0),
                 Container(
@@ -73,7 +72,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   Widget _mainTitle(context) {
     return Text(
-      'Olvidé mi contraseña',
+      'Cambiar mi contraseña',
       textAlign: TextAlign.left,
       style: Theme.of(context)
           .textTheme
@@ -82,12 +81,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     );
   }
 
-  Widget _emailField(context) {
+  Widget _passwordField(context) {
     return Container(
       color: Color.fromRGBO(243, 243, 243, 1),
       child: TextField(
-        textCapitalization: TextCapitalization.words,
-        keyboardType: TextInputType.emailAddress,
+        obscureText: true,
         style: Theme.of(context)
             .textTheme
             .bodyText1
@@ -100,22 +98,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             borderSide: BorderSide(color: MiPromotora().primaryDark),
           ),
           contentPadding: EdgeInsets.all(10),
-          hintText: 'Escribe tu correo electrónico',
+          hintText: "Escribe tu contraseña",
           hintStyle: Theme.of(context)
               .textTheme
               .bodyText1
               .copyWith(color: Colors.black45, fontSize: 14),
-          //errorText: 'correo invalido',
-          errorStyle:
-              Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.red),
         ),
-        onChanged: (text) {
-          setState(
-            () {
-              email = text;
-            },
-          );
-        },
       ),
     );
   }
@@ -124,21 +112,27 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 Widget _createButton(context) {
   final size = MediaQuery.of(context).size;
   return RaisedButton(
-      child: Container(
-        width: size.width * 0.6,
-        child: Text(
-          'Enviar enlace',
-          textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .headline1
-              .copyWith(color: Colors.black, fontSize: 16),
-        ),
+    child: Container(
+      width: size.width * 0.6,
+      child: Text(
+        'Siguiente',
+        textAlign: TextAlign.center,
+        style: Theme.of(context)
+            .textTheme
+            .headline1
+            .copyWith(color: Colors.black, fontSize: 16),
       ),
-      disabledColor: Colors.grey[300],
-      color: MiPromotora().primaryDark,
-      disabledTextColor: Colors.grey,
-      onPressed: () => _sendInterests(context));
+    ),
+    disabledColor: Colors.grey[300],
+    color: MiPromotora().primaryDark,
+    disabledTextColor: Colors.grey,
+    onPressed: () => Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NewPasswordPage(),
+      ),
+    ),
+  );
 }
 
 Widget _background(BuildContext context) {
@@ -151,64 +145,4 @@ Widget _background(BuildContext context) {
       ),
     ),
   );
-}
-
-_sendInterests(BuildContext context) async {
-  final ForgotPasswordProvider saleProvider = ForgotPasswordProvider();
-
-  bool sent = await saleProvider.sendPassword(email);
-  print(email);
-  if (sent) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(
-            'Su correo se envio correctamente',
-            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(
-                'OK',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: MiPromotora().primaryDark, fontSize: 16),
-              ),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => LoginPage(),
-                ),
-              ),
-            )
-          ],
-        );
-      },
-    );
-  } else {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(
-            'Este correo electronico no existe, vualva a intentarlo.',
-            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
-          ),
-          actions: <Widget>[
-            FlatButton(
-                child: Text(
-                  'OK',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(color: MiPromotora().primaryDark, fontSize: 16),
-                ),
-                onPressed: () => Navigator.pop(context))
-          ],
-        );
-      },
-    );
-  }
 }

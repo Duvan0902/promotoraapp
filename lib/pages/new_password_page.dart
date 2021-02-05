@@ -25,7 +25,7 @@ class NewPasswordPage extends StatelessWidget {
         children: <Widget>[
           SafeArea(
             child: Container(
-              height: 70,
+              height: 40,
             ),
           ),
           Container(
@@ -50,6 +50,18 @@ class NewPasswordPage extends StatelessWidget {
                   ),
                 ),
                 _passwordField(bloc),
+                SizedBox(height: 20.0),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    'Repita su contraseña',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.black, fontSize: 16),
+                  ),
+                ),
+                _repeatPassword(bloc),
                 SizedBox(height: 40.0),
                 Container(
                   child: recommendationList(context),
@@ -81,6 +93,44 @@ class NewPasswordPage extends StatelessWidget {
   }
 
   Widget _passwordField(LoginBloc bloc) {
+    return StreamBuilder(
+      stream: bloc.passwordStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Container(
+          color: Color.fromRGBO(243, 243, 243, 1),
+          child: TextField(
+            obscureText: true,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                .copyWith(color: Colors.black, fontSize: 18),
+            decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: MiPromotora().primaryDark),
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: MiPromotora().primaryDark),
+              ),
+              contentPadding: EdgeInsets.all(10),
+              hintText: "Escribe tu contraseña",
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(color: Colors.black45, fontSize: 14),
+              errorText: snapshot.error,
+              errorStyle: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(color: Colors.red),
+            ),
+            onChanged: bloc.changePassword,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _repeatPassword(LoginBloc bloc) {
     return StreamBuilder(
       stream: bloc.passwordStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
