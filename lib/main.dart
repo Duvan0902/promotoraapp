@@ -113,7 +113,7 @@ class MiPromotora extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: 'login',
+        initialRoute: prefs.token != null ? 'home' : 'login',
         routes: {
           'home': (BuildContext context) => HomePage(),
           'login': (BuildContext context) => LoginPage(),
