@@ -1,4 +1,3 @@
-import 'package:mi_promotora/pages/change_password_page.dart';
 import 'package:mi_promotora/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/common/raised_Button.dart';
@@ -82,7 +81,7 @@ class CustomDrawer extends StatelessWidget {
                     route: 'Porchat',
                   ),
                   SizedBox(height: 18),
-                  RaisedButton(
+                  /*RaisedButton(
                     padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
                     child: Container(
                       child: Row(
@@ -113,7 +112,7 @@ class CustomDrawer extends StatelessWidget {
                         ),
                       );
                     },
-                  ),
+                  ),*/
                   SizedBox(height: 200),
                   RaisedButton(
                       padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
