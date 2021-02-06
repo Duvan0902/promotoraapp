@@ -26,7 +26,7 @@ class AtacPage extends StatefulWidget {
 
 class AtacPageState extends State<AtacPage> {
   List<String> interests = [];
-  String data = '';
+  String data = "";
   String others = 'Otros: ';
 
   @override
@@ -157,6 +157,8 @@ class AtacPageState extends State<AtacPage> {
             interests.add(
               (key) + ('-' + atac),
             );
+          } else {
+            interests.remove((key) + ('-' + atac));
           }
         },
       );
@@ -185,7 +187,7 @@ class AtacPageState extends State<AtacPage> {
                     setState(
                       () {
                         values[key] = (value);
-                        if (value == true) {
+                        if (value) {
                           items();
                         }
                       },
@@ -266,9 +268,34 @@ class AtacPageState extends State<AtacPage> {
         disabledColor: Colors.grey[300],
         color: MiPromotora().primaryDark,
         disabledTextColor: Colors.grey,
-        onPressed: () => interests == null && data == null
-            ? print('envio vacio')
-            : _sendInterests(context));
+        onPressed: () =>
+            interests.isEmpty ? _alert() : _sendInterests(context));
+  }
+
+  _alert() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Su respuesta es vacia vuelva a intentarlo',
+            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(
+                'OK',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: MiPromotora().primaryDark, fontSize: 16),
+              ),
+              onPressed: () => Navigator.pop(context),
+            )
+          ],
+        );
+      },
+    );
   }
 
   _sendInterests(BuildContext context) async {
