@@ -81,39 +81,6 @@ class CustomDrawer extends StatelessWidget {
                     title: 'Chat',
                     route: 'Porchat',
                   ),
-                  SizedBox(height: 18),
-                  RaisedButton(
-                    padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
-                    child: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            'Cambiar mi contraseña',
-                            textAlign: TextAlign.left,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline2
-                                .copyWith(color: Colors.black, fontSize: 15.1),
-                          ),
-                          Icon(
-                            Icons.keyboard_arrow_right,
-                            color: MiPromotora().primaryDark,
-                          ),
-                        ],
-                      ),
-                    ),
-                    color: Colors.white,
-                    disabledTextColor: Colors.grey,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChangePasswordPage(),
-                        ),
-                      );
-                    },
-                  ),
                   SizedBox(height: 200),
                   RaisedButton(
                     padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
