@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mi_promotora/common/Popup_Menu_Button.dart';
 import 'package:mi_promotora/common/drawer.dart';
 import 'package:mi_promotora/models/education_model.dart';
 import 'package:mi_promotora/providers/education_provider.dart';
@@ -26,8 +27,12 @@ class _EducationsPageState extends State<EducationsPage> {
           padding: EdgeInsets.all(10),
           child: Column(
             children: <Widget>[
+              SizedBox(height: 15),
               Container(
-                  padding: EdgeInsets.all(10), child: _titleEducation(context)),
+                padding: EdgeInsets.all(10),
+                child: _titleEducation(context),
+              ),
+              SizedBox(height: 20),
               Expanded(
                 child: _education(context),
               ),
@@ -43,7 +48,7 @@ class _EducationsPageState extends State<EducationsPage> {
       'Te brindamos material de apoyo que te puede ayudar en tu proceso.',
       style: Theme.of(context)
           .textTheme
-          .bodyText2
+          .bodyText1
           .copyWith(color: Colors.white, fontSize: 17),
     );
   }
@@ -91,7 +96,13 @@ class _EducationsPageState extends State<EducationsPage> {
       child: Container(
         child: AppBar(
           backgroundColor: Colors.grey[900],
-          title: new Text("Educación"),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Educación"),
+              PopupButton(),
+            ],
+          ),
         ),
       ),
     );

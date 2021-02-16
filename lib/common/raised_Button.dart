@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mi_promotora/pages/change_password_page.dart';
 import 'package:mi_promotora/pages/documents_page.dart';
 import 'package:mi_promotora/pages/faq_categories_page.dart';
 import 'package:mi_promotora/pages/sale_page.dart';
@@ -57,7 +58,8 @@ class BottomList extends StatelessWidget {
                   'Documents': (BuildContext context) => DocumentsPage(),
                   'Porchat': (BuildContext context) => CustomWebView(),
                   'HomePage': (BuildContext context) => HomePage(),
-                  'LoginPage': (BuildContext context) => MiPromotora()
+                  'LoginPage': (BuildContext context) => MiPromotora(),
+                  'change': (BuildContext context) => ChangePasswordPage(),
                 },
               ),
             ),

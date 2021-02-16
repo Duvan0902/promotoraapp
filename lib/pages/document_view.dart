@@ -33,45 +33,48 @@ class _DocumentViewState extends State<DocumentView> {
     IconData icono,
     String text,
   ) {
-    return ClipRect(
-      child: Container(
-        height: 150.0,
-        margin: EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            new BoxShadow(
-              color: Colors.black,
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            SizedBox(height: 5.0),
-            CircleAvatar(
-              backgroundColor: color,
-              radius: 30.0,
-              child: IconButton(
-                color: MiPromotora().primaryDark,
-                icon: Icon(Icons.file_download),
-                iconSize: 30,
-                onPressed: () => _launchURL(widget.doc.file.url),
+    return InkWell(
+      child: ClipRect(
+        child: Container(
+          height: 150.0,
+          margin: EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              new BoxShadow(
+                color: Colors.black,
               ),
-            ),
-            Text(
-              text,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline2
-                  .copyWith(color: Colors.black, fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 5.0)
-          ],
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              SizedBox(height: 5.0),
+              CircleAvatar(
+                backgroundColor: color,
+                radius: 30.0,
+                child: IconButton(
+                  color: MiPromotora().primaryDark,
+                  icon: Icon(Icons.file_download),
+                  iconSize: 30,
+                  onPressed: () => _launchURL(widget.doc.file.url),
+                ),
+              ),
+              Text(
+                text,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2
+                    .copyWith(color: Colors.black, fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 5.0)
+            ],
+          ),
         ),
       ),
+      onTap: () => _launchURL(widget.doc.file.url),
     );
   }
 }

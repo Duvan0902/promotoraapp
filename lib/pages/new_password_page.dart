@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mi_promotora/bloc/login_bloc.dart';
 import 'package:mi_promotora/bloc/provider_bloc.dart';
 import 'package:mi_promotora/main.dart';
-import 'package:mi_promotora/providers/login_provider.dart';
-import 'package:mi_promotora/utils/alert_dialog.dart';
 
-import 'forgot_password_page.dart';
-
-class LoginPage extends StatelessWidget {
+class NewPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +25,7 @@ class LoginPage extends StatelessWidget {
         children: <Widget>[
           SafeArea(
             child: Container(
-              height: 70,
+              height: 40,
             ),
           ),
           Container(
@@ -37,7 +33,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 60),
+                SizedBox(height: 20),
                 Container(
                   child: _mainTitle(context),
                   alignment: Alignment.center,
@@ -46,19 +42,7 @@ class LoginPage extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(10),
                   child: Text(
-                    'Correo electrónico',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(color: Colors.black, fontSize: 16),
-                  ),
-                ),
-                _emailField(bloc),
-                SizedBox(height: 30.0),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    'Contraseña',
+                    'Nueva contraseña',
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1
@@ -66,15 +50,27 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 _passwordField(bloc),
+                SizedBox(height: 20.0),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    'Repita su contraseña',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.black, fontSize: 16),
+                  ),
+                ),
+                _repeatPassword(bloc),
+                SizedBox(height: 40.0),
+                Container(
+                  child: recommendationList(context),
+                  alignment: Alignment.center,
+                ),
                 SizedBox(height: 40.0),
                 Container(
                   child: _createButton(bloc),
                   alignment: Alignment.bottomCenter,
-                ),
-                SizedBox(height: 25),
-                Container(
-                  child: _forgotPassword(context),
-                  alignment: Alignment.center,
                 ),
                 SizedBox(height: 40),
               ],
@@ -87,22 +83,23 @@ class LoginPage extends StatelessWidget {
 
   Widget _mainTitle(context) {
     return Text(
-      'Inicia sesión en Promotora',
+      'Nueva contraseña',
       textAlign: TextAlign.left,
       style: Theme.of(context)
           .textTheme
           .headline1
-          .copyWith(color: Colors.black, fontSize: 35),
+          .copyWith(color: Colors.black, fontSize: 36),
     );
   }
 
-  Widget _emailField(LoginBloc bloc) {
+  Widget _passwordField(LoginBloc bloc) {
     return StreamBuilder(
-      stream: bloc.emailStream,
+      stream: bloc.passwordStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return Container(
           color: Color.fromRGBO(243, 243, 243, 1),
           child: TextField(
+            obscureText: true,
             style: Theme.of(context)
                 .textTheme
                 .bodyText1
@@ -115,7 +112,7 @@ class LoginPage extends StatelessWidget {
                 borderSide: BorderSide(color: MiPromotora().primaryDark),
               ),
               contentPadding: EdgeInsets.all(10),
-              hintText: 'Escribe tu correo electrónico',
+              hintText: "Escribe tu contraseña",
               hintStyle: Theme.of(context)
                   .textTheme
                   .bodyText1
@@ -126,14 +123,14 @@ class LoginPage extends StatelessWidget {
                   .bodyText1
                   .copyWith(color: Colors.red),
             ),
-            onChanged: bloc.changeEmail,
+            onChanged: bloc.changePassword,
           ),
         );
       },
     );
   }
 
-  Widget _passwordField(LoginBloc bloc) {
+  Widget _repeatPassword(LoginBloc bloc) {
     return StreamBuilder(
       stream: bloc.passwordStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -180,7 +177,7 @@ class LoginPage extends StatelessWidget {
           child: Container(
             width: size.width * 0.6,
             child: Text(
-              'Inicia sesión',
+              'Enviar enlace',
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
@@ -191,30 +188,50 @@ class LoginPage extends StatelessWidget {
           disabledColor: Colors.grey[300],
           color: MiPromotora().primaryDark,
           disabledTextColor: Colors.grey,
-          onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
+          onPressed: () {},
         );
       },
     );
   }
 }
 
-Widget _forgotPassword(context) {
-  return FlatButton(
-    textColor: MiPromotora().primaryDark,
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ForgotPasswordPage(),
+Widget recommendationList(context) {
+  return Container(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Minimo 8 caracteres',
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(color: Colors.black45, fontSize: 15),
         ),
-      );
-    },
-    child: Text(
-      "Olvidé mi contraseña",
-      style: Theme.of(context)
-          .textTheme
-          .headline1
-          .copyWith(color: MiPromotora().primaryDark, fontSize: 18),
+        SizedBox(height: 10),
+        Text(
+          'Utiliza letras y numeros',
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(color: Colors.black45, fontSize: 15),
+        ),
+        SizedBox(height: 10),
+        Text(
+          'Utiliza caracteres especiales (como @,?,%)',
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(color: Colors.black45, fontSize: 15),
+        ),
+        SizedBox(height: 10),
+        Text(
+          'Combina letras mayusculas y minusculas',
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(color: Colors.black45, fontSize: 15),
+        ),
+      ],
     ),
   );
 }
@@ -229,14 +246,4 @@ Widget _background(BuildContext context) {
       ),
     ),
   );
-}
-
-_login(LoginBloc bloc, BuildContext context) async {
-  final LoginProvider loginProvider = LoginProvider();
-  Map info = await loginProvider.login(bloc.identifare, bloc.password);
-  if (info['ok']) {
-    Navigator.pushReplacementNamed(context, 'home');
-  } else {
-    showAlert(context, info['message']);
-  }
 }

@@ -18,27 +18,28 @@ final String _url = GlobalConfiguration().getValue("api_url");
 class _EducationViewState extends State<EducationView> {
   @override
   Widget build(BuildContext context) {
-    return ClipRect(
-      child: Container(
-        height: 150.0,
-        margin: EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: generateRandomColor(),
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            new BoxShadow(
-              color: Colors.black,
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            SizedBox(height: 5.0),
-            CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 30.0,
-              child: IconButton(
+    return InkWell(
+      child: ClipRect(
+        child: Container(
+          height: 150.0,
+          margin: EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: generateRandomColor(),
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              new BoxShadow(
+                color: Colors.black,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              SizedBox(height: 5.0),
+              CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 30.0,
+                child: IconButton(
                   color: MiPromotora().primaryDark,
                   icon: Image.network(
                     _url + widget.education.icon.url,
@@ -53,20 +54,31 @@ class _EducationViewState extends State<EducationView> {
                             complement: widget.education),
                       ),
                     );
-                  }),
-            ),
-            Text(
-              widget.education.module,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText2
-                  .copyWith(color: Colors.white, fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 5.0)
-          ],
+                  },
+                ),
+              ),
+              Text(
+                widget.education.module,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .copyWith(color: Colors.white, fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 5.0)
+            ],
+          ),
         ),
       ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                EducationComplementPage(complement: widget.education),
+          ),
+        );
+      },
     );
   }
 }

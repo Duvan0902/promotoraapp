@@ -44,6 +44,7 @@ class SalesProvider {
 
   Future<int> getSalesCount() async {
     int sales;
+    String priv = _prefs.token;
     try {
       int id = _prefs.userId;
       var now = new DateTime.now();
@@ -54,7 +55,10 @@ class SalesProvider {
           _url + "/ventas/count?user=$id&created_at_gte=$formattedDate";
       print(requestUrl);
 
-      final response = await http.get(requestUrl);
+      final response = await http.get(
+        requestUrl,
+        headers: {'Authorization': 'Bearer $priv'},
+      );
 
       if (response.statusCode == 200) {
         sales = int.parse(response.body);

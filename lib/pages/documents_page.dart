@@ -65,7 +65,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 15,
+                height: 20,
               ),
               _posterTitle(context),
               SizedBox(

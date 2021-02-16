@@ -9,11 +9,15 @@ class GoalsProvider {
 
   Future<GoalsModel> getGoal() async {
     String userName = _prefs.userName;
+    String token = _prefs.token;
     final String _url = GlobalConfiguration().getValue("api_url") +
         "/reporte-integrado-data?user_code=$userName&branch_gct=Total&_sort=integrated_report:DESC&_limit=1";
     print(_url);
     try {
-      var response = await http.get(_url);
+      var response = await http.get(
+        _url,
+        headers: {'Authorization': 'Bearer $token'},
+      );
 
       if (response.statusCode == 200) {
         print(response.body);

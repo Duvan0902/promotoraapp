@@ -357,8 +357,6 @@ class _SalePageState extends State<SalePage> {
     final size = MediaQuery.of(context).size;
     return RaisedButton(
         child: Container(
-          decoration: BoxDecoration(),
-          height: size.height * 0.04,
           width: size.width * 0.7,
           child: Text(
             'Registra la venta',

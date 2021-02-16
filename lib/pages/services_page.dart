@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mi_promotora/common/Popup_Menu_Button.dart';
 import 'package:mi_promotora/common/drawer.dart';
 import 'package:mi_promotora/models/atac_model.dart';
 import 'package:mi_promotora/providers/service_provider.dart';
@@ -28,7 +29,7 @@ class _ServicesPageState extends State<ServicesPage> {
               ),
               _description(context),
               SizedBox(
-                height: 20,
+                height: 18,
               ),
               Expanded(
                 child: _service(context),
@@ -96,7 +97,13 @@ class _ServicesPageState extends State<ServicesPage> {
       child: Container(
         child: AppBar(
           backgroundColor: Colors.grey[900],
-          title: new Text("ATAC"),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("ATAC"),
+              PopupButton(),
+            ],
+          ),
         ),
       ),
     );

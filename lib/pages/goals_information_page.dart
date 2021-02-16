@@ -24,6 +24,9 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
       padding: EdgeInsets.all(8),
       child: ListView(
         children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
           _title(context),
           SizedBox(height: 20),
           _progressBarBudget(),
@@ -119,6 +122,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
       child: Container(
         padding: EdgeInsets.fromLTRB(18, 13, 18, 13),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
               'Cantidad de clientes que debes visitar este mes.',
