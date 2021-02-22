@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "180185530922",
+    "project_id": "promotora-metropolitana",
+    "storage_bucket": "promotora-metropolitana.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180185530922:android:66365ac7eb7bb461cbf953",
+        "android_client_info": {
+          "package_name": "co.innovaciones.promotora"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "180185530922-c8gpibn0rrellij0ob2inua98vm0au8s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.innovaciones.promotora",
+            "certificate_hash": "5d9b5be5ffe3e0394f4c1c5cfdba0212e7b48b2d"
+          }
+        },
+        {
+          "client_id": "180185530922-eipiosclae956i9cga4acl13e9lrgp44.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm7CS_8AwJ9EwnbS84UUzRJC47Zz7qTLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "180185530922-eipiosclae956i9cga4acl13e9lrgp44.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
