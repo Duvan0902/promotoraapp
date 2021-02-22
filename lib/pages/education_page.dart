@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/common/Popup_Menu_Button.dart';
 import 'package:mi_promotora/common/drawer.dart';
+import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/education_model.dart';
+import 'package:mi_promotora/pages/education_detailed_page.dart';
 import 'package:mi_promotora/providers/education_provider.dart';
-
-import 'education_view.dart';
+import 'package:global_configuration/global_configuration.dart';
+import 'package:mi_promotora/utils/random_color.dart';
 
 class EducationsPage extends StatefulWidget {
   const EducationsPage({
@@ -16,6 +18,8 @@ class EducationsPage extends StatefulWidget {
 }
 
 class _EducationsPageState extends State<EducationsPage> {
+  final String _url = GlobalConfiguration().getValue("api_url");
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,8 +84,8 @@ class _EducationsPageState extends State<EducationsPage> {
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (context, index) {
-        return EducationView(
-          education: education[index],
+        return _educationView(
+          education[index],
         );
       },
     );
@@ -105,6 +109,60 @@ class _EducationsPageState extends State<EducationsPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _educationView(EducationModel education) {
+    return InkWell(
+      child: ClipRect(
+        child: Container(
+          height: 150.0,
+          margin: EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: generateRandomColor(),
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              new BoxShadow(
+                color: Colors.black,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              SizedBox(height: 5.0),
+              CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 30.0,
+                child: Image.network(
+                  _url + education.icon.url,
+                  color: Colors.black,
+                  width: 30,
+                  height: 30,
+                  scale: 1,
+                ),
+              ),
+              Text(
+                education.module,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .copyWith(color: Colors.white, fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 5.0)
+            ],
+          ),
+        ),
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => EducationDetailedPage(complement: education),
+          ),
+        );
+      },
     );
   }
 }

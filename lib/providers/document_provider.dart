@@ -20,7 +20,7 @@ class DocumentsProvider {
       if (response.statusCode == 200) {
         print(response.body);
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
-        List<DocumentsModel> documents = List();
+        List<DocumentsModel> documents = [];
 
         for (var item in jsonResponse) {
           DocumentsModel document = DocumentsModel.fromMap(item);

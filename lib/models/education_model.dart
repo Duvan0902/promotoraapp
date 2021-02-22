@@ -46,11 +46,17 @@ class EducationModel {
         "video_url": videoUrl == null ? null : module,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "document_files":
-            List<dynamic>.from(documentFiles.map((x) => x.toMap())),
-        "podcast_file": podcastFile.toMap() == null ? null : podcastFile,
+        "document_files": documentFiles == null
+            ? null
+            : List<dynamic>.from(documentFiles.map((x) => x.toMap())),
+        "podcast_file": podcastFile == null ? null : podcastFile.toMap(),
         "icon": icon.toMap(),
       };
+
+  @override
+  String toString() {
+    return this.toJson();
+  }
 }
 
 class DocumentFile {
@@ -80,6 +86,11 @@ class DocumentFile {
         "title": title,
         "file": file.toMap(),
       };
+
+  @override
+  String toString() {
+    return this.toJson();
+  }
 }
 
 class EducationIcon {
@@ -165,4 +176,9 @@ class EducationIcon {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };
+
+  @override
+  String toString() {
+    return this.toJson();
+  }
 }

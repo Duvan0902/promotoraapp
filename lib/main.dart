@@ -6,6 +6,7 @@ import 'package:mi_promotora/bloc/provider_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:mi_promotora/providers/push_notifications_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,8 +17,9 @@ void main() async {
   runApp(MiPromotora());
 }
 
-class MiPromotora extends StatelessWidget {
+class MiPromotora extends StatefulWidget {
   final prefs = new UserPreferences();
+
   Color get accent => Color(0xffe7326e);
   Color get accentLight => Color(0xffff6c9c);
   Color get accentDark => Color(0xffaf0043);
@@ -25,6 +27,18 @@ class MiPromotora extends StatelessWidget {
   Color get primaryLight => Color(0xff5ba2fe);
   Color get primaryDark => Color.fromRGBO(0, 186, 193, 3);
   Color get grey => Colors.grey[900];
+
+  @override
+  _MiPromotoraState createState() => _MiPromotoraState();
+}
+
+class _MiPromotoraState extends State<MiPromotora> {
+  @override
+  void initState() {
+    super.initState();
+    final pushProvider = new PushNotificationsProvider();
+    pushProvider.initNotifications();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,15 +60,15 @@ class MiPromotora extends StatelessWidget {
           primarySwatch: Colors.cyan,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Asap',
-          primaryColor: primary,
-          primaryColorLight: primaryLight,
-          primaryColorDark: primaryDark,
-          accentColor: accent,
-          colorScheme:
-              ColorScheme.light(primary: primaryDark, secondary: accent),
+          primaryColor: widget.primary,
+          primaryColorLight: widget.primaryLight,
+          primaryColorDark: widget.primaryDark,
+          accentColor: widget.accent,
+          colorScheme: ColorScheme.light(
+              primary: widget.primaryDark, secondary: widget.accent),
           buttonTheme: ButtonThemeData(
-            buttonColor: accent,
-            disabledColor: accentLight,
+            buttonColor: widget.accent,
+            disabledColor: widget.accentLight,
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
@@ -113,7 +127,7 @@ class MiPromotora extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: 'login',
+        initialRoute: _initialRoute(),
         routes: {
           'home': (BuildContext context) => HomePage(),
           'login': (BuildContext context) => LoginPage(),
@@ -121,5 +135,13 @@ class MiPromotora extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String _initialRoute() {
+    if (widget.prefs.token != null) {
+      return 'home';
+    } else {
+      return 'login';
+    }
   }
 }

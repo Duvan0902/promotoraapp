@@ -21,7 +21,7 @@ class ServicesProvider {
       if (response.statusCode == 200) {
         print(response.body);
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
-        List<AtacModel> contacts = List();
+        List<AtacModel> contacts = [];
 
         for (var item in jsonResponse) {
           AtacModel contact = AtacModel.fromMap(item);

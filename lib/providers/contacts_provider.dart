@@ -20,7 +20,7 @@ class ContactsProvider {
       if (response.statusCode == 200) {
         print(response.body);
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
-        List<ContactsModel> users = List();
+        List<ContactsModel> users = [];
 
         for (var item in jsonResponse) {
           ContactsModel user = ContactsModel.fromMap(item);

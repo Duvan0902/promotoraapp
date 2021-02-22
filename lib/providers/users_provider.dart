@@ -13,7 +13,7 @@ class UsersProvider {
       if (response.statusCode == 200) {
         print(response.body);
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
-        List<UsersModel> users = List();
+        List<UsersModel> users = [];
 
         for (var item in jsonResponse) {
           UsersModel user = UsersModel.fromMap(item);

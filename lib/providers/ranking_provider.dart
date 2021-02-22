@@ -20,7 +20,7 @@ class RankingProvider {
       if (response.statusCode == 200) {
         // print(response.body);
         Map<String, dynamic> jsonResponse = json.jsonDecode(response.body);
-        List<RankingModel> ranking = List();
+        List<RankingModel> ranking = [];
 
         jsonResponse.forEach((key, value) {
           ranking.add(RankingModel.fromMap(jsonResponse, key));

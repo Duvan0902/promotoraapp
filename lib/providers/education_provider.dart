@@ -15,20 +15,22 @@ class EducationProvider {
           await http.get(_url, headers: {'Authorization': 'Bearer $token'});
 
       if (response.statusCode == 200) {
-        print(response.body);
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
-        List<EducationModel> educations = List();
+        List<EducationModel> educationList = [];
 
         for (var item in jsonResponse) {
           EducationModel education = EducationModel.fromMap(item);
-          educations.add(education);
+          educationList.add(education);
+          print(education);
         }
 
-        return educations;
+        return educationList;
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {}
+    } catch (Exception) {
+      print(Exception);
+    }
 
     return [];
   }

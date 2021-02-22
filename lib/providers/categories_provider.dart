@@ -24,7 +24,7 @@ class CategoriesProvider {
         print(response.body);
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
 
-        List<FaqCategoriesModel> categories = List();
+        List<FaqCategoriesModel> categories = [];
 
         for (var item in jsonResponse) {
           FaqCategoriesModel category = FaqCategoriesModel.fromMap(item);
@@ -36,7 +36,7 @@ class CategoriesProvider {
         print('Request failed with status: ${response.statusCode}.');
       }
     } catch (Exception) {
-      print('djdjjd');
+      print(Exception);
     }
 
     return null;

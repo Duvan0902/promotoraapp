@@ -60,11 +60,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: _transmisionButton(context),
+      floatingActionButton: BottomChat(),
     );
-  }
-
-  Widget _transmisionButton(context) {
-    return BottomChat();
   }
 }

@@ -6,18 +6,17 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:audioplayer/audioplayer.dart';
 import 'package:global_configuration/global_configuration.dart';
 
-class EducationComplementPage extends StatefulWidget {
+class EducationDetailedPage extends StatefulWidget {
   final EducationModel complement;
-  EducationComplementPage({Key key, this.complement}) : super(key: key);
+  EducationDetailedPage({Key key, this.complement}) : super(key: key);
 
   @override
-  _EducationComplementPageState createState() =>
-      _EducationComplementPageState();
+  _EducationDetailedPageState createState() => _EducationDetailedPageState();
 }
 
 final String _url = GlobalConfiguration().getValue("api_url");
 
-class _EducationComplementPageState extends State<EducationComplementPage> {
+class _EducationDetailedPageState extends State<EducationDetailedPage> {
   var playerState;
 
   @override
