@@ -123,7 +123,9 @@ class _GoalsPageState extends State<GoalsPage> {
         future: goalsProvider.getGoal(),
         builder: (BuildContext context, AsyncSnapshot<GoalsModel> snapshot) {
           if (snapshot.hasData) {
-            return _goalsList(snapshot.data);
+            return GoalInformationPage(
+              goals: snapshot.data,
+            );
           } else {
             return Container(
               height: 400,
@@ -134,12 +136,6 @@ class _GoalsPageState extends State<GoalsPage> {
           }
         },
       ),
-    );
-  }
-
-  Widget _goalsList(GoalsModel goal) {
-    return GoaldInformationPage(
-      goasl: goal,
     );
   }
 }

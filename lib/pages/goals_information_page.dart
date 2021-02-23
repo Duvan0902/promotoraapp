@@ -1,23 +1,36 @@
+import 'dart:ui';
+
+import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
+import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
 import 'package:flutter/material.dart';
+import 'package:mi_promotora/common/bar_chart.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/goals_model.dart';
 import 'package:mi_promotora/pages/ranking_page.dart';
-import 'package:pie_chart/pie_chart.dart';
-import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
-import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
+import 'package:pie_chart/pie_chart.dart' as pie;
 import "package:intl/intl.dart";
 
-class GoaldInformationPage extends StatefulWidget {
-  final GoalsModel goasl;
-  GoaldInformationPage({Key key, this.goasl}) : super(key: key);
+class GoalInformationPage extends StatefulWidget {
+  final GoalsModel goals;
+  GoalInformationPage({Key key, this.goals}) : super(key: key);
 
   @override
-  _GoaldInformationPageState createState() => _GoaldInformationPageState();
+  _GoalInformationPageState createState() => _GoalInformationPageState();
 }
 
-String sign = "\$";
+class _GoalInformationPageState extends State<GoalInformationPage> {
+  String _sign = "\$";
 
-class _GoaldInformationPageState extends State<GoaldInformationPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,6 +43,8 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
           _title(context),
           SizedBox(height: 20),
           _progressBarBudget(),
+          SizedBox(height: 10),
+          _historicChart(context),
           SizedBox(height: 10),
           _progressBar(),
           SizedBox(height: 10),
@@ -54,9 +69,9 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
   }
 
   Widget _progressBarBudget() {
-    var pdnNew = widget.goasl.pdnNew;
+    var pdnNew = widget.goals.pdnNew;
     var covertNumberPdnNew = double.parse(pdnNew);
-    var totalPercentage = widget.goasl.goal;
+    var totalPercentage = widget.goals.goal;
     var convertNumberGoal = double.parse(totalPercentage);
     var totalPercentagePdnNew = (100 * covertNumberPdnNew / convertNumberGoal);
     var newNamberGoal = NumberFormat.decimalPattern().format(convertNumberGoal);
@@ -92,8 +107,8 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(sign + '0'),
-                Text(sign + newNamberGoal),
+                Text(_sign + '0'),
+                Text(_sign + newNamberGoal),
               ],
             )
           ],
@@ -102,15 +117,19 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
     );
   }
 
+  Widget _historicChart(BuildContext context) {
+    return BarChartSample();
+  }
+
   Widget _progressBar() {
-    var goalValue = widget.goasl.goal;
-    var avgPrima = widget.goasl.avgPrima;
-    var pdnNew = widget.goasl.pdnNew;
+    var goalValue = widget.goals.goal;
+    var avgPrima = widget.goals.avgPrima;
+    var pdnNew = widget.goals.pdnNew;
     var covertNumberPdnNew = double.parse(pdnNew);
     var covertNumberGoal = double.parse(goalValue);
     var covertNumberAvgPrima = double.parse(avgPrima);
     var leaflet =
-        (covertNumberGoal / (widget.goasl.pctEffect * covertNumberAvgPrima))
+        (covertNumberGoal / (widget.goals.pctEffect * covertNumberAvgPrima))
             .ceil();
     var totalPercentageLeaflet =
         (100 * (covertNumberPdnNew / covertNumberAvgPrima) / leaflet);
@@ -158,8 +177,8 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
   }
 
   Widget _cirleGraph() {
-    var total = widget.goasl.pdnNewPrev;
-    var cancel = widget.goasl.pdnCanc;
+    var total = widget.goals.pdnNewPrev;
+    var cancel = widget.goals.pdnCanc;
     var pndNewPrev = double.parse(total);
     var pdnCanc = double.parse(cancel).abs();
     var totalPercentage = pndNewPrev + pdnCanc;
@@ -179,7 +198,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
         child: Row(
           children: <Widget>[
-            PieChart(
+            pie.PieChart(
               dataMap: dataMap,
               animationDuration: Duration(milliseconds: 800),
               chartLegendSpacing: 32,
@@ -187,13 +206,13 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
               initialAngleInDegree: 0,
               colorList: [Colors.blue, Colors.indigo[700]],
               ringStrokeWidth: 40,
-              legendOptions: LegendOptions(
+              legendOptions: pie.LegendOptions(
                 showLegendsInRow: false,
-                legendPosition: LegendPosition.right,
+                legendPosition: pie.LegendPosition.right,
                 showLegends: false,
                 legendShape: BoxShape.circle,
               ),
-              chartValuesOptions: ChartValuesOptions(
+              chartValuesOptions: pie.ChartValuesOptions(
                   showChartValueBackground: false,
                   showChartValues: true,
                   showChartValuesInPercentage: true,
@@ -283,11 +302,11 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
   }
 
   Widget _weightValue() {
-    var total = widget.goasl.pdnTotal;
+    var total = widget.goals.pdnTotal;
     var changeTotal = int.parse(total).ceil();
     var finaldataTotal = NumberFormat.decimalPattern().format(changeTotal); //
 
-    var cancel = widget.goasl.pdnCanc;
+    var cancel = widget.goals.pdnCanc;
     var changeCancel = int.parse(cancel).abs().ceil();
 
     var finaldataCancel = NumberFormat.decimalPattern().format(changeCancel);
@@ -308,7 +327,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
                 children: <Widget>[
                   SizedBox(height: 40),
                   Text(
-                    sign + finaldataCancel,
+                    _sign + finaldataCancel,
                     style: Theme.of(context)
                         .textTheme
                         .headline1
@@ -341,7 +360,7 @@ class _GoaldInformationPageState extends State<GoaldInformationPage> {
                 children: <Widget>[
                   SizedBox(height: 40),
                   Text(
-                    (sign + finaldataTotal),
+                    (_sign + finaldataTotal),
                     style: Theme.of(context)
                         .textTheme
                         .headline1

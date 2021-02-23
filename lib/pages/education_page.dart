@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/common/Popup_Menu_Button.dart';
 import 'package:mi_promotora/common/drawer.dart';
-import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/education_model.dart';
 import 'package:mi_promotora/pages/education_detailed_page.dart';
 import 'package:mi_promotora/providers/education_provider.dart';
