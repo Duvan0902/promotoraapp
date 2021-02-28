@@ -7,6 +7,7 @@ import 'package:mi_promotora/preferences/users_preferences.dart';
 
 class UsersProvider {
   final String _url = GlobalConfiguration().getValue("api_url") + "/users";
+  final _prefs = new UserPreferences();
 
   Future<List<UserModel>> getUsers() async {
     try {
@@ -59,9 +60,14 @@ class UsersProvider {
     final String _endpoint = _url.toString() + '/' + user.id.toString();
 
     try {
+      String token = _prefs.token;
+
       var response = await http.post(
         _endpoint,
-        headers: {'content-type': 'application/json'},
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
         body: user.toString(),
       );
 
@@ -80,7 +86,6 @@ class UsersProvider {
   }
 
   Future<bool> updateUserDevice() async {
-    final _prefs = new UserPreferences();
     final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
     try {
