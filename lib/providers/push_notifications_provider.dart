@@ -11,8 +11,6 @@ class PushNotificationsProvider {
 
   initNotifications() async {
     await _firebaseMessaging.requestNotificationPermissions();
-    String token = await _firebaseMessaging.getToken();
-    print(token);
 
     _firebaseMessaging.configure(
       onMessage: onMessage,

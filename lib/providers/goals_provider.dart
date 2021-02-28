@@ -34,4 +34,37 @@ class GoalsProvider {
 
     return null;
   }
+
+  Future<List<GoalsModel>> getHistoric(DateTime date) async {
+    String userName = _prefs.userName;
+    String token = _prefs.token;
+    final String _url = GlobalConfiguration().getValue("api_url") +
+        "/reporte-integrado-data?user_code=$userName&branch_gct=Total&report_date_gte=2021-01-01&_limit=10";
+
+    try {
+      var response = await http.get(
+        _url,
+        headers: {'Authorization': 'Bearer $token'},
+      );
+
+      if (response.statusCode == 200) {
+        print(response.body);
+        List<dynamic> jsonResponse = json.jsonDecode(response.body);
+        List<GoalsModel> goals;
+
+        for (var item in jsonResponse) {
+          GoalsModel goal = GoalsModel.fromMap(item);
+          goals.add(goal);
+        }
+
+        return goals;
+      } else {
+        print('Request failed with status: ${response.statusCode}.');
+      }
+    } catch (Exception) {
+      print(Exception);
+    }
+
+    return null;
+  }
 }

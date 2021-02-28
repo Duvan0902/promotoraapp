@@ -54,7 +54,7 @@ class UserModel {
         phone1: json["phone1"],
         phone2: json["phone2"],
         description: json["description"],
-        deviceToken: json["device-token"],
+        deviceToken: json["device_token"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -72,7 +72,7 @@ class UserModel {
         "phone1": phone1,
         "phone2": phone2,
         "description": description,
-        "device-token": deviceToken,
+        "device_token": deviceToken,
       };
 
   @override

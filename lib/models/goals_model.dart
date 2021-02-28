@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 class GoalsModel {
   GoalsModel({
     this.id,
@@ -16,6 +18,7 @@ class GoalsModel {
     this.integratedReport,
     this.createdAt,
     this.updatedAt,
+    this.reportDate,
   });
 
   final int id;
@@ -32,6 +35,7 @@ class GoalsModel {
   final IntegratedReport integratedReport;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final DateTime reportDate;
 
   factory GoalsModel.fromJson(String str) =>
       GoalsModel.fromMap(json.decode(str));
@@ -53,6 +57,7 @@ class GoalsModel {
         integratedReport: IntegratedReport.fromMap(json["integrated_report"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        reportDate: DateTime.parse(json["report_date"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -70,18 +75,21 @@ class GoalsModel {
         "integrated_report": integratedReport.toMap(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
+        "report_date": DateFormat('yyyy-MM-dd').format(reportDate),
       };
 }
 
 class IntegratedReport {
   IntegratedReport({
     this.id,
+    this.reportDate,
     this.createdAt,
     this.updatedAt,
     this.file,
   });
 
   final int id;
+  final DateTime reportDate;
   final DateTime createdAt;
   final DateTime updatedAt;
   final FileClass file;
@@ -94,6 +102,7 @@ class IntegratedReport {
   factory IntegratedReport.fromMap(Map<String, dynamic> json) =>
       IntegratedReport(
         id: json["id"],
+        reportDate: DateTime.parse(json["report_date"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         file: FileClass.fromMap(json["file"]),
@@ -101,6 +110,7 @@ class IntegratedReport {
 
   Map<String, dynamic> toMap() => {
         "id": id,
+        "report_date": DateFormat('yyyy-MM-dd').format(reportDate),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "file": file.toMap(),

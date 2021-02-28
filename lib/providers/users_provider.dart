@@ -62,7 +62,9 @@ class UsersProvider {
     try {
       String token = _prefs.token;
 
-      var response = await http.post(
+      print("Updating user $user");
+
+      var response = await http.put(
         _endpoint,
         headers: {
           'content-type': 'application/json',
@@ -72,11 +74,13 @@ class UsersProvider {
       );
 
       if (response.statusCode == 200) {
+        print("User updated successfully");
         print(response.body);
 
         return true;
       } else {
-        print('Request failed with status: ${response.statusCode}.');
+        print(
+            'Update user request failed with status: ${response.statusCode}.');
       }
     } catch (Exception) {
       print(Exception);

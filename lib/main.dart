@@ -6,7 +6,7 @@ import 'package:mi_promotora/bloc/provider_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:mi_promotora/providers/push_notifications_provider.dart';
+import 'package:mi_promotora/utils/manage_notification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,23 +41,7 @@ class _MiPromotoraState extends State<MiPromotora> {
   void initState() {
     super.initState();
 
-    final pushProvider = new PushNotificationsProvider();
-    pushProvider.initNotifications();
-    pushProvider.messageStreamm.listen((message) {
-      print('Message received: $message');
-
-      scaffoldMessengerKey.currentState.showSnackBar(SnackBar(
-        backgroundColor: widget.accentLight,
-        content: Text(message.notification.body),
-        duration: Duration(seconds: 10),
-        action: SnackBarAction(
-          label: 'OK',
-          textColor: widget.primary,
-          disabledTextColor: widget.primary,
-          onPressed: () {},
-        ),
-      ));
-    });
+    manageNotifications(scaffoldMessengerKey);
   }
 
   @override
