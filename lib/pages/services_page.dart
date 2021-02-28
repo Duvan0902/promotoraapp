@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:mi_promotora/common/settings_menu.dart';
 import 'package:mi_promotora/common/drawer.dart';
 import 'package:mi_promotora/models/atac_model.dart';
+import 'package:mi_promotora/pages/services_detailed_page.dart';
 import 'package:mi_promotora/providers/service_provider.dart';
-
-import 'services_view.dart';
+import 'package:mi_promotora/utils/random_color.dart';
 
 class ServicesPage extends StatefulWidget {
   const ServicesPage({Key key}) : super(key: key);
@@ -22,10 +23,11 @@ class _ServicesPageState extends State<ServicesPage> {
         drawer: CustomDrawer(),
         body: Container(
           color: Colors.grey[900],
+          padding: EdgeInsets.all(10),
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               _description(context),
               SizedBox(
@@ -81,8 +83,70 @@ class _ServicesPageState extends State<ServicesPage> {
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (context, index) {
-        return ServicesView(
-          atac: services[index],
+        return _serviceCategoryItem(services[index]);
+      },
+    );
+  }
+
+  Widget _serviceCategoryItem(AtacModel category) {
+    final String _url = GlobalConfiguration().getValue("api_url");
+
+    return InkWell(
+      child: ClipRect(
+        child: Container(
+          height: 150.0,
+          margin: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              color: generateRandomColor(),
+              borderRadius: BorderRadius.circular(10.0)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              SizedBox(height: 5.0),
+              CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 30.0,
+                child: IconButton(
+                  color: Colors.black,
+                  icon: Image.network(
+                    _url + category.icon.url,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ServicesDetailedPage(
+                          categoriesAtac: category.atacCategories,
+                          atac: category,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Text(
+                category.name,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.white, fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 5.0)
+            ],
+          ),
+        ),
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ServicesDetailedPage(
+              categoriesAtac: category.atacCategories,
+              atac: category,
+            ),
+          ),
         );
       },
     );

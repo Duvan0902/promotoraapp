@@ -8,12 +8,12 @@ import 'package:mi_promotora/providers/atac_requests_provider.dart';
 
 import 'home_page.dart';
 
-class AtacPage extends StatefulWidget {
+class ServicesDetailedPage extends StatefulWidget {
   final List<AtacCategory> categoriesAtac;
 
   final AtacModel atac;
 
-  const AtacPage({
+  const ServicesDetailedPage({
     Key key,
     this.categoriesAtac,
     this.atac,
@@ -21,59 +21,57 @@ class AtacPage extends StatefulWidget {
         super(key: key);
 
   @override
-  AtacPageState createState() => AtacPageState();
+  ServicesDetailedPageState createState() => ServicesDetailedPageState();
 }
 
-class AtacPageState extends State<AtacPage> {
+class ServicesDetailedPageState extends State<ServicesDetailedPage> {
   List<String> interests = [];
   String data = "";
   String others = 'Otros: ';
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        appBar: AppBar(
-          brightness: Brightness.dark,
-          iconTheme: IconThemeData(
-            color: Colors.white,
-          ),
-          backgroundColor: Colors.grey[900],
-          title: new Text(
-            "ATAC",
-            style: Theme.of(context)
-                .textTheme
-                .headline2
-                .copyWith(color: Colors.white, fontSize: 20),
-          ),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(
+          color: Colors.white,
         ),
-        body: Container(
-          padding: EdgeInsets.all(17),
-          child: Column(
-            children: <Widget>[
-              _title(context),
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: _cardAtac(context, widget.categoriesAtac),
-              ),
-              _others(),
-              SizedBox(
-                height: 10,
-              ),
-              _sendButton(),
-              SizedBox(
-                height: 20,
-              ),
-            ],
-          ),
+        backgroundColor: Colors.grey[900],
+        title: new Text(
+          "ATAC",
+          style: Theme.of(context)
+              .textTheme
+              .headline2
+              .copyWith(color: Colors.white, fontSize: 20),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: <Widget>[
+            _title(context),
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: _cardAtac(context, widget.categoriesAtac),
+            ),
+            _others(),
+            SizedBox(
+              height: 10,
+            ),
+            _sendButton(),
+            SizedBox(
+              height: 20,
+            ),
+          ],
         ),
       ),
     );

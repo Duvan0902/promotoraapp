@@ -14,12 +14,15 @@ class BarChartSampleState extends State<BarChartSample> {
   Widget build(BuildContext context) {
     GoalsProvider goalsProvider = GoalsProvider();
 
+    DateTime currentDate = DateTime.now();
+    DateTime initialDate = currentDate.subtract(Duration(days: 30 * 6));
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       child: FutureBuilder(
-        future: goalsProvider.getHistoric(DateTime.parse('2021-01-01')),
+        future: goalsProvider.getHistoric(initialDate),
         builder:
             (BuildContext context, AsyncSnapshot<List<GoalsModel>> snapshot) {
           if (snapshot.hasData) {

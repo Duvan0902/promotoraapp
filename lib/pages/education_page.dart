@@ -21,38 +21,32 @@ class _EducationsPageState extends State<EducationsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        appBar: _topBar(context),
-        drawer: CustomDrawer(),
-        body: Container(
-          color: Colors.grey[900],
-          padding: EdgeInsets.all(10),
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 15),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: _titleEducation(context),
+    return Scaffold(
+      appBar: _topBar(context),
+      drawer: CustomDrawer(),
+      body: Container(
+        color: Colors.grey[900],
+        padding: EdgeInsets.all(10),
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text(
+                'Te brindamos material de apoyo que te puede ayudar en tu proceso.',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.white, fontSize: 17),
               ),
-              SizedBox(height: 20),
-              Expanded(
-                child: _education(context),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(height: 20),
+            Expanded(
+              child: _education(context),
+            ),
+          ],
         ),
       ),
-    );
-  }
-
-  Widget _titleEducation(context) {
-    return Text(
-      'Te brindamos material de apoyo que te puede ayudar en tu proceso.',
-      style: Theme.of(context)
-          .textTheme
-          .bodyText1
-          .copyWith(color: Colors.white, fontSize: 17),
     );
   }
 
@@ -117,7 +111,7 @@ class _EducationsPageState extends State<EducationsPage> {
       child: ClipRect(
         child: Container(
           height: 150.0,
-          margin: EdgeInsets.all(8.0),
+          margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: generateRandomColor(),
             borderRadius: BorderRadius.circular(10.0),
