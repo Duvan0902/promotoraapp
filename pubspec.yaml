@@ -38,7 +38,7 @@ dependencies:
   global_configuration: ^1.6.0
   grouped_buttons: ^1.0.4
   http: ^0.12.2
-  intl: ^0.17.0
+  intl: ^0.17.0-nullsafety.2
   pie_chart: ^4.0.1
   random_color: ^1.0.5
   recase: ^3.0.1

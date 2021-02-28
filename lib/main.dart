@@ -33,17 +33,39 @@ class MiPromotora extends StatefulWidget {
 }
 
 class _MiPromotoraState extends State<MiPromotora> {
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+
   @override
   void initState() {
     super.initState();
+
     final pushProvider = new PushNotificationsProvider();
     pushProvider.initNotifications();
+    pushProvider.messageStreamm.listen((message) {
+      print('Message received: $message');
+
+      scaffoldMessengerKey.currentState.showSnackBar(SnackBar(
+        backgroundColor: widget.accentLight,
+        content: Text(message.notification.body),
+        duration: Duration(seconds: 10),
+        action: SnackBarAction(
+          label: 'OK',
+          textColor: widget.primary,
+          disabledTextColor: widget.primary,
+          onPressed: () {},
+        ),
+      ));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Provider(
       child: MaterialApp(
+        navigatorKey: navigatorKey,
+        scaffoldMessengerKey: scaffoldMessengerKey,
         debugShowCheckedModeBanner: false,
         title: 'Promotora App',
         localizationsDelegates: [

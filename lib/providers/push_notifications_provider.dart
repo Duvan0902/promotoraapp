@@ -1,7 +1,13 @@
+import 'dart:async';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:mi_promotora/models/message_model.dart';
 
 class PushNotificationsProvider {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  final _messageStreamController = StreamController<MessageModel>.broadcast();
+
+  Stream<MessageModel> get messageStreamm => _messageStreamController.stream;
 
   initNotifications() async {
     await _firebaseMessaging.requestNotificationPermissions();
@@ -17,52 +23,24 @@ class PushNotificationsProvider {
   }
 
   static Future<dynamic> onBackgroundMessage(
-      Map<String, dynamic> message) async {
-    if (message.containsKey('data')) {
-      // Handle data message
-      final dynamic data = message['data'];
-    }
-
-    if (message.containsKey('notification')) {
-      // Handle notification message
-      final dynamic notification = message['notification'];
-    }
-  }
+      Map<String, dynamic> message) async {}
 
   Future<dynamic> launch(Map<String, dynamic> message) async {
-    if (message.containsKey('data')) {
-      // Handle data message
-      final dynamic data = message['data'];
-    }
-
-    if (message.containsKey('notification')) {
-      // Handle notification message
-      final dynamic notification = message['notification'];
-    }
+    MessageModel receivedMessage = MessageModel.fromMap(message);
+    _messageStreamController.add(receivedMessage);
   }
 
   Future<dynamic> onResume(Map<String, dynamic> message) async {
-    if (message.containsKey('data')) {
-      // Handle data message
-      final dynamic data = message['data'];
-    }
-
-    if (message.containsKey('notification')) {
-      // Handle notification message
-      final dynamic notification = message['notification'];
-    }
+    MessageModel receivedMessage = MessageModel.fromMap(message);
+    _messageStreamController.add(receivedMessage);
   }
 
   Future<dynamic> onMessage(Map<String, dynamic> message) async {
-    print(message);
-    if (message.containsKey('data')) {
-      // Handle data message
-      final dynamic data = message['data'];
-    }
+    MessageModel receivedMessage = MessageModel.fromMap(message);
+    _messageStreamController.add(receivedMessage);
+  }
 
-    if (message.containsKey('notification')) {
-      // Handle notification message
-      final dynamic notification = message['notification'];
-    }
+  void dispose() {
+    _messageStreamController?.close();
   }
 }
