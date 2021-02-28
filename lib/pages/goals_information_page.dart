@@ -19,8 +19,11 @@ class GoalInformationPage extends StatefulWidget {
 }
 
 class _GoalInformationPageState extends State<GoalInformationPage> {
-  String _sign = "\$";
-
+  final NumberFormat currencyFormat = NumberFormat.currency(
+      locale: 'es_CO',
+      symbol: '\$',
+      decimalDigits: 0,
+      customPattern: '\u00A4###,###');
   @override
   void initState() {
     super.initState();
@@ -69,12 +72,12 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
   }
 
   Widget _progressBarBudget() {
-    var pdnNew = widget.goals.pdnNew;
-    var covertNumberPdnNew = double.parse(pdnNew);
-    var totalPercentage = widget.goals.goal;
-    var convertNumberGoal = double.parse(totalPercentage);
-    var totalPercentagePdnNew = (100 * covertNumberPdnNew / convertNumberGoal);
-    var newNamberGoal = NumberFormat.decimalPattern().format(convertNumberGoal);
+    double pdnNew = double.tryParse(widget.goals.pdnNew);
+    double goal = double.tryParse(widget.goals.goal);
+    double totalPercentagePdnNew = (100 * pdnNew / goal);
+
+    String formattedGoal = NumberFormat.compactSimpleCurrency().format(goal);
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -107,8 +110,8 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(_sign + '0'),
-                Text(_sign + newNamberGoal),
+                Text(currencyFormat.format(0)),
+                Text(formattedGoal),
               ],
             )
           ],
@@ -125,13 +128,13 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
     var goalValue = widget.goals.goal;
     var avgPrima = widget.goals.avgPrima;
     var pdnNew = widget.goals.pdnNew;
-    var covertNumberPdnNew = double.parse(pdnNew);
-    var covertNumberGoal = double.parse(goalValue);
-    var covertNumberAvgPrima = double.parse(avgPrima);
-    var leaflet =
+    double covertNumberPdnNew = double.parse(pdnNew);
+    double covertNumberGoal = double.parse(goalValue);
+    double covertNumberAvgPrima = double.parse(avgPrima);
+    int leaflet =
         (covertNumberGoal / (widget.goals.pctEffect * covertNumberAvgPrima))
             .ceil();
-    var totalPercentageLeaflet =
+    double totalPercentageLeaflet =
         (100 * (covertNumberPdnNew / covertNumberAvgPrima) / leaflet);
 
     return Card(
@@ -302,15 +305,11 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
   }
 
   Widget _weightValue() {
-    var total = widget.goals.pdnTotal;
-    var changeTotal = int.parse(total).ceil();
-    var finaldataTotal = NumberFormat.decimalPattern().format(changeTotal); //
+    double total = double.tryParse(widget.goals.pdnTotal);
+    double cancelled = double.tryParse(widget.goals.pdnCanc);
 
-    var cancel = widget.goals.pdnCanc;
-    var changeCancel = int.parse(cancel).abs().ceil();
-
-    var finaldataCancel = NumberFormat.decimalPattern().format(changeCancel);
     final size = MediaQuery.of(context).size;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
@@ -327,7 +326,7 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
                 children: <Widget>[
                   SizedBox(height: 40),
                   Text(
-                    _sign + finaldataCancel,
+                    currencyFormat.format(cancelled.abs()),
                     style: Theme.of(context)
                         .textTheme
                         .headline1
@@ -360,7 +359,7 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
                 children: <Widget>[
                   SizedBox(height: 40),
                   Text(
-                    (_sign + finaldataTotal),
+                    currencyFormat.format(total),
                     style: Theme.of(context)
                         .textTheme
                         .headline1

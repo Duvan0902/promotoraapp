@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:mi_promotora/models/goals_model.dart';
+import 'package:mi_promotora/providers/goals_provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class BarChartSample extends StatefulWidget {
@@ -7,71 +10,82 @@ class BarChartSample extends StatefulWidget {
 }
 
 class BarChartSampleState extends State<BarChartSample> {
-  List<_SalesData> data = [
-    _SalesData('Jan', 35),
-    _SalesData('Feb', 28),
-    _SalesData('Mar', 34),
-    _SalesData('Apr', 32),
-    _SalesData('May', 32),
-    _SalesData('Jun', 32),
-    _SalesData('Jul', 32),
-    _SalesData('Aug', 32),
-    _SalesData('Sep', 40)
-  ];
   @override
   Widget build(BuildContext context) {
+    GoalsProvider goalsProvider = GoalsProvider();
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child:
-            //Initialize the chart widget
-            SfCartesianChart(
-          primaryXAxis: CategoryAxis(),
-          // Chart title
-          title: ChartTitle(
-            text: 'Tus logros con respecto a tus metas anuales',
-            textStyle: Theme.of(context)
-                .textTheme
-                .bodyText2
-                .copyWith(color: Colors.black, fontSize: 14),
-            alignment: ChartAlignment.center,
-          ),
-          // Enable legend
-          legend: Legend(isVisible: true, position: LegendPosition.bottom),
-          // Enable tooltip
-          tooltipBehavior: TooltipBehavior(enable: true),
-          series: <ChartSeries<_SalesData, String>>[
-            ColumnSeries<_SalesData, String>(
-              dataSource: data,
-              xValueMapper: (_SalesData sales, _) => sales.year,
-              yValueMapper: (_SalesData sales, _) => sales.sales,
-              name: 'Lo que llevas',
-              // Enable data label
-              dataLabelSettings: DataLabelSettings(isVisible: false),
-              color: Colors.blue,
-            ),
-            ColumnSeries<_SalesData, String>(
-              dataSource: data,
-              xValueMapper: (_SalesData sales, _) => sales.year,
-              yValueMapper: (_SalesData sales, _) => sales.sales,
-              name: 'Lo que debes alcanzar',
-              // Enable data label
-              dataLabelSettings: DataLabelSettings(isVisible: false),
-              color: Colors.yellow[600],
-            )
-          ],
-        ),
+      child: FutureBuilder(
+        future: goalsProvider.getHistoric(DateTime.parse('2021-01-01')),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<GoalsModel>> snapshot) {
+          if (snapshot.hasData) {
+            return _historicChart(snapshot.data);
+          } else {
+            return Container(
+              height: 400,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        },
       ),
     );
   }
-}
 
-class _SalesData {
-  _SalesData(this.year, this.sales);
-
-  final String year;
-  final double sales;
+  Widget _historicChart(List<GoalsModel> data) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      child:
+          //Initialize the chart widget
+          SfCartesianChart(
+        primaryXAxis: CategoryAxis(
+          labelRotation: -45,
+        ),
+        primaryYAxis: NumericAxis(
+          numberFormat:
+              NumberFormat.compactSimpleCurrency(name: 'COP', locale: 'es'),
+        ),
+        // Chart title
+        title: ChartTitle(
+          text: 'Tus logros con respecto a tus metas anuales',
+          textStyle: Theme.of(context)
+              .textTheme
+              .bodyText2
+              .copyWith(color: Colors.black, fontSize: 14),
+          alignment: ChartAlignment.center,
+        ),
+        // Enable legend
+        legend: Legend(isVisible: true, position: LegendPosition.bottom),
+        // Enable tooltip
+        tooltipBehavior: TooltipBehavior(enable: true),
+        series: <ChartSeries<GoalsModel, String>>[
+          ColumnSeries<GoalsModel, String>(
+            dataSource: data,
+            xValueMapper: (GoalsModel goal, _) =>
+                DateFormat('MMM').format(goal.reportDate),
+            yValueMapper: (GoalsModel goal, _) => double.tryParse(goal.pdnNew),
+            name: 'Lo que llevas',
+            // Enable data label
+            dataLabelSettings: DataLabelSettings(isVisible: false),
+            color: Colors.blue,
+          ),
+          ColumnSeries<GoalsModel, String>(
+            dataSource: data,
+            xValueMapper: (GoalsModel goal, _) =>
+                DateFormat('MMM').format(goal.reportDate),
+            yValueMapper: (GoalsModel goal, _) => double.tryParse(goal.goal),
+            name: 'Lo que falta',
+            // Enable data label
+            dataLabelSettings: DataLabelSettings(isVisible: false),
+            color: Colors.yellow[600],
+          )
+        ],
+      ),
+    );
+  }
 }

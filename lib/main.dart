@@ -53,14 +53,14 @@ class _MiPromotoraState extends State<MiPromotora> {
         debugShowCheckedModeBanner: false,
         title: 'Promotora App',
         localizationsDelegates: [
-          // ... app-specific localization delegate[s] here
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: [
-          const Locale('en', 'US'), // English, no country code
-          const Locale('es', 'ES'), // Spanish, no country code
+          const Locale('es', 'CO'),
+          const Locale('es', 'ES'),
+          const Locale('es', 'US'),
         ],
         theme: ThemeData(
           primarySwatch: Colors.cyan,

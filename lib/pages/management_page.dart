@@ -29,8 +29,8 @@ class _ManagementPageState extends State<ManagementPage> {
     GoalsProvider goalsProvider = GoalsProvider();
     SalesProvider salesProvider = SalesProvider();
 
-    GoalsModel goals = await goalsProvider.getGoal().then((value) => value);
-    int sales = await salesProvider.getSalesCount().then((value) => value);
+    GoalsModel goals = await goalsProvider.getGoal();
+    int sales = await salesProvider.getSalesCount();
     print("Data: " + goals.avgPrima);
     print("Sales: " + sales.toString());
     String url = goals.integratedReport.file.url;

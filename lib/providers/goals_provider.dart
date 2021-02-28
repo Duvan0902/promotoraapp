@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:mi_promotora/models/goals_model.dart';
@@ -38,8 +39,10 @@ class GoalsProvider {
   Future<List<GoalsModel>> getHistoric(DateTime date) async {
     String userName = _prefs.userName;
     String token = _prefs.token;
+    String dateFilter = DateFormat('yyyy-MM-dd').format(date);
+
     final String _url = GlobalConfiguration().getValue("api_url") +
-        "/reporte-integrado-data?user_code=$userName&branch_gct=Total&report_date_gte=2021-01-01&_limit=10";
+        "/reporte-integrado-data?user_code=$userName&branch_gct=Total&report_date_gte=$dateFilter&_limit=10";
 
     try {
       var response = await http.get(
@@ -47,10 +50,11 @@ class GoalsProvider {
         headers: {'Authorization': 'Bearer $token'},
       );
 
+      print(_url);
       if (response.statusCode == 200) {
-        print(response.body);
+        print('Get Historic ${response.body}');
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
-        List<GoalsModel> goals;
+        List<GoalsModel> goals = [];
 
         for (var item in jsonResponse) {
           GoalsModel goal = GoalsModel.fromMap(item);
