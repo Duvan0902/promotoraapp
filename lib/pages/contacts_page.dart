@@ -159,10 +159,10 @@ class _ContactsPageState extends State<ContactsPage> {
     );
   }
 
-  Widget _userList(List<UsersModel> users) {
+  Widget _userList(List<UserModel> users) {
     print("Search text is: $searchText");
 
-    List<UsersModel> filteredListUser;
+    List<UserModel> filteredListUser;
 
     if (searchText != "" && searchText != null) {
       filteredListUser = users.where((contact) {

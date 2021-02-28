@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class UsersModel {
-  UsersModel({
+class UserModel {
+  UserModel({
     this.id,
     this.username,
     this.email,
@@ -16,6 +16,7 @@ class UsersModel {
     this.phone1,
     this.phone2,
     this.description,
+    this.deviceToken,
   });
 
   int id;
@@ -32,13 +33,13 @@ class UsersModel {
   String phone1;
   String phone2;
   String description;
+  String deviceToken;
 
-  factory UsersModel.fromJson(String str) =>
-      UsersModel.fromMap(json.decode(str));
+  factory UserModel.fromJson(String str) => UserModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory UsersModel.fromMap(Map<String, dynamic> json) => UsersModel(
+  factory UserModel.fromMap(Map<String, dynamic> json) => UserModel(
         id: json["id"],
         username: json["username"],
         email: json["email"],
@@ -53,6 +54,7 @@ class UsersModel {
         phone1: json["phone1"],
         phone2: json["phone2"],
         description: json["description"],
+        deviceToken: json["device-token"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -70,5 +72,11 @@ class UsersModel {
         "phone1": phone1,
         "phone2": phone2,
         "description": description,
+        "device-token": deviceToken,
       };
+
+  @override
+  String toString() {
+    return this.toJson();
+  }
 }

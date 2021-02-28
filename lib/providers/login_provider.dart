@@ -45,7 +45,7 @@ class LoginProvider {
           return {
             'ok': false,
             'message':
-                'Correo o contraseña invalidos. Por favor vuelva intentarlo.',
+                'Correo o contraseña inválidos. Por favor vuelve a intentarlo.',
           };
           break;
         default:

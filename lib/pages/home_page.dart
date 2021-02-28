@@ -9,6 +9,7 @@ import 'package:mi_promotora/pages/goals_page.dart';
 import 'package:mi_promotora/pages/services_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mi_promotora/main.dart';
+import 'package:mi_promotora/providers/users_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -31,6 +32,13 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    UsersProvider usersProvider = UsersProvider();
+    usersProvider.updateUserDevice();
   }
 
   @override

@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:recase/recase.dart';
 
 class UsersManagementList extends StatefulWidget {
-  final UsersModel user;
+  final UserModel user;
 
   UsersManagementList({Key key, this.user}) : super(key: key);
 
