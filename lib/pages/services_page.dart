@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mi_promotora/common/Popup_Menu_Button.dart';
+import 'package:mi_promotora/common/settings_menu.dart';
 import 'package:mi_promotora/common/drawer.dart';
 import 'package:mi_promotora/models/atac_model.dart';
 import 'package:mi_promotora/providers/service_provider.dart';
 
-import 'services_View.dart';
+import 'services_view.dart';
 
 class ServicesPage extends StatefulWidget {
   const ServicesPage({Key key}) : super(key: key);
@@ -96,6 +96,7 @@ class _ServicesPageState extends State<ServicesPage> {
       preferredSize: Size(screenWidth, barHeight),
       child: Container(
         child: AppBar(
+          brightness: Brightness.dark,
           backgroundColor: Colors.grey[900],
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

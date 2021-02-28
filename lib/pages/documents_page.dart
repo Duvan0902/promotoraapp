@@ -21,11 +21,12 @@ class _DocumentsPageState extends State<DocumentsPage> {
   SearchBar searchBar;
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      brightness: Brightness.dark,
       leading: BackButton(
           color: Colors.white,
           onPressed: () =>
               Navigator.of(context, rootNavigator: true).pop(context)),
-      title: new Text('Preguntas Frecuentes'),
+      title: new Text('Documentos'),
       actions: [searchBar.getSearchAction(context)],
       backgroundColor: Colors.grey[900],
     );

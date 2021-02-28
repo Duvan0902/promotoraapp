@@ -34,6 +34,7 @@ class AtacPageState extends State<AtacPage> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
+          brightness: Brightness.dark,
           iconTheme: IconThemeData(
             color: Colors.white,
           ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mi_promotora/common/Popup_Menu_Button.dart';
+import 'package:mi_promotora/common/settings_menu.dart';
 import 'package:mi_promotora/common/drawer.dart';
 import 'package:mi_promotora/models/goals_model.dart';
 import 'package:mi_promotora/pages/goals_information_page.dart';
@@ -34,6 +34,7 @@ class _GoalsPageState extends State<GoalsPage> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
+          brightness: Brightness.dark,
           backgroundColor: Colors.grey[900],
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

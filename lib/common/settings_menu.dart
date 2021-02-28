@@ -17,9 +17,9 @@ class _PopupButtonState extends State<PopupButton> {
       itemBuilder: (context) => [
         PopupMenuItem(
           value: 1,
-          child: RaisedButton(
-            padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
+          child: GestureDetector(
             child: Container(
+              padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -38,9 +38,8 @@ class _PopupButtonState extends State<PopupButton> {
                 ],
               ),
             ),
-            color: Colors.white,
-            disabledTextColor: Colors.grey,
-            onPressed: () {
+            onTap: () {
+              Navigator.of(context).pop();
               Navigator.push(
                 context,
                 MaterialPageRoute(

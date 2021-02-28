@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mi_promotora/common/Popup_Menu_Button.dart';
+import 'package:mi_promotora/common/settings_menu.dart';
 import 'package:mi_promotora/common/drawer.dart';
 import 'package:mi_promotora/models/contacts_model.dart';
 import 'package:mi_promotora/models/users_model.dart';
@@ -27,6 +27,7 @@ class _ContactsPageState extends State<ContactsPage> {
   SearchBar searchBar;
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      brightness: Brightness.dark,
       title: new Text('Buscar Contactos'),
       actions: [
         Row(

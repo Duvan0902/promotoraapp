@@ -21,6 +21,7 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      brightness: Brightness.dark,
       leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () =>

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mi_promotora/pages/services_View.dart';
+import 'package:mi_promotora/pages/services_view.dart';
 import 'package:mi_promotora/models/atac_model.dart';
 
 class ServicesList extends StatelessWidget {

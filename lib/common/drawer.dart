@@ -12,6 +12,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final prefs = new UserPreferences();
+
     return Container(
       child: ClipRRect(
         borderRadius: BorderRadius.only(

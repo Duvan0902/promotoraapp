@@ -24,6 +24,7 @@ class _EducationDetailedPageState extends State<EducationDetailedPage> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
+          brightness: Brightness.dark,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {

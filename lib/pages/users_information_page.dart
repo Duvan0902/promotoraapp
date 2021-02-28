@@ -25,6 +25,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
+          brightness: Brightness.dark,
           iconTheme: IconThemeData(
             color: Colors.white,
           ),
@@ -178,7 +179,7 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
                           ),
                           color: MiPromotora().primaryDark,
                           iconSize: 30,
-                          onPressed: () => _launchURL2(widget.phone2),
+                          onPressed: () => _launchURL(widget.phone2),
                         )
                       ],
                     ),
@@ -212,14 +213,6 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
       await launch('tel:' + phone);
     } else {
       throw 'Could not launch $phone';
-    }
-  }
-
-  _launchURL2(phone2) async {
-    if (await canLaunch('tel:' + phone2)) {
-      await launch('tel:' + phone2);
-    } else {
-      throw 'Could not launch $phone2';
     }
   }
 }

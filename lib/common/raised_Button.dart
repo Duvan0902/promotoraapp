@@ -46,6 +46,7 @@ class BottomList extends StatelessWidget {
         color: Colors.white,
         disabledTextColor: Colors.grey,
         onPressed: () {
+          Navigator.of(context).pop();
           Navigator.push(
             context,
             MaterialPageRoute(

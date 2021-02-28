@@ -21,35 +21,34 @@ class ContactInformationPage extends StatefulWidget {
 class _ContactInformationPageState extends State<ContactInformationPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(
-            color: Colors.white,
-          ),
-          backgroundColor: Colors.grey[900],
-          title: new Text(
-            "Contactos",
-            style: Theme.of(context)
-                .textTheme
-                .headline2
-                .copyWith(color: Colors.white, fontSize: 20),
-          ),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          flexibleSpace: Container(
-            padding: EdgeInsets.only(left: 75),
-            child: Icon(Icons.ac_unit),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(
+          color: Colors.white,
         ),
-        body: Container(
-          padding: EdgeInsets.all(15),
-          child: _contactsTitle(context),
+        backgroundColor: Colors.grey[900],
+        title: new Text(
+          "Contactos",
+          style: Theme.of(context)
+              .textTheme
+              .headline2
+              .copyWith(color: Colors.white, fontSize: 20),
         ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        flexibleSpace: Container(
+          padding: EdgeInsets.only(left: 75),
+          child: Icon(Icons.ac_unit),
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(15),
+        child: _contactsTitle(context),
       ),
     );
   }
@@ -147,7 +146,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
                           ),
                           color: MiPromotora().primaryDark,
                           iconSize: 30,
-                          onPressed: () => _launchURL(widget.phone),
+                          onPressed: () => _callPhone(widget.phone),
                         )
                       ],
                     ),
@@ -174,7 +173,7 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
                           ),
                           color: MiPromotora().primaryDark,
                           iconSize: 30,
-                          onPressed: () => _launchURL2(widget.phone1),
+                          onPressed: () => _callPhone(widget.phone1),
                         )
                       ],
                     ),
@@ -203,19 +202,11 @@ class _ContactInformationPageState extends State<ContactInformationPage> {
     );
   }
 
-  _launchURL(phone) async {
+  _callPhone(phone) async {
     if (await canLaunch('tel:' + phone)) {
       await launch('tel:' + phone);
     } else {
       throw 'Could not launch $phone';
-    }
-  }
-
-  _launchURL2(phone2) async {
-    if (await canLaunch('tel:' + phone2)) {
-      await launch('tel:' + phone2);
-    } else {
-      throw 'Could not launch $phone2';
     }
   }
 }

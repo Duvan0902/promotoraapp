@@ -40,7 +40,14 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               children: <Widget>[
                 SizedBox(height: 60),
                 Container(
-                  child: _mainTitle(context),
+                  child: Text(
+                    'Cambiar mi contraseña',
+                    textAlign: TextAlign.left,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1
+                        .copyWith(color: Colors.black, fontSize: 35),
+                  ),
                   alignment: Alignment.center,
                 ),
                 SizedBox(height: 40),
@@ -58,7 +65,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 SizedBox(height: 30.0),
                 SizedBox(height: 40.0),
                 Container(
-                  child: _createButton(context),
+                  child: _nextPageButton(context),
                   alignment: Alignment.bottomCenter,
                 ),
                 SizedBox(height: 40),
@@ -67,17 +74,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _mainTitle(context) {
-    return Text(
-      'Cambiar mi contraseña',
-      textAlign: TextAlign.left,
-      style: Theme.of(context)
-          .textTheme
-          .headline1
-          .copyWith(color: Colors.black, fontSize: 35),
     );
   }
 
@@ -109,7 +105,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   }
 }
 
-Widget _createButton(context) {
+Widget _nextPageButton(context) {
   final size = MediaQuery.of(context).size;
   return RaisedButton(
     child: Container(
