@@ -7,7 +7,20 @@ import 'package:mi_promotora/utils/alert_dialog.dart';
 
 import 'forgot_password_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool _isPasswordHidden = true;
+
+  void _toggleVisibility() {
+    setState(() {
+      _isPasswordHidden = !_isPasswordHidden;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,32 +152,41 @@ class LoginPage extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return Container(
           color: Color.fromRGBO(243, 243, 243, 1),
-          child: TextField(
-            obscureText: true,
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1
-                .copyWith(color: Colors.black, fontSize: 18),
-            decoration: InputDecoration(
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: MiPromotora().primaryDark),
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: MiPromotora().primaryDark),
-              ),
-              contentPadding: EdgeInsets.all(10),
-              hintText: "Escribe tu contraseña",
-              hintStyle: Theme.of(context)
+          child: Theme(
+            data: Theme.of(context).copyWith(primaryColor: Colors.cyan),
+            child: TextField(
+              style: Theme.of(context)
                   .textTheme
                   .bodyText1
-                  .copyWith(color: Colors.black45, fontSize: 14),
-              errorText: snapshot.error,
-              errorStyle: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: Colors.red),
+                  .copyWith(color: Colors.black, fontSize: 18),
+              obscureText: _isPasswordHidden,
+              decoration: InputDecoration(
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: MiPromotora().primaryDark),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: MiPromotora().primaryDark),
+                ),
+                contentPadding: EdgeInsets.all(10),
+                hintText: "Escribe tu contraseña",
+                hintStyle: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.black45, fontSize: 14),
+                errorText: snapshot.error,
+                errorStyle: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.red),
+                suffixIcon: IconButton(
+                  icon: Icon(_isPasswordHidden
+                      ? Icons.visibility
+                      : Icons.visibility_off),
+                  onPressed: _toggleVisibility,
+                ),
+              ),
+              onChanged: bloc.changePassword,
             ),
-            onChanged: bloc.changePassword,
           ),
         );
       },
