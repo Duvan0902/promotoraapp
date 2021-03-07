@@ -17,7 +17,7 @@ class LoginBloc with Validators {
   Function(String) get changeEmail => _emailController.sink.add;
   Function(String) get changePassword => _passwordController.sink.add;
 
-  String get identifare => _emailController.value;
+  String get identity => _emailController.value;
   String get password => _passwordController.value;
 
   dispose() {

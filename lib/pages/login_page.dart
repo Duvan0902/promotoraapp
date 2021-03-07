@@ -255,7 +255,7 @@ Widget _background(BuildContext context) {
 
 _login(LoginBloc bloc, BuildContext context) async {
   final LoginProvider loginProvider = LoginProvider();
-  Map info = await loginProvider.login(bloc.identifare, bloc.password);
+  Map info = await loginProvider.login(bloc.identity, bloc.password);
   if (info['ok']) {
     Navigator.pushReplacementNamed(context, 'home');
   } else {
