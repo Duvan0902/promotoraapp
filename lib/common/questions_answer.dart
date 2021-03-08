@@ -43,7 +43,7 @@ class _ExpansionCardState extends State<ExpansionCard> {
               padding: EdgeInsets.only(top: 5, bottom: 5),
               child: Text(
                 widget.questions,
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.left,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1

@@ -2,26 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:mi_promotora/models/user_model.dart';
 import 'package:mi_promotora/pages/users_information_page.dart';
 import 'package:mi_promotora/main.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:mi_promotora/utils/launch_url.dart';
 import 'package:recase/recase.dart';
 
-class UsersManagementList extends StatefulWidget {
+class UserInformationItem extends StatefulWidget {
   final UserModel user;
 
-  UsersManagementList({Key key, this.user}) : super(key: key);
+  UserInformationItem({Key key, this.user}) : super(key: key);
 
   @override
-  _UsersManagementListState createState() => _UsersManagementListState();
+  _UserInformationItemState createState() => _UserInformationItemState();
 }
 
-class _UsersManagementListState extends State<UsersManagementList> {
-  String name = '';
-  String surname = '';
-  String position = '';
-  String description = '';
-  String email = '';
-  String phone1 = '';
-  String phone2 = '';
+class _UserInformationItemState extends State<UserInformationItem> {
   @override
   Widget build(BuildContext context) {
     var listTile = Flexible(
@@ -80,38 +73,21 @@ class _UsersManagementListState extends State<UsersManagementList> {
                   ),
                   color: MiPromotora().primaryDark,
                   iconSize: 30,
-                  onPressed: () => _launchURL(widget.user.phone1),
+                  onPressed: () => callPhone(widget.user.phone1),
                 )
               ],
             ),
           ),
           onTap: () {
-            name = widget.user.name;
-            surname = widget.user.surname;
-            position = widget.user.position;
-            description = widget.user.description;
-            email = widget.user.email;
-            phone1 = widget.user.phone1;
-            phone2 = widget.user.phone2;
-
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => UsersInformationPage(name, surname,
-                    position, description, email, phone1, phone2),
+                builder: (context) => UsersInformationPage(widget.user),
               ),
             );
           },
         ),
       ),
     );
-  }
-
-  _launchURL(phone) async {
-    if (await canLaunch('tel:' + phone)) {
-      await launch('tel:' + phone);
-    } else {
-      throw 'Could not launch $phone';
-    }
   }
 }

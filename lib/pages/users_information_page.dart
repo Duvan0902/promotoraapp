@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:mi_promotora/main.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:mi_promotora/models/user_model.dart';
+import 'package:mi_promotora/utils/launch_url.dart';
 import 'package:recase/recase.dart';
 
 // ignore: must_be_immutable
 class UsersInformationPage extends StatefulWidget {
-  String name;
-  String surname;
-  String position;
-  String description;
-  String email;
-  String phone1;
-  String phone2;
-  UsersInformationPage(this.name, this.surname, this.position, this.description,
-      this.email, this.phone1, this.phone2);
+  final UserModel user;
+
+  UsersInformationPage(this.user);
 
   @override
   _UsersInformationPageState createState() => _UsersInformationPageState();
@@ -22,6 +18,8 @@ class UsersInformationPage extends StatefulWidget {
 class _UsersInformationPageState extends State<UsersInformationPage> {
   @override
   Widget build(BuildContext context) {
+    final String baseUrl = GlobalConfiguration().getValue("api_url");
+
     return Container(
       child: Scaffold(
         appBar: AppBar(
@@ -48,171 +46,160 @@ class _UsersInformationPageState extends State<UsersInformationPage> {
             child: Icon(Icons.ac_unit),
           ),
         ),
-        body: Container(
+        body: SingleChildScrollView(
           padding: const EdgeInsets.all(15),
-          child: Container(
-            child: _posterTitle(context),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _posterTitle(context) {
-    final size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            elevation: 2.0,
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Row(
-                    children: [
-                      Text(
-                        widget.name.titleCase,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1
-                            .copyWith(color: Colors.black, fontSize: 18),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        widget.surname.titleCase,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1
-                            .copyWith(color: Colors.black, fontSize: 18),
-                      )
-                    ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  Container(
-                    alignment: Alignment.bottomLeft,
-                    child: Text(
-                      widget.position.titleCase,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .copyWith(color: Colors.black45, fontSize: 16),
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(20),
+                    child: Row(
+                      children: <Widget>[
+                        widget.user.photo == null
+                            ? SizedBox()
+                            : Padding(
+                                padding: const EdgeInsets.only(right: 15),
+                                child: CircleAvatar(
+                                  foregroundImage: NetworkImage(baseUrl +
+                                      widget.user.photo.formats.small.url),
+                                ),
+                              ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.user.name.titleCase +
+                                    " " +
+                                    widget.user.surname.titleCase,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    .copyWith(
+                                        color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.left,
+                              ),
+                              Text(
+                                widget.user.position.titleCase,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    .copyWith(
+                                        color: Colors.black45, fontSize: 16),
+                                textAlign: TextAlign.left,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          widget.description == null || widget.description == ''
-              ? SizedBox()
-              : Card(
+              widget.user.description == null || widget.user.description == ''
+                  ? SizedBox()
+                  : Container(
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.all(20),
+                          width: double.infinity,
+                          child: Text(
+                            widget.user.description,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .copyWith(color: Colors.black45, fontSize: 16),
+                          ),
+                        ),
+                      ),
+                    ),
+              widget.user.phone1 == null || widget.user.phone1 == ''
+                  ? SizedBox()
+                  : Container(
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(widget.user.phone1),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.call_outlined,
+                                ),
+                                color: MiPromotora().primaryDark,
+                                iconSize: 30,
+                                onPressed: () => callPhone(widget.user.phone1),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+              widget.user.phone2 == null || widget.user.phone2 == ''
+                  ? SizedBox()
+                  : Container(
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(widget.user.phone2),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.call_outlined,
+                                ),
+                                color: MiPromotora().primaryDark,
+                                iconSize: 30,
+                                onPressed: () => callPhone(widget.user.phone2),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5),
+                child: Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Container(
                     padding: EdgeInsets.all(20),
-                    width: size.width * 1,
-                    height: size.width * 0.5,
+                    width: double.infinity,
                     child: Text(
-                      widget.description,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .copyWith(color: Colors.black45, fontSize: 16),
+                      widget.user.email,
+                      textAlign: TextAlign.left,
                     ),
                   ),
                 ),
-          SizedBox(
-            height: 10,
-          ),
-          widget.phone1 == null || widget.phone1 == ''
-              ? SizedBox()
-              : Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(widget.phone1),
-                        IconButton(
-                          icon: Icon(
-                            Icons.call_outlined,
-                          ),
-                          color: MiPromotora().primaryDark,
-                          iconSize: 30,
-                          onPressed: () => _launchURL(widget.phone1),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-          SizedBox(
-            height: 10,
-          ),
-          widget.phone2 == null || widget.phone2 == ''
-              ? SizedBox()
-              : Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(widget.phone2),
-                        IconButton(
-                          icon: Icon(
-                            Icons.call_outlined,
-                          ),
-                          color: MiPromotora().primaryDark,
-                          iconSize: 30,
-                          onPressed: () => _launchURL(widget.phone2),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-          SizedBox(
-            height: 10,
-          ),
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            elevation: 2.0,
-            child: Container(
-              padding: EdgeInsets.all(20),
-              width: size.width * 1,
-              height: size.width * 0.2,
-              child: Text(
-                widget.email,
-                textAlign: TextAlign.left,
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
-  }
-
-  _launchURL(phone) async {
-    if (await canLaunch('tel:' + phone)) {
-      await launch('tel:' + phone);
-    } else {
-      throw 'Could not launch $phone';
-    }
   }
 }

@@ -15,10 +15,8 @@ class ContactsProvider {
         _url,
         headers: {'Authorization': 'Bearer $token'},
       );
-      print(_prefs.token);
 
       if (response.statusCode == 200) {
-        print(response.body);
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
         List<ContactsModel> users = [];
 
@@ -31,7 +29,9 @@ class ContactsProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {}
+    } catch (Exception) {
+      print(Exception);
+    }
 
     return [];
   }

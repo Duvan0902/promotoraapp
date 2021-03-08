@@ -9,7 +9,7 @@ import 'package:mi_promotora/providers/contacts_provider.dart';
 import 'package:mi_promotora/providers/users_provider.dart';
 import 'package:string_similarity/string_similarity.dart';
 import 'contacts_management.dart';
-import 'users_management.dart';
+import 'users_item.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage({Key key}) : super(key: key);
@@ -66,11 +66,11 @@ class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> tabs = [
-      {"title": 'Empleados', "widget": jopList(context)},
+      {"title": 'Empleados', "widget": workContacts(context)},
       {"title": "Para tu gestión", "widget": managementList(context)}
     ];
     if (_currentWidget == null) {
-      _currentWidget = jopList(context);
+      _currentWidget = workContacts(context);
     }
 
     return Container(
@@ -139,7 +139,7 @@ class _ContactsPageState extends State<ContactsPage> {
     );
   }
 
-  Widget jopList(context) {
+  Widget workContacts(context) {
     final userProvider = UsersProvider();
     return Container(
       child: FutureBuilder(
@@ -183,7 +183,7 @@ class _ContactsPageState extends State<ContactsPage> {
       child: ListView.builder(
         itemCount: filteredListUser.length,
         itemBuilder: (context, index) {
-          return UsersManagementList(
+          return UserInformationItem(
             user: filteredListUser[index],
           );
         },

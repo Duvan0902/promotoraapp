@@ -8,8 +8,7 @@ class LoginBloc with Validators {
 
   Stream<String> get emailStream =>
       _emailController.stream.transform(validateEmail);
-  Stream<String> get passwordStream =>
-      _passwordController.stream.transform(validatePassword);
+  Stream<String> get passwordStream => _passwordController.stream;
 
   Stream<bool> get formValidStream =>
       Rx.combineLatest2(emailStream, passwordStream, (e, p) => true);
