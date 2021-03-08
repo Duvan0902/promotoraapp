@@ -89,6 +89,40 @@ class UsersProvider {
     return false;
   }
 
+  Future<bool> updateUserPass(UserModel user, String password) async {
+    final String _endpoint = _url.toString() + '/' + user.id.toString();
+
+    try {
+      String token = _prefs.token;
+
+      print("Updating password for user user ${user.id}");
+      String body = json.jsonEncode({"password": password});
+
+      var response = await http.put(
+        _endpoint,
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        print("User password updated successfully");
+        print(response.body);
+
+        return true;
+      } else {
+        print(
+            'Update user request failed with status: ${response.statusCode}.');
+      }
+    } catch (Exception) {
+      print(Exception);
+    }
+
+    return false;
+  }
+
   Future<bool> updateUserDevice() async {
     final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 

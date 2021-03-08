@@ -12,19 +12,13 @@ class LoginProvider {
       {'identifier': identifier, 'password': password},
     );
 
-    print(authData);
-
     final resp = await http.post(
       _url,
       headers: {'content-type': 'application/json'},
       body: authData,
     );
 
-    print(identifier);
-    print(password);
-
     Map<String, dynamic> decodedResp = json.decode(resp.body);
-    print(decodedResp);
 
     if (decodedResp.containsKey('jwt')) {
       _prefs.token = decodedResp['jwt'];

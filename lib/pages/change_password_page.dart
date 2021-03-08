@@ -62,7 +62,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         .headline1
                         .copyWith(color: Colors.black, fontSize: 35),
                   ),
-                  alignment: Alignment.center,
                 ),
                 SizedBox(height: 40),
                 Container(
@@ -102,7 +101,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           child: Theme(
             data: Theme.of(context).copyWith(primaryColor: Colors.cyan),
             child: TextField(
-              obscureText: true,
+              obscureText: _isPasswordHidden,
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
@@ -130,8 +129,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               onChanged: (value) {
                 bloc.changePassword(value);
                 bloc.changeEmail(_prefs.userEmail);
-                print(value);
-                print(_prefs.userEmail);
               },
             ),
           ),
