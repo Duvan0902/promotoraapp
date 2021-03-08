@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mi_promotora/bloc/password_update_bloc.dart';
 import 'package:mi_promotora/bloc/provider_bloc.dart';
 import 'package:mi_promotora/main.dart';
-import 'package:mi_promotora/models/users_model.dart';
+import 'package:mi_promotora/models/user_model.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:mi_promotora/providers/users_provider.dart';
 import 'package:mi_promotora/utils/alert_dialog.dart';

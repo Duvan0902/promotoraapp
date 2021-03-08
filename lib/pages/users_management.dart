@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mi_promotora/models/users_model.dart';
+import 'package:mi_promotora/models/user_model.dart';
 import 'package:mi_promotora/pages/users_information_page.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:url_launcher/url_launcher.dart';

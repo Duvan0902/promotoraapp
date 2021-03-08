@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mi_promotora/common/settings_menu.dart';
 import 'package:mi_promotora/common/drawer.dart';
 import 'package:mi_promotora/models/contacts_model.dart';
-import 'package:mi_promotora/models/users_model.dart';
+import 'package:mi_promotora/models/user_model.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/providers/contacts_provider.dart';

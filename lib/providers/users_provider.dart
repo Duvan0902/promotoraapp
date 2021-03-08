@@ -1,7 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as json;
-import 'package:mi_promotora/models/users_model.dart';
+import 'package:mi_promotora/models/user_model.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 
