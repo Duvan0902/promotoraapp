@@ -1,11 +1,15 @@
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:global_configuration/global_configuration.dart';
+import 'package:mi_promotora/bloc/provider_bloc.dart';
+import 'package:mi_promotora/common/custom_webView.dart';
+import 'package:mi_promotora/pages/change_password_page.dart';
+import 'package:mi_promotora/pages/documents_page.dart';
+import 'package:mi_promotora/pages/faq_categories_page.dart';
 import 'package:mi_promotora/pages/home_page.dart';
 import 'package:mi_promotora/pages/login_page.dart';
 import 'package:mi_promotora/pages/sale_page.dart';
-import 'package:mi_promotora/bloc/provider_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:mi_promotora/utils/manage_notification.dart';
 
 void main() async {
@@ -41,7 +45,8 @@ class _MiPromotoraState extends State<MiPromotora> {
   void initState() {
     super.initState();
 
-    manageNotifications(scaffoldMessengerKey);
+    manageNotifications(
+        scaffoldMessengerKey: scaffoldMessengerKey, navigatorKey: navigatorKey);
   }
 
   @override
@@ -138,6 +143,10 @@ class _MiPromotoraState extends State<MiPromotora> {
           'home': (BuildContext context) => HomePage(),
           'login': (BuildContext context) => LoginPage(),
           'sale': (BuildContext context) => SalePage(),
+          'faq': (BuildContext context) => FaqCategoriesPage(),
+          'documents': (BuildContext context) => DocumentsPage(),
+          'porchat': (BuildContext context) => CustomWebView(),
+          'change-pass': (BuildContext context) => ChangePasswordPage(),
         },
       ),
     );

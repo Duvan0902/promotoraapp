@@ -23,7 +23,7 @@ class GoalsProvider {
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
 
-        if (jsonResponse.length > 1) {
+        if (jsonResponse.length > 0) {
           GoalsModel goal = GoalsModel.fromMap(jsonResponse[0]);
           return goal;
         }

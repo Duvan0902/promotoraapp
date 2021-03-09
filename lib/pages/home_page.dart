@@ -20,6 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  bool routed = false;
 
   static const List<Widget> _widgetOptions = <Widget>[
     GoalsPage(),
@@ -43,6 +44,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (!routed) {
+      HomePageArguments args = ModalRoute.of(context).settings.arguments;
+      setState(() {
+        if (args != null) {
+          _selectedIndex = args.selectedIndex;
+          routed = true;
+        }
+      });
+    }
+
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: FABBottomAppBar(
@@ -71,4 +82,11 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: BottomChat(),
     );
   }
+}
+
+class HomePageArguments {
+  final int selectedIndex;
+  final Object widgetArguments;
+
+  HomePageArguments(this.selectedIndex, this.widgetArguments);
 }

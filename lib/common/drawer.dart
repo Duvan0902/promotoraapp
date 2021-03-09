@@ -34,52 +34,24 @@ class CustomDrawer extends StatelessWidget {
                         .copyWith(color: Colors.black, fontSize: 33),
                   ),
                   SizedBox(height: 40),
-                  RaisedButton(
-                    padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
-                    child: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            'Mis metas',
-                            textAlign: TextAlign.left,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline2
-                                .copyWith(color: Colors.black, fontSize: 15.1),
-                          ),
-                          Icon(
-                            Icons.keyboard_arrow_right,
-                            color: MiPromotora().primaryDark,
-                          ),
-                        ],
-                      ),
-                    ),
-                    color: Colors.white,
-                    disabledTextColor: Colors.grey,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ),
-                      );
-                    },
+                  BottomList(
+                    title: 'Mis metas',
+                    route: 'home',
                   ),
                   SizedBox(height: 18),
                   BottomList(
                     title: 'Preguntas Frecuentes',
-                    route: 'questions',
+                    route: 'faq',
                   ),
                   SizedBox(height: 18),
                   BottomList(
                     title: 'Documentos para tu gestion',
-                    route: 'Documents',
+                    route: 'documents',
                   ),
                   SizedBox(height: 18),
                   BottomList(
                     title: 'Chat',
-                    route: 'Porchat',
+                    route: 'porchat',
                   ),
                   SizedBox(height: 200),
                   RaisedButton(

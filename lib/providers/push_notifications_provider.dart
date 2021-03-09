@@ -6,8 +6,11 @@ import 'package:mi_promotora/models/message_model.dart';
 class PushNotificationsProvider {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final _messageStreamController = StreamController<MessageModel>.broadcast();
+  final _bgMessageStreamController = StreamController<MessageModel>.broadcast();
 
   Stream<MessageModel> get messageStreamm => _messageStreamController.stream;
+  Stream<MessageModel> get backgroundMessageStreamm =>
+      _bgMessageStreamController.stream;
 
   initNotifications() async {
     await _firebaseMessaging.requestNotificationPermissions();
@@ -26,13 +29,13 @@ class PushNotificationsProvider {
   Future<dynamic> launch(Map<String, dynamic> message) async {
     MessageModel receivedMessage = MessageModel.fromMap(message);
     print('Launch $receivedMessage');
-    _messageStreamController.add(receivedMessage);
+    _bgMessageStreamController.add(receivedMessage);
   }
 
   Future<dynamic> onResume(Map<String, dynamic> message) async {
     MessageModel receivedMessage = MessageModel.fromMap(message);
     print('On resume: $receivedMessage');
-    _messageStreamController.add(receivedMessage);
+    _bgMessageStreamController.add(receivedMessage);
   }
 
   Future<dynamic> onMessage(Map<String, dynamic> message) async {
@@ -43,5 +46,6 @@ class PushNotificationsProvider {
 
   void dispose() {
     _messageStreamController?.close();
+    _bgMessageStreamController?.close();
   }
 }

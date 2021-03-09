@@ -77,6 +77,11 @@ class GoalsModel {
         "updated_at": updatedAt.toIso8601String(),
         "report_date": DateFormat('yyyy-MM-dd').format(reportDate),
       };
+
+  @override
+  String toString() {
+    return this.toJson();
+  }
 }
 
 class IntegratedReport {
@@ -115,6 +120,11 @@ class IntegratedReport {
         "updated_at": updatedAt.toIso8601String(),
         "file": file.toMap(),
       };
+
+  @override
+  String toString() {
+    return this.toJson();
+  }
 }
 
 class FileClass {
@@ -199,6 +209,11 @@ class FileClass {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };
+
+  @override
+  String toString() {
+    return this.toJson();
+  }
 }
 
 class Formats {
@@ -211,4 +226,9 @@ class Formats {
   factory Formats.fromMap(Map<String, dynamic> json) => Formats();
 
   Map<String, dynamic> toMap() => {};
+
+  @override
+  String toString() {
+    return this.toJson();
+  }
 }

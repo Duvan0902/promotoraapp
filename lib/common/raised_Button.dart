@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mi_promotora/pages/change_password_page.dart';
-import 'package:mi_promotora/pages/documents_page.dart';
-import 'package:mi_promotora/pages/faq_categories_page.dart';
-import 'package:mi_promotora/pages/sale_page.dart';
 import 'package:mi_promotora/main.dart';
 
 import '../main.dart';
-import '../pages/home_page.dart';
-import 'custom_webView.dart';
 
 class BottomList extends StatelessWidget {
   final String title;
@@ -47,24 +41,7 @@ class BottomList extends StatelessWidget {
         disabledTextColor: Colors.grey,
         onPressed: () {
           Navigator.of(context).pop();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MaterialApp(
-                debugShowCheckedModeBanner: false,
-                initialRoute: this.route,
-                routes: {
-                  'sale': (BuildContext context) => SalePage(),
-                  'questions': (BuildContext context) => FaqCategoriesPage(),
-                  'Documents': (BuildContext context) => DocumentsPage(),
-                  'Porchat': (BuildContext context) => CustomWebView(),
-                  'HomePage': (BuildContext context) => HomePage(),
-                  'LoginPage': (BuildContext context) => MiPromotora(),
-                  'change': (BuildContext context) => ChangePasswordPage(),
-                },
-              ),
-            ),
-          );
+          Navigator.pushNamed(context, this.route);
         });
   }
 }
