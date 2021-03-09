@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (!routed) {
+    /* if (!routed) {
       HomePageArguments args = ModalRoute.of(context).settings.arguments;
       setState(() {
         if (args != null) {
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           routed = true;
         }
       });
-    }
+    } */
 
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
