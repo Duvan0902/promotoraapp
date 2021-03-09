@@ -118,15 +118,33 @@ class _GoalsPageState extends State<GoalsPage> {
 
   Widget goalInformationList(context) {
     final goalsProvider = GoalsProvider();
+    final size = MediaQuery.of(context).size;
+
     return Container(
       color: Colors.grey[900],
       child: FutureBuilder(
         future: goalsProvider.getGoal(),
         builder: (BuildContext context, AsyncSnapshot<GoalsModel> snapshot) {
-          if (snapshot.hasData) {
-            return GoalInformationPage(
-              goals: snapshot.data,
-            );
+          if (snapshot.connectionState != ConnectionState.waiting) {
+            if (snapshot.hasData) {
+              return GoalInformationPage(
+                goals: snapshot.data,
+              );
+            } else {
+              return Center(
+                child: Container(
+                  width: size.width * 0.6,
+                  child: Text(
+                    "No se ha podido obtener la información asociada al usuario",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.white),
+                  ),
+                ),
+              );
+            }
           } else {
             return Container(
               height: 400,

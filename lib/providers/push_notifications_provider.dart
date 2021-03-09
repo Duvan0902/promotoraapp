@@ -25,16 +25,19 @@ class PushNotificationsProvider {
 
   Future<dynamic> launch(Map<String, dynamic> message) async {
     MessageModel receivedMessage = MessageModel.fromMap(message);
+    print('Launch $receivedMessage');
     _messageStreamController.add(receivedMessage);
   }
 
   Future<dynamic> onResume(Map<String, dynamic> message) async {
     MessageModel receivedMessage = MessageModel.fromMap(message);
+    print('On resume: $receivedMessage');
     _messageStreamController.add(receivedMessage);
   }
 
   Future<dynamic> onMessage(Map<String, dynamic> message) async {
     MessageModel receivedMessage = MessageModel.fromMap(message);
+    print('On message $receivedMessage');
     _messageStreamController.add(receivedMessage);
   }
 

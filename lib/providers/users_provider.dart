@@ -6,13 +6,13 @@ import 'package:global_configuration/global_configuration.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 
 class UsersProvider {
-  final String _url =
-      GlobalConfiguration().getValue("api_url") + "/users?_sort=name";
+  final String _url = GlobalConfiguration().getValue("api_url") + "/users";
   final _prefs = new UserPreferences();
 
   Future<List<UserModel>> getUsers() async {
+    final String endpoint = _url + '?_sort=name';
     try {
-      var response = await http.get(_url);
+      var response = await http.get(endpoint);
 
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = json.jsonDecode(response.body);

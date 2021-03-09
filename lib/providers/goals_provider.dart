@@ -21,11 +21,12 @@ class GoalsProvider {
       );
 
       if (response.statusCode == 200) {
-        print(response.body);
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
-        GoalsModel goal = GoalsModel.fromMap(jsonResponse[0]);
 
-        return goal;
+        if (jsonResponse.length > 1) {
+          GoalsModel goal = GoalsModel.fromMap(jsonResponse[0]);
+          return goal;
+        }
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
@@ -50,9 +51,7 @@ class GoalsProvider {
         headers: {'Authorization': 'Bearer $token'},
       );
 
-      print(_url);
       if (response.statusCode == 200) {
-        print('Get Historic ${response.body}');
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
         List<GoalsModel> goals = [];
 

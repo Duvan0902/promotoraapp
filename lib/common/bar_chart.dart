@@ -13,7 +13,7 @@ class BarChartSampleState extends State<BarChartSample> {
   @override
   Widget build(BuildContext context) {
     GoalsProvider goalsProvider = GoalsProvider();
-
+    final size = MediaQuery.of(context).size;
     DateTime currentDate = DateTime.now();
     DateTime initialDate = currentDate.subtract(Duration(days: 30 * 6));
 
@@ -25,8 +25,24 @@ class BarChartSampleState extends State<BarChartSample> {
         future: goalsProvider.getHistoric(initialDate),
         builder:
             (BuildContext context, AsyncSnapshot<List<GoalsModel>> snapshot) {
-          if (snapshot.hasData) {
-            return _historicChart(snapshot.data);
+          if (snapshot.connectionState != ConnectionState.waiting) {
+            if (snapshot.hasData) {
+              return _historicChart(snapshot.data);
+            } else {
+              return Center(
+                child: Container(
+                  width: size.width * 0.6,
+                  child: Text(
+                    "No se ha podido obtener la información asociada al usuario",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.white),
+                  ),
+                ),
+              );
+            }
           } else {
             return Container(
               height: 400,
