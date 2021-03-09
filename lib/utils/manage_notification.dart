@@ -61,6 +61,7 @@ void navigateToPage(
       break;
     case 'Contactos':
       route = 'home';
+      arguments = HomePageArguments(1, null);
       break;
     case 'Educación':
       route = 'home';

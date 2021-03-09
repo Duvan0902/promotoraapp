@@ -2,7 +2,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:mi_promotora/bloc/provider_bloc.dart';
-import 'package:mi_promotora/common/custom_webView.dart';
+import 'package:mi_promotora/common/custom_web_view.dart';
 import 'package:mi_promotora/pages/change_password_page.dart';
 import 'package:mi_promotora/pages/documents_page.dart';
 import 'package:mi_promotora/pages/faq_categories_page.dart';

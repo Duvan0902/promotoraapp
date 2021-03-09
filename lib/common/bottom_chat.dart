@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'custom_webView.dart';
+import 'custom_web_view.dart';
 
 class BottomChat extends StatelessWidget {
   const BottomChat({Key key}) : super(key: key);

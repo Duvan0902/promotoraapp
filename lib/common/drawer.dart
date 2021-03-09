@@ -1,6 +1,6 @@
 import 'package:mi_promotora/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:mi_promotora/common/raised_Button.dart';
+import 'package:mi_promotora/common/raised_button.dart';
 import 'package:mi_promotora/pages/login_page.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 
