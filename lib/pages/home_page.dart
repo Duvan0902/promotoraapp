@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     GoalsPage(),
     ContactsPage(),
     ServicesPage(),
-    EducationsPage(),
+    EducationPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -42,23 +42,34 @@ class _HomePageState extends State<HomePage> {
     usersProvider.updateUserDevice();
   }
 
+  void rebuildAllChildren(BuildContext context) {
+    void rebuild(Element el) {
+      el.markNeedsBuild();
+      el.visitChildren(rebuild);
+    }
+
+    (context as Element).visitChildren(rebuild);
+  }
+
   @override
   Widget build(BuildContext context) {
-    /* if (!routed) {
+    if (!routed) {
       HomePageArguments args = ModalRoute.of(context).settings.arguments;
       setState(() {
         if (args != null) {
           _selectedIndex = args.selectedIndex;
+          rebuildAllChildren(context);
           routed = true;
         }
       });
-    } */
+    }
 
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: FABBottomAppBar(
         onTabSelected: _onItemTapped,
         selectedColor: MiPromotora().primaryDark,
+        selectedIndex: _selectedIndex,
         items: [
           FABBottomAppBarItem(
             iconData: CupertinoIcons.house,

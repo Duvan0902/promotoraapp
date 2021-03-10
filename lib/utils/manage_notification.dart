@@ -1,8 +1,14 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/main.dart';
+import 'package:mi_promotora/models/categories_model.dart';
+import 'package:mi_promotora/models/education_model.dart';
 import 'package:mi_promotora/models/message_model.dart';
+import 'package:mi_promotora/pages/education_detailed_page.dart';
+import 'package:mi_promotora/pages/faq_page.dart';
 import 'package:mi_promotora/pages/home_page.dart';
+import 'package:mi_promotora/providers/education_provider.dart';
+import 'package:mi_promotora/providers/faq_categories_provider.dart';
 import 'package:mi_promotora/providers/push_notifications_provider.dart';
 
 Future<void> manageNotifications(
@@ -50,7 +56,7 @@ Future<void> manageNotifications(
 }
 
 void navigateToPage(
-    MessageModel message, GlobalKey<NavigatorState> navigatorKey) {
+    MessageModel message, GlobalKey<NavigatorState> navigatorKey) async {
   int argumentId = int.tryParse(message.data.tapActionArguments);
   Object arguments;
   String route;
@@ -64,11 +70,33 @@ void navigateToPage(
       arguments = HomePageArguments(1, null);
       break;
     case 'Educación':
-      route = 'home';
-      arguments = HomePageArguments(3, argumentId);
+      EducationProvider educationProvider = EducationProvider();
+      EducationModel education = await educationProvider
+          .getById(int.tryParse(message.data.tapActionArguments));
+
+      if (education != null) {
+        navigatorKey.currentState.push(
+          MaterialPageRoute(
+            builder: (context) => EducationDetailedPage(complement: education),
+          ),
+        );
+      }
+      return;
       break;
     case 'Preguntas_frecuentes':
-      route = 'faq';
+      FaqCategoriesProvider faqCategoriesProvider = FaqCategoriesProvider();
+      FaqCategoriesModel faqCategory = await faqCategoriesProvider
+          .getCategory(message.data.tapActionArguments);
+
+      if (faqCategory != null) {
+        navigatorKey.currentState.push(
+          MaterialPageRoute(
+            builder: (context) =>
+                FaqPage(faqlist: faqCategory.faq, title: faqCategory.category),
+          ),
+        );
+        return;
+      }
       break;
     case 'Documentos':
       route = 'documents';

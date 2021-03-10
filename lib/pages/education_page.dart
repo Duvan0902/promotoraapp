@@ -7,16 +7,16 @@ import 'package:mi_promotora/providers/education_provider.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:mi_promotora/utils/random_color.dart';
 
-class EducationsPage extends StatefulWidget {
-  const EducationsPage({
+class EducationPage extends StatefulWidget {
+  const EducationPage({
     Key key,
   }) : super(key: key);
 
   @override
-  _EducationsPageState createState() => _EducationsPageState();
+  _EducationPageState createState() => _EducationPageState();
 }
 
-class _EducationsPageState extends State<EducationsPage> {
+class _EducationPageState extends State<EducationPage> {
   final String _url = GlobalConfiguration().getValue("api_url");
 
   @override
@@ -54,7 +54,7 @@ class _EducationsPageState extends State<EducationsPage> {
     final educationProvider = EducationProvider();
     return Container(
       child: FutureBuilder(
-        future: educationProvider.getEducation(),
+        future: educationProvider.getAll(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
             return _educationList(snapshot.data);

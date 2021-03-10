@@ -1,21 +1,20 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/models/categories_model.dart';
-import 'package:mi_promotora/providers/categories_provider.dart';
+import 'package:mi_promotora/providers/faq_categories_provider.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:string_similarity/string_similarity.dart';
 import 'faq.dart';
 
 class FaqCategoriesPage extends StatefulWidget {
-  final FaqCategoriesModel category;
-  const FaqCategoriesPage({Key key, this.category}) : super(key: key);
+  const FaqCategoriesPage({Key key}) : super(key: key);
 
   @override
   _FaqCategoriesPageState createState() => _FaqCategoriesPageState();
 }
 
 class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
-  final categoriesProvider = CategoriesProvider();
+  final categoriesProvider = FaqCategoriesProvider();
   String searchText;
   SearchBar searchBar;
 
@@ -77,7 +76,7 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
   }
 
   Widget categories(context) {
-    final categoriesProvider = CategoriesProvider();
+    final categoriesProvider = FaqCategoriesProvider();
 
     return Container(
       child: FutureBuilder(
