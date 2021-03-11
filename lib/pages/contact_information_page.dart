@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:mi_promotora/main.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:mi_promotora/models/contact_model_interface.dart';
+import 'package:mi_promotora/utils/launch_url.dart';
+import 'package:recase/recase.dart';
 
 // ignore: must_be_immutable
 class ContactInformationPage extends StatefulWidget {
-  String name;
-  String surname;
-  String company;
-  String description;
-  String email;
-  String phone;
-  String phone1;
-  ContactInformationPage(this.name, this.surname, this.company,
-      this.description, this.email, this.phone, this.phone1);
+  final ContactModelInterface contact;
+
+  ContactInformationPage(this.contact);
 
   @override
   _ContactInformationPageState createState() => _ContactInformationPageState();
@@ -21,192 +18,191 @@ class ContactInformationPage extends StatefulWidget {
 class _ContactInformationPageState extends State<ContactInformationPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        brightness: Brightness.dark,
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-        backgroundColor: Colors.grey[900],
-        title: new Text(
-          "Contactos",
-          style: Theme.of(context)
-              .textTheme
-              .headline2
-              .copyWith(color: Colors.white, fontSize: 20),
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        flexibleSpace: Container(
-          padding: EdgeInsets.only(left: 75),
-          child: Icon(Icons.ac_unit),
-        ),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(15),
-        child: _contactsTitle(context),
-      ),
-    );
-  }
+    final String baseUrl = GlobalConfiguration().getValue("api_url");
 
-  Widget _contactsTitle(context) {
-    final size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            elevation: 2.0,
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Row(
-                    children: [
-                      Text(
-                        widget.name,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1
-                            .copyWith(color: Colors.black, fontSize: 18),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        widget.surname,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1
-                            .copyWith(color: Colors.black, fontSize: 18),
-                      )
-                    ],
+    return Container(
+      child: Scaffold(
+        appBar: AppBar(
+          brightness: Brightness.dark,
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.grey[900],
+          title: new Text(
+            "Contactos",
+            style: Theme.of(context)
+                .textTheme
+                .headline2
+                .copyWith(color: Colors.white, fontSize: 20),
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          flexibleSpace: Container(
+            padding: EdgeInsets.only(left: 75),
+            child: Icon(Icons.ac_unit),
+          ),
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  Container(
-                    alignment: Alignment.bottomLeft,
-                    child: Text(
-                      widget.company,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .copyWith(color: Colors.black45, fontSize: 16),
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(20),
+                    child: Row(
+                      children: <Widget>[
+                        widget.contact.photo == null
+                            ? SizedBox()
+                            : Padding(
+                                padding: const EdgeInsets.only(right: 15),
+                                child: CircleAvatar(
+                                  foregroundImage: NetworkImage(baseUrl +
+                                      widget.contact.photo.formats.small.url),
+                                ),
+                              ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.contact.name.titleCase +
+                                    " " +
+                                    widget.contact.surname.titleCase,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    .copyWith(
+                                        color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.left,
+                              ),
+                              Text(
+                                widget.contact.company.titleCase,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    .copyWith(
+                                        color: Colors.black45, fontSize: 16),
+                                textAlign: TextAlign.left,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          widget.description == null || widget.description == ''
-              ? SizedBox()
-              : Card(
+              widget.contact.description == null ||
+                      widget.contact.description == ''
+                  ? SizedBox()
+                  : Container(
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.all(20),
+                          width: double.infinity,
+                          child: Text(
+                            widget.contact.description,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .copyWith(color: Colors.black45, fontSize: 16),
+                          ),
+                        ),
+                      ),
+                    ),
+              widget.contact.phone1 == null || widget.contact.phone1 == ''
+                  ? SizedBox()
+                  : Container(
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(widget.contact.phone1),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.call_outlined,
+                                ),
+                                color: MiPromotora().primaryDark,
+                                iconSize: 30,
+                                onPressed: () =>
+                                    callPhone(widget.contact.phone1),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+              widget.contact.phone2 == null || widget.contact.phone2 == ''
+                  ? SizedBox()
+                  : Container(
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(widget.contact.phone2),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.call_outlined,
+                                ),
+                                color: MiPromotora().primaryDark,
+                                iconSize: 30,
+                                onPressed: () =>
+                                    callPhone(widget.contact.phone2),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5),
+                child: Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Container(
                     padding: EdgeInsets.all(20),
-                    width: size.width * 1,
-                    height: size.width * 0.5,
+                    width: double.infinity,
                     child: Text(
-                      widget.description,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .copyWith(color: Colors.black45, fontSize: 16),
+                      widget.contact.email,
+                      textAlign: TextAlign.left,
                     ),
                   ),
                 ),
-          SizedBox(
-            height: 10,
-          ),
-          widget.phone == null || widget.phone == ''
-              ? SizedBox()
-              : Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(widget.phone),
-                        IconButton(
-                          icon: Icon(
-                            Icons.call_outlined,
-                          ),
-                          color: MiPromotora().primaryDark,
-                          iconSize: 30,
-                          onPressed: () => _callPhone(widget.phone),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-          SizedBox(
-            height: 10,
-          ),
-          widget.phone1 == null || widget.phone1 == ''
-              ? SizedBox()
-              : Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(widget.phone1),
-                        IconButton(
-                          icon: Icon(
-                            Icons.call_outlined,
-                          ),
-                          color: MiPromotora().primaryDark,
-                          iconSize: 30,
-                          onPressed: () => _callPhone(widget.phone1),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-          SizedBox(
-            height: 10,
-          ),
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            elevation: 2.0,
-            child: Container(
-              padding: EdgeInsets.all(20),
-              width: size.width * 1,
-              height: size.width * 0.2,
-              child: Text(
-                widget.email,
-                textAlign: TextAlign.left,
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
-  }
-
-  _callPhone(phone) async {
-    if (await canLaunch('tel:' + phone)) {
-      await launch('tel:' + phone);
-    } else {
-      throw 'Could not launch $phone';
-    }
   }
 }

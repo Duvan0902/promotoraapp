@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:mi_promotora/models/contact_model_interface.dart';
 import 'package:mi_promotora/models/contacts_model.dart';
 import 'dart:convert' as json;
 import 'package:global_configuration/global_configuration.dart';
@@ -8,7 +9,7 @@ class ContactsProvider {
   final String _url = GlobalConfiguration().getValue("api_url") + "/contactos";
   final _prefs = new UserPreferences();
 
-  Future<List<ContactsModel>> getContacts() async {
+  Future<List<ContactModelInterface>> getContacts() async {
     try {
       String token = _prefs.token;
       final response = await http.get(
@@ -18,14 +19,14 @@ class ContactsProvider {
 
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
-        List<ContactsModel> users = [];
+        List<ContactsModel> contacts = [];
 
         for (var item in jsonResponse) {
           ContactsModel user = ContactsModel.fromMap(item);
-          users.add(user);
+          contacts.add(user);
         }
 
-        return users;
+        return contacts;
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }

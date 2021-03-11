@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-class ContactsModel {
+import 'package:mi_promotora/models/contact_model_interface.dart';
+
+class ContactsModel implements ContactModelInterface {
   ContactsModel({
     this.id,
     this.name,
@@ -12,6 +14,7 @@ class ContactsModel {
     this.description,
     this.createdAt,
     this.updatedAt,
+    this.photo,
   });
 
   final int id;
@@ -24,6 +27,7 @@ class ContactsModel {
   final String description;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final Photo photo;
 
   factory ContactsModel.fromJson(String str) =>
       ContactsModel.fromMap(json.decode(str));
@@ -37,10 +41,11 @@ class ContactsModel {
         company: json["company"],
         email: json["email"],
         phone1: json["phone1"],
-        phone2: json["phone2"],
-        description: json["description"],
+        phone2: json["phone2"] == null ? null : json["phone2"],
+        description: json["description"] == null ? null : json["description"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        photo: json["photo"] == null ? null : Photo.fromMap(json["photo"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -54,5 +59,11 @@ class ContactsModel {
         "description": description,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
+        "photo": photo == null ? null : photo.toMap(),
       };
+
+  @override
+  String toString() {
+    return this.toJson();
+  }
 }

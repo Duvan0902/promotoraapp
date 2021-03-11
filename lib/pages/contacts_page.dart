@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/common/settings_menu.dart';
 import 'package:mi_promotora/common/drawer.dart';
-import 'package:mi_promotora/models/contacts_model.dart';
-import 'package:mi_promotora/models/user_model.dart';
+import 'package:mi_promotora/models/contact_model_interface.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:mi_promotora/main.dart';
+import 'package:mi_promotora/pages/contact_information_page.dart';
 import 'package:mi_promotora/providers/contacts_provider.dart';
 import 'package:mi_promotora/providers/users_provider.dart';
+import 'package:mi_promotora/utils/launch_url.dart';
 import 'package:string_similarity/string_similarity.dart';
-import 'contacts_management.dart';
-import 'users_item.dart';
+import 'package:recase/recase.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage({Key key}) : super(key: key);
@@ -67,7 +67,7 @@ class _ContactsPageState extends State<ContactsPage> {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> tabs = [
       {"title": 'Empleados', "widget": workContacts(context)},
-      {"title": "Para tu gestión", "widget": managementList(context)}
+      {"title": "Para tu gestión", "widget": _externalContacts(context)}
     ];
     if (_currentWidget == null) {
       _currentWidget = workContacts(context);
@@ -146,7 +146,7 @@ class _ContactsPageState extends State<ContactsPage> {
         future: userProvider.getUsers(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
-            return _userList(snapshot.data);
+            return _contactsList(snapshot.data);
           } else {
             return Container(
               height: 400,
@@ -160,13 +160,13 @@ class _ContactsPageState extends State<ContactsPage> {
     );
   }
 
-  Widget _userList(List<UserModel> users) {
+  Widget _contactsList(List<ContactModelInterface> contacts) {
     print("Search text is: $searchText");
 
-    List<UserModel> filteredListUser;
+    List<ContactModelInterface> filteredListContacts;
 
     if (searchText != "" && searchText != null) {
-      filteredListUser = users.where((contact) {
+      filteredListContacts = contacts.where((contact) {
         bool isSimilar = contact.name.similarityTo(searchText) > 0.3;
         bool isSimilarSurname = contact.surname.similarityTo(searchText) > 0.3;
         bool isContained =
@@ -175,28 +175,27 @@ class _ContactsPageState extends State<ContactsPage> {
         return isSimilar || isSimilarSurname || isContained;
       }).toList();
     } else {
-      filteredListUser = users;
+      filteredListContacts = contacts;
     }
 
     return Container(
       padding: EdgeInsets.only(top: 10.0),
       child: ListView.builder(
-        itemCount: filteredListUser.length,
+        itemCount: filteredListContacts.length,
         itemBuilder: (context, index) {
-          return UserInformationItem(
-            user: filteredListUser[index],
-          );
+          return _contactItem(context, filteredListContacts[index]);
         },
       ),
     );
   }
 
-  Widget managementList(context) {
+  Widget _externalContacts(context) {
     final contactProvider = ContactsProvider();
     return Container(
       child: FutureBuilder(
         future: contactProvider.getContacts(),
-        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+        builder: (BuildContext context,
+            AsyncSnapshot<List<ContactModelInterface>> snapshot) {
           if (snapshot.hasData) {
             return _contactsList(
               snapshot.data,
@@ -214,33 +213,77 @@ class _ContactsPageState extends State<ContactsPage> {
     );
   }
 
-  Widget _contactsList(List<ContactsModel> contacts) {
-    print("Search text is: $searchText");
-
-    List<ContactsModel> filteredList;
-
-    if (searchText != "" && searchText != null) {
-      filteredList = contacts.where((contact) {
-        bool isSimilar = contact.name.similarityTo(searchText) > 0.3;
-        bool isSimilarSurname = contact.surname.similarityTo(searchText) > 0.3;
-        bool isContained =
-            contact.name.toLowerCase().contains(this.searchText.toLowerCase());
-
-        return isSimilar || isSimilarSurname || isContained;
-      }).toList();
-    } else {
-      filteredList = contacts;
-    }
+  Widget _contactItem(BuildContext context, ContactModelInterface contact) {
+    var listTile = Flexible(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: <Widget>[
+            Text(
+              contact.name.titleCase,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(color: Colors.black, fontSize: 16),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              contact.surname.titleCase,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(color: Colors.black, fontSize: 16),
+            ),
+          ],
+        ),
+        SizedBox(height: 5),
+        Text(
+          contact.company.titleCase,
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(color: Colors.black45, fontSize: 15),
+        ),
+      ],
+    ));
 
     return Container(
-      padding: EdgeInsets.only(top: 10.0),
-      child: ListView.builder(
-        itemCount: filteredList.length,
-        itemBuilder: (context, index) {
-          return ContactsManagementList(
-            contacts: filteredList[index],
-          );
-        },
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        color: Colors.white,
+        child: InkWell(
+          child: Container(
+            padding: EdgeInsets.fromLTRB(15, 15, 3, 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                listTile,
+                IconButton(
+                  icon: Icon(
+                    Icons.call_outlined,
+                  ),
+                  color: MiPromotora().primaryDark,
+                  iconSize: 30,
+                  onPressed: () => callPhone(contact.phone1),
+                )
+              ],
+            ),
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ContactInformationPage(contact),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
