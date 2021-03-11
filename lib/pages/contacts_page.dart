@@ -66,11 +66,11 @@ class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> tabs = [
-      {"title": 'Empleados', "widget": workContacts(context)},
+      {"title": 'Empleados', "widget": _workContacts(context)},
       {"title": "Para tu gestión", "widget": _externalContacts(context)}
     ];
     if (_currentWidget == null) {
-      _currentWidget = workContacts(context);
+      _currentWidget = _workContacts(context);
     }
 
     return Container(
@@ -139,14 +139,38 @@ class _ContactsPageState extends State<ContactsPage> {
     );
   }
 
-  Widget workContacts(context) {
-    final userProvider = UsersProvider();
+  Widget _workContacts(context) {
+    final contactProviders = ContactsProvider();
     return Container(
       child: FutureBuilder(
-        future: userProvider.getUsers(),
+        future: contactProviders.getUserContacts(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
             return _contactsList(snapshot.data);
+          } else {
+            return Container(
+              height: 400,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _externalContacts(context) {
+    final contactProvider = ContactsProvider();
+    return Container(
+      child: FutureBuilder(
+        future: contactProvider.getContacts(),
+        builder: (BuildContext context,
+            AsyncSnapshot<List<ContactModelInterface>> snapshot) {
+          if (snapshot.hasData) {
+            return _contactsList(
+              snapshot.data,
+            );
           } else {
             return Container(
               height: 400,
@@ -184,30 +208,6 @@ class _ContactsPageState extends State<ContactsPage> {
         itemCount: filteredListContacts.length,
         itemBuilder: (context, index) {
           return _contactItem(context, filteredListContacts[index]);
-        },
-      ),
-    );
-  }
-
-  Widget _externalContacts(context) {
-    final contactProvider = ContactsProvider();
-    return Container(
-      child: FutureBuilder(
-        future: contactProvider.getContacts(),
-        builder: (BuildContext context,
-            AsyncSnapshot<List<ContactModelInterface>> snapshot) {
-          if (snapshot.hasData) {
-            return _contactsList(
-              snapshot.data,
-            );
-          } else {
-            return Container(
-              height: 400,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
         },
       ),
     );
