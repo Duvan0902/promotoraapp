@@ -159,18 +159,16 @@ class _ServicesPageState extends State<ServicesPage> {
     return PreferredSize(
       preferredSize: Size(screenWidth, barHeight),
       child: Container(
-        child: AppBar(
-          brightness: Brightness.dark,
-          backgroundColor: Colors.grey[900],
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("ATAC"),
-              PopupButton(),
-            ],
-          ),
-        ),
-      ),
+          child: AppBar(
+        brightness: Brightness.dark,
+        backgroundColor: Colors.grey[900],
+        title: Text("Servicios",
+            style: Theme.of(context)
+                .textTheme
+                .headline1
+                .copyWith(color: Colors.white, fontSize: 20)),
+        actions: [PopupButton()],
+      )),
     );
   }
 }

@@ -90,18 +90,19 @@ class _EducationPageState extends State<EducationPage> {
     double barHeight = currentOrientation == Orientation.portrait ? 60 : 50;
     return PreferredSize(
       preferredSize: Size(screenWidth, barHeight),
-      child: Container(
-        child: AppBar(
-          brightness: Brightness.dark,
-          backgroundColor: Colors.grey[900],
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Educación"),
-              PopupButton(),
-            ],
-          ),
+      child: AppBar(
+        brightness: Brightness.dark,
+        backgroundColor: Colors.grey[900],
+        title: Text(
+          "Educación",
+          style: Theme.of(context)
+              .textTheme
+              .headline1
+              .copyWith(color: Colors.white, fontSize: 20),
         ),
+        actions: [
+          PopupButton(),
+        ],
       ),
     );
   }

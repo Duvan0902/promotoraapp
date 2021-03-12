@@ -26,6 +26,17 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        brightness: Brightness.light,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: MiPromotora().accent),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+      ),
       body: Stack(
         children: <Widget>[
           _background(context),
@@ -165,8 +176,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   Widget _background(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.transparent,
         image: DecorationImage(
           image: AssetImage("assets/img/fondo.png"),
           fit: BoxFit.fill,

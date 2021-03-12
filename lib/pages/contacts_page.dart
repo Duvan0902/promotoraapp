@@ -6,7 +6,6 @@ import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/pages/contact_information_page.dart';
 import 'package:mi_promotora/providers/contacts_provider.dart';
-import 'package:mi_promotora/providers/users_provider.dart';
 import 'package:mi_promotora/utils/launch_url.dart';
 import 'package:string_similarity/string_similarity.dart';
 import 'package:recase/recase.dart';
@@ -28,7 +27,11 @@ class _ContactsPageState extends State<ContactsPage> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       brightness: Brightness.dark,
-      title: new Text('Buscar Contactos'),
+      title: Text("Contactos",
+          style: Theme.of(context)
+              .textTheme
+              .headline1
+              .copyWith(color: Colors.white, fontSize: 20)),
       actions: [
         Row(
           children: [

@@ -36,19 +36,14 @@ class _GoalsPageState extends State<GoalsPage> {
         appBar: AppBar(
           brightness: Brightness.dark,
           backgroundColor: Colors.grey[900],
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Mis metas",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline1
-                    .copyWith(color: Colors.white, fontSize: 20),
-              ),
-              PopupButton(),
-            ],
-          ),
+          title: Text("Mis metas",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline1
+                  .copyWith(color: Colors.white, fontSize: 20)),
+          actions: [
+            PopupButton(),
+          ],
         ),
         drawer: CustomDrawer(),
         body: Column(

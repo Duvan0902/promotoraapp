@@ -24,6 +24,17 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        brightness: Brightness.light,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: MiPromotora().accent),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+      ),
       body: Stack(
         children: <Widget>[
           _background(context),

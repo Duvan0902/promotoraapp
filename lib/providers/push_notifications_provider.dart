@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:mi_promotora/models/message_model.dart';
@@ -17,7 +18,8 @@ class PushNotificationsProvider {
 
     _firebaseMessaging.configure(
       onMessage: onMessage,
-      onBackgroundMessage: onBackgroundMessage,
+      onBackgroundMessage:
+          Platform.isIOS ? null : PushNotificationsProvider.onBackgroundMessage,
       onLaunch: launch,
       onResume: onResume,
     );
