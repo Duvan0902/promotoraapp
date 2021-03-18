@@ -42,7 +42,7 @@ class PushNotificationsProvider {
 
   Future<dynamic> onMessage(Map<String, dynamic> message) async {
     MessageModel receivedMessage = MessageModel.fromMap(message);
-    print('On message $receivedMessage');
+    print('On message $message');
     _messageStreamController.add(receivedMessage);
   }
 

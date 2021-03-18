@@ -12,7 +12,7 @@ import 'package:mi_promotora/providers/faq_categories_provider.dart';
 import 'package:mi_promotora/providers/push_notifications_provider.dart';
 
 Future<void> manageNotifications(
-    {GlobalKey<ScaffoldState> scaffoldMessengerKey,
+    {GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey,
     GlobalKey<NavigatorState> navigatorKey}) async {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
@@ -26,11 +26,10 @@ Future<void> manageNotifications(
   pushProvider.messageStreamm.listen(
     (message) {
       print('Message stream received: $message');
-      //scaffoldMessengerKey.currentState.removeCurrentSnackBar();
+      scaffoldMessengerKey.currentState.removeCurrentSnackBar();
 
       scaffoldMessengerKey.currentState.showSnackBar(
         SnackBar(
-          key: Key('notification'),
           backgroundColor: MiPromotora().accentLight,
           content: Text(message.notification.body),
           duration: Duration(seconds: 10),

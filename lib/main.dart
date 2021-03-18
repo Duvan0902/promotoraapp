@@ -38,8 +38,9 @@ class MiPromotora extends StatefulWidget {
 
 class _MiPromotoraState extends State<MiPromotora> {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  final GlobalKey<ScaffoldState> scaffoldMessengerKey =
-      GlobalKey<ScaffoldState>();
+
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   @override
   void initState() {
@@ -54,7 +55,7 @@ class _MiPromotoraState extends State<MiPromotora> {
     return Provider(
       child: MaterialApp(
         navigatorKey: navigatorKey,
-        //key: scaffoldMessengerKey,
+        scaffoldMessengerKey: scaffoldMessengerKey,
         debugShowCheckedModeBanner: false,
         title: 'Mi Promotora',
         localizationsDelegates: [

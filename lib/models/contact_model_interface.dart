@@ -78,7 +78,8 @@ class Photo {
         caption: json["caption"],
         width: json["width"],
         height: json["height"],
-        formats: Formats.fromMap(json["formats"]),
+        formats:
+            json["formats"] == null ? null : Formats.fromMap(json["formats"]),
         hash: json["hash"],
         ext: json["ext"],
         mime: json["mime"],
@@ -98,7 +99,7 @@ class Photo {
         "caption": caption,
         "width": width,
         "height": height,
-        "formats": formats.toMap(),
+        "formats": this.formats ?? formats.toMap(),
         "hash": hash,
         "ext": ext,
         "mime": mime,

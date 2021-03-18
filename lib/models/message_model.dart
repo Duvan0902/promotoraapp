@@ -1,37 +1,31 @@
-// To parse this JSON data, do
-//
-//     final messageModel = messageModelFromMap(jsonString);
-
 import 'dart:convert';
 
-class MessageModel {
-  MessageModel({
-    this.notification,
-    this.data,
-  });
+import 'dart:io';
 
+import 'package:mi_promotora/models/message_model_android.dart';
+import 'package:mi_promotora/models/message_model_ios.dart';
+
+abstract class MessageModel {
   Notification notification;
   Data data;
 
-  factory MessageModel.fromJson(String str) =>
-      MessageModel.fromMap(json.decode(str));
+  factory MessageModel.fromJson(String str) {
+    if (Platform.isAndroid) {
+      return MessageModelAndroid.fromJson(str);
+    } else {
+      return MessageModelIos.fromJson(str);
+    }
+  }
 
-  String toJson() => json.encode(toMap());
+  factory MessageModel.fromMap(Map<String, dynamic> json) {
+    if (Platform.isAndroid) {
+      return MessageModelAndroid.fromMap(json);
+    } else {
+      return MessageModelIos.fromMap(json);
+    }
+  }
 
-  factory MessageModel.fromMap(Map<String, dynamic> json) => MessageModel(
-        notification: json["notification"] == null
-            ? null
-            : Notification.fromMap(
-                json["notification"].cast<String, dynamic>()),
-        data: json["data"] == null
-            ? null
-            : Data.fromMap(json["data"].cast<String, dynamic>()),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "notification": notification == null ? null : notification.toMap(),
-        "data": data == null ? null : data.toMap(),
-      };
+  String toJson();
 
   @override
   String toString() {
