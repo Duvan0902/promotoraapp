@@ -77,15 +77,13 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     color: Colors.white,
                     disabledTextColor: Colors.grey,
-                    onPressed: () => prefs.token != null
-                        ? Navigator.of(context).pushNamedAndRemoveUntil(
-                            'login', (Route<dynamic> route) => false)
-                        : Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginPage(),
-                            ),
-                          ),
+                    onPressed: () {
+                      prefs.token = null;
+                      prefs.userEmail = null;
+                      prefs.userId = null;
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          'login', (Route<dynamic> route) => false);
+                    },
                   ),
                 ],
               ),
