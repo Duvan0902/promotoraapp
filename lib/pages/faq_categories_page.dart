@@ -51,12 +51,14 @@ class _FaqCategoriesPageState extends State<FaqCategoriesPage> {
 
   _FaqCategoriesPageState() {
     searchBar = SearchBar(
-        inBar: false,
-        setState: setState,
-        onChanged: search,
-        onCleared: clearSearch,
-        onClosed: clearSearch,
-        buildDefaultAppBar: buildAppBar);
+      inBar: false,
+      setState: setState,
+      onChanged: search,
+      onCleared: clearSearch,
+      onClosed: clearSearch,
+      buildDefaultAppBar: buildAppBar,
+      hintText: 'Buscar',
+    );
   }
 
   @override

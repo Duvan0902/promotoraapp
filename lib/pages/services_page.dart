@@ -96,6 +96,7 @@ class _ServicesPageState extends State<ServicesPage> {
         child: Container(
           height: 150.0,
           margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
               color: generateRandomColor(),
               borderRadius: BorderRadius.circular(10.0)),

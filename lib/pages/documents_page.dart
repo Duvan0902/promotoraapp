@@ -46,12 +46,14 @@ class _DocumentsPageState extends State<DocumentsPage> {
 
   _DocumentsPageState() {
     searchBar = SearchBar(
-        inBar: false,
-        setState: setState,
-        onChanged: search,
-        onCleared: clearSearch,
-        onClosed: clearSearch,
-        buildDefaultAppBar: buildAppBar);
+      inBar: false,
+      setState: setState,
+      onChanged: search,
+      onCleared: clearSearch,
+      onClosed: clearSearch,
+      buildDefaultAppBar: buildAppBar,
+      hintText: 'Buscar documentos',
+    );
   }
 
   @override

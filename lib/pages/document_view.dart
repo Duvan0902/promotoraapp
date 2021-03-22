@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/models/documents_model.dart';
 import 'package:mi_promotora/main.dart';
+import 'package:mi_promotora/utils/launch_url.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:global_configuration/global_configuration.dart';
 
@@ -58,7 +59,7 @@ class _DocumentViewState extends State<DocumentView> {
                   color: MiPromotora().primaryDark,
                   icon: Icon(Icons.file_download),
                   iconSize: 30,
-                  onPressed: () => _launchURL(widget.doc.file.url),
+                  onPressed: () => launchUrl(_url + widget.doc.file.url),
                 ),
               ),
               Text(
@@ -74,15 +75,7 @@ class _DocumentViewState extends State<DocumentView> {
           ),
         ),
       ),
-      onTap: () => _launchURL(widget.doc.file.url),
+      onTap: () => launchUrl(_url + widget.doc.file.url),
     );
-  }
-}
-
-_launchURL(url) async {
-  if (await canLaunch(_url + url)) {
-    await launch(_url + url);
-  } else {
-    throw 'Could not launch $url';
   }
 }
