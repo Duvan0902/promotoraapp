@@ -33,12 +33,8 @@ class _ContactsPageState extends State<ContactsPage> {
               .headline1
               .copyWith(color: Colors.white, fontSize: 20)),
       actions: [
-        Row(
-          children: [
-            searchBar.getSearchAction(context),
-            PopupButton(),
-          ],
-        )
+        searchBar.getSearchAction(context),
+        PopupButton(),
       ],
       backgroundColor: Colors.grey[900],
     );
@@ -51,23 +47,28 @@ class _ContactsPageState extends State<ContactsPage> {
   }
 
   void search(String value) {
+    print(value);
     setState(() {
       searchText = value;
+      _currentWidget = _currentWidget;
     });
   }
 
   _ContactsPageState() {
     searchBar = SearchBar(
-        inBar: false,
-        setState: setState,
-        onChanged: search,
-        onCleared: clearSearch,
-        onClosed: clearSearch,
-        buildDefaultAppBar: buildAppBar);
+      inBar: false,
+      setState: setState,
+      onChanged: search,
+      onCleared: clearSearch,
+      onClosed: clearSearch,
+      buildDefaultAppBar: buildAppBar,
+      hintText: 'Buscar contacto',
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    rebuildAllChildren(context);
     List<Map<String, dynamic>> tabs = [
       {"title": 'Empleados', "widget": _workContacts(context)},
       {"title": "Para tu gestión", "widget": _externalContacts(context)}
@@ -109,6 +110,15 @@ class _ContactsPageState extends State<ContactsPage> {
         ),
       ),
     );
+  }
+
+  void rebuildAllChildren(BuildContext context) {
+    void rebuild(Element el) {
+      el.markNeedsBuild();
+      el.visitChildren(rebuild);
+    }
+
+    (context as Element).visitChildren(rebuild);
   }
 
   Widget _tab(String title, Function onTap, selected) {
@@ -171,9 +181,7 @@ class _ContactsPageState extends State<ContactsPage> {
         builder: (BuildContext context,
             AsyncSnapshot<List<ContactModelInterface>> snapshot) {
           if (snapshot.hasData) {
-            return _contactsList(
-              snapshot.data,
-            );
+            return _contactsList(snapshot.data);
           } else {
             return Container(
               height: 400,
