@@ -113,6 +113,7 @@ class _EducationPageState extends State<EducationPage> {
         child: Container(
           height: 150.0,
           margin: EdgeInsets.all(10),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
             color: generateRandomColor(),
             borderRadius: BorderRadius.circular(10.0),

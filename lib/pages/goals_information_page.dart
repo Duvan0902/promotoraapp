@@ -88,7 +88,7 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Presupuesto mensual.',
+              'Tu presupuesto',
               style: Theme.of(context)
                   .textTheme
                   .bodyText2

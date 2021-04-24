@@ -21,8 +21,8 @@ final String _url = GlobalConfiguration().getValue("api_url");
 class _ManagementPageState extends State<ManagementPage> {
   int currentSales = 0;
 
-  int avgPrima = 1;
-  int goalSales = 1;
+  int avgPrima = 0;
+  int goalSales = 0;
   String downloadUrl;
 
   getInitialData() async {
@@ -33,6 +33,7 @@ class _ManagementPageState extends State<ManagementPage> {
     int sales = await salesProvider.getSalesCount();
     print("Data: " + goals.avgPrima);
     print("Sales: " + sales.toString());
+
     String url = goals.integratedReport.file.url;
 
     setState(() {
@@ -85,7 +86,10 @@ class _ManagementPageState extends State<ManagementPage> {
   }
 
   Widget _progressIndicator(context) {
-    var value = (this.goalSales / this.avgPrima);
+    var value = this.avgPrima != 0 && this.avgPrima != null
+        ? this.goalSales / this.avgPrima
+        : 0;
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -160,7 +164,8 @@ class _ManagementPageState extends State<ManagementPage> {
     var currentSales = this.currentSales;
     var avgPrima = this.avgPrima;
     var totalValue = (goalSales / avgPrima).floorToDouble();
-    var totalPercentage = ((100 * currentSales) / totalValue);
+    var totalPercentage =
+        totalValue != 0 ? ((100 * currentSales) / totalValue) : 0;
     var finalvalue = NumberFormat("#,##0.00").format(totalPercentage);
 
     return Container(
