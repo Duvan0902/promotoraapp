@@ -11,7 +11,7 @@ void showAlert(BuildContext context, String message) {
           style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
         ),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             child: Text(
               'Intentar de nuevo',
               style: Theme.of(context)

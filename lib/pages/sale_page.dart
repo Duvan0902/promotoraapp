@@ -405,7 +405,7 @@ class _SalePageState extends State<SalePage> {
                   Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text(
                   'OK',
                   style: Theme.of(context)

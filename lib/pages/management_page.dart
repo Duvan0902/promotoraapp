@@ -54,7 +54,7 @@ class _ManagementPageState extends State<ManagementPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(15),
       color: Colors.grey[900],
       child: ListView(
         children: <Widget>[
@@ -95,7 +95,7 @@ class _ManagementPageState extends State<ManagementPage> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Container(
-        padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+        padding: EdgeInsets.all(20),
         child: Row(
           children: <Widget>[
             Container(
@@ -118,7 +118,7 @@ class _ManagementPageState extends State<ManagementPage> {
                 ),
               ),
             ),
-            SizedBox(width: 6),
+            SizedBox(width: 15),
             Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,10 +180,11 @@ class _ManagementPageState extends State<ManagementPage> {
   }
 
   Widget _downloadButton(context) {
-    return FlatButton(
-      textColor: MiPromotora().primaryDark,
-      disabledTextColor: Colors.black,
-      padding: EdgeInsets.all(2),
+    return TextButton(
+      style: ButtonStyle(
+        foregroundColor:
+            MaterialStateProperty.all<Color>(MiPromotora().primaryDark),
+      ),
       onPressed: () => _launchURL(this.downloadUrl),
       child: Text(
         "Descargar reporte",
@@ -195,8 +196,9 @@ class _ManagementPageState extends State<ManagementPage> {
 
 Widget _addSaleButton(context) {
   final size = MediaQuery.of(context).size;
-  return RaisedButton(
+  return ElevatedButton(
     child: Container(
+      padding: EdgeInsets.symmetric(vertical: 15),
       width: size.width * 0.7,
       child: Text(
         'Agregar mi venta',
@@ -207,8 +209,10 @@ Widget _addSaleButton(context) {
             .copyWith(color: Colors.black, fontSize: 17),
       ),
     ),
-    color: MiPromotora().primaryDark,
-    disabledTextColor: Colors.grey,
+    style: ButtonStyle(
+      backgroundColor:
+          MaterialStateProperty.all<Color>(MiPromotora().primaryDark),
+    ),
     onPressed: () {
       Navigator.push(
         context,

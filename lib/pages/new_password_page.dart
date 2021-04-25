@@ -243,7 +243,7 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                   Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text(
                   'Aceptar',
                   style: Theme.of(context)
