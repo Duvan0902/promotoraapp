@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
 import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
 import 'package:flutter/material.dart';
-import 'package:mi_promotora/common/bar_chart.dart';
+import 'package:mi_promotora/common/historic_chart.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/goals_model.dart';
 import 'package:mi_promotora/pages/ranking_page.dart';
@@ -121,7 +121,7 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
   }
 
   Widget _historicChart(BuildContext context) {
-    return BarChartSample();
+    return HistoricChart();
   }
 
   Widget _progressBar() {

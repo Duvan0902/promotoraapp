@@ -4,12 +4,12 @@ import 'package:mi_promotora/models/goals_model.dart';
 import 'package:mi_promotora/providers/goals_provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class BarChartSample extends StatefulWidget {
+class HistoricChart extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => BarChartSampleState();
+  State<StatefulWidget> createState() => HistoricChartState();
 }
 
-class BarChartSampleState extends State<BarChartSample> {
+class HistoricChartState extends State<HistoricChart> {
   @override
   Widget build(BuildContext context) {
     GoalsProvider goalsProvider = GoalsProvider();
