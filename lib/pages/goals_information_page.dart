@@ -269,8 +269,12 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
   Widget _top10() {
     return Container(
       padding: EdgeInsets.all(5),
-      child: RaisedButton(
-        padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+      child: ElevatedButton(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all<EdgeInsets>(
+              EdgeInsets.fromLTRB(20, 10, 10, 10)),
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        ),
         child: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -292,8 +296,6 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
             ],
           ),
         ),
-        color: Colors.white,
-        disabledTextColor: Colors.grey,
         onPressed: () {
           Navigator.push(
             context,

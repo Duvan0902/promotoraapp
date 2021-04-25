@@ -198,7 +198,7 @@ class _LoginPageState extends State<LoginPage> {
       stream: bloc.formValidStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         final size = MediaQuery.of(context).size;
-        return RaisedButton(
+        return ElevatedButton(
           child: Container(
             width: size.width * 0.6,
             child: Text(
@@ -210,9 +210,6 @@ class _LoginPageState extends State<LoginPage> {
                   .copyWith(color: Colors.black, fontSize: 16),
             ),
           ),
-          disabledColor: Colors.grey[300],
-          color: MiPromotora().primaryDark,
-          disabledTextColor: Colors.grey,
           onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
         );
       },
@@ -221,8 +218,7 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 Widget _forgotPassword(context) {
-  return FlatButton(
-    textColor: MiPromotora().primaryDark,
+  return TextButton(
     onPressed: () {
       Navigator.push(
         context,

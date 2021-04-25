@@ -356,7 +356,7 @@ class _SalePageState extends State<SalePage> {
 
   Widget _registerButton(context) {
     final size = MediaQuery.of(context).size;
-    return RaisedButton(
+    return ElevatedButton(
         child: Container(
           width: size.width * 0.7,
           child: Text(
@@ -368,8 +368,6 @@ class _SalePageState extends State<SalePage> {
                 .copyWith(color: Colors.black, fontSize: 16),
           ),
         ),
-        color: MiPromotora().primaryDark,
-        disabledTextColor: Colors.grey,
         onPressed: () => _sendInterests(context));
   }
 

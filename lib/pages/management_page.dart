@@ -54,8 +54,8 @@ class _ManagementPageState extends State<ManagementPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(15),
-      color: Colors.grey[900],
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      color: MiPromotora().grey,
       child: ListView(
         children: <Widget>[
           SizedBox(
@@ -91,6 +91,8 @@ class _ManagementPageState extends State<ManagementPage> {
         : 0;
 
     return Card(
+      margin: EdgeInsets.all(0),
+      shadowColor: Colors.blueGrey,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -195,11 +197,8 @@ class _ManagementPageState extends State<ManagementPage> {
 }
 
 Widget _addSaleButton(context) {
-  final size = MediaQuery.of(context).size;
   return ElevatedButton(
     child: Container(
-      padding: EdgeInsets.symmetric(vertical: 15),
-      width: size.width * 0.7,
       child: Text(
         'Agregar mi venta',
         textAlign: TextAlign.center,
@@ -208,10 +207,6 @@ Widget _addSaleButton(context) {
             .headline1
             .copyWith(color: Colors.black, fontSize: 17),
       ),
-    ),
-    style: ButtonStyle(
-      backgroundColor:
-          MaterialStateProperty.all<Color>(MiPromotora().primaryDark),
     ),
     onPressed: () {
       Navigator.push(

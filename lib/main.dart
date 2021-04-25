@@ -31,6 +31,7 @@ class MiPromotora extends StatefulWidget {
   Color get primaryLight => Color(0xff5ba2fe);
   Color get primaryDark => Color.fromRGBO(0, 186, 193, 3);
   Color get grey => Colors.grey[900];
+  Color get greyLight => Colors.grey[300];
 
   @override
   _MiPromotoraState createState() => _MiPromotoraState();
@@ -84,6 +85,26 @@ class _MiPromotoraState extends State<MiPromotora> {
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(
+                  EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              )),
+              backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled))
+                  return widget.greyLight;
+                return null; // Defer to the widget's default.
+              }),
+              foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.disabled)) return widget.grey;
+                return null; // Defer to the widget's default.
+              }),
             ),
           ),
           textTheme: TextTheme(
