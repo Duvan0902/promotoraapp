@@ -45,7 +45,7 @@ class GoalsModel {
   factory GoalsModel.fromMap(Map<String, dynamic> json) => GoalsModel(
         id: json["id"],
         userCode: json["user_code"],
-        name: json["name"],
+        name: json["name"] ?? '',
         branchGct: json["branch_gct"] ?? "0",
         pdnNew: json["pdn_new"] ?? "0",
         pdnNewPrev: json["pdn_new_prev"] ?? "0",
@@ -54,7 +54,9 @@ class GoalsModel {
         pctEffect: json["pct_effect"].toDouble() ?? 0,
         avgPrima: json["avg_prima"] ?? 0,
         goal: json["goal"] ?? "0",
-        integratedReport: IntegratedReport.fromMap(json["integrated_report"]),
+        integratedReport: json["integrated_report"] != null
+            ? IntegratedReport.fromMap(json["integrated_report"])
+            : null,
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         reportDate: DateTime.parse(json["report_date"]),

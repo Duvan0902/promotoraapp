@@ -45,6 +45,8 @@ class GoalsProvider {
     final String _url = GlobalConfiguration().getValue("api_url") +
         "/reporte-integrado-data?user_code=$userName&branch_gct=Total&report_date_gte=$dateFilter&_limit=10";
 
+    print(_url);
+
     try {
       var response = await http.get(
         _url,

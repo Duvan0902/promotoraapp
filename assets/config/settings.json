@@ -1,4 +1,5 @@
 {
     "api_url": "https://promotora.innovaciones.co",
-    "chat_url": "https://porchatasesor.sura.com/"
+    "chat_url": "https://porchatasesor.sura.com/",
+    "texts": "https://raw.githubusercontent.com/sdtorresl/promotoraapp/master/assets/config/"
 }

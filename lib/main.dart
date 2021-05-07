@@ -8,7 +8,9 @@ import 'package:mi_promotora/pages/documents_page.dart';
 import 'package:mi_promotora/pages/faq_categories_page.dart';
 import 'package:mi_promotora/pages/home_page.dart';
 import 'package:mi_promotora/pages/login_page.dart';
+import 'package:mi_promotora/pages/privacy_policy.dart';
 import 'package:mi_promotora/pages/sale_page.dart';
+import 'package:mi_promotora/pages/terms_and_conditions.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:mi_promotora/utils/manage_notification.dart';
 
@@ -107,6 +109,7 @@ class _MiPromotoraState extends State<MiPromotora> {
               }),
             ),
           ),
+          dividerColor: Colors.transparent,
           textTheme: TextTheme(
             headline1: TextStyle(
                 fontSize: 30.0,
@@ -169,6 +172,9 @@ class _MiPromotoraState extends State<MiPromotora> {
           'documents': (BuildContext context) => DocumentsPage(),
           'porchat': (BuildContext context) => CustomWebView(),
           'change-pass': (BuildContext context) => ChangePasswordPage(),
+          'privacy-policy': (BuildContext context) => PrivacyPolicyPage(),
+          'terms-and-conditions': (BuildContext context) =>
+              TermsAndConditionsPage(),
         },
       ),
     );
@@ -176,7 +182,14 @@ class _MiPromotoraState extends State<MiPromotora> {
 
   String _initialRoute() {
     if (widget.prefs.token != null) {
-      return 'home';
+      if (widget.prefs.acceptedTerms != true) {
+        if (widget.prefs.acceptedPrivacyPolicy != true)
+          return 'privacy-policy';
+        else
+          return 'home';
+      } else {
+        return 'terms-and-conditions';
+      }
     } else {
       return 'login';
     }
