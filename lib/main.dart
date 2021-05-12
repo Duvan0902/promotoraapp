@@ -182,11 +182,11 @@ class _MiPromotoraState extends State<MiPromotora> {
 
   String _initialRoute() {
     if (widget.prefs.token != null) {
-      if (widget.prefs.acceptedTerms != true) {
-        if (widget.prefs.acceptedPrivacyPolicy != true)
-          return 'privacy-policy';
-        else
+      if (widget.prefs.acceptedTerms == true) {
+        if (widget.prefs.acceptedPrivacyPolicy == true)
           return 'home';
+        else
+          return 'privacy-policy';
       } else {
         return 'terms-and-conditions';
       }

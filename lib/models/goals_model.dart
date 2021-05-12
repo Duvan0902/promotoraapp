@@ -12,6 +12,7 @@ class GoalsModel {
     this.pdnNewPrev,
     this.pdnTotal,
     this.pdnCanc,
+    this.pdnMonthly,
     this.pctEffect,
     this.avgPrima,
     this.goal,
@@ -29,6 +30,7 @@ class GoalsModel {
   final String pdnNewPrev;
   final String pdnTotal;
   final String pdnCanc;
+  final String pdnMonthly;
   final double pctEffect;
   final String avgPrima;
   final String goal;
@@ -52,6 +54,7 @@ class GoalsModel {
         pdnTotal: json["pdn_total"] ?? "0",
         pdnCanc: json["pdn_canc"] ?? "0",
         pctEffect: json["pct_effect"].toDouble() ?? 0,
+        pdnMonthly: json["pdn_monthly"] ?? "0",
         avgPrima: json["avg_prima"] ?? 0,
         goal: json["goal"] ?? "0",
         integratedReport: json["integrated_report"] != null
@@ -72,6 +75,7 @@ class GoalsModel {
         "pdn_total": pdnTotal,
         "pdn_canc": pdnCanc,
         "pct_effect": pctEffect,
+        "pdn_monthly": pdnMonthly,
         "avg_prima": avgPrima,
         "goal": goal,
         "integrated_report": integratedReport.toMap(),

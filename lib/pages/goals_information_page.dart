@@ -130,7 +130,7 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
     var pdnNew = widget.goals.pdnNew;
     double covertNumberPdnNew = double.parse(pdnNew);
     double covertNumberGoal = double.parse(goalValue);
-    double covertNumberAvgPrima = double.parse(avgPrima);
+    double covertNumberAvgPrima = avgPrima != "0" ? double.parse(avgPrima) : 1;
     int leaflet =
         (covertNumberGoal / (widget.goals.pctEffect * covertNumberAvgPrima))
             .ceil();

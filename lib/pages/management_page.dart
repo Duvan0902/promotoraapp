@@ -38,8 +38,8 @@ class _ManagementPageState extends State<ManagementPage> {
 
     setState(() {
       this.currentSales = sales;
-      this.goalSales = int.tryParse(goals.goal);
-      this.avgPrima = int.tryParse(goals.avgPrima);
+      this.goalSales = int.tryParse(goals.goal) ?? 0;
+      this.avgPrima = int.tryParse(goals.avgPrima) ?? 0;
 
       this.downloadUrl = url;
     });

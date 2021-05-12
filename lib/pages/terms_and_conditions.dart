@@ -85,7 +85,11 @@ class TermsAndConditionsPage extends StatelessWidget {
                       ),
                       onPressed: () {
                         prefs.acceptedTerms = true;
-                        Navigator.of(context).pushNamed('privacy-policy');
+                        if (prefs.acceptedPrivacyPolicy == true) {
+                          Navigator.of(context).pushNamed('home');
+                        } else {
+                          Navigator.of(context).pushNamed('privacy-policy');
+                        }
                       },
                     ),
                   ),

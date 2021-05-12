@@ -91,7 +91,8 @@ class HistoricChartState extends State<HistoricChart> {
             dataSource: data,
             xValueMapper: (GoalsModel goal, _) =>
                 DateFormat('MMM').format(goal.reportDate),
-            yValueMapper: (GoalsModel goal, _) => double.tryParse(goal.pdnNew),
+            yValueMapper: (GoalsModel goal, _) =>
+                double.tryParse(goal.pdnMonthly),
             name: 'Lo que llevas',
             // Enable data label
             dataLabelSettings: DataLabelSettings(isVisible: false),
@@ -102,7 +103,7 @@ class HistoricChartState extends State<HistoricChart> {
             xValueMapper: (GoalsModel goal, _) =>
                 DateFormat('MMM').format(goal.reportDate),
             yValueMapper: (GoalsModel goal, _) => double.tryParse(goal.goal),
-            name: 'Mi meta',
+            name: 'Tu meta',
             // Enable data label
             dataLabelSettings: DataLabelSettings(isVisible: false),
             color: Colors.yellow[600],
