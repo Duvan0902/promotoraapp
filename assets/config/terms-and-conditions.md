@@ -1,6 +1,4 @@
-# Términos y Condiciones 
- 
-Actualizado el 2021-05-11  
+_Actualizado el 2022-05-18_
 
 # Términos generales 
  

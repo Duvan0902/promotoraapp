@@ -1,6 +1,6 @@
 # Política de Privacidad
 
-_Actualizado el 2022-04-21_
+_Actualizado el 2022-05-18_
 
 Mi Promotora ("nosotros", "nuestro" o "nos") se compromete a proteger su privacidad. Esta Política de privacidad explica cómo Mi Promotora recopila, usa y divulga su información personal.
 
@@ -155,14 +155,12 @@ Los Servicios de terceros y los enlaces a los mismos se brindan únicamente para
 
 # Tecnologías de Seguimiento
 
-* Sesiones  
+* Sesiones: Mi Promotora utiliza "Sesiones" para identificar las áreas de nuestro sitio web que ha visitado. Una sesión es un pequeño fragmento de datos que su navegador web almacena en su computadora o dispositivo móvil.
 
-Mi Promotora utiliza "Sesiones" para identificar las áreas de nuestro sitio web que ha visitado. Una sesión es un pequeño fragmento de datos que su navegador web almacena en su computadora o dispositivo móvil.
+# Contáctenos  
 
-# Contáctenos
+No dude en contactarnos si tiene alguna pregunta. 
 
-No dude en contactarnos si tiene alguna pregunta.
-
-* A través de correo electrónico: kpareja@sura.com.co
-* A través del número de teléfono: 3105744632
-* A través de esta dirección: Carrera 43b # 16\. 95 oficina 202\. Medellín, Antioquia.
+* A través de correo electrónico: dacevedoa@sura.com.co
+* A través del número de teléfono: 3216445651 
+* A través de esta dirección: Carrera 43B # 16 95 Oficina 202. Medellín, Antioquia. 
