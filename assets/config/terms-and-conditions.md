@@ -5,9 +5,13 @@ Actualizado el 2021-05-11
 # Términos generales 
  
 Los términos y condiciones descritos a continuación rigen exclusivamente las relaciones de la AGENCIA DE SEGUROS GARHEC & COMPAÑÍA LIMITADA o PROMOTORA METROPOLITANA GARHEC (en adelante Mi Promotora) con los usuarios de su aplicación.  
+
 La aplicación funcionará como un medio para que los asesores en calidad de usuarios de la misma reciban contenido formativo relacionado con su labor, con el ánimo de impactar en su gestión como intermediario de seguros; además de ser un medio a través del cual puedan acceder de forma rápida y práctica a los siguientes datos: cifras de su negocio, contactos para su gestión, preguntas frecuentes que facilitan su gestión e información del personal de la promotora que está a su servicio. Igualmente será utilizado como un medio para reforzar hábitos enfocados en el seguimiento e información de su negocio.  
-Por lo que al acceder a la aplicación de Mi Promotora, usted confirma que está de acuerdo y sujeto a los términos de servicio contenidos en los términos y condiciones que se describen a continuación. Estos términos se aplican a todo el sitio web y a cualquier correo electrónico u otro tipo de comunicación entre usted y Mi Promotora.  
+
+Por lo que al acceder a la aplicación de Mi Promotora, usted confirma que está de acuerdo y sujeto a los términos de servicio contenidos en los términos y condiciones que se describen a continuación. Estos términos se aplican a todo el sitio web y a cualquier correo electrónico u otro tipo de comunicación entre usted y Mi Promotora. 
+
 Bajo ninguna circunstancia el equipo de Mi Promotora será responsable de ningún daño directo, indirecto, especial, incidental o consecuente, que incluye, entre otros, la pérdida de datos o ganancias que surjan del uso o la incapacidad de usar, los materiales de este sitio, incluso si el equipo de Mi Promotora o un representante autorizado han sido informados de la posibilidad de tales daños. Si su uso de materiales de este sitio resulta en la necesidad de servicio, reparación o corrección de equipos o datos, usted asume los costos de los mismos.  
+
 Mi Promotora no será responsable de ningún resultado que pueda ocurrir durante el curso del uso de nuestros recursos. Nos reservamos el derecho de cambiar y revisar la política de uso de recursos en cualquier momento. 
 
 # Licencia 
