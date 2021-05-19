@@ -180,17 +180,15 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
   }
 
   Widget _cirleGraph() {
-    var total = widget.goals.pdnNewPrev;
-    var cancel = widget.goals.pdnCanc;
-    var pndNewPrev = double.parse(total);
-    var pdnCanc = double.parse(cancel).abs();
-    var totalPercentage = pndNewPrev + pdnCanc;
-    var totalPercentagePdnNewPrev = (100 * pndNewPrev / totalPercentage).ceil();
-    var totalPercentagePdnCanc = (100 * pdnCanc / totalPercentage).floor();
+    var pdnTotal = double.parse(widget.goals.pdnTotal);
+    var pndNew = double.parse(widget.goals.pdnNew);
+    var totalPercentagePdnNew = (100 * pndNew / pdnTotal).round();
+    var totalPercentagePdnOthers =
+        (100 * (pdnTotal - pndNew) / pdnTotal).round();
 
     Map<String, double> dataMap = {
-      "Flutter": pndNewPrev,
-      "React": pdnCanc,
+      "Pdn. Nueva": pndNew,
+      "Total": pdnTotal - pndNew
     };
 
     return Card(
@@ -211,7 +209,7 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
               ringStrokeWidth: 40,
               legendOptions: pie.LegendOptions(
                 showLegendsInRow: false,
-                legendPosition: pie.LegendPosition.right,
+                legendPosition: pie.LegendPosition.bottom,
                 showLegends: false,
                 legendShape: BoxShape.circle,
               ),
@@ -237,7 +235,7 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
                       .copyWith(color: Colors.black, fontSize: 17),
                 ),
                 Text(
-                  'VS Cancelaciones',
+                  'y Otros',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1
@@ -245,19 +243,19 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  ('Produccion Nueva: $totalPercentagePdnNewPrev %'),
+                  ('Produccion Nueva: $totalPercentagePdnNew %'),
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1
                       .copyWith(color: Colors.black45, fontSize: 14),
                 ),
                 Text(
-                  'Cancelaciones: $totalPercentagePdnCanc%',
+                  ('Otros: $totalPercentagePdnOthers %'),
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1
                       .copyWith(color: Colors.black45, fontSize: 14),
-                )
+                ),
               ],
             ))
           ],
