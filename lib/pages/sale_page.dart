@@ -17,7 +17,7 @@ class _SalePageState extends State<SalePage> {
   String quantity = '';
   String clients = '';
   String idClient = '';
-  String _value;
+  String selectedSaleType;
 
   TextEditingController _dateController = TextEditingController();
   @override
@@ -110,7 +110,7 @@ class _SalePageState extends State<SalePage> {
         Container(
           padding: EdgeInsets.all(10),
           child: Text(
-            'Nit/Cedula',
+            'Nit/Cédula',
             style: Theme.of(context)
                 .textTheme
                 .bodyText1
@@ -126,6 +126,15 @@ class _SalePageState extends State<SalePage> {
 
   Widget _enterValue() {
     final size = MediaQuery.of(context).size;
+    final saleTypes = [
+      "Salud Familiar",
+      "Movilidad",
+      "Vida Individual",
+      "Vida Grupo",
+      "Renta",
+      "Propiedad y Patrimonio"
+    ];
+
     return Container(
       width: size.width * 0.9,
       color: Color.fromRGBO(243, 243, 243, 1),
@@ -135,50 +144,26 @@ class _SalePageState extends State<SalePage> {
           height: 1,
           color: Colors.grey,
         ),
-        items: [
-          DropdownMenuItem<String>(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                'Venta 1',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: Colors.black45, fontSize: 14),
+        items: saleTypes
+            .map(
+              (saleType) => DropdownMenuItem<String>(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    saleType,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.black45, fontSize: 14),
+                  ),
+                ),
+                value: saleType,
               ),
-            ),
-            value: 'tipo 1',
-          ),
-          DropdownMenuItem<String>(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                'Venta 2',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: Colors.black45, fontSize: 14),
-              ),
-            ),
-            value: 'tipo 2',
-          ),
-          DropdownMenuItem<String>(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                'Venta 3',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: Colors.black45, fontSize: 14),
-              ),
-            ),
-            value: 'tipo 3',
-          ),
-        ],
+            )
+            .toList(),
         onChanged: (String value) {
           setState(() {
-            _value = value;
+            selectedSaleType = value;
           });
         },
         hint: Container(
@@ -197,7 +182,7 @@ class _SalePageState extends State<SalePage> {
             .textTheme
             .bodyText1
             .copyWith(color: Colors.black45, fontSize: 14),
-        value: _value,
+        value: selectedSaleType,
       ),
     );
   }
@@ -219,7 +204,7 @@ class _SalePageState extends State<SalePage> {
             borderSide: BorderSide(color: MiPromotora().primaryDark),
           ),
           contentPadding: EdgeInsets.all(10),
-          hintText: 'selecciona la fecha',
+          hintText: 'Selecciona la fecha',
           hintStyle: Theme.of(context)
               .textTheme
               .bodyText1
@@ -335,7 +320,7 @@ class _SalePageState extends State<SalePage> {
             borderSide: BorderSide(color: MiPromotora().primaryDark),
           ),
           contentPadding: EdgeInsets.all(10),
-          hintText: 'ingresa identificación del cliente',
+          hintText: 'Ingresa la identificación del cliente',
           hintStyle: Theme.of(context)
               .textTheme
               .bodyText1
@@ -356,6 +341,12 @@ class _SalePageState extends State<SalePage> {
 
   Widget _registerButton(context) {
     final size = MediaQuery.of(context).size;
+    bool isCompleted = selectedSaleType != null &&
+        _date != "" &&
+        quantity != "" &&
+        clients != "" &&
+        idClient != "";
+
     return ElevatedButton(
         child: Container(
           width: size.width * 0.7,
@@ -368,7 +359,7 @@ class _SalePageState extends State<SalePage> {
                 .copyWith(color: Colors.black, fontSize: 16),
           ),
         ),
-        onPressed: () => _sendInterests(context));
+        onPressed: isCompleted ? () => _sendInterests(context) : null);
   }
 
   _sendInterests(BuildContext context) async {
@@ -384,28 +375,28 @@ class _SalePageState extends State<SalePage> {
       );
     }
     bool sent = await saleProvider.sendSale(
-      _value,
+      selectedSaleType,
       _date,
       quantity,
       clients,
       idClient,
       id.toString(),
     );
-    print(_date);
+
     if (sent) {
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: Text(
-              'Su respuesta se envio correctamente',
+              'Su respuesta se envió correctamente',
               style:
                   Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
             ),
             actions: <Widget>[
               TextButton(
                 child: Text(
-                  'OK',
+                  'Aceptar',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1
@@ -417,6 +408,31 @@ class _SalePageState extends State<SalePage> {
                     builder: (BuildContext context) => HomePage(),
                   ),
                 ),
+              )
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              'Se ha producido un error al registrar tu venta, revisa que todos los campos hayan sido completados correctamente.',
+              style:
+                  Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text(
+                  'Aceptar',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: MiPromotora().primaryDark, fontSize: 16),
+                ),
+                onPressed: () => Navigator.pop(context),
               )
             ],
           );
