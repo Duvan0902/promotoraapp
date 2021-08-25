@@ -43,7 +43,7 @@ class GoalsProvider {
     String dateFilter = DateFormat('yyyy-MM-dd').format(date);
 
     final String _url = GlobalConfiguration().getValue("api_url") +
-        "/reporte-integrado-data?user_code=$userName&branch_gct=Total&report_date_gte=$dateFilter&_limit=10";
+        "/reporte-integrado-data?user_code=$userName&branch_gct=Total&report_date_gte=$dateFilter&_limit=50";
 
     print(_url);
 
