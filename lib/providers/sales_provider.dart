@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:global_configuration/global_configuration.dart';
+import 'package:mi_promotora/models/sales_model.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:intl/intl.dart';
 
@@ -69,6 +70,73 @@ class SalesProvider {
     } catch (Exception) {
       print(Exception);
     }
+    return sales;
+  }
+
+  Future<List<SalesCategoryModel>> getSalesCategories() async {
+    List<SalesCategoryModel> salesCategories = [];
+
+    try {
+      String token = _prefs.token;
+      String salesCategoriesUrl = _url + "/ventas-categorias";
+
+      final response = await http.get(
+        salesCategoriesUrl,
+        /* headers: {
+          'Authorization': 'Bearer $token',
+        }, */
+      );
+
+      if (response.statusCode == 200) {
+        print(response.body);
+        List<dynamic> jsonResponse = jsonDecode(response.body);
+
+        for (var item in jsonResponse) {
+          SalesCategoryModel saleCategory = SalesCategoryModel.fromMap(item);
+          salesCategories.add(saleCategory);
+        }
+      } else {
+        print('Request failed with status: ${response.statusCode}.');
+      }
+    } catch (Exception) {
+      print(Exception);
+    }
+
+    return salesCategories;
+  }
+
+  Future<List<SaleModel>> getSalesByUser(int categoryId, int userId) async {
+    List<SaleModel> sales = [];
+
+    try {
+      String token = _prefs.token;
+      String salesCategoriesUrl =
+          '$_url/ventas?user.id=$userId&category.id=$categoryId';
+
+      print(salesCategoriesUrl);
+
+      final response = await http.get(
+        salesCategoriesUrl,
+        /* headers: {
+          'Authorization': 'Bearer $token',
+        }, */
+      );
+
+      if (response.statusCode == 200) {
+        print(response.body);
+        List<dynamic> jsonResponse = jsonDecode(response.body);
+
+        for (var item in jsonResponse) {
+          SaleModel sale = SaleModel.fromMap(item);
+          sales.add(sale);
+        }
+      } else {
+        print('Request failed with status: ${response.statusCode}.');
+      }
+    } catch (Exception) {
+      print(Exception);
+    }
+
     return sales;
   }
 }

@@ -10,6 +10,7 @@ import 'package:mi_promotora/pages/home_page.dart';
 import 'package:mi_promotora/pages/login_page.dart';
 import 'package:mi_promotora/pages/privacy_policy.dart';
 import 'package:mi_promotora/pages/sale_page.dart';
+import 'package:mi_promotora/pages/sales_categories_page.dart';
 import 'package:mi_promotora/pages/terms_and_conditions.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:mi_promotora/utils/manage_notification.dart';
@@ -175,6 +176,7 @@ class _MiPromotoraState extends State<MiPromotora> {
           'privacy-policy': (BuildContext context) => PrivacyPolicyPage(),
           'terms-and-conditions': (BuildContext context) =>
               TermsAndConditionsPage(),
+          'sales-categories': (BuildContext context) => SalesCategoriesPage()
         },
       ),
     );

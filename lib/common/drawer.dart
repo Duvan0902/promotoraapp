@@ -38,6 +38,11 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   SizedBox(height: 18),
                   BottomList(
+                    title: 'Mis ventas',
+                    route: 'sales-categories',
+                  ),
+                  SizedBox(height: 18),
+                  BottomList(
                     title: 'Preguntas Frecuentes',
                     route: 'faq',
                   ),
@@ -51,7 +56,7 @@ class CustomDrawer extends StatelessWidget {
                     title: 'Chat',
                     route: 'porchat',
                   ),
-                  SizedBox(height: 200),
+                  SizedBox(height: 18),
                   ElevatedButton(
                     child: Container(
                       child: Row(
