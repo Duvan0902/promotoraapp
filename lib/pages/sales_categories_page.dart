@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:intl/intl.dart';
+import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/sales_model.dart';
 import 'package:mi_promotora/pages/sales_list_page.dart';
+import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:mi_promotora/providers/sales_provider.dart';
 import 'package:mi_promotora/utils/random_color.dart';
 
 class SalesCategoriesPage extends StatelessWidget {
   final String _url = GlobalConfiguration().getValue("api_url");
+  final salesProvider = SalesProvider();
+  final _prefs = UserPreferences();
 
   SalesCategoriesPage({Key key}) : super(key: key);
 
@@ -40,7 +45,7 @@ class SalesCategoriesPage extends StatelessWidget {
       body: Container(
         color: Colors.grey[900],
         padding: EdgeInsets.all(10),
-        child: Column(
+        child: ListView(
           children: <Widget>[
             SizedBox(height: 15),
             Padding(
@@ -53,8 +58,8 @@ class SalesCategoriesPage extends StatelessWidget {
                     .copyWith(color: Colors.white, fontSize: 17),
               ),
             ),
-            SizedBox(height: 20),
-            Flexible(child: _categories(context)),
+            _totalSales(context),
+            _categories(context),
           ],
         ),
       ),
@@ -62,7 +67,6 @@ class SalesCategoriesPage extends StatelessWidget {
   }
 
   Widget _categories(context) {
-    final salesProvider = SalesProvider();
     return FutureBuilder(
       future: salesProvider.getSalesCategories(),
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
@@ -83,6 +87,8 @@ class SalesCategoriesPage extends StatelessWidget {
   Widget _categoriesList(
       BuildContext context, List<SalesCategoryModel> salesCategories) {
     return GridView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemCount: salesCategories.length,
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
@@ -145,6 +151,64 @@ class SalesCategoriesPage extends StatelessWidget {
             builder: (context) => SalesListPage(category: category),
           ),
         );
+      },
+    );
+  }
+
+  Widget _totalSales(context) {
+    return FutureBuilder(
+      future: salesProvider.getSalesByUser(null, _prefs.userId),
+      builder: (BuildContext context, AsyncSnapshot<List<SaleModel>> snapshot) {
+        if (snapshot.hasData) {
+          List<SaleModel> sales = snapshot.data;
+
+          double total = sales
+              .map((e) => double.tryParse(e.value))
+              .reduce((a, b) => a + b);
+
+          final NumberFormat currencyFormat = NumberFormat.currency(
+              locale: 'es_CO',
+              symbol: '\$',
+              decimalDigits: 0,
+              customPattern: '\u00A4###,###');
+          String formattedTotal = currencyFormat.format(total);
+
+          print(formattedTotal);
+
+          return Card(
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            color: MiPromotora().accent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Container(
+              padding: EdgeInsets.fromLTRB(18, 13, 18, 13),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Total',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline2
+                        .copyWith(color: Colors.white),
+                  ),
+                  Text(
+                    formattedTotal,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline2
+                        .copyWith(color: Colors.white),
+                  )
+                ],
+              ),
+            ),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
       },
     );
   }

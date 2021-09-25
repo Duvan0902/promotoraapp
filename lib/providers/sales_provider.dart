@@ -110,8 +110,9 @@ class SalesProvider {
 
     try {
       String token = _prefs.token;
-      String salesCategoriesUrl =
-          '$_url/ventas?user.id=$userId&category.id=$categoryId';
+      String salesCategoriesUrl = categoryId == null
+          ? '$_url/ventas?user.id=$userId'
+          : '$_url/ventas?user.id=$userId&category.id=$categoryId';
 
       print(salesCategoriesUrl);
 
