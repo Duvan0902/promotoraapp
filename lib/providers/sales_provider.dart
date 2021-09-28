@@ -14,6 +14,7 @@ class SalesProvider {
     final bodyData = json.encode(
       {
         'type': type,
+        'category': type,
         'date': date,
         'value': value,
         'client': client,
