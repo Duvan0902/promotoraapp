@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mi_promotora/common/questions_answer.dart';
 import 'package:mi_promotora/common/sale_item.dart';
+import 'package:mi_promotora/common/total_box.dart';
+import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/sales_model.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:mi_promotora/providers/sales_provider.dart';
@@ -55,44 +57,71 @@ class _SalesListPageState extends State<SalesListPage> {
           if (snapshot.hasData) {
             List<SaleModel> sales = snapshot.data;
 
+            //double total = 0;
+            //for (var sale in sales) {
+            //total = total + double.tryParse(sale.value);
+            //}
+            var total = sales
+                .map((sold) => double.tryParse(sold.value))
+                .reduce((a, b) => a + b);
+            print('las ventas totales son $total');
+
+            final NumberFormat currencyFormat = NumberFormat.currency(
+                locale: 'es_CO',
+                symbol: '\$',
+                decimalDigits: 0,
+                customPattern: '\u00A4###,###');
+            String formattedTotal = currencyFormat.format(total);
+
             return Container(
               padding: EdgeInsets.all(10),
-              child: ListView.builder(
-                itemCount: sales.length,
-                itemBuilder: (context, index) {
-                  SaleModel sale = sales[index];
+              child: Column(
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: sales.length,
+                    itemBuilder: (context, index) {
+                      SaleModel sale = sales[index];
 
-                  final DateFormat formatter = DateFormat('yyyy-MM-dd');
-                  final String created = formatter.format(sale.date);
+                      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                      final String created = formatter.format(sale.date);
 
-                  return FlexibleExpansionCard(
-                    header: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(created),
-                        Text("\$${sale.value}"),
-                      ],
-                    ),
-                    detail: Column(
-                      children: [
-                        Row(
+                      return FlexibleExpansionCard(
+                        header: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Cliente"),
-                            Text(sale.client),
+                            Text(created),
+                            Text("\$${sale.value}"),
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        detail: Column(
                           children: [
-                            Text("Identificación"),
-                            Text(sale.idClient),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Cliente"),
+                                Text(sale.client),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Identificación"),
+                                Text(sale.idClient),
+                              ],
+                            )
                           ],
-                        )
-                      ],
-                    ),
-                  );
-                },
+                        ),
+                      );
+                    },
+                  ),
+                  //Expanded(child: SizedBox.expand()),
+                  TotalBox(
+                      lefttext: 'Total',
+                      rigthtext: formattedTotal,
+                      background: MiPromotora().grey,
+                      fontcolor: Colors.white)
+                ],
               ),
             );
           } else {

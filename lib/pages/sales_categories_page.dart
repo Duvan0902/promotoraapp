@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:intl/intl.dart';
+import 'package:mi_promotora/common/total_box.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/sales_model.dart';
 import 'package:mi_promotora/pages/sales_list_page.dart';
@@ -175,34 +176,11 @@ class SalesCategoriesPage extends StatelessWidget {
 
           print(formattedTotal);
 
-          return Card(
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-            color: MiPromotora().accent,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Container(
-              padding: EdgeInsets.fromLTRB(18, 13, 18, 13),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'Total',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline2
-                        .copyWith(color: Colors.white),
-                  ),
-                  Text(
-                    formattedTotal,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline2
-                        .copyWith(color: Colors.white),
-                  )
-                ],
-              ),
-            ),
+          return TotalBox(
+            lefttext: 'Total',
+            rigthtext: formattedTotal,
+            background: MiPromotora().accent,
+            fontcolor: Colors.white,
           );
         } else {
           return Center(
