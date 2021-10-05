@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mi_promotora/common/bottom_chat.dart';
-import 'package:mi_promotora/common/fab_button_app_bar.dart';
+import 'package:mi_promotora/common/button_app_bar.dart';
 import 'package:mi_promotora/pages/contacts_page.dart';
 import 'package:mi_promotora/pages/education_page.dart';
 import 'package:mi_promotora/pages/goals_page.dart';
@@ -18,9 +18,11 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
   bool routed = false;
+  TabController _tabController;
 
   static const List<Widget> _widgetOptions = <Widget>[
     GoalsPage(),
@@ -30,9 +32,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    _tabController.animateTo(index);
   }
 
   @override
@@ -40,6 +40,19 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     UsersProvider usersProvider = UsersProvider();
     usersProvider.updateUserDevice();
+
+    _selectedIndex = 0;
+    _tabController = TabController(vsync: this, length: _widgetOptions.length);
+    _tabController.addListener(() {
+      setState(() {
+        if (_tabController.indexIsChanging ||
+            (_tabController.animation.value == _tabController.index)) {
+          setState(() {
+            _selectedIndex = _tabController.index;
+          });
+        }
+      });
+    });
   }
 
   void rebuildAllChildren(BuildContext context) {
@@ -65,25 +78,28 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
-      body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: FABBottomAppBar(
+      body: TabBarView(
+        controller: _tabController,
+        children: _widgetOptions,
+      ),
+      bottomNavigationBar: CustomBottomAppBar(
         onTabSelected: _onItemTapped,
         selectedColor: MiPromotora().primaryDark,
         selectedIndex: _selectedIndex,
         items: [
-          FABBottomAppBarItem(
+          BottomAppBarItem(
             iconData: CupertinoIcons.house,
             text: 'Mis metas',
           ),
-          FABBottomAppBarItem(
+          BottomAppBarItem(
             iconData: CupertinoIcons.rectangle_stack_person_crop,
             text: 'Contactos',
           ),
-          FABBottomAppBarItem(
+          BottomAppBarItem(
             iconData: CupertinoIcons.heart,
             text: 'Servicios',
           ),
-          FABBottomAppBarItem(
+          BottomAppBarItem(
             iconData: CupertinoIcons.book,
             text: 'Educación',
           ),
