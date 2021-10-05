@@ -39,11 +39,6 @@ class CustomWebView extends StatelessWidget {
             initialUrl: url,
             javascriptMode: JavascriptMode.unrestricted,
             navigationDelegate: (NavigationRequest request) {
-              if (!request.url.startsWith(url)) {
-                print('Blocking navigation to $request}');
-                return NavigationDecision.prevent;
-              }
-              print('Allowing navigation to $request');
               return NavigationDecision.navigate;
             },
             onPageStarted: (String url) {
