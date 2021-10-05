@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mi_promotora/main.dart';
 
 class BottomAppBarItem {
   BottomAppBarItem({this.iconData, this.text});
@@ -75,6 +77,7 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
         children: items,
       ),
       color: widget.backgroundColor,
+      elevation: 0,
     );
   }
 
@@ -84,10 +87,12 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
     ValueChanged<int> onPressed,
   }) {
     Color color = _selectedIndex == index ? widget.selectedColor : widget.color;
+
     return Expanded(
       child: SizedBox(
         height: widget.height,
         child: Material(
+          color: widget.backgroundColor,
           child: InkWell(
             onTap: () => onPressed(index),
             child: Column(

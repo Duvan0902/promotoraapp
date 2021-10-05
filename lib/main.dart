@@ -4,6 +4,7 @@ import 'package:global_configuration/global_configuration.dart';
 import 'package:mi_promotora/bloc/provider_bloc.dart';
 import 'package:mi_promotora/common/custom_web_view.dart';
 import 'package:mi_promotora/pages/change_password_page.dart';
+import 'package:mi_promotora/pages/customers_page.dart';
 import 'package:mi_promotora/pages/documents_page.dart';
 import 'package:mi_promotora/pages/faq_categories_page.dart';
 import 'package:mi_promotora/pages/home_page.dart';
@@ -176,7 +177,8 @@ class _MiPromotoraState extends State<MiPromotora> {
           'privacy-policy': (BuildContext context) => PrivacyPolicyPage(),
           'terms-and-conditions': (BuildContext context) =>
               TermsAndConditionsPage(),
-          'sales-categories': (BuildContext context) => SalesCategoriesPage()
+          'sales-categories': (BuildContext context) => SalesCategoriesPage(),
+          'customers': (BuildContext context) => CustomersPage()
         },
       ),
     );

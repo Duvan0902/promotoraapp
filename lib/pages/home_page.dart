@@ -86,6 +86,7 @@ class _HomePageState extends State<HomePage>
         onTabSelected: _onItemTapped,
         selectedColor: MiPromotora().primaryDark,
         selectedIndex: _selectedIndex,
+        backgroundColor: Colors.white,
         items: [
           BottomAppBarItem(
             iconData: CupertinoIcons.house,
