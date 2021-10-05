@@ -21,69 +21,67 @@ class _EducationDetailedPageState extends State<EducationDetailedPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        appBar: AppBar(
-          brightness: Brightness.dark,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          backgroundColor: Colors.grey[900],
-          title: Text(
-            "Educación",
-            style: Theme.of(context)
-                .textTheme
-                .headline2
-                .copyWith(color: Colors.white, fontSize: 18),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        brightness: Brightness.dark,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        body: Container(
-          padding: EdgeInsets.all(10),
-          child: ListView(
-            children: <Widget>[
-              SizedBox(
-                height: 20,
+        backgroundColor: Colors.grey[900],
+        title: Text(
+          "Educación",
+          style: Theme.of(context)
+              .textTheme
+              .headline2
+              .copyWith(color: Colors.white, fontSize: 18),
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: ListView(
+          children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              padding: EdgeInsets.all(4),
+              child: Text(
+                'Te brindamos material de apoyo que te ayudara con tu proceso.',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.black, fontSize: 17),
               ),
-              Container(
-                padding: EdgeInsets.all(4),
-                child: Text(
-                  'Te brindamos material de apoyo que te ayudara con tu proceso.',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(color: Colors.black, fontSize: 17),
-                ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              padding: EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
               ),
-              SizedBox(
-                height: 8,
-              ),
-              Container(
-                padding: EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: widget.complement.videoUrl == null ||
-                        widget.complement.videoUrl == ''
-                    ? SizedBox()
-                    : _videoPlayer(),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                padding: EdgeInsets.all(2),
-                child: widget.complement.podcastFile == null
-                    ? SizedBox()
-                    : _audioPlayer(context),
-              ),
-              widget.complement.documentFiles == null
+              child: widget.complement.videoUrl == null ||
+                      widget.complement.videoUrl == ''
                   ? SizedBox()
-                  : _document(context, widget.complement.documentFiles),
-            ],
-          ),
+                  : _videoPlayer(),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+              padding: EdgeInsets.all(2),
+              child: widget.complement.podcastFile == null
+                  ? SizedBox()
+                  : _audioPlayer(context),
+            ),
+            widget.complement.documentFiles == null
+                ? SizedBox()
+                : _document(context, widget.complement.documentFiles),
+          ],
         ),
       ),
     );
