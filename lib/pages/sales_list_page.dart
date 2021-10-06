@@ -8,8 +8,9 @@ import 'package:mi_promotora/providers/sales_provider.dart';
 
 class SalesListPage extends StatefulWidget {
   final SalesCategoryModel category;
+  final String date;
 
-  SalesListPage({Key key, this.category}) : super(key: key);
+  SalesListPage({Key key, this.category, this.date}) : super(key: key);
 
   @override
   _SalesListPageState createState() => _SalesListPageState();
@@ -48,52 +49,73 @@ class _SalesListPageState extends State<SalesListPage> {
         ),
       ),
       body: FutureBuilder(
-        future: salesProvider.getSalesByUser(widget.category.id, _username),
+        future: salesProvider.getSalesByUser(
+          widget.category.id,
+          _username,
+          widget.date,
+        ),
         builder:
             (BuildContext context, AsyncSnapshot<List<SaleModel>> snapshot) {
           if (snapshot.hasData) {
             List<SaleModel> sales = snapshot.data;
 
-            return Container(
-              padding: EdgeInsets.all(10),
-              child: ListView.builder(
-                itemCount: sales.length,
-                itemBuilder: (context, index) {
-                  SaleModel sale = sales[index];
+            if (sales.isNotEmpty) {
+              return Container(
+                padding: EdgeInsets.all(10),
+                child: ListView.builder(
+                  itemCount: sales.length,
+                  itemBuilder: (context, index) {
+                    SaleModel sale = sales[index];
 
-                  final DateFormat formatter = DateFormat('yyyy-MM-dd');
-                  final String created = formatter.format(sale.date);
+                    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+                    final String created = formatter.format(sale.date);
 
-                  return FlexibleExpansionCard(
-                    header: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(created),
-                        Text("\$${sale.value}"),
-                      ],
-                    ),
-                    detail: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Cliente"),
-                            Text(sale.client),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Identificación"),
-                            Text(sale.idClient),
-                          ],
-                        )
-                      ],
-                    ),
-                  );
-                },
-              ),
-            );
+                    return FlexibleExpansionCard(
+                      header: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(created),
+                          Text("\$${sale.value}"),
+                        ],
+                      ),
+                      detail: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Cliente"),
+                              Text(sale.client),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Identificación"),
+                              Text(sale.idClient),
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              );
+            } else {
+              Size size = MediaQuery.of(context).size;
+              return Center(
+                child: Container(
+                  width: size.width * 0.8,
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                      "No tienes ventas asociadas de esta categoría desde la fecha seleccionada (${widget.date})",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(color: Colors.black)),
+                ),
+              );
+            }
           } else {
             return Center(child: CircularProgressIndicator());
           }
