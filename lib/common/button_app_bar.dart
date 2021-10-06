@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mi_promotora/main.dart';
 
 class BottomAppBarItem {
   BottomAppBarItem({this.iconData, this.text});
