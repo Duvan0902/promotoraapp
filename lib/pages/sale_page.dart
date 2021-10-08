@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mi_promotora/models/sales_model.dart';
 import 'package:mi_promotora/pages/login_page.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
@@ -20,6 +21,7 @@ class _SalePageState extends State<SalePage> {
   String selectedSaleType;
 
   TextEditingController _dateController = TextEditingController();
+  SalesProvider _salesProvider = SalesProvider();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -69,7 +71,7 @@ class _SalePageState extends State<SalePage> {
                 .copyWith(color: Colors.black, fontSize: 16),
           ),
         ),
-        _enterValue(),
+        _saleType(),
         SizedBox(height: 20.0),
         Container(
           padding: EdgeInsets.all(10),
@@ -124,66 +126,70 @@ class _SalePageState extends State<SalePage> {
     );
   }
 
-  Widget _enterValue() {
+  Widget _saleType() {
     final size = MediaQuery.of(context).size;
-    final saleTypes = [
-      "Salud Familiar",
-      "Movilidad",
-      "Vida Individual",
-      "Vida Grupo",
-      "Renta",
-      "Propiedad y Patrimonio"
-    ];
 
-    return Container(
-      width: size.width * 0.9,
-      color: Color.fromRGBO(243, 243, 243, 1),
-      child: DropdownButton<String>(
-        iconSize: 0.0,
-        underline: Container(
-          height: 1,
-          color: Colors.grey,
-        ),
-        items: saleTypes
-            .map(
-              (saleType) => DropdownMenuItem<String>(
-                child: Container(
-                  padding: EdgeInsets.all(10),
+    return FutureBuilder(
+      future: _salesProvider.getSalesCategories(),
+      builder: (BuildContext context,
+          AsyncSnapshot<List<SalesCategoryModel>> snapshot) {
+        List<SalesCategoryModel> saleTypes = snapshot.data;
+
+        if (snapshot.hasData) {
+          return Container(
+            width: size.width * 0.9,
+            color: Color.fromRGBO(243, 243, 243, 1),
+            child: DropdownButton<String>(
+              iconSize: 0.0,
+              underline: Container(
+                height: 1,
+                color: Colors.grey,
+              ),
+              items: saleTypes
+                  .map(
+                    (saleType) => DropdownMenuItem<String>(
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          saleType.title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              .copyWith(color: Colors.black45, fontSize: 14),
+                        ),
+                      ),
+                      value: saleType.id.toString(),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (String value) {
+                setState(() {
+                  selectedSaleType = value;
+                });
+              },
+              hint: Container(
+                padding: EdgeInsets.all(10),
+                child: Align(
                   child: Text(
-                    saleType,
+                    'Escoge el tipo de venta',
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1
                         .copyWith(color: Colors.black45, fontSize: 14),
                   ),
                 ),
-                value: saleType,
               ),
-            )
-            .toList(),
-        onChanged: (String value) {
-          setState(() {
-            selectedSaleType = value;
-          });
-        },
-        hint: Container(
-          padding: EdgeInsets.all(10),
-          child: Align(
-            child: Text(
-              'Escoge el tipo de venta',
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
                   .copyWith(color: Colors.black45, fontSize: 14),
+              value: selectedSaleType,
             ),
-          ),
-        ),
-        style: Theme.of(context)
-            .textTheme
-            .bodyText1
-            .copyWith(color: Colors.black45, fontSize: 14),
-        value: selectedSaleType,
-      ),
+          );
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 

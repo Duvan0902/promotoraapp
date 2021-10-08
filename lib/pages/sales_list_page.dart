@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mi_promotora/common/questions_answer.dart';
 import 'package:mi_promotora/common/sale_item.dart';
 import 'package:mi_promotora/common/total_box.dart';
 import 'package:mi_promotora/main.dart';

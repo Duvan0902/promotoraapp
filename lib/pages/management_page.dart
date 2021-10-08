@@ -31,18 +31,18 @@ class _ManagementPageState extends State<ManagementPage> {
 
     GoalsModel goals = await goalsProvider.getGoal();
     int sales = await salesProvider.getSalesCount();
-    print("Data: " + goals.avgPrima);
-    print("Sales: " + sales.toString());
 
-    String url = goals.integratedReport.file.url;
+    if (goals != null) {
+      String url = goals.integratedReport.file.url;
 
-    setState(() {
-      this.currentSales = sales;
-      this.goalSales = int.tryParse(goals.goal) ?? 0;
-      this.avgPrima = int.tryParse(goals.avgPrima) ?? 0;
+      setState(() {
+        this.currentSales = sales;
+        this.goalSales = int.tryParse(goals.goal) ?? 0;
+        this.avgPrima = int.tryParse(goals.avgPrima) ?? 0;
 
-      this.downloadUrl = url;
-    });
+        this.downloadUrl = url;
+      });
+    }
   }
 
   @override
@@ -162,12 +162,13 @@ class _ManagementPageState extends State<ManagementPage> {
   }
 
   Widget _percentagelist() {
-    var goalSales = this.goalSales;
-    var currentSales = this.currentSales;
-    var avgPrima = this.avgPrima;
+    var goalSales = this.goalSales ?? 0;
+    var currentSales = this.currentSales ?? 0;
+    var avgPrima = this.avgPrima ?? 0;
     var totalValue = (goalSales / avgPrima).floorToDouble();
-    var totalPercentage =
-        totalValue != 0 ? ((100 * currentSales) / totalValue) : 0;
+    var totalPercentage = totalValue != 0 && currentSales != 0
+        ? ((100 * currentSales) / totalValue)
+        : 0;
     var finalvalue = NumberFormat("#,##0.00").format(totalPercentage);
 
     return Container(
