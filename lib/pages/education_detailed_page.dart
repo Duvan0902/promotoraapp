@@ -47,7 +47,7 @@ class _EducationDetailedPageState extends State<EducationDetailedPage> {
               height: 20,
             ),
             Container(
-              padding: EdgeInsets.all(4),
+              padding: EdgeInsets.all(5),
               child: Text(
                 'Te brindamos material de apoyo que te ayudara con tu proceso.',
                 style: Theme.of(context)
@@ -56,11 +56,8 @@ class _EducationDetailedPageState extends State<EducationDetailedPage> {
                     .copyWith(color: Colors.black, fontSize: 17),
               ),
             ),
-            SizedBox(
-              height: 8,
-            ),
             Container(
-              padding: EdgeInsets.all(6),
+              padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
               ),
@@ -80,7 +77,7 @@ class _EducationDetailedPageState extends State<EducationDetailedPage> {
             ),
             widget.complement.documentFiles == null
                 ? SizedBox()
-                : _document(context, widget.complement.documentFiles),
+                : _documents(context, widget.complement.documentFiles),
           ],
         ),
       ),
@@ -177,7 +174,7 @@ class _EducationDetailedPageState extends State<EducationDetailedPage> {
     setState(() {});
   }
 
-  Widget _document(context, final List<DocumentFile> documentFiles) {
+  Widget _documents(context, final List<DocumentFile> documentFiles) {
     return GridView.builder(
       itemCount: documentFiles.length,
       gridDelegate:
@@ -186,45 +183,44 @@ class _EducationDetailedPageState extends State<EducationDetailedPage> {
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         DocumentFile document = documentFiles[index];
-        return ClipRect(
-          child: Container(
-            height: 150.0,
-            margin: EdgeInsets.all(8.0),
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
-              boxShadow: [
-                new BoxShadow(
-                  color: Colors.black,
+        return Container(
+          margin: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              new BoxShadow(
+                color: Colors.black,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CircleAvatar(
+                backgroundColor: Color.fromRGBO(243, 243, 243, 1),
+                radius: 30.0,
+                child: IconButton(
+                  color: MiPromotora().primaryDark,
+                  icon: Icon(Icons.file_download),
+                  iconSize: 30,
+                  onPressed: () => _launchURL(document.file.url),
                 ),
-              ],
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                SizedBox(height: 5.0),
-                CircleAvatar(
-                  backgroundColor: Color.fromRGBO(243, 243, 243, 1),
-                  radius: 30.0,
-                  child: IconButton(
-                    color: MiPromotora().primaryDark,
-                    icon: Icon(Icons.file_download),
-                    iconSize: 30,
-                    onPressed: () => _launchURL(document.file.url),
-                  ),
-                ),
-                Text(
-                  document.title,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      .copyWith(color: Colors.black, fontSize: 17),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 5.0)
-              ],
-            ),
+              ),
+              SizedBox(height: 10),
+              Text(
+                document.title,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline1
+                    .copyWith(color: Colors.black, fontSize: 17),
+                textAlign: TextAlign.center,
+                softWrap: true,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
           ),
         );
       },

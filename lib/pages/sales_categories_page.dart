@@ -250,9 +250,92 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
               symbol: '\$',
               decimalDigits: 0,
               customPattern: '\u00A4###,###');
+          final NumberFormat pointsFormat = NumberFormat.currency(
+              locale: 'es_CO', decimalDigits: 0, customPattern: '###,###');
           String formattedTotal = currencyFormat.format(total);
+          String formattedPoints = pointsFormat.format(total / 1000);
 
           print(formattedTotal);
+
+          return Card(
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            color: MiPromotora().accent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Container(
+              padding: EdgeInsets.fromLTRB(18, 13, 18, 13),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Total',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline2
+                            .copyWith(color: Colors.white),
+                      ),
+                      Text(
+                        formattedTotal,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline2
+                            .copyWith(color: Colors.white),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Total puntos',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline2
+                            .copyWith(color: Colors.white),
+                      ),
+                      Text(
+                        formattedPoints,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline2
+                            .copyWith(color: Colors.white),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _totalPoints(context) {
+    return FutureBuilder(
+      future: salesProvider.getSalesByUser(null, _prefs.userId, _date),
+      builder: (BuildContext context, AsyncSnapshot<List<SaleModel>> snapshot) {
+        if (snapshot.hasData) {
+          List<SaleModel> sales = snapshot.data;
+
+          double total = sales
+              .map((e) => double.tryParse(e.value))
+              .reduce((a, b) => a + b);
+
+          final NumberFormat currencyFormat = NumberFormat.currency(
+              locale: 'es_CO', decimalDigits: 0, customPattern: '###,###');
+
+          String formattedTotal = currencyFormat.format(total / 1000);
 
           return Card(
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
@@ -266,7 +349,7 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    'Total',
+                    'Total puntos',
                     style: Theme.of(context)
                         .textTheme
                         .headline2
