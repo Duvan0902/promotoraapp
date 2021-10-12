@@ -24,15 +24,20 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
   final _prefs = UserPreferences();
 
   TextEditingController _dateController = TextEditingController();
+  TextEditingController _currentDateController = TextEditingController();
   String _date;
+  String _currentDate;
 
   @override
   void initState() {
     super.initState();
     setState(() {
       DateFormat formatter = DateFormat('yyyy-MM-01');
+      DateFormat currentDateFormatter = DateFormat('yyyy-MM-dd');
       _date = formatter.format(DateTime.now());
+      _currentDate = currentDateFormatter.format(DateTime.now());
       _dateController.text = _date;
+      _currentDateController.text = _currentDate;
     });
   }
 
@@ -96,31 +101,75 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
       ),
       margin: EdgeInsets.all(10),
       //color: Color.fromRGBO(243, 243, 243, 1),
-      child: TextField(
-        style: Theme.of(context)
-            .textTheme
-            .bodyText1
-            .copyWith(color: Colors.black45, fontSize: 14),
-        controller: _dateController,
-        textCapitalization: TextCapitalization.words,
-        keyboardType: TextInputType.multiline,
-        enableInteractiveSelection: false,
-        decoration: InputDecoration(
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: MiPromotora().primaryDark),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 45,
           ),
-          contentPadding: EdgeInsets.all(10),
-          hintText: 'Selecciona la fecha',
-          hintStyle: Theme.of(context)
-              .textTheme
-              .bodyText1
-              .copyWith(color: MiPromotora().grey, fontSize: 14),
-          errorStyle:
-              Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.red),
-        ),
-        onTap: () {
-          _selectDate(context);
-        },
+          Flexible(
+            child: TextField(
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(color: Colors.black45, fontSize: 14),
+              controller: _dateController,
+              textCapitalization: TextCapitalization.words,
+              keyboardType: TextInputType.multiline,
+              enableInteractiveSelection: false,
+              decoration: InputDecoration(
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: MiPromotora().primaryDark),
+                ),
+                contentPadding: EdgeInsets.all(10),
+                hintText: 'Selecciona la fecha',
+                hintStyle: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: MiPromotora().grey, fontSize: 14),
+                errorStyle: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.red),
+              ),
+              onTap: () {
+                _selectDate(context);
+              },
+            ),
+          ),
+          Flexible(
+            child: TextField(
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(color: Colors.black45, fontSize: 14),
+              controller: _currentDateController,
+              textCapitalization: TextCapitalization.words,
+              keyboardType: TextInputType.multiline,
+              enableInteractiveSelection: false,
+              decoration: InputDecoration(
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: MiPromotora().primaryDark),
+                ),
+                contentPadding: EdgeInsets.all(10),
+                hintText: 'Selecciona la fecha',
+                hintStyle: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: MiPromotora().grey, fontSize: 14),
+                errorStyle: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.red),
+              ),
+              onTap: () {
+                _selectDate(context);
+              },
+            ),
+          ),
+          SizedBox(
+            width: 0,
+          ),
+        ],
       ),
     );
   }
