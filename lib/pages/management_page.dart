@@ -21,8 +21,8 @@ final String _url = GlobalConfiguration().getValue("api_url");
 class _ManagementPageState extends State<ManagementPage> {
   int currentSales = 0;
 
-  int avgPrima = 1;
-  int goalSales = 1;
+  int avgPrima = 0;
+  int goalSales = 0;
   String downloadUrl;
 
   getInitialData() async {
@@ -31,17 +31,18 @@ class _ManagementPageState extends State<ManagementPage> {
 
     GoalsModel goals = await goalsProvider.getGoal();
     int sales = await salesProvider.getSalesCount();
-    print("Data: " + goals.avgPrima);
-    print("Sales: " + sales.toString());
-    String url = goals.integratedReport.file.url;
 
-    setState(() {
-      this.currentSales = sales;
-      this.goalSales = int.tryParse(goals.goal);
-      this.avgPrima = int.tryParse(goals.avgPrima);
+    if (goals != null) {
+      String url = goals.integratedReport.file.url;
 
-      this.downloadUrl = url;
-    });
+      setState(() {
+        this.currentSales = sales;
+        this.goalSales = int.tryParse(goals.goal) ?? 0;
+        this.avgPrima = int.tryParse(goals.avgPrima) ?? 0;
+
+        this.downloadUrl = url;
+      });
+    }
   }
 
   @override
@@ -53,8 +54,8 @@ class _ManagementPageState extends State<ManagementPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
-      color: Colors.grey[900],
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      color: MiPromotora().grey,
       child: ListView(
         children: <Widget>[
           SizedBox(
@@ -85,13 +86,18 @@ class _ManagementPageState extends State<ManagementPage> {
   }
 
   Widget _progressIndicator(context) {
-    var value = (this.goalSales / this.avgPrima);
+    var value = this.avgPrima != 0 && this.avgPrima != null
+        ? this.goalSales / this.avgPrima
+        : 0;
+
     return Card(
+      margin: EdgeInsets.all(0),
+      shadowColor: Colors.blueGrey,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       child: Container(
-        padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+        padding: EdgeInsets.all(20),
         child: Row(
           children: <Widget>[
             Container(
@@ -114,7 +120,7 @@ class _ManagementPageState extends State<ManagementPage> {
                 ),
               ),
             ),
-            SizedBox(width: 6),
+            SizedBox(width: 15),
             Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,11 +162,13 @@ class _ManagementPageState extends State<ManagementPage> {
   }
 
   Widget _percentagelist() {
-    var goalSales = this.goalSales;
-    var currentSales = this.currentSales;
-    var avgPrima = this.avgPrima;
+    var goalSales = this.goalSales ?? 0;
+    var currentSales = this.currentSales ?? 0;
+    var avgPrima = this.avgPrima ?? 0;
     var totalValue = (goalSales / avgPrima).floorToDouble();
-    var totalPercentage = ((100 * currentSales) / totalValue);
+    var totalPercentage = totalValue != 0 && currentSales != 0
+        ? ((100 * currentSales) / totalValue)
+        : 0;
     var finalvalue = NumberFormat("#,##0.00").format(totalPercentage);
 
     return Container(
@@ -175,10 +183,11 @@ class _ManagementPageState extends State<ManagementPage> {
   }
 
   Widget _downloadButton(context) {
-    return FlatButton(
-      textColor: MiPromotora().primaryDark,
-      disabledTextColor: Colors.black,
-      padding: EdgeInsets.all(2),
+    return TextButton(
+      style: ButtonStyle(
+        foregroundColor:
+            MaterialStateProperty.all<Color>(MiPromotora().primaryDark),
+      ),
       onPressed: () => _launchURL(this.downloadUrl),
       child: Text(
         "Descargar reporte",
@@ -189,10 +198,8 @@ class _ManagementPageState extends State<ManagementPage> {
 }
 
 Widget _addSaleButton(context) {
-  final size = MediaQuery.of(context).size;
-  return RaisedButton(
+  return ElevatedButton(
     child: Container(
-      width: size.width * 0.7,
       child: Text(
         'Agregar mi venta',
         textAlign: TextAlign.center,
@@ -202,8 +209,6 @@ Widget _addSaleButton(context) {
             .copyWith(color: Colors.black, fontSize: 17),
       ),
     ),
-    color: MiPromotora().primaryDark,
-    disabledTextColor: Colors.grey,
     onPressed: () {
       Navigator.push(
         context,

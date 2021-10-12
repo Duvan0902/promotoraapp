@@ -12,6 +12,7 @@ class GoalsModel {
     this.pdnNewPrev,
     this.pdnTotal,
     this.pdnCanc,
+    this.pdnMonthly,
     this.pctEffect,
     this.avgPrima,
     this.goal,
@@ -29,6 +30,7 @@ class GoalsModel {
   final String pdnNewPrev;
   final String pdnTotal;
   final String pdnCanc;
+  final String pdnMonthly;
   final double pctEffect;
   final String avgPrima;
   final String goal;
@@ -45,16 +47,19 @@ class GoalsModel {
   factory GoalsModel.fromMap(Map<String, dynamic> json) => GoalsModel(
         id: json["id"],
         userCode: json["user_code"],
-        name: json["name"],
-        branchGct: json["branch_gct"],
-        pdnNew: json["pdn_new"],
-        pdnNewPrev: json["pdn_new_prev"],
-        pdnTotal: json["pdn_total"],
-        pdnCanc: json["pdn_canc"],
-        pctEffect: json["pct_effect"].toDouble(),
-        avgPrima: json["avg_prima"],
-        goal: json["goal"],
-        integratedReport: IntegratedReport.fromMap(json["integrated_report"]),
+        name: json["name"] ?? '',
+        branchGct: json["branch_gct"] ?? "0",
+        pdnNew: json["pdn_new"] ?? "0",
+        pdnNewPrev: json["pdn_new_prev"] ?? "0",
+        pdnTotal: json["pdn_total"] ?? "0",
+        pdnCanc: json["pdn_canc"] ?? "0",
+        pctEffect: json["pct_effect"].toDouble() ?? 0,
+        pdnMonthly: json["pdn_monthly"] ?? "0",
+        avgPrima: json["avg_prima"] ?? 0,
+        goal: json["goal"] ?? "0",
+        integratedReport: json["integrated_report"] != null
+            ? IntegratedReport.fromMap(json["integrated_report"])
+            : null,
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         reportDate: DateTime.parse(json["report_date"]),
@@ -70,6 +75,7 @@ class GoalsModel {
         "pdn_total": pdnTotal,
         "pdn_canc": pdnCanc,
         "pct_effect": pctEffect,
+        "pdn_monthly": pdnMonthly,
         "avg_prima": avgPrima,
         "goal": goal,
         "integrated_report": integratedReport.toMap(),

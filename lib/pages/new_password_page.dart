@@ -205,7 +205,7 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
       stream: bloc.checkNewPasswordsStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         final size = MediaQuery.of(context).size;
-        return RaisedButton(
+        return ElevatedButton(
           child: Container(
             width: size.width * 0.6,
             child: Text(
@@ -217,9 +217,6 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                   .copyWith(color: Colors.black, fontSize: 16),
             ),
           ),
-          disabledColor: Colors.grey[300],
-          color: MiPromotora().primaryDark,
-          disabledTextColor: Colors.grey,
           onPressed:
               snapshot.hasData ? () => _updatePassword(bloc, context) : null,
         );
@@ -243,7 +240,7 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                   Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text(
                   'Aceptar',
                   style: Theme.of(context)

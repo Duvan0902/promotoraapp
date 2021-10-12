@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mi_promotora/bloc/login_bloc.dart';
 import 'package:mi_promotora/bloc/provider_bloc.dart';
 import 'package:mi_promotora/main.dart';
+import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:mi_promotora/providers/login_provider.dart';
 import 'package:mi_promotora/utils/alert_dialog.dart';
 
@@ -14,6 +15,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isPasswordHidden = true;
+  final prefs = new UserPreferences();
 
   void _toggleVisibility() {
     setState(() {
@@ -198,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
       stream: bloc.formValidStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         final size = MediaQuery.of(context).size;
-        return RaisedButton(
+        return ElevatedButton(
           child: Container(
             width: size.width * 0.6,
             child: Text(
@@ -210,55 +212,59 @@ class _LoginPageState extends State<LoginPage> {
                   .copyWith(color: Colors.black, fontSize: 16),
             ),
           ),
-          disabledColor: Colors.grey[300],
-          color: MiPromotora().primaryDark,
-          disabledTextColor: Colors.grey,
           onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
         );
       },
     );
   }
-}
 
-Widget _forgotPassword(context) {
-  return FlatButton(
-    textColor: MiPromotora().primaryDark,
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ForgotPasswordPage(),
-        ),
-      );
-    },
-    child: Text(
-      "Olvidé mi contraseña",
-      style: Theme.of(context)
-          .textTheme
-          .headline1
-          .copyWith(color: MiPromotora().primaryDark, fontSize: 18),
-    ),
-  );
-}
-
-Widget _background(BuildContext context) {
-  return Container(
-    decoration: BoxDecoration(
-      color: Colors.white,
-      image: DecorationImage(
-        image: AssetImage("assets/img/fondo.png"),
-        fit: BoxFit.fill,
+  Widget _forgotPassword(context) {
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ForgotPasswordPage(),
+          ),
+        );
+      },
+      child: Text(
+        "Olvidé mi contraseña",
+        style: Theme.of(context)
+            .textTheme
+            .headline1
+            .copyWith(color: MiPromotora().primaryDark, fontSize: 18),
       ),
-    ),
-  );
-}
+    );
+  }
 
-_login(LoginBloc bloc, BuildContext context) async {
-  final LoginProvider loginProvider = LoginProvider();
-  Map info = await loginProvider.login(bloc.identity, bloc.password);
-  if (info['ok']) {
-    Navigator.pushReplacementNamed(context, 'home');
-  } else {
-    showAlert(context, info['message']);
+  Widget _background(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        image: DecorationImage(
+          image: AssetImage("assets/img/fondo.png"),
+          fit: BoxFit.fill,
+        ),
+      ),
+    );
+  }
+
+  _login(LoginBloc bloc, BuildContext context) async {
+    final LoginProvider loginProvider = LoginProvider();
+    Map info = await loginProvider.login(bloc.identity, bloc.password);
+    if (info['ok']) {
+      Navigator.pushReplacementNamed(context, _loginRoute());
+    } else {
+      showAlert(context, info['message']);
+    }
+  }
+
+  String _loginRoute() {
+    if (this.prefs.acceptedTerms != true) return 'terms-and-conditions';
+
+    if (this.prefs.acceptedPrivacyPolicy != true) return 'privacy-policy';
+
+    return 'home';
   }
 }

@@ -1,7 +1,5 @@
-import 'package:mi_promotora/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/common/raised_button.dart';
-import 'package:mi_promotora/pages/login_page.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 
 import '../main.dart';
@@ -40,6 +38,16 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   SizedBox(height: 18),
                   BottomList(
+                    title: 'Mis ventas',
+                    route: 'sales-categories',
+                  ),
+                  SizedBox(height: 18),
+                  BottomList(
+                    title: 'Mis clientes',
+                    route: 'customers',
+                  ),
+                  SizedBox(height: 18),
+                  BottomList(
                     title: 'Preguntas Frecuentes',
                     route: 'faq',
                   ),
@@ -53,9 +61,8 @@ class CustomDrawer extends StatelessWidget {
                     title: 'Chat',
                     route: 'porchat',
                   ),
-                  SizedBox(height: 200),
-                  RaisedButton(
-                    padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
+                  SizedBox(height: 18),
+                  ElevatedButton(
                     child: Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,8 +82,11 @@ class CustomDrawer extends StatelessWidget {
                         ],
                       ),
                     ),
-                    color: Colors.white,
-                    disabledTextColor: Colors.grey,
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                      padding: MaterialStateProperty.all<EdgeInsets>(
+                          EdgeInsets.fromLTRB(20, 15, 8, 15)),
+                    ),
                     onPressed: () {
                       prefs.token = null;
                       prefs.userEmail = null;

@@ -16,8 +16,17 @@ class BottomList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-        padding: EdgeInsets.fromLTRB(20, 15, 8, 15),
+    return ElevatedButton(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all<EdgeInsets>(
+              EdgeInsets.fromLTRB(20, 15, 8, 15)),
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          foregroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) return Colors.grey;
+            return Colors.white; // Defer to the widget's default.
+          }),
+        ),
         child: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,8 +46,6 @@ class BottomList extends StatelessWidget {
             ],
           ),
         ),
-        color: Colors.white,
-        disabledTextColor: Colors.grey,
         onPressed: () {
           Navigator.of(context).pop();
           Navigator.pushNamed(context, this.route);

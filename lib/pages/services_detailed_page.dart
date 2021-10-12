@@ -252,23 +252,20 @@ class ServicesDetailedPageState extends State<ServicesDetailedPage> {
   Widget _sendButton() {
     final size = MediaQuery.of(context).size;
 
-    return RaisedButton(
-        child: Container(
-          width: size.width * 0.7,
-          child: Text(
-            'Enviar',
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headline1
-                .copyWith(color: Colors.black, fontSize: 19),
-          ),
+    return ElevatedButton(
+      child: Container(
+        width: size.width * 0.7,
+        child: Text(
+          'Enviar',
+          textAlign: TextAlign.center,
+          style: Theme.of(context)
+              .textTheme
+              .headline1
+              .copyWith(color: Colors.black, fontSize: 19),
         ),
-        disabledColor: Colors.grey[300],
-        color: MiPromotora().primaryDark,
-        disabledTextColor: Colors.grey,
-        onPressed: () =>
-            interests.isEmpty ? _alert() : _sendInterests(context));
+      ),
+      onPressed: () => interests.isEmpty ? _alert() : _sendInterests(context),
+    );
   }
 
   _alert() {
@@ -281,7 +278,7 @@ class ServicesDetailedPageState extends State<ServicesDetailedPage> {
             style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text(
                 'OK',
                 style: Theme.of(context)
@@ -327,7 +324,7 @@ class ServicesDetailedPageState extends State<ServicesDetailedPage> {
                   Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text(
                   'OK',
                   style: Theme.of(context)

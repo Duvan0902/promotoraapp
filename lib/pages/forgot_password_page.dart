@@ -134,7 +134,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
 Widget _createButton(context) {
   final size = MediaQuery.of(context).size;
-  return RaisedButton(
+  return ElevatedButton(
       child: Container(
         width: size.width * 0.6,
         child: Text(
@@ -146,9 +146,6 @@ Widget _createButton(context) {
               .copyWith(color: Colors.black, fontSize: 16),
         ),
       ),
-      disabledColor: Colors.grey[300],
-      color: MiPromotora().primaryDark,
-      disabledTextColor: Colors.grey,
       onPressed: () => _sendInterests(context));
 }
 
@@ -179,7 +176,7 @@ _sendInterests(BuildContext context) async {
             style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text(
                 'OK',
                 style: Theme.of(context)
@@ -208,7 +205,7 @@ _sendInterests(BuildContext context) async {
             style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
                 child: Text(
                   'OK',
                   style: Theme.of(context)

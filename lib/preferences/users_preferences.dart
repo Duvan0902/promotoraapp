@@ -30,4 +30,14 @@ class UserPreferences {
   set userEmail(String email) => _prefs.setString('user', email);
 
   String get userEmail => _prefs.getString('user');
+
+  set acceptedTerms(bool acceptedTerms) =>
+      _prefs.setBool('acceptedTerms', acceptedTerms);
+
+  bool get acceptedTerms => _prefs.getBool('acceptedTerms');
+
+  set acceptedPrivacyPolicy(bool acceptedPrivacyPolicy) =>
+      _prefs.setBool('acceptedPrivacyPolicy', acceptedPrivacyPolicy);
+
+  bool get acceptedPrivacyPolicy => _prefs.getBool('acceptedPrivacyPolicy');
 }

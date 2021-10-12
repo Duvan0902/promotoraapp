@@ -17,8 +17,16 @@ class _FrequentQuestionsPageState extends State<FrequentQuestionsPage> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(23, 13, 20, 1),
-      child: RaisedButton(
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+      child: ElevatedButton(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(20)),
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          foregroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) return Colors.grey;
+            return Colors.white; // Defer to the widget's default.
+          }),
+        ),
         child: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,8 +46,6 @@ class _FrequentQuestionsPageState extends State<FrequentQuestionsPage> {
             ],
           ),
         ),
-        color: Colors.white,
-        disabledTextColor: Colors.grey,
         onPressed: () {
           Navigator.push(
             context,

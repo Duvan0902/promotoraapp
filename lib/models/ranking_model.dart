@@ -46,7 +46,7 @@ class RankingDataModel {
       RankingDataModel(
         id: json["id"],
         userCode: json["user_code"],
-        name: json["name"],
+        name: json["name"] ?? '',
       );
 
   Map<String, dynamic> toMap() => {

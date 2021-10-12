@@ -1,13 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FABBottomAppBarItem {
-  FABBottomAppBarItem({this.iconData, this.text});
+class BottomAppBarItem {
+  BottomAppBarItem({this.iconData, this.text});
   IconData iconData;
   String text;
 }
 
-class FABBottomAppBar extends StatefulWidget {
-  FABBottomAppBar({
+class CustomBottomAppBar extends StatefulWidget {
+  CustomBottomAppBar({
     this.items,
     this.centerItemText,
     this.height: 50.0,
@@ -21,7 +22,7 @@ class FABBottomAppBar extends StatefulWidget {
   }) {
     assert(this.items.length == 2 || this.items.length == 4);
   }
-  final List<FABBottomAppBarItem> items;
+  final List<BottomAppBarItem> items;
   final String centerItemText;
   final double height;
   final double iconSize;
@@ -33,10 +34,10 @@ class FABBottomAppBar extends StatefulWidget {
   final int selectedIndex;
 
   @override
-  State<StatefulWidget> createState() => FABBottomAppBarState();
+  State<StatefulWidget> createState() => CustomBottomAppBarState();
 }
 
-class FABBottomAppBarState extends State<FABBottomAppBar> {
+class CustomBottomAppBarState extends State<CustomBottomAppBar> {
   int _selectedIndex = 0;
 
   _updateIndex(int index) {
@@ -75,19 +76,22 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
         children: items,
       ),
       color: widget.backgroundColor,
+      elevation: 0,
     );
   }
 
   Widget _buildTabItem({
-    FABBottomAppBarItem item,
+    BottomAppBarItem item,
     int index,
     ValueChanged<int> onPressed,
   }) {
     Color color = _selectedIndex == index ? widget.selectedColor : widget.color;
+
     return Expanded(
       child: SizedBox(
         height: widget.height,
         child: Material(
+          color: widget.backgroundColor,
           child: InkWell(
             onTap: () => onPressed(index),
             child: Column(

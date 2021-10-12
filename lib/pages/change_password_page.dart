@@ -153,21 +153,16 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     return StreamBuilder(
       stream: bloc.formValidStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return RaisedButton(
+        return ElevatedButton(
           child: Container(
             width: size.width * 0.6,
             child: Text(
               'Siguiente',
               textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline1
-                  .copyWith(color: Colors.black, fontSize: 16),
+              style:
+                  Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
             ),
           ),
-          disabledColor: Colors.grey[300],
-          color: MiPromotora().primaryDark,
-          disabledTextColor: Colors.grey,
           onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
         );
       },

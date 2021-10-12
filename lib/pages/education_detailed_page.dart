@@ -21,74 +21,66 @@ class _EducationDetailedPageState extends State<EducationDetailedPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        appBar: AppBar(
-          brightness: Brightness.dark,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          backgroundColor: Colors.grey[900],
-          title: Text(
-            "Educación",
-            style: Theme.of(context)
-                .textTheme
-                .headline2
-                .copyWith(color: Colors.white, fontSize: 18),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        brightness: Brightness.dark,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        body: Container(
-          padding: EdgeInsets.all(10),
-          child: ListView(
-            children: <Widget>[
-              SizedBox(
-                height: 20,
-              ),
-              Container(padding: EdgeInsets.all(4), child: _titleEducation()),
-              SizedBox(
-                height: 8,
-              ),
-              Container(
-                padding: EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: widget.complement.videoUrl == null ||
-                        widget.complement.videoUrl == ''
-                    ? SizedBox()
-                    : _videoPlayer(),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                padding: EdgeInsets.all(2),
-                child: widget.complement.podcastFile == null
-                    ? SizedBox()
-                    : _audioPlayer(),
-              ),
-              Container(
-                child: widget.complement.documentFiles == null
-                    ? SizedBox()
-                    : _document(context, widget.complement.documentFiles),
-              ),
-            ],
-          ),
+        backgroundColor: Colors.grey[900],
+        title: Text(
+          "Educación",
+          style: Theme.of(context)
+              .textTheme
+              .headline2
+              .copyWith(color: Colors.white, fontSize: 18),
         ),
       ),
-    );
-  }
-
-  Widget _titleEducation() {
-    return Text(
-      'Te brindamos material de apoyo que te ayudara con tu proceso.',
-      style: Theme.of(context)
-          .textTheme
-          .bodyText1
-          .copyWith(color: Colors.black, fontSize: 17),
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: ListView(
+          children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              padding: EdgeInsets.all(5),
+              child: Text(
+                'Te brindamos material de apoyo que te ayudara con tu proceso.',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.black, fontSize: 17),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: widget.complement.videoUrl == null ||
+                      widget.complement.videoUrl == ''
+                  ? SizedBox()
+                  : _videoPlayer(),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+              padding: EdgeInsets.all(2),
+              child: widget.complement.podcastFile == null
+                  ? SizedBox()
+                  : _audioPlayer(context),
+            ),
+            widget.complement.documentFiles == null
+                ? SizedBox()
+                : _documents(context, widget.complement.documentFiles),
+          ],
+        ),
+      ),
     );
   }
 
@@ -112,7 +104,10 @@ class _EducationDetailedPageState extends State<EducationDetailedPage> {
     );
   }
 
-  Widget _audioPlayer() {
+  Widget _audioPlayer(context) {
+    Size size = MediaQuery.of(context).size;
+    double width = size.width;
+
     AudioPlayer audioPlayer = AudioPlayer();
 
     audioPlayer.onPlayerStateChanged.listen((s) {
@@ -135,15 +130,15 @@ class _EducationDetailedPageState extends State<EducationDetailedPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  widget.complement.podcastFile.name,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      .copyWith(color: Colors.black, fontSize: 17),
-                ),
-                SizedBox(
-                  height: 5,
+                Container(
+                  width: width * 0.7,
+                  child: Text(
+                    widget.complement.podcastFile.name,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1
+                        .copyWith(color: Colors.black, fontSize: 17),
+                  ),
                 ),
                 Text(widget.complement.podcastFile.caption,
                     style: Theme.of(context)
@@ -179,57 +174,56 @@ class _EducationDetailedPageState extends State<EducationDetailedPage> {
     setState(() {});
   }
 
-  Widget _document(context, final List<DocumentFile> documentFiles) {
-    return Container(
-      height: 300,
-      child: GridView.builder(
-        itemCount: documentFiles.length,
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (context, index) {
-          DocumentFile document = documentFiles[index];
-          return ClipRect(
-            child: Container(
-              height: 150.0,
-              margin: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow: [
-                  new BoxShadow(
-                    color: Colors.black,
-                  ),
-                ],
+  Widget _documents(context, final List<DocumentFile> documentFiles) {
+    return GridView.builder(
+      itemCount: documentFiles.length,
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        DocumentFile document = documentFiles[index];
+        return Container(
+          margin: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              new BoxShadow(
+                color: Colors.black,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  SizedBox(height: 5.0),
-                  CircleAvatar(
-                    backgroundColor: Color.fromRGBO(243, 243, 243, 1),
-                    radius: 30.0,
-                    child: IconButton(
-                      color: MiPromotora().primaryDark,
-                      icon: Icon(Icons.file_download),
-                      iconSize: 30,
-                      onPressed: () => _launchURL(document.file.url),
-                    ),
-                  ),
-                  Text(
-                    document.title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1
-                        .copyWith(color: Colors.black, fontSize: 17),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 5.0)
-                ],
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CircleAvatar(
+                backgroundColor: Color.fromRGBO(243, 243, 243, 1),
+                radius: 30.0,
+                child: IconButton(
+                  color: MiPromotora().primaryDark,
+                  icon: Icon(Icons.file_download),
+                  iconSize: 30,
+                  onPressed: () => _launchURL(document.file.url),
+                ),
               ),
-            ),
-          );
-        },
-      ),
+              SizedBox(height: 10),
+              Text(
+                document.title,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline1
+                    .copyWith(color: Colors.black, fontSize: 17),
+                textAlign: TextAlign.center,
+                softWrap: true,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

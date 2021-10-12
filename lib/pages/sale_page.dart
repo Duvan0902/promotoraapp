@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mi_promotora/models/sales_model.dart';
 import 'package:mi_promotora/pages/login_page.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
@@ -17,9 +18,10 @@ class _SalePageState extends State<SalePage> {
   String quantity = '';
   String clients = '';
   String idClient = '';
-  String _value;
+  String selectedSaleType;
 
   TextEditingController _dateController = TextEditingController();
+  SalesProvider _salesProvider = SalesProvider();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -69,7 +71,7 @@ class _SalePageState extends State<SalePage> {
                 .copyWith(color: Colors.black, fontSize: 16),
           ),
         ),
-        _enterValue(),
+        _saleType(),
         SizedBox(height: 20.0),
         Container(
           padding: EdgeInsets.all(10),
@@ -110,7 +112,7 @@ class _SalePageState extends State<SalePage> {
         Container(
           padding: EdgeInsets.all(10),
           child: Text(
-            'Nit/Cedula',
+            'Nit/Cédula',
             style: Theme.of(context)
                 .textTheme
                 .bodyText1
@@ -124,81 +126,70 @@ class _SalePageState extends State<SalePage> {
     );
   }
 
-  Widget _enterValue() {
+  Widget _saleType() {
     final size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width * 0.9,
-      color: Color.fromRGBO(243, 243, 243, 1),
-      child: DropdownButton<String>(
-        iconSize: 0.0,
-        underline: Container(
-          height: 1,
-          color: Colors.grey,
-        ),
-        items: [
-          DropdownMenuItem<String>(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                'Venta 1',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: Colors.black45, fontSize: 14),
+
+    return FutureBuilder(
+      future: _salesProvider.getSalesCategories(),
+      builder: (BuildContext context,
+          AsyncSnapshot<List<SalesCategoryModel>> snapshot) {
+        List<SalesCategoryModel> saleTypes = snapshot.data;
+
+        if (snapshot.hasData) {
+          return Container(
+            width: size.width * 0.9,
+            color: Color.fromRGBO(243, 243, 243, 1),
+            child: DropdownButton<String>(
+              iconSize: 0.0,
+              underline: Container(
+                height: 1,
+                color: Colors.grey,
               ),
-            ),
-            value: 'tipo 1',
-          ),
-          DropdownMenuItem<String>(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                'Venta 2',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: Colors.black45, fontSize: 14),
+              items: saleTypes
+                  .map(
+                    (saleType) => DropdownMenuItem<String>(
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          saleType.title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              .copyWith(color: Colors.black45, fontSize: 14),
+                        ),
+                      ),
+                      value: saleType.id.toString(),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (String value) {
+                setState(() {
+                  selectedSaleType = value;
+                });
+              },
+              hint: Container(
+                padding: EdgeInsets.all(10),
+                child: Align(
+                  child: Text(
+                    'Escoge el tipo de venta',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: Colors.black45, fontSize: 14),
+                  ),
+                ),
               ),
-            ),
-            value: 'tipo 2',
-          ),
-          DropdownMenuItem<String>(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                'Venta 3',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: Colors.black45, fontSize: 14),
-              ),
-            ),
-            value: 'tipo 3',
-          ),
-        ],
-        onChanged: (String value) {
-          setState(() {
-            _value = value;
-          });
-        },
-        hint: Container(
-          padding: EdgeInsets.all(10),
-          child: Align(
-            child: Text(
-              'Escoge el tipo de venta',
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
                   .copyWith(color: Colors.black45, fontSize: 14),
+              value: selectedSaleType,
             ),
-          ),
-        ),
-        style: Theme.of(context)
-            .textTheme
-            .bodyText1
-            .copyWith(color: Colors.black45, fontSize: 14),
-        value: _value,
-      ),
+          );
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 
@@ -219,7 +210,7 @@ class _SalePageState extends State<SalePage> {
             borderSide: BorderSide(color: MiPromotora().primaryDark),
           ),
           contentPadding: EdgeInsets.all(10),
-          hintText: 'selecciona la fecha',
+          hintText: 'Selecciona la fecha',
           hintStyle: Theme.of(context)
               .textTheme
               .bodyText1
@@ -335,7 +326,7 @@ class _SalePageState extends State<SalePage> {
             borderSide: BorderSide(color: MiPromotora().primaryDark),
           ),
           contentPadding: EdgeInsets.all(10),
-          hintText: 'ingresa identificación del cliente',
+          hintText: 'Ingresa la identificación del cliente',
           hintStyle: Theme.of(context)
               .textTheme
               .bodyText1
@@ -356,7 +347,13 @@ class _SalePageState extends State<SalePage> {
 
   Widget _registerButton(context) {
     final size = MediaQuery.of(context).size;
-    return RaisedButton(
+    bool isCompleted = selectedSaleType != null &&
+        _date != "" &&
+        quantity != "" &&
+        clients != "" &&
+        idClient != "";
+
+    return ElevatedButton(
         child: Container(
           width: size.width * 0.7,
           child: Text(
@@ -368,9 +365,7 @@ class _SalePageState extends State<SalePage> {
                 .copyWith(color: Colors.black, fontSize: 16),
           ),
         ),
-        color: MiPromotora().primaryDark,
-        disabledTextColor: Colors.grey,
-        onPressed: () => _sendInterests(context));
+        onPressed: isCompleted ? () => _sendInterests(context) : null);
   }
 
   _sendInterests(BuildContext context) async {
@@ -385,29 +380,29 @@ class _SalePageState extends State<SalePage> {
         ),
       );
     }
-    bool sent = await saleProvider.sendSale(
-      _value,
+    SaleModel sale = await saleProvider.sendSale(
+      selectedSaleType,
       _date,
       quantity,
       clients,
       idClient,
       id.toString(),
     );
-    print(_date);
-    if (sent) {
+
+    if (sale != null) {
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: Text(
-              'Su respuesta se envio correctamente',
+              'Su venta se envió correctamente con el ID ' + sale.id.toString(),
               style:
                   Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text(
-                  'OK',
+                  'Aceptar',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1
@@ -419,6 +414,31 @@ class _SalePageState extends State<SalePage> {
                     builder: (BuildContext context) => HomePage(),
                   ),
                 ),
+              )
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              'Se ha producido un error al registrar tu venta, revisa que todos los campos hayan sido completados correctamente.',
+              style:
+                  Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text(
+                  'Aceptar',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: MiPromotora().primaryDark, fontSize: 16),
+                ),
+                onPressed: () => Navigator.pop(context),
               )
             ],
           );

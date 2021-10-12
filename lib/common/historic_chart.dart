@@ -4,55 +4,59 @@ import 'package:mi_promotora/models/goals_model.dart';
 import 'package:mi_promotora/providers/goals_provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class BarChartSample extends StatefulWidget {
+class HistoricChart extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => BarChartSampleState();
+  State<StatefulWidget> createState() => HistoricChartState();
 }
 
-class BarChartSampleState extends State<BarChartSample> {
+class HistoricChartState extends State<HistoricChart> {
   @override
   Widget build(BuildContext context) {
     GoalsProvider goalsProvider = GoalsProvider();
-    final size = MediaQuery.of(context).size;
     DateTime currentDate = DateTime.now();
     DateTime initialDate = currentDate.subtract(Duration(days: 30 * 6));
 
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: FutureBuilder(
-        future: goalsProvider.getHistoric(initialDate),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<GoalsModel>> snapshot) {
-          if (snapshot.connectionState != ConnectionState.waiting) {
-            if (snapshot.hasData) {
-              return _historicChart(snapshot.data);
-            } else {
-              return Center(
+    return FutureBuilder(
+      future: goalsProvider.getHistoric(initialDate),
+      builder:
+          (BuildContext context, AsyncSnapshot<List<GoalsModel>> snapshot) {
+        if (snapshot.connectionState != ConnectionState.waiting) {
+          if (snapshot.hasData) {
+            return Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: _historicChart(snapshot.data),
+            );
+          } else {
+            return Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
                 child: Container(
-                  width: size.width * 0.6,
+                  padding: EdgeInsets.all(15),
                   child: Text(
-                    "No se ha podido obtener la información asociada al usuario",
+                    "No se ha podido obtener los datos históricos para este usuario.",
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1
-                        .copyWith(color: Colors.white),
+                        .copyWith(color: Colors.black),
                   ),
                 ),
-              );
-            }
-          } else {
-            return Container(
-              height: 400,
-              child: Center(
-                child: CircularProgressIndicator(),
               ),
             );
           }
-        },
-      ),
+        } else {
+          return Container(
+            height: 400,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -71,7 +75,7 @@ class BarChartSampleState extends State<BarChartSample> {
         ),
         // Chart title
         title: ChartTitle(
-          text: 'Tus logros con respecto a tus metas anuales',
+          text: 'Tus logros con respecto a tus metas mensuales',
           textStyle: Theme.of(context)
               .textTheme
               .bodyText2
@@ -87,7 +91,8 @@ class BarChartSampleState extends State<BarChartSample> {
             dataSource: data,
             xValueMapper: (GoalsModel goal, _) =>
                 DateFormat('MMM').format(goal.reportDate),
-            yValueMapper: (GoalsModel goal, _) => double.tryParse(goal.pdnNew),
+            yValueMapper: (GoalsModel goal, _) =>
+                double.tryParse(goal.pdnMonthly),
             name: 'Lo que llevas',
             // Enable data label
             dataLabelSettings: DataLabelSettings(isVisible: false),
@@ -98,7 +103,7 @@ class BarChartSampleState extends State<BarChartSample> {
             xValueMapper: (GoalsModel goal, _) =>
                 DateFormat('MMM').format(goal.reportDate),
             yValueMapper: (GoalsModel goal, _) => double.tryParse(goal.goal),
-            name: 'Lo que falta',
+            name: 'Tu meta',
             // Enable data label
             dataLabelSettings: DataLabelSettings(isVisible: false),
             color: Colors.yellow[600],

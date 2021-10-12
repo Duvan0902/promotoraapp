@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mi_promotora/models/documents_model.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/utils/launch_url.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:global_configuration/global_configuration.dart';
 
 class DocumentView extends StatefulWidget {

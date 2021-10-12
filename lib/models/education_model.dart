@@ -43,7 +43,7 @@ class EducationModel {
   Map<String, dynamic> toMap() => {
         "id": id,
         "module": module,
-        "video_url": videoUrl == null ? null : module,
+        "video_url": videoUrl == null ? null : videoUrl,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "document_files": documentFiles == null
