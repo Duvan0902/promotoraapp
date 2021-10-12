@@ -380,7 +380,7 @@ class _SalePageState extends State<SalePage> {
         ),
       );
     }
-    bool sent = await saleProvider.sendSale(
+    SaleModel sale = await saleProvider.sendSale(
       selectedSaleType,
       _date,
       quantity,
@@ -389,13 +389,13 @@ class _SalePageState extends State<SalePage> {
       id.toString(),
     );
 
-    if (sent) {
+    if (sale != null) {
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: Text(
-              'Su respuesta se envió correctamente',
+              'Su venta se envió correctamente con el ID ' + sale.id.toString(),
               style:
                   Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
             ),

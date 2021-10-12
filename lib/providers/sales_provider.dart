@@ -8,9 +8,9 @@ import 'package:intl/intl.dart';
 class SalesProvider {
   final String _url = GlobalConfiguration().getValue("api_url");
   final _prefs = new UserPreferences();
-
-  Future<bool> sendSale(String type, String date, String value, String client,
-      String idclient, String user) async {
+  SaleModel sale;
+  Future<SaleModel> sendSale(String type, String date, String value,
+      String client, String idclient, String user) async {
     final bodyData = json.encode(
       {
         'type': type,
@@ -23,6 +23,7 @@ class SalesProvider {
       },
     );
     print(bodyData);
+
     String token = _prefs.token;
 
     final resp = await http.post(
@@ -34,14 +35,15 @@ class SalesProvider {
       body: bodyData,
     );
 
-    Map<String, dynamic> decodedResp = json.decode(resp.body);
-    print(decodedResp);
-
     if (resp.statusCode == 200) {
-      return true;
+      Map<String, dynamic> decodedResp = json.decode(resp.body);
+      sale = SaleModel.fromMap(decodedResp);
+      print(decodedResp);
     } else {
-      return false;
+      print('Request failed with status: ${resp.statusCode}.');
+      sale = null;
     }
+    return sale;
   }
 
   Future<int> getSalesCount() async {
