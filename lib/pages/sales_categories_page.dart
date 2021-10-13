@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:intl/intl.dart';
-import 'package:mi_promotora/common/total_box.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/sales_model.dart';
 import 'package:mi_promotora/pages/sales_list_page.dart';
@@ -23,10 +22,11 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
 
   final _prefs = UserPreferences();
 
-  TextEditingController _dateController = TextEditingController();
-  TextEditingController _currentDateController = TextEditingController();
-  String _date;
-  String _currentDate;
+  TextEditingController _startDateController = TextEditingController();
+  TextEditingController _endDateController = TextEditingController();
+  String _startDate;
+  String _endDate;
+  List<SaleModel> _sales = [];
 
   @override
   void initState() {
@@ -34,10 +34,10 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
     setState(() {
       DateFormat formatter = DateFormat('yyyy-MM-01');
       DateFormat currentDateFormatter = DateFormat('yyyy-MM-dd');
-      _date = formatter.format(DateTime.now());
-      _currentDate = currentDateFormatter.format(DateTime.now());
-      _dateController.text = _date;
-      _currentDateController.text = _currentDate;
+      _startDate = formatter.format(DateTime.now());
+      _endDate = currentDateFormatter.format(DateTime.now());
+      _startDateController.text = _startDate;
+      _endDateController.text = _endDate;
     });
   }
 
@@ -87,6 +87,7 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
             _dateSale(context),
             _totalSales(context),
             _categories(context),
+            _downloadReport(context),
           ],
         ),
       ),
@@ -102,17 +103,19 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
       margin: EdgeInsets.all(10),
       //color: Color.fromRGBO(243, 243, 243, 1),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           SizedBox(
-            width: 45,
+            width: 30,
           ),
+          Text("Desde:"),
           Flexible(
             child: TextField(
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
                   .copyWith(color: Colors.black45, fontSize: 14),
-              controller: _dateController,
+              controller: _startDateController,
               textCapitalization: TextCapitalization.words,
               keyboardType: TextInputType.multiline,
               enableInteractiveSelection: false,
@@ -132,17 +135,18 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
                     .copyWith(color: Colors.red),
               ),
               onTap: () {
-                _selectDate(context);
+                _selectStartDate(context);
               },
             ),
           ),
+          Text("Hasta:"),
           Flexible(
             child: TextField(
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
                   .copyWith(color: Colors.black45, fontSize: 14),
-              controller: _currentDateController,
+              controller: _endDateController,
               textCapitalization: TextCapitalization.words,
               keyboardType: TextInputType.multiline,
               enableInteractiveSelection: false,
@@ -162,19 +166,16 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
                     .copyWith(color: Colors.red),
               ),
               onTap: () {
-                _selectDate(context);
+                _selectEndDate(context);
               },
             ),
-          ),
-          SizedBox(
-            width: 0,
           ),
         ],
       ),
     );
   }
 
-  _selectDate(BuildContext context) async {
+  _selectStartDate(BuildContext context) async {
     DateTime picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -187,8 +188,28 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
 
       setState(
         () {
-          _date = formatter.format(picked);
-          _dateController.text = _date;
+          _startDate = formatter.format(picked);
+          _startDateController.text = _startDate;
+        },
+      );
+    }
+  }
+
+  _selectEndDate(BuildContext context) async {
+    DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2018),
+      lastDate: DateTime(2025),
+      locale: Locale('es', 'ES'),
+    );
+    if (picked != null) {
+      var formatter = new DateFormat('yyyy-MM-dd');
+
+      setState(
+        () {
+          _endDate = formatter.format(picked);
+          _endDateController.text = _endDate;
         },
       );
     }
@@ -276,8 +297,8 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                SalesListPage(category: category, date: _date),
+            builder: (context) => SalesListPage(
+                category: category, startDate: _startDate, endDate: _endDate),
           ),
         );
       },
@@ -286,9 +307,11 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
 
   Widget _totalSales(context) {
     return FutureBuilder(
-      future: salesProvider.getSalesByUser(null, _prefs.userId, _date),
+      future: salesProvider.getSalesByUser(
+          null, _prefs.userId, _startDate, _endDate),
       builder: (BuildContext context, AsyncSnapshot<List<SaleModel>> snapshot) {
         if (snapshot.hasData) {
+          this._sales = snapshot.data;
           List<SaleModel> sales = snapshot.data;
 
           double total = sales
@@ -371,57 +394,25 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
     );
   }
 
-  Widget _totalPoints(context) {
-    return FutureBuilder(
-      future: salesProvider.getSalesByUser(null, _prefs.userId, _date),
-      builder: (BuildContext context, AsyncSnapshot<List<SaleModel>> snapshot) {
-        if (snapshot.hasData) {
-          List<SaleModel> sales = snapshot.data;
-
-          double total = sales
-              .map((e) => double.tryParse(e.value))
-              .reduce((a, b) => a + b);
-
-          final NumberFormat currencyFormat = NumberFormat.currency(
-              locale: 'es_CO', decimalDigits: 0, customPattern: '###,###');
-
-          String formattedTotal = currencyFormat.format(total / 1000);
-
-          return Card(
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-            color: MiPromotora().accent,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Container(
-              padding: EdgeInsets.fromLTRB(18, 13, 18, 13),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'Total puntos',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline2
-                        .copyWith(color: Colors.white),
-                  ),
-                  Text(
-                    formattedTotal,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline2
-                        .copyWith(color: Colors.white),
-                  )
-                ],
-              ),
-            ),
-          );
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
+  Widget _downloadReport(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      child: ElevatedButton(
+        onPressed: () {
+          for (var sale in this._sales) {
+            print(sale.value);
+          }
+        },
+        child: Text(
+          'Descargar reporte',
+          textAlign: TextAlign.center,
+          style: Theme.of(context)
+              .textTheme
+              .headline1
+              .copyWith(fontSize: 16, color: Colors.white),
+        ),
+      ),
     );
   }
 }

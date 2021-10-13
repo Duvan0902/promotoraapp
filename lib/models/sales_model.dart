@@ -159,7 +159,9 @@ class SaleModel {
 
   factory SaleModel.fromMap(Map<String, dynamic> json) {
     var category = json["category"];
-    category = category.runtimeType == int ? category : category["id"];
+    if (category != null) {
+      category = category.runtimeType == int ? category : category["id"];
+    }
 
     var user = json["user"];
     user = user.runtimeType == int ? user : user["id"];

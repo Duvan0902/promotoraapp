@@ -2,17 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mi_promotora/common/sale_item.dart';
-import 'package:mi_promotora/common/total_box.dart';
-import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/sales_model.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:mi_promotora/providers/sales_provider.dart';
 
 class SalesListPage extends StatefulWidget {
   final SalesCategoryModel category;
-  final String date;
+  final String startDate;
+  final String endDate;
 
-  SalesListPage({Key key, this.category, this.date}) : super(key: key);
+  SalesListPage({Key key, this.category, this.startDate, this.endDate})
+      : super(key: key);
 
   @override
   _SalesListPageState createState() => _SalesListPageState();
@@ -52,10 +52,7 @@ class _SalesListPageState extends State<SalesListPage> {
       ),
       body: FutureBuilder(
         future: salesProvider.getSalesByUser(
-          widget.category.id,
-          _username,
-          widget.date,
-        ),
+            widget.category.id, _username, widget.startDate, widget.endDate),
         builder:
             (BuildContext context, AsyncSnapshot<List<SaleModel>> snapshot) {
           if (snapshot.hasData) {
@@ -109,7 +106,7 @@ class _SalesListPageState extends State<SalesListPage> {
                   width: size.width * 0.8,
                   padding: EdgeInsets.all(10),
                   child: Text(
-                      "No tienes ventas asociadas de esta categoría desde la fecha seleccionada (${widget.date})",
+                      "No tienes ventas asociadas de esta categoría desde la fecha seleccionada (${widget.startDate})",
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
