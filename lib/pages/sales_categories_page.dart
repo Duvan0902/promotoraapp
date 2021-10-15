@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +9,9 @@ import 'package:mi_promotora/pages/sales_list_page.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:mi_promotora/providers/sales_provider.dart';
 import 'package:mi_promotora/utils/random_color.dart';
+import 'package:excel/excel.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as p;
 
 class SalesCategoriesPage extends StatefulWidget {
   SalesCategoriesPage({Key key}) : super(key: key);
@@ -400,9 +405,7 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: ElevatedButton(
         onPressed: () {
-          for (var sale in this._sales) {
-            print(sale.value);
-          }
+          createReport();
         },
         child: Text(
           'Descargar reporte',
@@ -414,5 +417,34 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
         ),
       ),
     );
+  }
+
+  void createReport() async {
+    Excel report = Excel.createExcel();
+    Sheet sheetObject = report['Ventas'];
+    CellStyle cellStyle = CellStyle(
+        backgroundColorHex: "#1AFF1A",
+        fontFamily: getFontFamily(FontFamily.Calibri));
+
+    for (var sale in _sales) {
+      List<dynamic> values = sale.toMap().values.toList();
+      sheetObject.appendRow(values);
+    }
+
+    var directory = await _localPath();
+
+    report.encode().then((onValue) {
+      var file = p.join("$directory/sales_report.xlsx");
+      debugPrint("Saving in path: " + file);
+      File(file)
+        ..createSync(recursive: true)
+        ..writeAsBytesSync(onValue);
+    });
+  }
+
+  Future<String> _localPath() async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    return directory.path.toString();
   }
 }

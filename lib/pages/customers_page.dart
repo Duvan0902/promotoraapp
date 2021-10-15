@@ -29,7 +29,7 @@ class _CustomersPageState extends State<CustomersPage>
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       brightness: Brightness.dark,
-      title: Text("Mis Clientes",
+      title: Text("Gestiona tu cartera",
           style: Theme.of(context)
               .textTheme
               .headline1
