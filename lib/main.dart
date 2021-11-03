@@ -160,7 +160,7 @@ class _MiPromotoraState extends State<MiPromotora> {
               color: Colors.white,
             ),
             button: TextStyle(
-              fontSize: 10.0,
+              fontSize: 17.0,
               fontFamily: 'AsapBold',
             ),
           ),

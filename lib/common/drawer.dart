@@ -36,16 +36,11 @@ class CustomDrawer extends StatelessWidget {
                     title: 'Mis metas',
                     route: 'home',
                   ),
-                  /* SizedBox(height: 18),
+                  SizedBox(height: 18),
                   BottomList(
                     title: 'Mis ventas',
                     route: 'sales-categories',
                   ),
-                  SizedBox(height: 18),
-                  BottomList(
-                    title: 'Mis clientes',
-                    route: 'customers',
-                  ), */
                   SizedBox(height: 18),
                   BottomList(
                     title: 'Preguntas Frecuentes',

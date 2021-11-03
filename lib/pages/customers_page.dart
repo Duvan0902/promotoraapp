@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mi_promotora/bloc/customers_bloc.dart';
 import 'package:mi_promotora/common/settings_menu.dart';
 import 'package:mi_promotora/models/contact_model_interface.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:mi_promotora/main.dart';
+import 'package:mi_promotora/models/user_model.dart';
 import 'package:mi_promotora/pages/contact_information_page.dart';
 import 'package:mi_promotora/providers/contacts_provider.dart';
+import 'package:mi_promotora/utils/alert_dialog.dart';
 import 'package:mi_promotora/utils/launch_url.dart';
 import 'package:string_similarity/string_similarity.dart';
 import 'package:recase/recase.dart';
@@ -18,6 +22,8 @@ class CustomersPage extends StatefulWidget {
 
 class _CustomersPageState extends State<CustomersPage>
     with SingleTickerProviderStateMixin {
+  CustomerBloc _customerBloc = CustomerBloc();
+
   AnimationController _animationController;
   Animation _animation;
   int _selectedTab = 0;
@@ -72,6 +78,7 @@ class _CustomersPageState extends State<CustomersPage>
 
   @override
   void dispose() {
+    _customerBloc.dispose();
     _animationController.dispose();
     super.dispose();
   }
@@ -182,7 +189,7 @@ class _CustomersPageState extends State<CustomersPage>
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasData) {
             _animationController.forward();
-            return _contactsList(snapshot.data);
+            return _customersList(snapshot.data);
           } else {
             return Container(
               height: 400,
@@ -205,7 +212,7 @@ class _CustomersPageState extends State<CustomersPage>
             AsyncSnapshot<List<ContactModelInterface>> snapshot) {
           if (snapshot.hasData) {
             _animationController.forward();
-            return _contactsList(snapshot.data);
+            return _customersList(snapshot.data);
           } else {
             return Container(
               height: 400,
@@ -219,7 +226,7 @@ class _CustomersPageState extends State<CustomersPage>
     );
   }
 
-  Widget _contactsList(List<ContactModelInterface> contacts) {
+  Widget _customersList(List<ContactModelInterface> contacts) {
     print("Search text is: $searchText");
 
     List<ContactModelInterface> filteredListContacts;
@@ -237,46 +244,159 @@ class _CustomersPageState extends State<CustomersPage>
       filteredListContacts = contacts;
     }
 
-    return Container(
-      padding: EdgeInsets.only(top: 10.0),
-      child: ListView.builder(
-        itemCount: filteredListContacts.length,
-        itemBuilder: (context, index) {
-          return _contactItem(context, filteredListContacts[index]);
-        },
-      ),
+    return StreamBuilder<List<UserModel>>(
+      stream: _customerBloc.selectedUsersStream,
+      initialData: [],
+      builder: (BuildContext context, AsyncSnapshot<List<UserModel>> snapshot) {
+        Widget selectedUsersWidget = SizedBox();
+        List<UserModel> selectedCustomers = [];
+
+        if (snapshot.hasData) {
+          selectedCustomers = snapshot.data;
+          if (selectedCustomers.length > 0) {
+            selectedUsersWidget = Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: InkWell(
+                onTap: () {
+                  _sendMessages(selectedCustomers);
+                },
+                highlightColor: MiPromotora().accent,
+                child: Container(
+                  color: MiPromotora().grey,
+                  width: double.infinity,
+                  padding:
+                      EdgeInsets.only(top: 20, bottom: 40, right: 30, left: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Enviar mensaje a ${selectedCustomers.length} usuario(s)",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(color: Colors.white),
+                      ),
+                      FaIcon(
+                        FontAwesomeIcons.arrowRight,
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+        }
+
+        return Stack(children: [
+          Positioned(
+            child: Container(
+              padding: EdgeInsets.only(
+                top: 10.0,
+                bottom: selectedCustomers.length > 0 ? 75 : 0,
+              ),
+              child: ListView.builder(
+                itemCount: filteredListContacts.length,
+                itemBuilder: (context, index) {
+                  return ContactItem(
+                      filteredListContacts[index], _customerBloc);
+                },
+              ),
+            ),
+          ),
+          selectedUsersWidget
+        ]);
+      },
     );
   }
 
-  Widget _contactItem(BuildContext context, ContactModelInterface contact) {
+  Future<void> _sendMessages(List<UserModel> customers) async {
+    Widget confirmateAlertDialog = AlertDialog(
+      title: const Text('Enviar mensaje'),
+      content: Column(
+        children: [
+          Text(
+              "¿Enviar mensaje a ${customers.length} usuario(s) seleccionados?"),
+          Text(
+              "Previsualizaciòn del mensaje: Hola Andrès, hablas con tu asesor de seguro Sura.")
+        ],
+      ),
+      actions: <Widget>[
+        TextButton(
+          child: const Text('Cancelar'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        TextButton(
+          child: const Text('Enviar'),
+          onPressed: () {
+            for (var customer in customers) {
+              String _message =
+                  "Hola ${customer.name}, hablas con tu asesor de seguro Sura.";
+              String _url =
+                  "https://api.whatsapp.com/send?phone=${customer.phone1}&text=$_message";
+              try {
+                launchUrl(_url);
+              } catch (Exception) {
+                print("It wasn't possible to launch whatsapp in your mobile");
+              }
+            }
+
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return confirmateAlertDialog;
+      },
+    );
+  }
+}
+
+class ContactItem extends StatefulWidget {
+  final UserModel contact;
+  final CustomerBloc customerBloc;
+
+  ContactItem(this.contact, this.customerBloc, {Key key}) : super(key: key);
+
+  @override
+  _ContactItemState createState() => _ContactItemState();
+}
+
+class _ContactItemState extends State<ContactItem> {
+  bool _isChecked = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     var listTile = Flexible(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: <Widget>[
-            Text(
-              contact.name.titleCase,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: Colors.black, fontSize: 16),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Text(
-              contact.surname.titleCase,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: Colors.black, fontSize: 16),
-            ),
-          ],
+        Text(
+          widget.contact.name.titleCase +
+              " " +
+              widget.contact.surname.titleCase,
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(color: Colors.black, fontSize: 16),
         ),
         SizedBox(height: 5),
         Text(
-          contact.company.titleCase,
+          widget.contact.company.titleCase,
           style: Theme.of(context)
               .textTheme
               .bodyText1
@@ -299,13 +419,41 @@ class _CustomersPageState extends State<CustomersPage>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 listTile,
-                IconButton(
-                  icon: Icon(
-                    Icons.call_outlined,
-                  ),
-                  color: MiPromotora().primaryDark,
-                  iconSize: 30,
-                  onPressed: () => callPhone(contact.phone1),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.call_outlined,
+                      ),
+                      color: MiPromotora().primaryDark,
+                      iconSize: 30,
+                      onPressed: () => callPhone(widget.contact.phone1),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.message,
+                      ),
+                      color: MiPromotora().primaryDark,
+                      iconSize: 30,
+                      onPressed: () => callPhone(widget.contact.phone1),
+                    ),
+                    Checkbox(
+                      value: _isChecked,
+                      checkColor: Colors.white,
+                      onChanged: (bool value) {
+                        if (value) {
+                          widget.customerBloc.addUserEvent
+                              .add(AddCustomer(widget.contact));
+                        } else {
+                          widget.customerBloc.addUserEvent
+                              .add(RemoveCustomer(widget.contact));
+                        }
+                        setState(() {
+                          _isChecked = value;
+                        });
+                      },
+                    ),
+                  ],
                 )
               ],
             ),
@@ -314,12 +462,17 @@ class _CustomersPageState extends State<CustomersPage>
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ContactInformationPage(contact),
+                builder: (context) => ContactInformationPage(widget.contact),
               ),
             );
           },
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

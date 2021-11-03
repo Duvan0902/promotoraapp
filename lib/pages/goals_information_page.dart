@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
 import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mi_promotora/common/historic_chart.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/goals_model.dart';
@@ -56,6 +57,9 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
           _cirleGraph(),
           SizedBox(height: 10),
           _weightValue(),
+          SizedBox(height: 10),
+          _manageCustomers(),
+          SizedBox(height: 15),
         ],
       ),
     );
@@ -381,6 +385,33 @@ class _GoalInformationPageState extends State<GoalInformationPage> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _manageCustomers() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+      child: ElevatedButton(
+        onPressed: () => Navigator.pushNamed(context, 'customers'),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FaIcon(
+              FontAwesomeIcons.moneyBillWave,
+              color: Colors.black,
+            ),
+            SizedBox(
+              width: 15,
+            ),
+            Text(
+              "Gestiona tu cartera",
+              style: Theme.of(context).textTheme.button.copyWith(
+                    fontSize: 17,
+                  ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
