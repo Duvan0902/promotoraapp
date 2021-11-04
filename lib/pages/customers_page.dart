@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mi_promotora/bloc/customers_bloc.dart';
 import 'package:mi_promotora/common/settings_menu.dart';
-import 'package:mi_promotora/models/contact_model_interface.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:mi_promotora/main.dart';
+import 'package:mi_promotora/models/portfolio_model.dart';
 import 'package:mi_promotora/models/user_model.dart';
-import 'package:mi_promotora/pages/contact_information_page.dart';
-import 'package:mi_promotora/providers/contacts_provider.dart';
-import 'package:mi_promotora/utils/alert_dialog.dart';
+import 'package:mi_promotora/providers/portfolio_provider.dart';
 import 'package:mi_promotora/utils/launch_url.dart';
 import 'package:string_similarity/string_similarity.dart';
 import 'package:recase/recase.dart';
@@ -182,11 +179,12 @@ class _CustomersPageState extends State<CustomersPage>
   }
 
   Widget _newCustomers(context) {
-    final contactProviders = ContactsProvider();
+    final _portfolioProvider = PortfolioProvider();
     return Container(
       child: FutureBuilder(
-        future: contactProviders.getUserContacts(),
-        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+        future: _portfolioProvider.getPortfolio(),
+        builder: (BuildContext context,
+            AsyncSnapshot<List<PortfolioModel>> snapshot) {
           if (snapshot.hasData) {
             _animationController.forward();
             return _customersList(snapshot.data);
@@ -204,12 +202,12 @@ class _CustomersPageState extends State<CustomersPage>
   }
 
   Widget _followingCustomers(context) {
-    final contactProvider = ContactsProvider();
+    final _portfolioProvider = PortfolioProvider();
     return Container(
       child: FutureBuilder(
-        future: contactProvider.getContacts(),
+        future: _portfolioProvider.getContactedCustomers(),
         builder: (BuildContext context,
-            AsyncSnapshot<List<ContactModelInterface>> snapshot) {
+            AsyncSnapshot<List<PortfolioModel>> snapshot) {
           if (snapshot.hasData) {
             _animationController.forward();
             return _customersList(snapshot.data);
@@ -226,22 +224,24 @@ class _CustomersPageState extends State<CustomersPage>
     );
   }
 
-  Widget _customersList(List<ContactModelInterface> contacts) {
+  Widget _customersList(List<PortfolioModel> portfolioContacts) {
     print("Search text is: $searchText");
 
-    List<ContactModelInterface> filteredListContacts;
+    List<PortfolioModel> filteredPortfolioContacts;
 
     if (searchText != "" && searchText != null) {
-      filteredListContacts = contacts.where((contact) {
-        bool isSimilar = contact.name.similarityTo(searchText) > 0.3;
-        bool isSimilarSurname = contact.surname.similarityTo(searchText) > 0.3;
-        bool isContained =
-            contact.name.toLowerCase().contains(this.searchText.toLowerCase());
+      filteredPortfolioContacts = portfolioContacts.where((contact) {
+        bool isSimilar = contact.customerName.similarityTo(searchText) > 0.3;
+        bool isSimilarSurname =
+            contact.insurance.similarityTo(searchText) > 0.3;
+        bool isContained = contact.customerName
+            .toLowerCase()
+            .contains(this.searchText.toLowerCase());
 
         return isSimilar || isSimilarSurname || isContained;
       }).toList();
     } else {
-      filteredListContacts = contacts;
+      filteredPortfolioContacts = portfolioContacts;
     }
 
     return StreamBuilder<List<UserModel>>(
@@ -251,45 +251,6 @@ class _CustomersPageState extends State<CustomersPage>
         Widget selectedUsersWidget = SizedBox();
         List<UserModel> selectedCustomers = [];
 
-        if (snapshot.hasData) {
-          selectedCustomers = snapshot.data;
-          if (selectedCustomers.length > 0) {
-            selectedUsersWidget = Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: InkWell(
-                onTap: () {
-                  _sendMessages(selectedCustomers);
-                },
-                highlightColor: MiPromotora().accent,
-                child: Container(
-                  color: MiPromotora().grey,
-                  width: double.infinity,
-                  padding:
-                      EdgeInsets.only(top: 20, bottom: 40, right: 30, left: 30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Enviar mensaje a ${selectedCustomers.length} usuario(s)",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1
-                            .copyWith(color: Colors.white),
-                      ),
-                      FaIcon(
-                        FontAwesomeIcons.arrowRight,
-                        color: Colors.white,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
-          }
-        }
-
         return Stack(children: [
           Positioned(
             child: Container(
@@ -298,10 +259,10 @@ class _CustomersPageState extends State<CustomersPage>
                 bottom: selectedCustomers.length > 0 ? 75 : 0,
               ),
               child: ListView.builder(
-                itemCount: filteredListContacts.length,
+                itemCount: filteredPortfolioContacts.length,
                 itemBuilder: (context, index) {
                   return ContactItem(
-                      filteredListContacts[index], _customerBloc);
+                      filteredPortfolioContacts[index], _customerBloc);
                 },
               ),
             ),
@@ -362,7 +323,7 @@ class _CustomersPageState extends State<CustomersPage>
 }
 
 class ContactItem extends StatefulWidget {
-  final UserModel contact;
+  final PortfolioModel contact;
   final CustomerBloc customerBloc;
 
   ContactItem(this.contact, this.customerBloc, {Key key}) : super(key: key);
@@ -386,9 +347,7 @@ class _ContactItemState extends State<ContactItem> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          widget.contact.name.titleCase +
-              " " +
-              widget.contact.surname.titleCase,
+          widget.contact.customerName.titleCase,
           style: Theme.of(context)
               .textTheme
               .bodyText1
@@ -396,7 +355,7 @@ class _ContactItemState extends State<ContactItem> {
         ),
         SizedBox(height: 5),
         Text(
-          widget.contact.company.titleCase,
+          widget.contact.insurance.titleCase,
           style: Theme.of(context)
               .textTheme
               .bodyText1
@@ -427,7 +386,7 @@ class _ContactItemState extends State<ContactItem> {
                       ),
                       color: MiPromotora().primaryDark,
                       iconSize: 30,
-                      onPressed: () => callPhone(widget.contact.phone1),
+                      onPressed: () => callPhone(widget.contact.phone),
                     ),
                     IconButton(
                       icon: Icon(
@@ -435,23 +394,7 @@ class _ContactItemState extends State<ContactItem> {
                       ),
                       color: MiPromotora().primaryDark,
                       iconSize: 30,
-                      onPressed: () => callPhone(widget.contact.phone1),
-                    ),
-                    Checkbox(
-                      value: _isChecked,
-                      checkColor: Colors.white,
-                      onChanged: (bool value) {
-                        if (value) {
-                          widget.customerBloc.addUserEvent
-                              .add(AddCustomer(widget.contact));
-                        } else {
-                          widget.customerBloc.addUserEvent
-                              .add(RemoveCustomer(widget.contact));
-                        }
-                        setState(() {
-                          _isChecked = value;
-                        });
-                      },
+                      onPressed: () => callPhone(widget.contact.phone),
                     ),
                   ],
                 )
@@ -459,12 +402,7 @@ class _ContactItemState extends State<ContactItem> {
             ),
           ),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ContactInformationPage(widget.contact),
-              ),
-            );
+            print("Contact pressed");
           },
         ),
       ),
