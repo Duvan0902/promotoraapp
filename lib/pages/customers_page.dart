@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/bloc/customers_bloc.dart';
+import 'package:mi_promotora/common/customer_item.dart';
 import 'package:mi_promotora/common/settings_menu.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/portfolio_model.dart';
 import 'package:mi_promotora/models/user_model.dart';
 import 'package:mi_promotora/providers/portfolio_provider.dart';
+import 'package:mi_promotora/utils/alert_dialog.dart';
 import 'package:mi_promotora/utils/launch_url.dart';
 import 'package:string_similarity/string_similarity.dart';
 import 'package:recase/recase.dart';
@@ -244,173 +246,11 @@ class _CustomersPageState extends State<CustomersPage>
       filteredPortfolioContacts = portfolioContacts;
     }
 
-    return StreamBuilder<List<UserModel>>(
-      stream: _customerBloc.selectedUsersStream,
-      initialData: [],
-      builder: (BuildContext context, AsyncSnapshot<List<UserModel>> snapshot) {
-        Widget selectedUsersWidget = SizedBox();
-        List<UserModel> selectedCustomers = [];
-
-        return Stack(children: [
-          Positioned(
-            child: Container(
-              padding: EdgeInsets.only(
-                top: 10.0,
-                bottom: selectedCustomers.length > 0 ? 75 : 0,
-              ),
-              child: ListView.builder(
-                itemCount: filteredPortfolioContacts.length,
-                itemBuilder: (context, index) {
-                  return ContactItem(
-                      filteredPortfolioContacts[index], _customerBloc);
-                },
-              ),
-            ),
-          ),
-          selectedUsersWidget
-        ]);
+    return ListView.builder(
+      itemCount: filteredPortfolioContacts.length,
+      itemBuilder: (context, index) {
+        return CustomerItem(filteredPortfolioContacts[index]);
       },
     );
-  }
-
-  Future<void> _sendMessages(List<UserModel> customers) async {
-    Widget confirmateAlertDialog = AlertDialog(
-      title: const Text('Enviar mensaje'),
-      content: Column(
-        children: [
-          Text(
-              "¿Enviar mensaje a ${customers.length} usuario(s) seleccionados?"),
-          Text(
-              "Previsualizaciòn del mensaje: Hola Andrès, hablas con tu asesor de seguro Sura.")
-        ],
-      ),
-      actions: <Widget>[
-        TextButton(
-          child: const Text('Cancelar'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        TextButton(
-          child: const Text('Enviar'),
-          onPressed: () {
-            for (var customer in customers) {
-              String _message =
-                  "Hola ${customer.name}, hablas con tu asesor de seguro Sura.";
-              String _url =
-                  "https://api.whatsapp.com/send?phone=${customer.phone1}&text=$_message";
-              try {
-                launchUrl(_url);
-              } catch (Exception) {
-                print("It wasn't possible to launch whatsapp in your mobile");
-              }
-            }
-
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
-    );
-
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return confirmateAlertDialog;
-      },
-    );
-  }
-}
-
-class ContactItem extends StatefulWidget {
-  final PortfolioModel contact;
-  final CustomerBloc customerBloc;
-
-  ContactItem(this.contact, this.customerBloc, {Key key}) : super(key: key);
-
-  @override
-  _ContactItemState createState() => _ContactItemState();
-}
-
-class _ContactItemState extends State<ContactItem> {
-  bool _isChecked = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var listTile = Flexible(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          widget.contact.customerName.titleCase,
-          style: Theme.of(context)
-              .textTheme
-              .bodyText1
-              .copyWith(color: Colors.black, fontSize: 16),
-        ),
-        SizedBox(height: 5),
-        Text(
-          widget.contact.insurance.titleCase,
-          style: Theme.of(context)
-              .textTheme
-              .bodyText1
-              .copyWith(color: Colors.black45, fontSize: 15),
-        ),
-      ],
-    ));
-
-    return Container(
-      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        color: Colors.white,
-        child: InkWell(
-          child: Container(
-            padding: EdgeInsets.fromLTRB(15, 15, 3, 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                listTile,
-                Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.call_outlined,
-                      ),
-                      color: MiPromotora().primaryDark,
-                      iconSize: 30,
-                      onPressed: () => callPhone(widget.contact.phone),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.message,
-                      ),
-                      color: MiPromotora().primaryDark,
-                      iconSize: 30,
-                      onPressed: () => callPhone(widget.contact.phone),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          onTap: () {
-            print("Contact pressed");
-          },
-        ),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
