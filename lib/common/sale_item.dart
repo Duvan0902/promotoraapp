@@ -45,7 +45,7 @@ class _FlexibleExpansionCardState extends State<FlexibleExpansionCard> {
       children: <Widget>[
         SizedBox(height: 5),
         Container(
-          padding: EdgeInsets.fromLTRB(16, 10, 60, 10),
+          padding: EdgeInsets.fromLTRB(16, 10, 10, 10),
           child: widget.detail,
         ),
       ],

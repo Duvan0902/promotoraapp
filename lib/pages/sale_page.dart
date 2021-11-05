@@ -390,12 +390,13 @@ class _SalePageState extends State<SalePage> {
     );
 
     if (sale != null) {
+      double points = double.tryParse(sale.value) / 1000;
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: Text(
-              'Su venta se envió correctamente con el ID ' + sale.id.toString(),
+              "Tu venta se envió correctamente con el ID ${sale.id.toString()}. Has ganado ${points.toInt()} puntos!",
               style:
                   Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
             ),

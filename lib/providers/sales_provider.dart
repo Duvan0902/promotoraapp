@@ -8,9 +8,11 @@ import 'package:intl/intl.dart';
 class SalesProvider {
   final String _url = GlobalConfiguration().getValue("api_url");
   final _prefs = new UserPreferences();
-  SaleModel sale;
+
   Future<SaleModel> sendSale(String type, String date, String value,
       String client, String idclient, String user) async {
+    SaleModel sale;
+
     final bodyData = json.encode(
       {
         'type': type,
@@ -83,15 +85,17 @@ class SalesProvider {
       String token = _prefs.token;
       String salesCategoriesUrl = _url + "/ventas-categorias";
 
+      print(salesCategoriesUrl);
+
       final response = await http.get(
         salesCategoriesUrl,
-        /* headers: {
+        headers: {
           'Authorization': 'Bearer $token',
-        }, */
+        },
       );
 
       if (response.statusCode == 200) {
-        print(response.body);
+        print("Categories: ${response.body}");
         List<dynamic> jsonResponse = jsonDecode(response.body);
 
         for (var item in jsonResponse) {
@@ -101,8 +105,8 @@ class SalesProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {
-      print(Exception);
+    } catch (e) {
+      print(e);
     }
 
     return salesCategories;
@@ -127,14 +131,12 @@ class SalesProvider {
       }
 
       print(salesCategoriesUrl);
-      print(startDate);
-      print(endDate);
 
       final response = await http.get(
         salesCategoriesUrl,
-        /* headers: {
+        headers: {
           'Authorization': 'Bearer $token',
-        }, */
+        },
       );
 
       if (response.statusCode == 200) {
@@ -153,5 +155,32 @@ class SalesProvider {
     }
 
     return sales;
+  }
+
+  Future<bool> deleteSale(SaleModel sale) async {
+    try {
+      String token = _prefs.token;
+      String deleteSaleUrl = '$_url/ventas/${sale.id}';
+
+      print(deleteSaleUrl);
+
+      final response = await http.delete(
+        deleteSaleUrl,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        print(response.body);
+        return true;
+      } else {
+        print('Request failed with status: ${response.statusCode}.');
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    return false;
   }
 }

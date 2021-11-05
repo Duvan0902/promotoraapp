@@ -319,9 +319,15 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
           this._sales = snapshot.data;
           List<SaleModel> sales = snapshot.data;
 
-          double total = sales
-              .map((e) => double.tryParse(e.value))
-              .reduce((a, b) => a + b);
+          double total;
+
+          try {
+            total = sales
+                .map((e) => double.tryParse(e.value))
+                .reduce((a, b) => a + b);
+          } catch (e) {
+            total = 0;
+          }
 
           final NumberFormat currencyFormat = NumberFormat.currency(
               locale: 'es_CO',
@@ -332,8 +338,6 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
               locale: 'es_CO', decimalDigits: 0, customPattern: '###,###');
           String formattedTotal = currencyFormat.format(total);
           String formattedPoints = pointsFormat.format(total / 1000);
-
-          print(formattedTotal);
 
           return Card(
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
@@ -400,7 +404,6 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
   }
 
   Widget _downloadReport(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: ElevatedButton(

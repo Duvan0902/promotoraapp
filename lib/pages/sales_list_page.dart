@@ -6,6 +6,8 @@ import 'package:mi_promotora/models/sales_model.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:mi_promotora/providers/sales_provider.dart';
 
+import '../main.dart';
+
 class SalesListPage extends StatefulWidget {
   final SalesCategoryModel category;
   final String startDate;
@@ -19,9 +21,9 @@ class SalesListPage extends StatefulWidget {
 }
 
 class _SalesListPageState extends State<SalesListPage> {
+  SalesProvider _salesProvider = SalesProvider();
   @override
   Widget build(BuildContext context) {
-    SalesProvider salesProvider = SalesProvider();
     UserPreferences _prefs = UserPreferences();
     int _username = _prefs.userId;
 
@@ -51,7 +53,7 @@ class _SalesListPageState extends State<SalesListPage> {
         ),
       ),
       body: FutureBuilder(
-        future: salesProvider.getSalesByUser(
+        future: _salesProvider.getSalesByUser(
             widget.category.id, _username, widget.startDate, widget.endDate),
         builder:
             (BuildContext context, AsyncSnapshot<List<SaleModel>> snapshot) {
@@ -77,21 +79,44 @@ class _SalesListPageState extends State<SalesListPage> {
                           Text("\$${sale.value}"),
                         ],
                       ),
-                      detail: Column(
+                      detail: Row(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Cliente"),
-                              Text(sale.client),
-                            ],
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Cliente"),
+                                    Text(sale.client),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Identificación"),
+                                    Text(sale.idClient),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Identificación"),
-                              Text(sale.idClient),
-                            ],
+                          Container(
+                            margin: EdgeInsets.only(left: 10),
+                            child: IconButton(
+                              onPressed: () async {
+                                bool deleted = await _deleteSale(sale);
+                                if (deleted) {
+                                  setState(() {});
+                                }
+                              },
+                              icon: Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              ),
+                            ),
                           )
                         ],
                       ),
@@ -121,5 +146,50 @@ class _SalesListPageState extends State<SalesListPage> {
         },
       ),
     );
+  }
+
+  Future<bool> _deleteSale(SaleModel sale) async {
+    bool deleted = false;
+
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            "Borrar venta",
+            style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 16),
+          ),
+          content: Text("¿Desea borrar la venta con ID: ${sale.id}?"),
+          actions: <Widget>[
+            TextButton(
+                child: Text(
+                  'Cancelar',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: MiPromotora().primaryDark, fontSize: 16),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                }),
+            TextButton(
+              child: Text(
+                'Borrar',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.red, fontSize: 16),
+              ),
+              onPressed: () async {
+                deleted = await _salesProvider.deleteSale(sale);
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
+
+    return deleted;
   }
 }
