@@ -19,6 +19,7 @@ class _SalePageState extends State<SalePage> {
   String clients = '';
   String idClient = '';
   String selectedSaleType;
+  bool inProgress = false;
 
   TextEditingController _dateController = TextEditingController();
   SalesProvider _salesProvider = SalesProvider();
@@ -351,19 +352,27 @@ class _SalePageState extends State<SalePage> {
         _date != "" &&
         quantity != "" &&
         clients != "" &&
-        idClient != "";
+        idClient != "" &&
+        !inProgress;
 
     return ElevatedButton(
         child: Container(
           width: size.width * 0.7,
-          child: Text(
-            'Registra la venta',
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headline2
-                .copyWith(color: Colors.black, fontSize: 16),
-          ),
+          child: !inProgress
+              ? Text(
+                  'Registra la venta',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline2
+                      .copyWith(color: Colors.black, fontSize: 16),
+                )
+              : Center(
+                  child: SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator()),
+                ),
         ),
         onPressed: isCompleted ? () => _sendInterests(context) : null);
   }
@@ -380,6 +389,10 @@ class _SalePageState extends State<SalePage> {
         ),
       );
     }
+
+    setState(() {
+      inProgress = true;
+    });
     SaleModel sale = await saleProvider.sendSale(
       selectedSaleType,
       _date,
@@ -388,6 +401,9 @@ class _SalePageState extends State<SalePage> {
       idClient,
       id.toString(),
     );
+    setState(() {
+      inProgress = false;
+    });
 
     if (sale != null) {
       double points = sale.value / 1000;

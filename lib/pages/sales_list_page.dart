@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:mi_promotora/common/formats.dart';
-import 'package:mi_promotora/common/sale_item.dart';
 import 'package:mi_promotora/models/sales_model.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:mi_promotora/providers/sales_provider.dart';
@@ -26,6 +24,7 @@ class _SalesListPageState extends State<SalesListPage> {
   @override
   Widget build(BuildContext context) {
     UserPreferences _prefs = UserPreferences();
+    List<SaleModel> sales;
     int _username = _prefs.userId;
 
     return Scaffold(
@@ -55,7 +54,7 @@ class _SalesListPageState extends State<SalesListPage> {
         builder:
             (BuildContext context, AsyncSnapshot<List<SaleModel>> snapshot) {
           if (snapshot.hasData) {
-            List<SaleModel> sales = snapshot.data;
+            sales = snapshot.data;
 
             if (sales.isNotEmpty) {
               return Container(
@@ -65,58 +64,86 @@ class _SalesListPageState extends State<SalesListPage> {
                   itemBuilder: (context, index) {
                     SaleModel sale = sales[index];
 
-                    final DateFormat formatter = DateFormat('yyyy-MM-dd');
-                    final String created = formatter.format(sale.date);
+                    final String created = dateFormat.format(sale.date);
                     final String price = currencyFormat.format(sale.value);
 
-                    return FlexibleExpansionCard(
-                      header: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(created),
-                          Text(price),
-                        ],
-                      ),
-                      detail: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
+                    return Dismissible(
+                      key: Key(sale.id.toString()),
+                      child: Container(
+                        margin: EdgeInsets.all(10),
+                        child: Card(
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                top: 20, bottom: 20, right: 10, left: 20),
+                            child: Row(
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Cliente"),
-                                    Text(sale.client),
-                                  ],
+                                Expanded(
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(created),
+                                            Text(price),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("Cliente"),
+                                            Text(sale.client),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("Identificación"),
+                                            Text(sale.idClient),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("ID venta"),
+                                            Text(sale.id.toString()),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text("Identificación"),
-                                    Text(sale.idClient),
-                                  ],
-                                )
+                                Container(
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: IconButton(
+                                    onPressed: () async {
+                                      bool deleted = await _deleteSale(sale);
+                                      if (deleted) {
+                                        setState(() {
+                                          sales.removeAt(index);
+                                        });
+                                      }
+                                    },
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(left: 10),
-                            child: IconButton(
-                              onPressed: () async {
-                                bool deleted = await _deleteSale(sale);
-                                if (deleted) {
-                                  setState(() {});
-                                }
-                              },
-                              icon: Icon(
-                                Icons.delete,
-                                color: Colors.red,
-                              ),
-                            ),
-                          )
-                        ],
+                        ),
                       ),
                     );
                   },

@@ -8,3 +8,5 @@ final NumberFormat currencyFormat = NumberFormat.currency(
 
 final NumberFormat pointsFormat = NumberFormat.currency(
     locale: 'es_CO', decimalDigits: 0, customPattern: '###,###');
+
+final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
