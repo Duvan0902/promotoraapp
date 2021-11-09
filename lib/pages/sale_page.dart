@@ -390,7 +390,7 @@ class _SalePageState extends State<SalePage> {
     );
 
     if (sale != null) {
-      double points = double.tryParse(sale.value) / 1000;
+      double points = sale.value / 1000;
       showDialog(
         context: context,
         builder: (context) {

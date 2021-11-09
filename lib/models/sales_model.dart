@@ -149,7 +149,7 @@ class SaleModel {
 
   final int id;
   final DateTime date;
-  final String value;
+  final double value;
   final String client;
   final String idClient;
   final int user;
@@ -169,7 +169,7 @@ class SaleModel {
     return SaleModel(
       id: json["id"],
       date: DateTime.parse(json["date"]),
-      value: json["value"],
+      value: double.tryParse(json["value"]) ?? 0,
       client: json["client"],
       idClient: json["id_client"],
       user: user,

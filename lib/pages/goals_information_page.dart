@@ -4,6 +4,7 @@ import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
 import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mi_promotora/common/formats.dart';
 import 'package:mi_promotora/common/historic_chart.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/goals_model.dart';
@@ -20,11 +21,6 @@ class GoalInformationPage extends StatefulWidget {
 }
 
 class _GoalInformationPageState extends State<GoalInformationPage> {
-  final NumberFormat currencyFormat = NumberFormat.currency(
-      locale: 'es_CO',
-      symbol: '\$',
-      decimalDigits: 0,
-      customPattern: '\u00A4###,###');
   @override
   void initState() {
     super.initState();

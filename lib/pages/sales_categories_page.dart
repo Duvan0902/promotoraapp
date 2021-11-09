@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:intl/intl.dart';
+import 'package:mi_promotora/common/formats.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/sales_model.dart';
 import 'package:mi_promotora/pages/sales_list_page.dart';
@@ -322,20 +323,11 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
           double total;
 
           try {
-            total = sales
-                .map((e) => double.tryParse(e.value))
-                .reduce((a, b) => a + b);
+            total = sales.map((e) => e.value).reduce((a, b) => a + b);
           } catch (e) {
             total = 0;
           }
 
-          final NumberFormat currencyFormat = NumberFormat.currency(
-              locale: 'es_CO',
-              symbol: '\$',
-              decimalDigits: 0,
-              customPattern: '\u00A4###,###');
-          final NumberFormat pointsFormat = NumberFormat.currency(
-              locale: 'es_CO', decimalDigits: 0, customPattern: '###,###');
           String formattedTotal = currencyFormat.format(total);
           String formattedPoints = pointsFormat.format(total / 1000);
 

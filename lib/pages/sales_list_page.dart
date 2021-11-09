@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mi_promotora/common/formats.dart';
 import 'package:mi_promotora/common/sale_item.dart';
 import 'package:mi_promotora/models/sales_model.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
@@ -47,10 +48,6 @@ class _SalesListPageState extends State<SalesListPage> {
             Navigator.pop(context);
           },
         ),
-        flexibleSpace: Container(
-          padding: EdgeInsets.only(left: 75),
-          child: Icon(Icons.ac_unit),
-        ),
       ),
       body: FutureBuilder(
         future: _salesProvider.getSalesByUser(
@@ -70,13 +67,14 @@ class _SalesListPageState extends State<SalesListPage> {
 
                     final DateFormat formatter = DateFormat('yyyy-MM-dd');
                     final String created = formatter.format(sale.date);
+                    final String price = currencyFormat.format(sale.value);
 
                     return FlexibleExpansionCard(
                       header: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(created),
-                          Text("\$${sale.value}"),
+                          Text(price),
                         ],
                       ),
                       detail: Row(
