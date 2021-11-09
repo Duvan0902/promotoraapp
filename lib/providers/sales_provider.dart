@@ -49,7 +49,7 @@ class SalesProvider {
   }
 
   Future<int> getSalesCount() async {
-    int sales;
+    int sales = 0;
     String priv = _prefs.token;
     try {
       int id = _prefs.userId;
@@ -70,7 +70,6 @@ class SalesProvider {
         sales = int.parse(response.body);
       } else {
         print('Request failed with status: ${response.statusCode}.');
-        sales = 0;
       }
     } catch (Exception) {
       print(Exception);

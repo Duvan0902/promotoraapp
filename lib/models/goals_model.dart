@@ -55,7 +55,7 @@ class GoalsModel {
         pdnCanc: json["pdn_canc"] ?? "0",
         pctEffect: json["pct_effect"].toDouble() ?? 0,
         pdnMonthly: json["pdn_monthly"] ?? "0",
-        avgPrima: json["avg_prima"] ?? 0,
+        avgPrima: json["avg_prima"] ?? "0",
         goal: json["goal"] ?? "0",
         integratedReport: json["integrated_report"] != null
             ? IntegratedReport.fromMap(json["integrated_report"])

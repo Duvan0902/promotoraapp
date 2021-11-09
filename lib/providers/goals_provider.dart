@@ -13,7 +13,7 @@ class GoalsProvider {
     String token = _prefs.token;
     final String _url = GlobalConfiguration().getValue("api_url") +
         "/reporte-integrado-data?user_code=$userName&branch_gct=Total&_sort=integrated_report:DESC&_limit=1";
-    print(_url);
+    print("This: " + _url);
     try {
       var response = await http.get(
         _url,
@@ -31,6 +31,7 @@ class GoalsProvider {
         print('Request failed with status: ${response.statusCode}.');
       }
     } catch (Exception) {
+      print("Here");
       print(Exception);
     }
 
