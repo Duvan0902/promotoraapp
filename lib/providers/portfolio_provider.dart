@@ -71,4 +71,33 @@ class PortfolioProvider {
 
     return [];
   }
+
+  Future<PortfolioModel> updateContact(PortfolioModel portfolio) async {
+    final String _endpoint = "$_url/carteras/${portfolio.id}";
+
+    try {
+      print("Update contact with this info: ${portfolio.toJson()}");
+
+      String token = _prefs.token;
+      final response = await http.put(
+        _endpoint,
+        headers: {'Authorization': 'Bearer $token'},
+        body: portfolio.toJson(),
+      );
+
+      print("Update contact");
+      print(response.body);
+      if (response.statusCode == 200) {
+        portfolio = PortfolioModel.fromJson(response.body);
+
+        return portfolio;
+      } else {
+        print('Request failed with status: ${response.statusCode}.');
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+
+    return null;
+  }
 }

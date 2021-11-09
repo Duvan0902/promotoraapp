@@ -98,8 +98,8 @@ class _CustomersPageState extends State<CustomersPage>
   Widget build(BuildContext context) {
     rebuildAllChildren(context);
     List<Map<String, dynamic>> tabs = [
-      {"title": 'Nuevos clientes', "widget": _newCustomers(context)},
-      {"title": "Seguimiento", "widget": _followingCustomers(context)}
+      {"title": 'Para contactar', "widget": _newCustomers(context)},
+      {"title": "Contactados", "widget": _followingCustomers(context)}
     ];
     if (_currentWidget == null) {
       _currentWidget = _newCustomers(context);

@@ -25,6 +25,13 @@ void main() async {
   runApp(MiPromotora());
 }
 
+/**
+ * TODO
+ * Delimitar precios por puntos
+ * Vista expandida de items de ventas
+ * Arreglar fecha de fin ventas
+ * Reporte de excel ventas
+ */
 class MiPromotora extends StatefulWidget {
   final prefs = new UserPreferences();
 

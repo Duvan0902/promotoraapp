@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/models/portfolio_model.dart';
+import 'package:mi_promotora/providers/portfolio_provider.dart';
 import 'package:mi_promotora/utils/launch_url.dart';
 import 'package:recase/recase.dart';
 
@@ -16,6 +17,7 @@ class CustomerItem extends StatefulWidget {
 
 class _CustomerItemState extends State<CustomerItem> {
   String destinationPhone;
+  PortfolioProvider _portfolioProvider = PortfolioProvider();
 
   @override
   void initState() {
@@ -115,8 +117,6 @@ class _CustomerItemState extends State<CustomerItem> {
         children: [
           Text("¿Enviar mensaje al usuario seleccionado?"),
           Flexible(
-            // margin: EdgeInsets.symmetric(vertical: 8),
-            // constraints: BoxConstraints(maxHeight: 150),
             child: Scrollbar(
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
@@ -151,6 +151,10 @@ class _CustomerItemState extends State<CustomerItem> {
         TextButton(
           child: const Text('Enviar'),
           onPressed: () {
+            customer.contacted = true;
+            customer.updatedAt = DateTime.now();
+
+            _portfolioProvider.updateContact(customer);
             String _url =
                 "https://api.whatsapp.com/send?phone=${destinationPhone}&text=$_message";
             try {
