@@ -154,22 +154,21 @@ class _ServicesPageState extends State<ServicesPage> {
   }
 
   Widget _topBar(context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    Orientation currentOrientation = MediaQuery.of(context).orientation;
-    double barHeight = currentOrientation == Orientation.portrait ? 60 : 50;
-    return PreferredSize(
-      preferredSize: Size(screenWidth, barHeight),
-      child: Container(
-          child: AppBar(
-        brightness: Brightness.dark,
-        backgroundColor: Colors.grey[900],
-        title: Text("Servicios",
-            style: Theme.of(context)
-                .textTheme
-                .headline1
-                .copyWith(color: Colors.white, fontSize: 20)),
-        actions: [PopupButton()],
-      )),
+    return AppBar(
+      brightness: Brightness.dark,
+      backgroundColor: Colors.grey[900],
+      title: Text("Servicios",
+          style: Theme.of(context)
+              .textTheme
+              .headline1
+              .copyWith(color: Colors.white, fontSize: 20)),
+      actions: [PopupButton()],
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
     );
   }
 }

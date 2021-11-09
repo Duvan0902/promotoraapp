@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:mi_promotora/common/bottom_chat.dart';
 import 'package:mi_promotora/common/button_app_bar.dart';
 import 'package:mi_promotora/pages/contacts_page.dart';
+import 'package:mi_promotora/pages/customers_page.dart';
 import 'package:mi_promotora/pages/education_page.dart';
 import 'package:mi_promotora/pages/goals_page.dart';
 import 'package:mi_promotora/pages/services_page.dart';
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage>
   static const List<Widget> _widgetOptions = <Widget>[
     GoalsPage(),
     ContactsPage(),
-    ServicesPage(),
+    CustomersPage(),
     EducationPage(),
   ];
 
@@ -97,8 +98,8 @@ class _HomePageState extends State<HomePage>
             text: 'Contactos',
           ),
           BottomAppBarItem(
-            iconData: CupertinoIcons.heart,
-            text: 'Servicios',
+            iconData: CupertinoIcons.money_dollar,
+            text: 'Cartera',
           ),
           BottomAppBarItem(
             iconData: CupertinoIcons.book,

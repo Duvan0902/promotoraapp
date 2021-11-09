@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mi_promotora/bloc/customers_bloc.dart';
 import 'package:mi_promotora/common/customer_item.dart';
+import 'package:mi_promotora/common/drawer.dart';
 import 'package:mi_promotora/common/settings_menu.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:mi_promotora/main.dart';
@@ -44,12 +45,6 @@ class _CustomersPageState extends State<CustomersPage>
         PopupButton(),
       ],
       backgroundColor: Colors.grey[900],
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
     );
   }
 
@@ -108,6 +103,7 @@ class _CustomersPageState extends State<CustomersPage>
     return Container(
       child: Scaffold(
         appBar: searchBar.build(context),
+        drawer: CustomDrawer(),
         body: Column(
           children: <Widget>[
             SizedBox(height: 20),
