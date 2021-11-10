@@ -112,7 +112,7 @@ class SalesProvider {
   }
 
   Future<List<SaleModel>> getSalesByUser(
-      int categoryId, int userId, String startDate, String endDate) async {
+      int categoryId, int userId, DateTime startDate, DateTime endDate) async {
     List<SaleModel> sales = [];
 
     try {
@@ -122,11 +122,11 @@ class SalesProvider {
           : '$_url/ventas?user.id=$userId&category.id=$categoryId';
 
       if (startDate != null) {
-        salesCategoriesUrl += "&created_at_gte=$startDate";
+        salesCategoriesUrl += "&created_at_gte=${startDate.toIso8601String()}";
       }
 
       if (endDate != null) {
-        salesCategoriesUrl += "&created_at_lte=$endDate";
+        salesCategoriesUrl += "&created_at_lte=${endDate.toIso8601String()}";
       }
 
       print(salesCategoriesUrl);

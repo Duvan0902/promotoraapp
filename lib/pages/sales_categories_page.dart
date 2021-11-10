@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:intl/intl.dart';
 import 'package:mi_promotora/common/formats.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/sales_model.dart';
@@ -30,26 +29,19 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
 
   TextEditingController _startDateController = TextEditingController();
   TextEditingController _endDateController = TextEditingController();
-  String _startDate;
-  String _endDate;
+  DateTime _startDate;
+  DateTime _endDate;
   List<SaleModel> _sales = [];
 
   @override
   void initState() {
     super.initState();
 
-    DateTime firstDayMonth =
-        DateTime.utc(DateTime.now().year, DateTime.now().month, 1);
-
     setState(() {
-      _startDate = dateFormat.format(firstDayMonth);
-      _endDate = dateFormat.format(
-        DateTime.now().add(
-          Duration(days: 1),
-        ),
-      );
-      _startDateController.text = _startDate;
-      _endDateController.text = _endDate;
+      _startDate = DateTime.utc(DateTime.now().year, DateTime.now().month, 1);
+      _endDate = DateTime.now().add(Duration(days: 1));
+      _startDateController.text = dateFormat.format(_startDate);
+      _endDateController.text = dateFormat.format(_endDate);
     });
   }
 
@@ -198,8 +190,8 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
     if (picked != null) {
       setState(
         () {
-          _startDate = dateFormat.format(picked);
-          _startDateController.text = _startDate;
+          _startDate = picked;
+          _startDateController.text = dateFormat.format(_startDate);
         },
       );
     }
@@ -216,8 +208,8 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
     if (picked != null) {
       setState(
         () {
-          _endDate = dateFormat.format(picked);
-          _endDateController.text = _endDate;
+          _endDate = picked;
+          _endDateController.text = dateFormat.format(_endDate);
         },
       );
     }

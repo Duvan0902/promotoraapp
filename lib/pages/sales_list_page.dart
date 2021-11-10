@@ -9,8 +9,8 @@ import '../main.dart';
 
 class SalesListPage extends StatefulWidget {
   final SalesCategoryModel category;
-  final String startDate;
-  final String endDate;
+  final DateTime startDate;
+  final DateTime endDate;
 
   SalesListPage({Key key, this.category, this.startDate, this.endDate})
       : super(key: key);

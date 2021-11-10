@@ -35,6 +35,8 @@ class _ManagementPageState extends State<ManagementPage> {
     if (goals != null) {
       String url = goals.integratedReport.file.url;
 
+      if (!mounted) return;
+
       setState(() {
         this.currentSales = sales;
         this.goalSales = int.tryParse(goals.goal) ?? 0;
@@ -129,7 +131,7 @@ class _ManagementPageState extends State<ManagementPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Números de ventas',
+                        'Número de ventas',
                         style: Theme.of(context)
                             .textTheme
                             .bodyText1
