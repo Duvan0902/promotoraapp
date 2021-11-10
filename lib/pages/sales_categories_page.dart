@@ -37,11 +37,17 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
   @override
   void initState() {
     super.initState();
+
+    DateTime firstDayMonth =
+        DateTime.utc(DateTime.now().year, DateTime.now().month, 1);
+
     setState(() {
-      DateFormat formatter = DateFormat('yyyy-MM-01');
-      DateFormat currentDateFormatter = DateFormat('yyyy-MM-dd');
-      _startDate = formatter.format(DateTime.now());
-      _endDate = currentDateFormatter.format(DateTime.now());
+      _startDate = dateFormat.format(firstDayMonth);
+      _endDate = dateFormat.format(
+        DateTime.now().add(
+          Duration(days: 1),
+        ),
+      );
       _startDateController.text = _startDate;
       _endDateController.text = _endDate;
     });
@@ -190,11 +196,9 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
       locale: Locale('es', 'ES'),
     );
     if (picked != null) {
-      var formatter = new DateFormat('yyyy-MM-dd');
-
       setState(
         () {
-          _startDate = formatter.format(picked);
+          _startDate = dateFormat.format(picked);
           _startDateController.text = _startDate;
         },
       );
@@ -210,11 +214,9 @@ class _SalesCategoriesPageState extends State<SalesCategoriesPage> {
       locale: Locale('es', 'ES'),
     );
     if (picked != null) {
-      var formatter = new DateFormat('yyyy-MM-dd');
-
       setState(
         () {
-          _endDate = formatter.format(picked);
+          _endDate = dateFormat.format(picked);
           _endDateController.text = _endDate;
         },
       );
