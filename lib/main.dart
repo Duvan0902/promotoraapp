@@ -1,6 +1,7 @@
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:mi_promotora/bloc/provider_bloc.dart';
 import 'package:mi_promotora/common/custom_web_view.dart';
 import 'package:mi_promotora/pages/change_password_page.dart';
@@ -26,13 +27,6 @@ void main() async {
   runApp(MiPromotora());
 }
 
-/**
- * TODO
- * Delimitar precios por puntos
- * Vista expandida de items de ventas
- * Arreglar fecha de fin ventas
- * Reporte de excel ventas
- */
 class MiPromotora extends StatefulWidget {
   final prefs = new UserPreferences();
 
@@ -195,6 +189,13 @@ class _MiPromotoraState extends State<MiPromotora> {
 
   String _initialRoute() {
     if (widget.prefs.token != null) {
+      String _token = widget.prefs.token;
+      bool isTokenExpired = JwtDecoder.isExpired(_token);
+
+      if (isTokenExpired) {
+        return 'login';
+      }
+
       if (widget.prefs.acceptedTerms == true) {
         if (widget.prefs.acceptedPrivacyPolicy == true)
           return 'home';

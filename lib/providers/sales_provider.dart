@@ -50,7 +50,7 @@ class SalesProvider {
 
   Future<int> getSalesCount() async {
     int sales = 0;
-    String priv = _prefs.token;
+    String token = _prefs.token;
     try {
       int id = _prefs.userId;
       var now = new DateTime.now();
@@ -63,7 +63,7 @@ class SalesProvider {
 
       final response = await http.get(
         requestUrl,
-        headers: {'Authorization': 'Bearer $priv'},
+        headers: {'Authorization': 'Bearer $token'},
       );
 
       if (response.statusCode == 200) {
@@ -71,8 +71,8 @@ class SalesProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {
-      print(Exception);
+    } catch (e) {
+      print(e);
     }
     return sales;
   }
