@@ -28,8 +28,8 @@ class EducationProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {
-      print(Exception);
+    } on Exception catch (e) {
+      print(e);
     }
 
     return [];
@@ -53,10 +53,9 @@ class EducationProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {
-      print(Exception);
+    } on Exception catch (e) {
+      print(e);
     }
-
     return null;
   }
 }

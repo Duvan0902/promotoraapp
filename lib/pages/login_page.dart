@@ -5,7 +5,7 @@ import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/preferences/users_preferences.dart';
 import 'package:mi_promotora/providers/login_provider.dart';
 import 'package:mi_promotora/utils/alert_dialog.dart';
-
+import 'package:package_info_plus/package_info_plus.dart';
 import 'forgot_password_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,6 +16,18 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _isPasswordHidden = true;
   final prefs = new UserPreferences();
+  PackageInfo _packageInfo = PackageInfo(
+    appName: '',
+    packageName: '',
+    version: '',
+    buildNumber: '',
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _initPackageInfo();
+  }
 
   void _toggleVisibility() {
     setState(() {
@@ -23,14 +35,18 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: <Widget>[
-          _background(context),
-          _loginForm(context),
-        ],
+        children: <Widget>[_background(context), _loginForm(context)],
       ),
     );
   }
@@ -91,7 +107,8 @@ class _LoginPageState extends State<LoginPage> {
                   child: _forgotPassword(context),
                   alignment: Alignment.center,
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 20),
+                _versionInfo(context)
               ],
             ),
           ),
@@ -266,5 +283,19 @@ class _LoginPageState extends State<LoginPage> {
     if (this.prefs.acceptedPrivacyPolicy != true) return 'privacy-policy';
 
     return 'home';
+  }
+
+  Widget _versionInfo(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      child: Text(
+        "Versión ${_packageInfo.version}",
+        textAlign: TextAlign.center,
+        style: Theme.of(context)
+            .textTheme
+            .bodyText2
+            .copyWith(color: Colors.grey, fontSize: 12),
+      ),
+    );
   }
 }

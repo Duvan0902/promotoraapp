@@ -11,26 +11,28 @@ class PortfolioProvider {
   Future<List<PortfolioModel>> getPortfolio() async {
     final userName = _prefs.userName;
     final String _endpoint =
-        "$_url/carteras?contacted=false&agent.username=$userName";
+        "$_url/cartera-data?contacted=false&agent.username=$userName";
 
     print("Request to $_endpoint");
 
+    List<PortfolioModel> portfolio = [];
+
     try {
       String token = _prefs.token;
-      final response = await http
-          .get(_endpoint, headers: {'Authorization': 'Bearer $token'});
+      print("Token: $token");
+      final response = await http.get(
+        _endpoint,
+        headers: {'Authorization': 'Bearer $token'},
+      );
 
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = json.jsonDecode(response.body);
-        List<PortfolioModel> educationList = [];
 
         for (var item in jsonResponse) {
           PortfolioModel portfolioItem = PortfolioModel.fromMap(item);
-          educationList.add(portfolioItem);
+          portfolio.add(portfolioItem);
           print(portfolioItem);
         }
-
-        return educationList;
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
@@ -38,13 +40,13 @@ class PortfolioProvider {
       print(e);
     }
 
-    return [];
+    return portfolio;
   }
 
   Future<List<PortfolioModel>> getContactedCustomers() async {
     final username = _prefs.userName;
     final String _endpoint =
-        "$_url/carteras?contacted=true&agent.username=$username";
+        "$_url/cartera-data?contacted=true&agent.username=$username";
 
     try {
       String token = _prefs.token;
@@ -73,20 +75,21 @@ class PortfolioProvider {
   }
 
   Future<PortfolioModel> updateContact(PortfolioModel portfolio) async {
-    final String _endpoint = "$_url/carteras/${portfolio.id}";
+    final String _endpoint = "$_url/cartera-data/${portfolio.id}";
 
     try {
-      print("Update contact with this info: ${portfolio.toJson()}");
-
       String token = _prefs.token;
       final response = await http.put(
         _endpoint,
-        headers: {'Authorization': 'Bearer $token'},
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json'
+        },
         body: portfolio.toJson(),
       );
 
-      print("Update contact");
-      print(response.body);
+      print(_endpoint);
+
       if (response.statusCode == 200) {
         portfolio = PortfolioModel.fromJson(response.body);
 

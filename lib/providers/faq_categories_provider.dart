@@ -35,10 +35,9 @@ class FaqCategoriesProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {
-      print(Exception);
+    } on Exception catch (e) {
+      print(e);
     }
-
     return null;
   }
 
@@ -64,8 +63,8 @@ class FaqCategoriesProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {
-      print(Exception);
+    } on Exception catch (e) {
+      print(e);
     }
 
     return null;

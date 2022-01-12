@@ -156,7 +156,7 @@ class _CustomerItemState extends State<CustomerItem> {
 
             _portfolioProvider.updateContact(customer);
             String _url =
-                "https://api.whatsapp.com/send?phone=${destinationPhone}&text=$_message";
+                "https://api.whatsapp.com/send?phone=$destinationPhone&text=$_message";
             try {
               launchUrl(_url);
             } catch (e) {

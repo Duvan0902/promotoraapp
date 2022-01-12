@@ -16,8 +16,8 @@ class TextsProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {
-      print(Exception);
+    } catch (e) {
+      print(e);
     }
 
     return "";
@@ -35,8 +35,8 @@ class TextsProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {
-      print(Exception);
+    } catch (e) {
+      print(e);
     }
 
     return "";

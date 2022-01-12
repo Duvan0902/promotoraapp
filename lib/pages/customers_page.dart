@@ -6,12 +6,8 @@ import 'package:mi_promotora/common/settings_menu.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:mi_promotora/main.dart';
 import 'package:mi_promotora/models/portfolio_model.dart';
-import 'package:mi_promotora/models/user_model.dart';
 import 'package:mi_promotora/providers/portfolio_provider.dart';
-import 'package:mi_promotora/utils/alert_dialog.dart';
-import 'package:mi_promotora/utils/launch_url.dart';
 import 'package:string_similarity/string_similarity.dart';
-import 'package:recase/recase.dart';
 
 class CustomersPage extends StatefulWidget {
   const CustomersPage({Key key}) : super(key: key);

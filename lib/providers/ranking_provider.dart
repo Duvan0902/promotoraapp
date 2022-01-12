@@ -30,8 +30,9 @@ class RankingProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {}
-
+    } on Exception catch (e) {
+      print(e);
+    }
     return [];
   }
 }

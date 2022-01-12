@@ -63,6 +63,10 @@ class PortfolioModel {
         "balance": balance,
         "customer_id": customerId,
         "contacted": contacted,
-        "agent": agent.toMap(),
       };
+
+  @override
+  String toString() {
+    return toJson();
+  }
 }

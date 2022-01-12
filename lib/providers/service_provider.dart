@@ -32,7 +32,9 @@ class ServicesProvider {
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
-    } catch (Exception) {}
+    } catch (e) {
+      print(e);
+    }
 
     return [];
   }
